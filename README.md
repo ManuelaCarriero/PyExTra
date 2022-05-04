@@ -1,1 +1,1 @@
-# protein-synthesis-modeling
+# Stochastic Simulation Algorithm
