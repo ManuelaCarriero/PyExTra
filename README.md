@@ -1,7 +1,7 @@
 # Stochastic simulation of biological circuits
 The simples model for central dogma of biology is the following:
 <br />
-<img src="https://github.com/ManuelaCarriero/protein-synthesis-modeling/blob/main/Images/simplest_protein_synthesis_model.jpg" width="500">
+<img src="https://github.com/ManuelaCarriero/protein-synthesis-modeling/blob/main/Images/simplest_protein_synthesis_model.jpg" width="400">
 <br />
 The number of messenger RNAs (mRNAs) and proteins can be described by a chemical master equation. The rate of protein production depends on the number of mRNAs but not vice-versa (m and n are the numbers of mRNA and proteins respectively; Φ is the degraded molecule).
 
