@@ -2,7 +2,7 @@
 A simple model for central dogma of biology is represented by the following sketch:
 <p align="center">
   <img 
-    width="500"
+    width="450"
     src="https://github.com/ManuelaCarriero/protein-synthesis-modeling/blob/main/Images/simplest_protein_synthesis_model.jpg"
   >
 </p>
