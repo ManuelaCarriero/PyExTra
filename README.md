@@ -10,7 +10,7 @@ A simple model for central dogma of biology is represented by the following sket
 The number of messenger RNAs (mRNAs) and proteins can be described by a *chemical master equation*. The rate of protein production depends on the number of mRNAs but not vice-versa (**m** and **n** are the numbers of mRNA and proteins respectively; **Φ** is the degraded molecule).
 
 **Gillespie algorithm** (i.e. **stochastic simulation algorithm**) samples the probability distribution described by the master equation. The basic idea is that events are rare, discrete, *separate* events, i.e., each event is an arrivial of a Poisson process and the algorithm is based on the following steps:
-1. Choose some **initial states** (in this case, initiale state of gene that is active or inactive, initial number of molecules of mRNA **m<sub>0</sub>** and initial number of proteins **p<sub>0</sub>**); 
+1. Choose some **initial states** (in this case, initiale state of gene that is active or inactive, initial number of mRNA molecules **m<sub>0</sub>** and initial number of proteins **p<sub>0</sub>**); 
 2. A state change will happen. In this approach, the event that can happen is one of the following: 
     * gene activation: the state of the gene switches from inactive to active and, in such case, there is no increase or decrease in the number of RNA or protein molecules.   
     * gene inactivation: the state of the gene switches from active to inactive and, in such case, there is no increase or decrease in the number of RNA or protein molecules;     
