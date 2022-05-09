@@ -1,5 +1,5 @@
 # Stochastic simulation of biological circuits
-A simple model for central dogma of biology is represented by the following sketch:
+A simple model for central dogma of biology is represented by the following biological circuit:
 <p align="center">
   <img 
     width="400"
