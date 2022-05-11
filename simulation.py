@@ -14,7 +14,7 @@ import matplotlib.pylab as plt
 import typing 
 from enum import Enum
 
-from collections import Counter
+from collections import Counter, namedtuple
 
 import scipy.stats as st
 
@@ -68,7 +68,7 @@ inactive_gene_transition_names = [Transition.GENE_ACTIVATE,
                                   Transition.PROTEIN_INCREASE, 
                                   Transition.PROTEIN_DEGRADE]
 
-# Define Observation class  
+ 
 
 class Observation(typing.NamedTuple):
     gene_state: typing.Any
@@ -205,7 +205,7 @@ def simulation(starting_gene_state, starting_RNA_Protein_state, time_limit):
     return observed_states
 
 
-time_limit = 1000
+time_limit = 100
 results = simulation(starting_gene_state = gene_state, starting_RNA_Protein_state = RNA_Protein_state, time_limit = time_limit)
 
 
@@ -218,14 +218,6 @@ results = simulation(starting_gene_state = gene_state, starting_RNA_Protein_stat
 def generate_RNA_distribution(results):
     """ This method creates a Counter with state values 
     as keys and normalized residency time as values
-    
-    Parameters
-    
-    result : list of Observation objects.
-
-    Returns:
-        Counter
-          
     """
     RNA_distribution = Counter()
     for observation in results:
@@ -244,40 +236,31 @@ def generate_protein_distribution(results):
 
     return protein_distribution 
 
-RNA_distribution = generate_RNA_distribution(results)
-protein_distribution = generate_protein_distribution(results)
 
-
-
-
-fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(10, 15))
-values = np.arange(20)
-pmf = st.poisson(10).pmf(values) 
-ax[0].bar(RNA_distribution.keys(), RNA_distribution.values())
-ax[0].set_ylabel('Normalized residency time', fontsize=16)
-ax[0].set_xlabel('Number of RNA molecules', fontsize=16)
-ax[0].bar(values, pmf, alpha=0.5)
-ax[1].bar(protein_distribution.keys(), protein_distribution.values())
-ax[1].set_ylabel('Normalized residency time', fontsize=16)
-ax[1].set_xlabel('Number of proteins', fontsize=16)
-ax[1].bar(values, pmf, alpha=0.5)
+def DistributionPlot():
+    """ This method plots the probability distribution of 
+    observing each state
+    """
+    RNA_distribution = generate_RNA_distribution(results)
+    protein_distribution = generate_protein_distribution(results)
+    fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(10, 15))
+    values = np.arange(20)
+    pmf = st.poisson(10).pmf(values) 
+    ax[0].bar(RNA_distribution.keys(), RNA_distribution.values())
+    ax[0].set_ylabel('Normalized residency time', fontsize=16)
+    ax[0].set_xlabel('Number of RNA molecules', fontsize=16)
+    ax[0].bar(values, pmf, alpha=0.5)
+    ax[1].bar(protein_distribution.keys(), protein_distribution.values())
+    ax[1].set_ylabel('Normalized residency time', fontsize=16)
+    ax[1].set_xlabel('Number of proteins', fontsize=16)
+    ax[1].bar(values, pmf, alpha=0.5)
 
 
 
 def create_dataframe(results):
     """ This method creates a dataframe with 4 columns:
         time of observation, gene activity, number of RNA molecules
-        and number of proteins.
-    
-    Parameters
-    ----------
-    
-    result : list of Observation objects.
-
-    Returns:
-    ----------
-    df: pandas dataframe
-          
+        and number of proteins.          
     """
     time_of_observation = []
     number_of_RNA_molecules = []
@@ -301,17 +284,58 @@ def create_dataframe(results):
     df = pd.DataFrame(d)
     return df
 
-df = create_dataframe(results)
 
 
-fig, ax = plt.subplots(nrows=3, ncols=1, figsize=(5, 10))
-ax[0].plot(df['Time'], df['Gene activity'])
-ax[0].set_ylabel('Gene Activity')
-ax[0].set_xlabel('Time')
-ax[1].plot(df['Time'], df['Number of RNA molecules'])
-ax[1].set_ylabel('# of RNA molecules')
-ax[1].set_xlabel('Time')
-ax[2].plot(df['Time'], df['Number of proteins'])
-ax[2].set_ylabel('# of proteins')
-ax[2].set_xlabel('Time')
-sns.despine(fig, trim=True, bottom=False, left=False)
+
+
+def MoleculesPlot():
+    """This method plots gene activity, the number of RNA molecules
+    produced vs time and the number of proteins produced vs time
+    """
+
+    gene_transitions = [gene_activate, gene_inactivate]
+    gene_rates = [f(gene_state) for f in gene_transitions] # [ka, ki]  
+    gene_rates_namedtuple = namedtuple("Rates",['ka','ki'])
+    ka_value = gene_rates[0]
+    ki_value = gene_rates[1]
+    gene_rate = gene_rates_namedtuple(ka=ka_value,ki=ki_value)
+    
+    
+    RNA_transitions = [RNA_increase,RNA_degrade]
+    RNA_rates = [f(RNA_Protein_state) for f in RNA_transitions] # [k1, k2]
+    RNA_rates_namedtuple = namedtuple("Rates",['k1','k2'])
+    k1_value = RNA_rates[0]
+    RNA_rate = RNA_rates_namedtuple(k1=k1_value,k2='m*0.1')
+    
+    Protein_transitions = [Protein_increase, Protein_degrade]
+    Protein_rates = [f(RNA_Protein_state) for f in Protein_transitions] # [k3, k4]
+    Protein_rates_namedtuple = namedtuple("Rates",['k3','k4']) 
+    k3_value = Protein_rates[0]
+    Protein_rate = Protein_rates_namedtuple(k3=k3_value,k4='p*0.1')
+    
+    df = create_dataframe(results)
+    
+    fig, ax = plt.subplots(nrows=3, ncols=1, figsize=(5, 10))
+    ax[0].plot(df['Time'], df['Gene activity'])
+    ax[0].set_ylabel('Gene Activity')
+    ax[0].set_xlabel('Time')
+    ax[0].text(0.9,0.8,"$k_a$={}\n $k_i$={}".format(gene_rate.ka,gene_rate.ki), 
+               ha='center', va='center', fontsize=16, bbox=dict(facecolor='white', alpha=0.5),
+               transform = ax[0].transAxes)
+    ax[1].plot(df['Time'], df['Number of RNA molecules'])
+    ax[1].set_ylabel('# of RNA molecules')
+    ax[1].set_xlabel('Time')
+    ax[1].text(0.9,0.8,"$k_1$={}\n $k_2$={}".format(RNA_rate.k1, RNA_rate.k2), 
+               ha ='center', va = 'center', fontsize=16, bbox=dict(facecolor='white', alpha=0.5),
+               transform = ax[1].transAxes)
+    ax[2].plot(df['Time'], df['Number of proteins'])
+    ax[2].set_ylabel('# of proteins')
+    ax[2].set_xlabel('Time')
+    ax[2].text(0.9,0.8,"$k_3$={}\n $k_4$={}".format(Protein_rate.k3, Protein_rate.k4), 
+               ha='center', va='center', fontsize=16, bbox=dict(facecolor='white', alpha=0.5),
+               transform = ax[2].transAxes)
+    
+    sns.despine(fig, trim=True, bottom=False, left=False)
+
+DistributionPlot()
+MoleculesPlot()
