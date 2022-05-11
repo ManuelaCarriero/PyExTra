@@ -31,3 +31,22 @@ We can also call these events as *transitions* and each one happens with a certa
 5. Increment time by time step you calculate in step 3.
 6. Update the state according to the state change chosen in step 4.
 7. If the total time spent is less than a pre-determined stopping time, go to step 2. Else stop.
+
+# Example of results
+Below there are examples of plots that can be obtained by running [simulation.py](https://github.com/ManuelaCarriero/protein-synthesis-modeling/blob/main/simulation.py) with parameters that are initial state of gene = inactive, initial number of RNA molecules = 0, inital number of proteins = 0, transition rates k<sub>a</sub>=1, k<sub>i</sub>=0.5, k<sub>1</sub>=1, k<sub>2</sub>=m * 0.1, k<sub>3</sub>=1 and k<sub>4</sub>=p * 0.1 and simulation time limit = 100. First the distribution of states (i.e. number of RNA and protein molecules) is obtained:
+<p align="center">
+  <img 
+    width="450"
+    height="700"   
+    src="https://github.com/ManuelaCarriero/protein-synthesis-modeling/blob/main/Plots/Dist_ka_1_ki_0.5_timelimit_100_initialstate_active00.png"
+  >
+</p>
+Then a plot that shows the trend of the number of RNA molecules and proteins produced as function of time with the activity of gene on the top of the multiple plot:
+<p align="center">
+<img 
+    width="300"
+    height="600"   
+    src="https://github.com/ManuelaCarriero/protein-synthesis-modeling/blob/main/Plots/ka_1_ki_0.5_timelimit_100_initialstate_active00.png"
+  >
+</p>
+The results can vary also by setting the same values of parameters due to the algorithm stochasticity. 
