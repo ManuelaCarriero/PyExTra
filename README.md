@@ -33,7 +33,7 @@ We can also call these events as *transitions* and each one happens with a certa
 7. If the total time spent is less than a pre-determined stopping time, go to step 2. Else stop.
 
 # Example of results
-Below there are examples of plots that can be obtained by running [simulation.py](https://github.com/ManuelaCarriero/protein-synthesis-modeling/blob/main/simulation.py) with parameters that are initial state of gene = inactive, initial number of RNA molecules = 0, inital number of proteins = 0, transition rates k<sub>a</sub>=1, k<sub>i</sub>=0.5, k<sub>1</sub>=1, k<sub>2</sub>=m * 0.1, k<sub>3</sub>=1 and k<sub>4</sub>=p * 0.1 and simulation time limit = 100. First the distribution of states (i.e. number of RNA and protein molecules) is obtained:
+Below there are examples of plots that can be obtained by running [simulation.py](https://github.com/ManuelaCarriero/protein-synthesis-modeling/blob/main/simulation.py) with parameters that are initial state of gene = inactive, initial number of RNA molecules = 0, inital number of proteins = 0, transition rates k<sub>a</sub>=1, k<sub>i</sub>=0.5, k<sub>1</sub>=1, k<sub>2</sub>=m * 0.1, k<sub>3</sub>=1 and k<sub>4</sub>=p * 0.1 and simulation time limit = 100. First a plot that shows the simulation distribution of states (i.e. number of RNA and protein molecules) and the Poisson distribution is obtained:
 <p align="center">
   <img 
     width="450"
