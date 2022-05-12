@@ -88,14 +88,23 @@ def update_state(active_gene_event, inactive_gene_event, gene_state, RNA_Protein
     
     Parameters
     ----------
-    activate_gene_event : str
-    inactivate_gene_event: str
+    active_gene_event : Transition class member
+                        Transition that occurs when gene state is active.
+    inactive_gene_event: Transition class member
+                         Transition that occurs when gene state is inactive.
     gene_state: str
+                gene state that can be active or inactive
     RNA_Protein_state: ndarray
+                       ndarray that has number of RNAs as first dimension 
+                       and number of proteins as
+                       second dimension.
 
     Returns
     -------
     updated_state : ndarray, shape (gene_state, RNA_Protein_state)
+                    ndarray that has the gene state as first dimension and 
+                    RNA and Protein number of molecules as second dimension
+                    after a given event is occured.
     """
     if inactive_gene_event == Transition.GENE_ACTIVATE and gene_state == 'inactive':
         gene_state = 'active'
@@ -142,8 +151,11 @@ def update_state(active_gene_event, inactive_gene_event, gene_state, RNA_Protein
         gene_state = gene_state[:]
         RNA_Protein_state[1] -=1
         RNA_Protein_state = RNA_Protein_state.copy()
+        
+    elif isinstance(inactive_gene_event,str) or isinstance(active_gene_event, str):
+        raise TypeError("Do not use string ! Choose transitions from Transition enum members.")
     else:
-        raise ValueError("transition not recognized")
+        raise ValueError("Transition not recognized")
     
     updated_state = np.array([gene_state,RNA_Protein_state], dtype=object)
     return updated_state 
