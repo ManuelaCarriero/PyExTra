@@ -37,16 +37,19 @@ class Transition(Enum):
 def gene_activate(state):
     return 1 
 def gene_inactivate(state):
-    return 1 
+    return 0.5 
 
 def RNA_increase(state):
     return 1
 def RNA_degrade(state):
     return state[0]*0.1
+k2_value = 'm*0.1'
 def Protein_increase(state):
-    return 1
+    return state[0]*1
+k3_value = 'm*1'
 def Protein_degrade(state):
-    return state[1]*0.1
+    return state[1]*1
+k4_value = 'p*1'
 
 active_gene_transitions = [gene_inactivate, RNA_increase, 
                            RNA_degrade, Protein_increase, 
@@ -71,26 +74,100 @@ inactive_gene_transition_names = [Transition.GENE_ACTIVATE,
  
 
 class Observation(typing.NamedTuple):
+    """ typing.NamedTuple class storing information
+    for each event in the simulation"""
     gene_state: typing.Any
     RNA_Protein_state: typing.Any
     time_of_observation: float
     time_of_residency: float
     transition: Transition
 
+
+def update_state(active_gene_event, inactive_gene_event, gene_state, RNA_Protein_state):
+    """This method updates the initial state according to the event occured
+    
+    Parameters
+    ----------
+    activate_gene_event : str
+    inactivate_gene_event: str
+    gene_state: str
+    RNA_Protein_state: ndarray
+
+    Returns
+    -------
+    updated_state : ndarray, shape (gene_state, RNA_Protein_state)
+    """
+    if inactive_gene_event == Transition.GENE_ACTIVATE and gene_state == 'inactive':
+        gene_state = 'active'
+        gene_state = gene_state[:]
+        RNA_Protein_state = RNA_Protein_state
+        RNA_Protein_state = RNA_Protein_state.copy() 
+    elif active_gene_event == Transition.RNA_INCREASE and gene_state == 'active':
+        gene_state = gene_state
+        gene_state = gene_state[:]
+        RNA_Protein_state[0] +=1
+        RNA_Protein_state = RNA_Protein_state.copy()
+    elif active_gene_event == Transition.RNA_DEGRADE and gene_state == 'active':
+        gene_state = gene_state
+        gene_state = gene_state[:]
+        RNA_Protein_state[0] -=1
+        RNA_Protein_state = RNA_Protein_state.copy()
+    elif active_gene_event == Transition.PROTEIN_INCREASE and gene_state == 'active':
+        gene_state = gene_state
+        gene_state = gene_state[:]
+        RNA_Protein_state[1] +=1
+        RNA_Protein_state = RNA_Protein_state.copy()
+    elif active_gene_event == Transition.PROTEIN_DEGRADE and gene_state == 'active':
+        gene_state = gene_state
+        gene_state = gene_state[:]
+        RNA_Protein_state[1] -=1
+        RNA_Protein_state = RNA_Protein_state.copy()
+    elif active_gene_event == Transition.GENE_INACTIVATE and gene_state == 'active':
+        gene_state = 'inactive'
+        gene_state = gene_state[:]
+        RNA_Protein_state = RNA_Protein_state
+        RNA_Protein_state = RNA_Protein_state.copy()
+    elif inactive_gene_event == Transition.RNA_DEGRADE and gene_state == 'inactive':
+        gene_state = gene_state
+        gene_state = gene_state[:]
+        RNA_Protein_state[0] -=1
+        RNA_Protein_state = RNA_Protein_state.copy()
+    elif inactive_gene_event == Transition.PROTEIN_INCREASE and gene_state == 'inactive' :
+        gene_state = gene_state
+        gene_state = gene_state[:]
+        RNA_Protein_state[1] +=1
+        RNA_Protein_state = RNA_Protein_state.copy()
+    elif inactive_gene_event == Transition.PROTEIN_DEGRADE and gene_state == 'inactive':
+        gene_state = gene_state
+        gene_state = gene_state[:]
+        RNA_Protein_state[1] -=1
+        RNA_Protein_state = RNA_Protein_state.copy()
+    else:
+        raise ValueError("transition not recognized")
+    
+    updated_state = np.array([gene_state,RNA_Protein_state], dtype=object)
+    return updated_state 
+
+
+
+
+
+
 def simulation(starting_gene_state, starting_RNA_Protein_state, time_limit):
     """ This method simulates RNA and Protein populations from a regulated gene.
     
     Parameters
     
-    starting_state : initial number of DNA molecules, RNA molecules and proteins.
+    starting_gene_state : starting state of gene.
+    starting_RNA_Protein_state : initial number of RNAs and proteins.
     time_limit : simulation time limit.
 
     Returns:
-        updated number of RNA molecules, 
-        total time spent, 
-        time of residency in each state,
-        the type of event regarding the gene
-        the type of event regarding the RNA and protein molecules.
+        observed_states : list
+                        list of named tuples each one storing 
+                        gene state, number of RNAs and proteins,
+                        total time spent, time of residency in that state,
+                        type of event for each iteration of simulation.
     """
     observed_states = []
     gene_state = starting_gene_state
@@ -118,7 +195,7 @@ def simulation(starting_gene_state, starting_RNA_Protein_state, time_limit):
         elif gene_state == 'inactive':
             event = inactive_gene_event
             time = inactive_gene_time
-    
+        
         
         observation = Observation(gene_state, RNA_Protein_state, total_time, time, event)
         
@@ -127,89 +204,18 @@ def simulation(starting_gene_state, starting_RNA_Protein_state, time_limit):
         
         total_time += time
         
-        
-        
-        # Update state
-        
-        
-        
-        if inactive_gene_event == Transition.GENE_ACTIVATE and gene_state == 'inactive':
-            gene_state = 'active'
-            gene_state = gene_state[:]
-            RNA_Protein_state = RNA_Protein_state
-            event = active_gene_event
-            time = active_gene_time
-            RNA_Protein_state = RNA_Protein_state.copy() 
-        elif active_gene_event == Transition.RNA_INCREASE and gene_state == 'active':
-            gene_state = gene_state
-            gene_state = gene_state[:]
-            RNA_Protein_state[0] +=1
-            event = active_gene_event
-            time = active_gene_time
-            RNA_Protein_state = RNA_Protein_state.copy()
-        elif active_gene_event == Transition.RNA_DEGRADE and gene_state == 'active':
-            gene_state = gene_state
-            gene_state = gene_state[:]
-            RNA_Protein_state[0] -=1
-            event = active_gene_event
-            time = active_gene_time
-            RNA_Protein_state = RNA_Protein_state.copy()
-        elif active_gene_event == Transition.PROTEIN_INCREASE and gene_state == 'active':
-            gene_state = gene_state
-            gene_state = gene_state[:]
-            RNA_Protein_state[1] +=1
-            event = active_gene_event
-            time = active_gene_time
-            RNA_Protein_state = RNA_Protein_state.copy()
-        elif active_gene_event == Transition.PROTEIN_DEGRADE and gene_state == 'active':
-            gene_state = gene_state
-            gene_state = gene_state[:]
-            RNA_Protein_state[1] -=1
-            event = active_gene_event
-            time = active_gene_time
-            RNA_Protein_state = RNA_Protein_state.copy()
-        elif active_gene_event == Transition.GENE_INACTIVATE and gene_state == 'active':
-            gene_state = 'inactive'
-            gene_state = gene_state[:]
-            RNA_Protein_state = RNA_Protein_state
-            event = active_gene_event
-            time = active_gene_time
-            RNA_Protein_state = RNA_Protein_state.copy()
-        elif inactive_gene_event == Transition.RNA_DEGRADE and gene_state == 'inactive':
-            gene_state = gene_state
-            gene_state = gene_state[:]
-            RNA_Protein_state[0] -=1
-            event = inactive_gene_event
-            time = inactive_gene_time
-            RNA_Protein_state = RNA_Protein_state.copy()
-        elif inactive_gene_event == Transition.PROTEIN_INCREASE and gene_state == 'inactive' :
-            gene_state = gene_state
-            gene_state = gene_state[:]
-            RNA_Protein_state[1] +=1
-            event = inactive_gene_event
-            time = inactive_gene_time
-            RNA_Protein_state = RNA_Protein_state.copy()
-        elif inactive_gene_event == Transition.PROTEIN_DEGRADE and gene_state == 'inactive':
-            gene_state = gene_state
-            gene_state = gene_state[:]
-            RNA_Protein_state[1] -=1
-            event = inactive_gene_event
-            time = inactive_gene_time
-            RNA_Protein_state = RNA_Protein_state.copy()
-        else:
-            raise ValueError("transition not recognized")
-        
-        
-        
-        
+        updated_state = update_state(active_gene_event, inactive_gene_event, gene_state, RNA_Protein_state)
+        gene_state = updated_state[0]
+        RNA_Protein_state = updated_state[1]
+    
     return observed_states
 
 
 time_limit = 100
 results = simulation(starting_gene_state = gene_state, starting_RNA_Protein_state = RNA_Protein_state, time_limit = time_limit)
 
+results 
 
-# Plot
 
 
 
@@ -224,6 +230,10 @@ def generate_RNA_distribution(results):
         state = observation.RNA_Protein_state[0]
         residency_time = observation.time_of_residency
         RNA_distribution[state] += residency_time/time_limit
+        
+    total_time_observed = sum(RNA_distribution.values())
+    for state in RNA_distribution:
+        RNA_distribution[state] /= total_time_observed
 
     return RNA_distribution 
 
@@ -233,6 +243,10 @@ def generate_protein_distribution(results):
         state = observation.RNA_Protein_state[1]
         residency_time = observation.time_of_residency
         protein_distribution[state] += residency_time/time_limit
+    
+    total_time_observed = sum(protein_distribution.values())
+    for state in protein_distribution:
+        protein_distribution[state] /= total_time_observed
 
     return protein_distribution 
 
@@ -250,11 +264,14 @@ def DistributionPlot():
     ax[0].set_ylabel('Normalized residency time', fontsize=16)
     ax[0].set_xlabel('Number of RNA molecules', fontsize=16)
     ax[0].bar(values, pmf, alpha=0.5)
+    ax[0].legend(["Simulation","Poisson distribution"], fontsize=16)
     ax[1].bar(protein_distribution.keys(), protein_distribution.values())
     ax[1].set_ylabel('Normalized residency time', fontsize=16)
     ax[1].set_xlabel('Number of proteins', fontsize=16)
     ax[1].bar(values, pmf, alpha=0.5)
+ 
 
+DistributionPlot()
 
 
 def create_dataframe(results):
@@ -281,8 +298,9 @@ def create_dataframe(results):
          'Number of RNA molecules': number_of_RNA_molecules, 
          'Number of proteins': number_of_proteins}
     
-    df = pd.DataFrame(d)
-    return df
+    results_dataframe = pd.DataFrame(d)
+    
+    return results_dataframe
 
 
 
@@ -305,13 +323,10 @@ def MoleculesPlot():
     RNA_rates = [f(RNA_Protein_state) for f in RNA_transitions] # [k1, k2]
     RNA_rates_namedtuple = namedtuple("Rates",['k1','k2'])
     k1_value = RNA_rates[0]
-    RNA_rate = RNA_rates_namedtuple(k1=k1_value,k2='m*0.1')
+    RNA_rate = RNA_rates_namedtuple(k1 = k1_value, k2 = k2_value)
     
-    Protein_transitions = [Protein_increase, Protein_degrade]
-    Protein_rates = [f(RNA_Protein_state) for f in Protein_transitions] # [k3, k4]
     Protein_rates_namedtuple = namedtuple("Rates",['k3','k4']) 
-    k3_value = Protein_rates[0]
-    Protein_rate = Protein_rates_namedtuple(k3=k3_value,k4='p*0.1')
+    Protein_rate = Protein_rates_namedtuple(k3 = k3_value, k4 = k4_value)
     
     df = create_dataframe(results)
     
@@ -337,5 +352,6 @@ def MoleculesPlot():
     
     sns.despine(fig, trim=True, bottom=False, left=False)
 
-DistributionPlot()
+
+
 MoleculesPlot()
