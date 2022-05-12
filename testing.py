@@ -22,6 +22,26 @@ class Transition(Enum):
 
 def update_state(active_gene_event, inactive_gene_event, gene_state, RNA_Protein_state):
     """This method updates the initial state according to the event occured
+    
+    Parameters
+    ----------
+    active_gene_event : Transition class member
+                        Transition that occurs when gene state is active.
+    inactive_gene_event: Transition class member
+                         Transition that occurs when gene state is inactive.
+    gene_state: str
+                gene state that can be active or inactive
+    RNA_Protein_state: ndarray
+                       ndarray that has number of RNAs as first dimension 
+                       and number of proteins as
+                       second dimension.
+
+    Returns
+    -------
+    updated_state : ndarray, shape (gene_state, RNA_Protein_state)
+                    ndarray that has the gene state as first dimension and 
+                    RNA and Protein number of molecules as second dimension
+                    after a given event is occured.
     """
     if inactive_gene_event == Transition.GENE_ACTIVATE and gene_state == 'inactive':
         gene_state = 'active'
@@ -32,55 +52,62 @@ def update_state(active_gene_event, inactive_gene_event, gene_state, RNA_Protein
         gene_state = gene_state
         gene_state = gene_state[:]
         RNA_Protein_state[0] +=1
-        RNA_Protein_state = RNA_Protein_state.copy()
+        RNA_Protein_state = RNA_Protein_state.copy() 
     elif active_gene_event == Transition.RNA_DEGRADE and gene_state == 'active':
         gene_state = gene_state
         gene_state = gene_state[:]
         RNA_Protein_state[0] -=1
-        RNA_Protein_state = RNA_Protein_state.copy()
+        RNA_Protein_state = RNA_Protein_state.copy() 
     elif active_gene_event == Transition.PROTEIN_INCREASE and gene_state == 'active':
         gene_state = gene_state
         gene_state = gene_state[:]
         RNA_Protein_state[1] +=1
-        RNA_Protein_state = RNA_Protein_state.copy()
+        RNA_Protein_state = RNA_Protein_state.copy() 
     elif active_gene_event == Transition.PROTEIN_DEGRADE and gene_state == 'active':
         gene_state = gene_state
         gene_state = gene_state[:]
         RNA_Protein_state[1] -=1
-        RNA_Protein_state = RNA_Protein_state.copy()
+        RNA_Protein_state = RNA_Protein_state.copy() 
     elif active_gene_event == Transition.GENE_INACTIVATE and gene_state == 'active':
         gene_state = 'inactive'
         gene_state = gene_state[:]
         RNA_Protein_state = RNA_Protein_state
-        RNA_Protein_state = RNA_Protein_state.copy()
+        RNA_Protein_state = RNA_Protein_state.copy() 
     elif inactive_gene_event == Transition.RNA_DEGRADE and gene_state == 'inactive':
         gene_state = gene_state
         gene_state = gene_state[:]
         RNA_Protein_state[0] -=1
-        RNA_Protein_state = RNA_Protein_state.copy()
+        RNA_Protein_state = RNA_Protein_state.copy() 
     elif inactive_gene_event == Transition.PROTEIN_INCREASE and gene_state == 'inactive' :
         gene_state = gene_state
         gene_state = gene_state[:]
         RNA_Protein_state[1] +=1
-        RNA_Protein_state = RNA_Protein_state.copy()
+        RNA_Protein_state = RNA_Protein_state.copy() 
     elif inactive_gene_event == Transition.PROTEIN_DEGRADE and gene_state == 'inactive':
         gene_state = gene_state
         gene_state = gene_state[:]
         RNA_Protein_state[1] -=1
-        RNA_Protein_state = RNA_Protein_state.copy()
+        RNA_Protein_state = RNA_Protein_state.copy() 
+        
+    elif isinstance(inactive_gene_event,str) or isinstance(active_gene_event, str):
+        raise TypeError("Do not use string ! Choose transitions from Transition enum members.")
     else:
-        raise ValueError("transition not recognized")
+        raise ValueError("Transition not recognized")
         
     updated_state = np.array([gene_state,RNA_Protein_state], dtype=object)
     
     return updated_state
 
+
+
+
+
 #%% Tests
 def test_update_state_return_correct_gene_state_when_gene_is_active():
     """Verify that the update_state function updates gene state to 'inactive' 
     when the initial gene state is active and when the transition for gene in active state
-    is "Transition.GENE_INACTIVATE" and verify that in this transition the number
-    of RNAs and proteins keeps constant"""
+    is "Transition.GENE_INACTIVATE" despite gene inactive transition is Transition.GENE_ACTIVATE
+    and verify that in this transition the number of RNAs and proteins keeps constant"""
     active_gene_event = Transition.GENE_INACTIVATE
     inactive_gene_event = Transition.GENE_ACTIVATE
     gene_state = 'active'
@@ -92,8 +119,8 @@ def test_update_state_return_correct_gene_state_when_gene_is_active():
 def test_update_state_return_correct_gene_state_when_gene_is_inactive():
     """Verify that the update_state function updates gene state to 'active' 
     when the initial gene state is inactive and when the transition for gene in inactive state
-    is "Transition.GENE_ACTIVATE" and verify that in this transition the number
-    of RNAs and proteins keeps constant
+    is "Transition.GENE_ACTIVATE" despite gene active transition is Transition.GENE_INACTIVATE
+    and verify that in this transition the number of RNAs and proteins keeps constant
     """
     active_gene_event = Transition.GENE_INACTIVATE
     inactive_gene_event = Transition.GENE_ACTIVATE
@@ -106,7 +133,7 @@ def test_update_state_return_correct_gene_state_when_gene_is_inactive():
 def test_update_state_return_correct_value_when_gene_is_active_and_RNA_INCREASE():
     """Verify that the update_state function increases the number of RNA
     molecules by 1 when gene state is active and the active gene state transition
-    is Transition.RNA_INCREASE.
+    is Transition.RNA_INCREASE despite gene inactive transition is Transition.GENE_ACTIVATE.
     """
     active_gene_event = Transition.RNA_INCREASE
     inactive_gene_event = Transition.GENE_ACTIVATE
@@ -119,7 +146,7 @@ def test_update_state_return_correct_value_when_gene_is_active_and_RNA_INCREASE(
 def test_update_state_return_correct_value_when_gene_is_active_and_RNA_DEGRADE():
     """Verify that the update_state function decreases the number of RNA
     molecules by 1 when gene state is active and the active gene state transition
-    is Transition.RNA_DEGRADE.
+    is Transition.RNA_DEGRADE, despite gene inactive transition is Transition.GENE_ACTIVATE.
     """
     active_gene_event = Transition.RNA_DEGRADE
     inactive_gene_event = Transition.GENE_ACTIVATE
@@ -132,7 +159,7 @@ def test_update_state_return_correct_value_when_gene_is_active_and_RNA_DEGRADE()
 def test_update_state_return_correct_value_when_gene_is_active_and_Protein_INCREASE():
     """Verify that the update_state function increases the number of proteins
     by 1 when gene state is active and the active gene state transition
-    is Transition.PROTEIN_INCREASE.
+    is Transition.PROTEIN_INCREASE, despite gene inactive transition is Transition.GENE_ACTIVATE.
     """
     active_gene_event = Transition.PROTEIN_INCREASE
     inactive_gene_event = Transition.GENE_ACTIVATE
@@ -145,7 +172,7 @@ def test_update_state_return_correct_value_when_gene_is_active_and_Protein_INCRE
 def test_update_state_return_correct_value_when_gene_is_active_and_Protein_DEGRADE():
     """Verify that the update_state function decreases the number of proteins
     by 1 when gene state is active and the active gene state transition
-    is Transition.PROTEIN_DEGRADE.
+    is Transition.PROTEIN_DEGRADE, despite gene inactive transition is Transition.GENE_ACTIVATE.
     """
     active_gene_event = Transition.PROTEIN_DEGRADE
     inactive_gene_event = Transition.GENE_ACTIVATE
@@ -240,7 +267,7 @@ def test_update_state_return_a_string_as_gene_state():
     gene_state = 'active'
     RNA_Protein_state = np.array([0,0])
     updated_state = update_state(active_gene_event, inactive_gene_event, gene_state, RNA_Protein_state)
-    assert type(updated_state[0]) == str
+    assert isinstance(updated_state[0], str)
     
 def test_update_state_return_value_error_given_wrong_transition():
     """Verify that the update_state function raises a 'value' error
@@ -254,14 +281,14 @@ def test_update_state_return_value_error_given_wrong_transition():
         update_state(active_gene_event, inactive_gene_event, gene_state, RNA_Protein_state)
 
 def test_update_state_fails_given_a_string_as_transition():
-    """Verify that the update_state function raises a 'value' error
+    """Verify that the update_state function raises a 'type' error
     given a string as transition.
     """
-    active_gene_event = 'gene activate'
+    active_gene_event = 'Transition.GENE_INACTIVATE'
     inactive_gene_event = Transition.GENE_ACTIVATE
     gene_state = 'active'
     RNA_Protein_state = np.array([0,0])
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         update_state(active_gene_event, inactive_gene_event, gene_state, RNA_Protein_state)
 
 
