@@ -14,7 +14,7 @@ import matplotlib.pylab as plt
 import typing 
 from enum import Enum
 
-from collections import Counter
+from collections import Counter, namedtuple 
 
 import scipy.stats as st
 
@@ -37,37 +37,39 @@ class Transition(Enum):
     PROTEIN_INCREASE = 'Protein increase'
     PROTEIN_DEGRADE = 'Protein degrade'
 
-ka = 1
-ki = 0.5
-k1 = 1
-k2 = 0.1
-k3 = 1
-k4 = 1
+rates = namedtuple("Rates",['ka', 'ki', 'k1', 'k2', 'k3', 'k4'])
+rate = rates(ka = 1, ki = 0.5, k1 = 1, k2 = 0.1, k3 = 1, k4 = 1)
 
 def gene_activate(state):
-    return state[index_n_inactive_genes]*ka
+    return state[index_n_inactive_genes]*rate.ka
 def gene_inactivate(state):
-    return state[index_n_active_genes]*ki 
+    return state[index_n_active_genes]*rate.ki 
 
 def RNA_increase(state):
-    return state[index_n_active_genes]*k1
+    return state[index_n_active_genes]*rate.k1
 
 def RNA_degrade(state):
-    return state[index_n_RNAs]*k2
+    return state[index_n_RNAs]*rate.k2
 
 def Protein_increase(state):
-    return state[index_n_RNAs]*k3
+    return state[index_n_RNAs]*rate.k3
 
 def Protein_degrade(state):
-    return state[index_n_proteins]*k4
+    return state[index_n_proteins]*rate.k4
 
-transitions = [gene_activate, gene_inactivate, RNA_increase, 
-               RNA_degrade, Protein_increase, Protein_degrade]
 
-transition_names = [Transition.GENE_ACTIVATE, Transition.GENE_INACTIVATE, Transition.RNA_INCREASE, Transition.RNA_DEGRADE, Transition.PROTEIN_INCREASE, Transition.PROTEIN_DEGRADE]
 
-rates = [f(state) for f in transitions]
-rates
+
+transitions = [gene_activate, gene_inactivate, 
+               RNA_increase, RNA_degrade, 
+               Protein_increase, Protein_degrade]
+
+transition_names = [Transition.GENE_ACTIVATE, Transition.GENE_INACTIVATE, 
+                    Transition.RNA_INCREASE, Transition.RNA_DEGRADE, 
+                    Transition.PROTEIN_INCREASE, Transition.PROTEIN_DEGRADE]
+
+
+
 
 def update_state(event, state):
     """This method updates the initial state according to the event occured
@@ -87,54 +89,40 @@ def update_state(event, state):
                     the event has occured.
     """
 
-
-
-    
-    
     if event == Transition.GENE_ACTIVATE:
          state[index_n_active_genes] +=1
          state[index_n_inactive_genes] -=1
-         state = state
          state = state.copy()
 
          
     elif event == Transition.GENE_INACTIVATE:
         state[index_n_active_genes] -=1
         state[index_n_inactive_genes] +=1
-        state = state
         state = state.copy()
 
     elif event == Transition.RNA_INCREASE:
          state[index_n_RNAs] +=1
-         state = state
          state = state.copy()
 
     elif event == Transition.RNA_DEGRADE:
         state[index_n_RNAs] -=1
-        state = state
         state = state.copy()
 
     elif event == Transition.PROTEIN_INCREASE:
          state[index_n_proteins] +=1
-         state = state
          state = state.copy()
 
     elif event == Transition.PROTEIN_DEGRADE:
         state[index_n_proteins] -=1
-        state = state
         state = state.copy()
 
-
-
-        
     elif isinstance(event,str) or isinstance(event, str):
         raise TypeError("Do not use string ! Choose transitions from Transition enum members.")
     else:
         raise ValueError("Transition not recognized")
-    
 
-    
     updated_state = state
+
     return updated_state 
 
 
@@ -150,57 +138,48 @@ class Observation(typing.NamedTuple):
 
 
 
-
-def simulation(starting_state, time_limit):
-    """ This method simulates RNA and Protein populations from a regulated gene.
+def gillespie_ssa(state, transitions, total_time):
+    rates = [f(state) for f in transitions]
     
-    Parameters
-    
-    starting_gene_state : starting state of gene.
-    starting_RNA_Protein_state : initial number of RNAs and proteins.
-    time_limit : simulation time limit.
+    total_rate = np.sum(rates)
 
-    Returns:
-        observed_states : list
-                        list of named tuples each one storing 
-                        gene state, number of RNAs and proteins,
-                        total time spent, time of residency in that state,
-                        type of event for each iteration of simulation.
-    """
-    observed_states = []
+    time = np.random.exponential(1/total_rate)
+   
+    event = rn.choices(transition_names, weights = rates)[0]
+
+    
+    
+    
+    updated_state = update_state(event, state)
+        
+    state = updated_state
+ 
+    observation = Observation(state, total_time, time, event)
+
+    return observation
+
+
+
+def evolution(starting_state, time_limit):
     state = starting_state
     total_time = 0.0
-    
+    observed_states = []
     while total_time < time_limit:
         
-        rates = [f(state) for f in transitions]
         
-        total_rate = np.sum(rates)
-
-        time = np.random.exponential(1/total_rate)
-       
-        event = rn.choices(transition_names, weights = rates)[0]
-
-        
-        
-        observation = Observation(state, total_time, time, event)
-        
+        observation = gillespie_ssa(state, transitions, total_time)
         observed_states.append(observation)
-        
+        time = observation.time_of_residency
         
         total_time += time
         
-        updated_state = update_state(event, state)
-        
-        state = updated_state
-    
+
     return observed_states
 
 
-time_limit = 100
-results = simulation(starting_state = state, time_limit = time_limit)
 
-results 
+time_limit = 100
+results = evolution(starting_state = state, time_limit = time_limit)
 
 
 
@@ -237,6 +216,8 @@ def generate_protein_distribution(results):
     return protein_distribution 
 
 
+
+
 def StatesDistributionPlot():
     """ This method plots the probability distribution of 
     observing each state
@@ -257,7 +238,9 @@ def StatesDistributionPlot():
     ax[1].bar(values, pmf, alpha=0.5)
  
 
+
 StatesDistributionPlot()
+
 
 
 def create_dataframe(results):
@@ -288,30 +271,49 @@ def create_dataframe(results):
     
     return results_dataframe
 
-df = create_dataframe(results)
-df.to_csv(r'C:\Users\asus\Desktop\ProgettoNFkBTumorCellsSimulation\protein-synthesis-modeling\results.csv', index = None, header=True) 
+
+
+
+def save_results(file_path):
+    """This method saves dataframe in a tab separated CSV file
+    
+    Parameters
+    
+    file_path : str
+                path to folder where the CSV file is saved
+    """
+    df = create_dataframe(results)
+    df.to_csv(file_path, sep ='\t', index = None, header=True) 
+    
+
+
+save_results(file_path = r'C:\Users\asus\Desktop\results.csv')
+
+
 
 def MoleculesVsTimePlot():
     """This method plots gene activity, the number of RNA molecules
     produced vs time and the number of proteins produced vs time
     """
+    df = create_dataframe(results)
+    
     fig, ax = plt.subplots(nrows=3, ncols=1, figsize=(5, 10))
     ax[0].plot(df['Time'], df['Gene activity'])
     ax[0].set_ylabel('Gene Activity')
     ax[0].set_xlabel('Time')
-    ax[0].text(0.9,0.8,"$k_a$=$n_a$*{}\n $k_i$=$n_i$*{}".format(ka,ki), 
+    ax[0].text(0.9,0.8,"$k_a$=$n_a$*{}\n $k_i$=$n_i$*{}".format(rate.ka,rate.ki), 
                ha='center', va='center', fontsize=16, bbox=dict(facecolor='white', alpha=0.5),
                transform = ax[0].transAxes)
     ax[1].plot(df['Time'], df['Number of RNA molecules'])
     ax[1].set_ylabel('# of RNA molecules')
     ax[1].set_xlabel('Time')
-    ax[1].text(0.9,0.8,"$k_1$=$n_a$*{}\n $k_2$=m*{}".format(k1, k2), 
+    ax[1].text(0.9,0.8,"$k_1$=$n_a$*{}\n $k_2$=m*{}".format(rate.k1, rate.k2), 
                ha ='center', va = 'center', fontsize=16, bbox=dict(facecolor='white', alpha=0.5),
                transform = ax[1].transAxes)
     ax[2].plot(df['Time'], df['Number of proteins'])
     ax[2].set_ylabel('# of proteins')
     ax[2].set_xlabel('Time')
-    ax[2].text(0.9,0.8,"$k_3$=m*{}\n $k_4$=p*{}".format(k3, k4), 
+    ax[2].text(0.9,0.8,"$k_3$=m*{}\n $k_4$=p*{}".format(rate.k3, rate.k4), 
                ha='center', va='center', fontsize=16, bbox=dict(facecolor='white', alpha=0.5),
                transform = ax[2].transAxes)
     
