@@ -41,9 +41,9 @@ rates = namedtuple("Rates",['ka', 'ki', 'k1', 'k2', 'k3', 'k4'])
 rate = rates(ka = 1, ki = 0.5, k1 = 1, k2 = 0.1, k3 = 1, k4 = 1)
 
 def gene_activate(state):
-    return state[index_n_inactive_genes]*rate.ka
+    return state[index_n_inactive_genes]*rate.ka if state.any() > 0 else 0
 def gene_inactivate(state):
-    return state[index_n_active_genes]*rate.ki 
+    return state[index_n_active_genes]*rate.ki if state.any() > 0 else 0
 
 def RNA_increase(state):
     return state[index_n_active_genes]*rate.k1
@@ -139,12 +139,14 @@ class Observation(typing.NamedTuple):
 
 
 def gillespie_ssa(state, transitions, total_time):
+    
     rates = [f(state) for f in transitions]
     
     total_rate = np.sum(rates)
 
     time = np.random.exponential(1/total_rate)
-   
+    
+    
     event = rn.choices(transition_names, weights = rates)[0]
 
     
@@ -164,6 +166,7 @@ def evolution(starting_state, time_limit):
     state = starting_state
     total_time = 0.0
     observed_states = []
+    rn.seed(1)
     while total_time < time_limit:
         
         
