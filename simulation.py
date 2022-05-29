@@ -36,12 +36,14 @@ class Transition(Enum):
     RNA_DEGRADE = 'RNA degrade'
     PROTEIN_INCREASE = 'Protein increase'
     PROTEIN_DEGRADE = 'Protein degrade'
+    GENE_DEGRADE = 'gene degrade'
+    ABSORPTION = 'Absorption'
 
 rates = namedtuple("Rates",['ka', 'ki', 'k1', 'k2', 'k3', 'k4'])
 rate = rates(ka = 1, ki = 0.5, k1 = 1, k2 = 0.1, k3 = 1, k4 = 1)
 
 def gene_activate(state):
-    return state[index_n_inactive_genes]*rate.ka
+    return state[index_n_inactive_genes]*rate.ka 
 def gene_inactivate(state):
     return state[index_n_active_genes]*rate.ki
 
@@ -56,6 +58,9 @@ def Protein_increase(state):
 
 def Protein_degrade(state):
     return state[index_n_proteins]*rate.k4
+
+def gene_degrade(state):
+    return (state[index_n_active_genes]+state[index_n_inactive_genes])*rate.k5
 
 
 
@@ -115,7 +120,15 @@ def update_state(event, state):
     elif event == Transition.PROTEIN_DEGRADE:
         state[index_n_proteins] -=1
         state = state.copy()
-
+    
+    elif event == Transition.GENE_DEGRADE:
+        state[index_n_active_genes] = 0
+        state[index_n_inactive_genes] = 0
+        state = state.copy() 
+    
+    elif event == Transition.ABSORPTION:
+        pass
+    
     elif isinstance(event,str) or isinstance(event, str):
         raise TypeError("Do not use string ! Choose transitions from Transition enum members.")
     else:
@@ -135,55 +148,108 @@ class Observation(typing.NamedTuple):
     time_of_observation: float
     time_of_residency: float
     transition: Transition
+    transition_rates: typing.Any
 
 
-
-def gillespie_ssa(state, transitions, total_time):
+def gillespie_ssa(starting_state, transitions):
+    
+    state = starting_state 
     
     rates = [f(state) for f in transitions]
     
     total_rate = np.sum(rates)
-
-    time = np.random.exponential(1/total_rate)
     
-    
-    event = rn.choices(transition_names, weights = rates)[0]
-
-    updated_state = update_state(event, state)
+    if total_rate > 0:
         
-    state = updated_state
- 
-    observation = Observation(state, total_time, time, event)
+        time = np.random.exponential(1/total_rate)
+        
+        rates_array = np.array(rates)
 
-    return observation
+        rates_array /= rates_array.sum()
+    
+        event = np.random.choice(transition_names, p=rates_array)
+    
+    else:
+        
+        time = np.inf
+        
+        event = Transition.ABSORPTION
+    
+    state = state.copy()
+    
+    updated_state = update_state(event, state)
+    
+    gillespie_result = [starting_state, updated_state, time, event, rates]
+    
+    return gillespie_result
 
 
 
-def evolution(starting_state, time_limit):
-    rn.seed(1)
+def evolution(starting_state, time_limit, seed_number):
+    observed_states = []
     state = starting_state
     total_time = 0.0
-    observed_states = []
+    
+    
+    np.random.seed(seed_number)
+
+    
+    
     while total_time < time_limit:
         
+        gillespie_result = gillespie(starting_state = state, transitions = transitions)
         
-        observation = gillespie_ssa(state, transitions, total_time)
+        rates = gillespie_result[4]
+        
+        event = gillespie_result[3]
+        
+        time = gillespie_result[2]
+        
+        observation_state = gillespie_result[0]
+        
+        
+        
+        observation = Observation(observation_state, total_time, time, event, rates)
+        
+        
+        
         observed_states.append(observation)
-        time = observation.time_of_residency
         
+        # Update time
         total_time += time
         
+        # Update starting state in gillespie algorithm
+        state = state.copy()
+        state = gillespie_result[1]
 
     return observed_states
 
 
-
 time_limit = 100
-results = evolution(starting_state = state, time_limit = time_limit)
-results[:5]
+simulation_results = evolution(starting_state = state, time_limit = time_limit, seed_number = 1)
+#simulation_results
+#simulation_results[:5]
+#simulation_results[0]
+#simulation_results[-5:]
+#simulation_results_length = len(simulation_results)
+#simulation_results_length
+
+def remove_warmup(results):
+    results_copy = results.copy()
+    for observation in results_copy:
+        if observation.time_of_observation < 20:
+            results.remove(observation)
+    return results
+
+results = remove_warmup(results=simulation_results)
+#results
+#results_length = len(results)
+#results_length
 
 
 
+
+##############################################################################
 
 
 def generate_RNA_distribution(results):
