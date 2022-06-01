@@ -28,19 +28,18 @@ index_n_inactive_genes = 1
 index_n_RNAs = 2
 index_n_proteins = 3
 
-class Transition(Enum):
-    """Define all possible transitions"""
-    GENE_ACTIVATE = 'gene activate'
-    GENE_INACTIVATE = 'gene inactivate'
-    RNA_INCREASE = 'RNA increase'
-    RNA_DEGRADE = 'RNA degrade'
-    PROTEIN_INCREASE = 'Protein increase'
-    PROTEIN_DEGRADE = 'Protein degrade'
-    GENE_DEGRADE = 'gene degrade'
-    ABSORPTION = 'Absorption'
+rates = namedtuple("Rates",['ka', 'ki', 'k1', 'k2', 'k3', 'k4', 'k5'])
+rate = rates(ka = 1, ki = 0.5, k1 = 1, k2 = 0.1, k3 = 1, k4 = 1, k5 = 0.001)
 
-rates = namedtuple("Rates",['ka', 'ki', 'k1', 'k2', 'k3', 'k4'])
-rate = rates(ka = 1, ki = 0.5, k1 = 1, k2 = 0.1, k3 = 1, k4 = 1)
+time_limit = 400
+
+N = 4
+
+warmup_time = 20
+
+#%% 
+
+
 
 def gene_activate(state):
     return state[index_n_inactive_genes]*rate.ka 
@@ -69,12 +68,31 @@ transitions = [gene_activate, gene_inactivate,
                RNA_increase, RNA_degrade, 
                Protein_increase, Protein_degrade]
 
+class Transition(Enum):
+    """Define all possible transitions"""
+    GENE_ACTIVATE = 'gene activate'
+    GENE_INACTIVATE = 'gene inactivate'
+    RNA_INCREASE = 'RNA increase'
+    RNA_DEGRADE = 'RNA degrade'
+    PROTEIN_INCREASE = 'Protein increase'
+    PROTEIN_DEGRADE = 'Protein degrade'
+    GENE_DEGRADE = 'gene degrade'
+    ABSORPTION = 'Absorption'
+
 transition_names = [Transition.GENE_ACTIVATE, Transition.GENE_INACTIVATE, 
                     Transition.RNA_INCREASE, Transition.RNA_DEGRADE, 
                     Transition.PROTEIN_INCREASE, Transition.PROTEIN_DEGRADE]
 
+class Observation(typing.NamedTuple):
+    """ typing.NamedTuple class storing information
+    for each event in the simulation"""
+    state: typing.Any
+    time_of_observation: float
+    time_of_residency: float
+    transition: Transition
+    transition_rates: typing.Any
 
-
+#%%
 
 def update_state(event, state):
     """This method updates the initial state according to the event occured
@@ -141,14 +159,7 @@ def update_state(event, state):
 
 
 
-class Observation(typing.NamedTuple):
-    """ typing.NamedTuple class storing information
-    for each event in the simulation"""
-    state: typing.Any
-    time_of_observation: float
-    time_of_residency: float
-    transition: Transition
-    transition_rates: typing.Any
+
 
 
 def gillespie_ssa(starting_state, transitions):
@@ -389,38 +400,84 @@ def MoleculesVsTimePlot():
 
 MoleculesVsTimePlot()
 
-time_limit = 1000
-result_1 = evolution(starting_state = state, time_limit = time_limit, seed_number = 1)
-result_2 = evolution(starting_state = state, time_limit = time_limit, seed_number = 2)
-result_3 = evolution(starting_state = state, time_limit = time_limit, seed_number = 3)
+def save_multiple_simulations_results(N, file_path=r'C:\\Users\asus\Desktop\{}.csv'):
+    """This method saves dataframes of multiple simulations in tab separated CSV files
+    each one named as "results_seedn" with n that is the number of the random seed.
+    
+    Parameters
+    
+    N : int
+        number of simulations.
+    
+    file_path : str, default is r"C:\\Users\asus\Desktop\{}.csv"
+                path to folder where files are saved. By default, it saves the files following the path \\Users\asus\Desktop.
+    """
+    results_list = []
+    for n in range(1,N):
+        result = evolution(starting_state = state, time_limit = time_limit, seed_number = n)
+        results_list.append(result)
+        
+    dataframes_list = []
+    for result in results_list:
+        dataframe = create_dataframe(result)
+        dataframes_list.append(dataframe)
+    
+    results_names = []
+    for n in range(1,N):
+        results_names.append("results_seed"+str(n))
+    
+    for dataframe, results in zip(dataframes_list, results_names):
+        dataframe.to_csv(file_path.format(results), sep='\t', index = None, header=True)
 
-results_list = [result_1, result_2, result_3]
 
+
+save_multiple_simulations_results(N)
 
 """
-def MultipleSimulationsPlot(result, ax = None):
-    if ax == None:
-        ax = plt.gca()
-    RNAs_values = [observation.state[index_n_RNAs] for observation in result]
-    RNAs_times = [observation.time_of_observation for observation in result]
-    ax.plot(RNAs_times, RNAs_values, linestyle = '-')
+#Alternative: use numpy function to speed up the code instead of range Python function.
+#Compare the time
+np.linspace(1,4,4, dtype = int)
+
+%timeit save_multiple_simulations_results(N)
+3.75 s ± 44 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+
+%timeit save_multiple_simulations_results_numpy(N)
+4.92 s ± 23.8 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 """
-dataframe_1 = create_dataframe(results = result_1)
-dataframe_2 = create_dataframe(results = result_2)
-dataframe_3 = create_dataframe(results = result_3)
 
-dataframe_list = [dataframe_1, dataframe_2, dataframe_3]
-dataframe_list 
+def MultipleSimulationsPlot(N):
+    """
+    This method makes a multiplot with one column and two rows:
+    top plot for the number of RNA molecules produced vs time 
+    and down plot for the number of proteins produced vs time.
 
-fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(5,10))
-ax[0].plot(dataframe_1['Time'], dataframe_1['Number of RNA molecules'])
-ax[0].plot(dataframe_2['Time'], dataframe_2['Number of RNA molecules'])
-ax[0].plot(dataframe_3['Time'], dataframe_3['Number of RNA molecules'])
-ax[0].set_ylabel('# of RNA molecules')
-ax[0].set_xlabel('Time')
-ax[1].plot(dataframe_1['Time'], dataframe_1['Number of proteins'])
-ax[1].plot(dataframe_2['Time'], dataframe_2['Number of proteins'])
-ax[1].plot(dataframe_3['Time'], dataframe_3['Number of proteins'])
-ax[1].set_ylabel('# of proteins')
-ax[1].set_xlabel('Time')
+    Parameters
+    ----------
+    N : int > 0
+        number of simulations.
+    """
+    
+    results_list = []
+    for n in range(1,N):
+        result = evolution(starting_state = state, time_limit = time_limit, seed_number = n)
+        results_list.append(result)
+        
+    dataframes_list = []
+    for result in results_list:
+        dataframe = create_dataframe(result)
+        dataframes_list.append(dataframe)
+        
+    fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(5,10))
+    for dataframe in dataframes_list:
+        ax[0].plot(dataframe['Time'], dataframe['Number of RNA molecules'])
+        ax[0].set_ylabel('# of RNA molecules')
+        ax[0].set_xlabel('Time')
+        ax[1].plot(dataframe['Time'], dataframe['Number of proteins'])
+        ax[1].set_ylabel('# of proteins')
+        ax[1].set_xlabel('Time')
+
+
+
+MultipleSimulationsPlot(N)
+
 
