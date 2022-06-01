@@ -314,22 +314,67 @@ def evolution(starting_state, time_limit, seed_number):
 
 
 
-#%%
-
-
-
 simulation_results = evolution(starting_state = state, time_limit = time_limit, seed_number = 1)
 
-#len(simulation_results)
+
+
+def add_evolution(simulation_results, time_limit, seed_number):
+    
+    observed_states = simulation_results
+    
+    last_state = simulation_results[-1]
+    
+    state = last_state.state
+    
+    total_time = last_state.time_of_observation
+    
+    np.random.seed(seed_number)
+    
+    while total_time < time_limit:
+        
+        gillespie_result = gillespie_ssa(starting_state = state, transitions = transitions)
+        
+        rates = gillespie_result[4]
+        
+        event = gillespie_result[3]
+        
+        time = gillespie_result[2]
+        
+        observation_state = gillespie_result[0]
+        
+        
+        observation = Observation(observation_state, total_time, time, event, rates)
+        
+        
+        observed_states.append(observation)
+        
+        # Update time
+        total_time += time
+        
+        # Update starting state in gillespie algorithm
+        state = state.copy()
+        
+        state = gillespie_result[1]
+
+    return observed_states
+
+
+
+simulation_results = add_evolution(simulation_results = simulation_results, time_limit = 100, seed_number = 1)  
+
+
+
+#%%
+
 
 
 def steadystate_distribution(observation):
         return observation.time_of_observation > warmup_time
 
 filtered_results = filter(steadystate_distribution, simulation_results)
+
 removedwarmup_results = list(filtered_results)
 
-#len(removedwarmup_results)
 
 
 def generate_RNA_distribution(results):
