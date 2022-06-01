@@ -24,9 +24,11 @@ import scipy.stats as st
 
 
 config = configparser.ConfigParser()
-config.read('gillespie_configuration.txt')
-#config.read(sys.argv[1])
 
+if len(sys.argv) == 1:
+    config.read('gillespie_configuration.txt')
+else:
+    config.read(sys.argv[1])
 
 
 def read_population():
