@@ -197,7 +197,7 @@ def evolution(starting_state, time_limit, seed_number):
     
     while total_time < time_limit:
         
-        gillespie_result = gillespie(starting_state = state, transitions = transitions)
+        gillespie_result = gillespie_ssa(starting_state = state, transitions = transitions)
         
         rates = gillespie_result[4]
         
@@ -388,3 +388,39 @@ def MoleculesVsTimePlot():
 
 
 MoleculesVsTimePlot()
+
+time_limit = 1000
+result_1 = evolution(starting_state = state, time_limit = time_limit, seed_number = 1)
+result_2 = evolution(starting_state = state, time_limit = time_limit, seed_number = 2)
+result_3 = evolution(starting_state = state, time_limit = time_limit, seed_number = 3)
+
+results_list = [result_1, result_2, result_3]
+
+
+"""
+def MultipleSimulationsPlot(result, ax = None):
+    if ax == None:
+        ax = plt.gca()
+    RNAs_values = [observation.state[index_n_RNAs] for observation in result]
+    RNAs_times = [observation.time_of_observation for observation in result]
+    ax.plot(RNAs_times, RNAs_values, linestyle = '-')
+"""
+dataframe_1 = create_dataframe(results = result_1)
+dataframe_2 = create_dataframe(results = result_2)
+dataframe_3 = create_dataframe(results = result_3)
+
+dataframe_list = [dataframe_1, dataframe_2, dataframe_3]
+dataframe_list 
+
+fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(5,10))
+ax[0].plot(dataframe_1['Time'], dataframe_1['Number of RNA molecules'])
+ax[0].plot(dataframe_2['Time'], dataframe_2['Number of RNA molecules'])
+ax[0].plot(dataframe_3['Time'], dataframe_3['Number of RNA molecules'])
+ax[0].set_ylabel('# of RNA molecules')
+ax[0].set_xlabel('Time')
+ax[1].plot(dataframe_1['Time'], dataframe_1['Number of proteins'])
+ax[1].plot(dataframe_2['Time'], dataframe_2['Number of proteins'])
+ax[1].plot(dataframe_3['Time'], dataframe_3['Number of proteins'])
+ax[1].set_ylabel('# of proteins')
+ax[1].set_xlabel('Time')
+
