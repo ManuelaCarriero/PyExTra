@@ -4,6 +4,9 @@ Created on Tue May 10 17:57:20 2022
 
 @author: asus
 """
+import configparser
+import sys
+import ast 
 
 import numpy as np
 import random as rn
@@ -18,58 +21,94 @@ from collections import Counter, namedtuple
 
 import scipy.stats as st
 
-#import argparse
-import configparser
 
-import ast 
+
 
 config = configparser.ConfigParser()
 config.read('gillespie_configuration.ini')
+#config.read(sys.argv[1])
 
 
 
-state = config.get('POPULATION', 'state')
-# YOU CAN CREATE A PIP FUNCTION
-state = np.array(ast.literal_eval(state))
- 
-
-
-index = dict(config["INDEX"])
-
-for key,value in index.items():
-    index[key] = int(value)
-
-active_genes = index['active_genes']
-inactive_genes = index['inactive_genes']
-RNAs = index['rnas']
-proteins = index['proteins']
-
-
-
-k_value = dict(config["RATES"])
-
-for key,value in k_value.items():
-    k_value[key] = float(value)
-
-rates = namedtuple("Rates",['ka', 'ki', 'k1', 'k2', 'k3', 'k4', 'k5'])
-rate = rates(ka = k_value['ka'], 
-             ki = k_value['ki'], 
-             k1 = k_value['k1'], 
-             k2 = k_value['k2'], 
-             k3 = k_value['k3'], 
-             k4 = k_value['k4'], 
-             k5 = k_value['k5'])
+def read_population():
+    """This function reads population parameters from configuration file
+    """
+    
+    state = config.get('POPULATION', 'state')
+    
+    def _convert_to_array(state):
+        List = ast.literal_eval(state)
+        return np.array(List)
+    
+    state = _convert_to_array(state)
+    
+    index = dict(config["INDEX"])
+    
+    for key,value in index.items():
+        index[key] = int(value)
+    
+    active_genes = index['active_genes']
+    inactive_genes = index['inactive_genes']
+    RNAs = index['rnas']
+    proteins = index['proteins']
+    
+    return state, active_genes, inactive_genes, RNAs, proteins
 
 
 
-simulation = dict(config["SIMULATION"])
 
-for key,value in simulation.items():
-    simulation[key] = int(value)
-  
-time_limit = simulation['time_limit'] 
-N = simulation['n']
-warmup_time = simulation['warmup_time']
+state, active_genes, inactive_genes, RNAs, proteins = read_population()
+
+
+
+
+def read_k_values():
+    """This function reads k parameters from configuration file
+    """
+    
+    k_value = dict(config["RATES"])
+    
+    for key,value in k_value.items():
+        k_value[key] = float(value)
+    
+    rates = namedtuple("Rates",['ka', 'ki', 'k1', 'k2', 'k3', 'k4', 'k5'])
+    rate = rates(ka = k_value['ka'], 
+                 ki = k_value['ki'], 
+                 k1 = k_value['k1'], 
+                 k2 = k_value['k2'], 
+                 k3 = k_value['k3'], 
+                 k4 = k_value['k4'], 
+                 k5 = k_value['k5'])
+    
+    return rate
+
+
+
+
+rate = read_k_values()
+
+
+
+
+def read_simulation_parameters():
+    """This function reads simulation parameters from configuration file
+    """
+    
+    simulation = dict(config["SIMULATION"])
+    
+    for key,value in simulation.items():
+        simulation[key] = int(value)
+      
+    time_limit = simulation['time_limit'] 
+    N = simulation['n']
+    warmup_time = simulation['warmup_time']
+    
+    return time_limit, N, warmup_time
+
+
+
+time_limit, N, warmup_time = read_simulation_parameters()
+
 #%% 
 
 
@@ -297,24 +336,29 @@ results = remove_warmup(results=simulation_results)
 
 
 def generate_RNA_distribution(results):
-    """ This method creates a Counter with state values 
+    """ This function creates a Counter with RNA state values 
     as keys and normalized residency time as values
     """
     RNA_distribution = Counter()
-    for observation in results:
+    for observation in results[0:-1]:
         state = observation.state[RNAs]
         residency_time = observation.time_of_residency
         RNA_distribution[state] += residency_time
-        
+    
     total_time_observed = sum(RNA_distribution.values())
     for state in RNA_distribution:
         RNA_distribution[state] /= total_time_observed
 
     return RNA_distribution 
 
+
+
 def generate_protein_distribution(results):
+    """ This function creates a Counter with protein state values 
+    as keys and normalized residency time as values
+    """
     protein_distribution = Counter()
-    for observation in results:
+    for observation in results[0:-1]:
         state = observation.state[proteins]
         residency_time = observation.time_of_residency
         protein_distribution[state] += residency_time
@@ -322,8 +366,10 @@ def generate_protein_distribution(results):
     total_time_observed = sum(protein_distribution.values())
     for state in protein_distribution:
         protein_distribution[state] /= total_time_observed
-
+    
     return protein_distribution 
+
+
 
 
 
