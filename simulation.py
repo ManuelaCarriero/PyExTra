@@ -18,48 +18,81 @@ from collections import Counter, namedtuple
 
 import scipy.stats as st
 
-# Define initial states
+#import argparse
+import configparser
 
-state = np.array([0, 1, 0, 0])
+import ast 
 
-#news = 0
-index_n_active_genes = 0
-index_n_inactive_genes = 1
-index_n_RNAs = 2
-index_n_proteins = 3
+config = configparser.ConfigParser()
+config.read('gillespie_configuration.ini')
+
+
+
+state = config.get('POPULATION', 'state')
+# YOU CAN CREATE A PIP FUNCTION
+state = np.array(ast.literal_eval(state))
+ 
+
+
+index = dict(config["INDEX"])
+
+for key,value in index.items():
+    index[key] = int(value)
+
+active_genes = index['active_genes']
+inactive_genes = index['inactive_genes']
+RNAs = index['rnas']
+proteins = index['proteins']
+
+
+
+k_value = dict(config["RATES"])
+
+for key,value in k_value.items():
+    k_value[key] = float(value)
 
 rates = namedtuple("Rates",['ka', 'ki', 'k1', 'k2', 'k3', 'k4', 'k5'])
-rate = rates(ka = 1, ki = 0.5, k1 = 1, k2 = 0.1, k3 = 1, k4 = 1, k5 = 0.001)
+rate = rates(ka = k_value['ka'], 
+             ki = k_value['ki'], 
+             k1 = k_value['k1'], 
+             k2 = k_value['k2'], 
+             k3 = k_value['k3'], 
+             k4 = k_value['k4'], 
+             k5 = k_value['k5'])
 
-time_limit = 400
 
-N = 4
 
-warmup_time = 20
+simulation = dict(config["SIMULATION"])
 
+for key,value in simulation.items():
+    simulation[key] = int(value)
+  
+time_limit = simulation['time_limit'] 
+N = simulation['n']
+warmup_time = simulation['warmup_time']
 #%% 
 
 
 
 def gene_activate(state):
-    return state[index_n_inactive_genes]*rate.ka 
+    return state[inactive_genes]*rate.ka 
 def gene_inactivate(state):
-    return state[index_n_active_genes]*rate.ki
+    return state[active_genes]*rate.ki
 
 def RNA_increase(state):
-    return state[index_n_active_genes]*rate.k1
+    return state[active_genes]*rate.k1
 
 def RNA_degrade(state):
-    return state[index_n_RNAs]*rate.k2
+    return state[RNAs]*rate.k2
 
 def Protein_increase(state):
-    return state[index_n_RNAs]*rate.k3
+    return state[RNAs]*rate.k3
 
 def Protein_degrade(state):
-    return state[index_n_proteins]*rate.k4
+    return state[proteins]*rate.k4
 
 def gene_degrade(state):
-    return (state[index_n_active_genes]+state[index_n_inactive_genes])*rate.k5
+    return (state[active_genes]+state[inactive_genes])*rate.k5
 
 
 
@@ -113,35 +146,35 @@ def update_state(event, state):
     """
 
     if event == Transition.GENE_ACTIVATE:
-         state[index_n_active_genes] +=1
-         state[index_n_inactive_genes] -=1
+         state[active_genes] +=1
+         state[inactive_genes] -=1
          state = state.copy()
 
          
     elif event == Transition.GENE_INACTIVATE:
-        state[index_n_active_genes] -=1
-        state[index_n_inactive_genes] +=1
+        state[active_genes] -=1
+        state[inactive_genes] +=1
         state = state.copy()
 
     elif event == Transition.RNA_INCREASE:
-         state[index_n_RNAs] +=1
+         state[RNAs] +=1
          state = state.copy()
 
     elif event == Transition.RNA_DEGRADE:
-        state[index_n_RNAs] -=1
+        state[RNAs] -=1
         state = state.copy()
 
     elif event == Transition.PROTEIN_INCREASE:
-         state[index_n_proteins] +=1
+         state[proteins] +=1
          state = state.copy()
 
     elif event == Transition.PROTEIN_DEGRADE:
-        state[index_n_proteins] -=1
+        state[proteins] -=1
         state = state.copy()
     
     elif event == Transition.GENE_DEGRADE:
-        state[index_n_active_genes] = 0
-        state[index_n_inactive_genes] = 0
+        state[active_genes] = 0
+        state[inactive_genes] = 0
         state = state.copy() 
     
     elif event == Transition.ABSORPTION:
@@ -269,9 +302,9 @@ def generate_RNA_distribution(results):
     """
     RNA_distribution = Counter()
     for observation in results:
-        state = observation.state[index_n_RNAs]
+        state = observation.state[RNAs]
         residency_time = observation.time_of_residency
-        RNA_distribution[state] += residency_time/time_limit
+        RNA_distribution[state] += residency_time
         
     total_time_observed = sum(RNA_distribution.values())
     for state in RNA_distribution:
@@ -282,9 +315,9 @@ def generate_RNA_distribution(results):
 def generate_protein_distribution(results):
     protein_distribution = Counter()
     for observation in results:
-        state = observation.state[index_n_proteins]
+        state = observation.state[proteins]
         residency_time = observation.time_of_residency
-        protein_distribution[state] += residency_time/time_limit
+        protein_distribution[state] += residency_time
     
     total_time_observed = sum(protein_distribution.values())
     for state in protein_distribution:
@@ -332,9 +365,9 @@ def create_dataframe(results):
 
     for observation in results:
         time_of_observation.append(observation.time_of_observation)
-        number_of_RNA_molecules.append(observation.state[index_n_RNAs])
-        number_of_proteins.append(observation.state[index_n_proteins])
-        if observation.state[index_n_active_genes] > 0:
+        number_of_RNA_molecules.append(observation.state[RNAs])
+        number_of_proteins.append(observation.state[proteins])
+        if observation.state[active_genes] > 0:
             gene_activity.append(1)
         else:
             gene_activity.append(0)
