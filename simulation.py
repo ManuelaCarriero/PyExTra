@@ -31,6 +31,7 @@ else:
     config.read(sys.argv[1])
 
 
+
 def read_population():
     """This function reads population parameters from configuration file
     """
@@ -103,12 +104,13 @@ def read_simulation_parameters():
     time_limit = simulation['time_limit'] 
     N = simulation['n']
     warmup_time = simulation['warmup_time']
+    seed_number = simulation['seed_number']
     
-    return time_limit, N, warmup_time
+    return time_limit, N, warmup_time, seed_number
 
 
 
-time_limit, N, warmup_time = read_simulation_parameters()
+time_limit, N, warmup_time, seed_number = read_simulation_parameters()
 
 
 
@@ -316,66 +318,11 @@ def evolution(starting_state, time_limit, seed_number):
 
 
 
-simulation_results = evolution(starting_state = state, time_limit = time_limit, seed_number = 1)
-
-
-
-def add_evolution(simulation_results, time_limit, seed_number):
-    
-    observed_states = simulation_results
-    
-    last_state = simulation_results[-1]
-    
-    state = last_state.state
-    
-    total_time = last_state.time_of_observation
-    
-    np.random.seed(seed_number)
-    
-    while total_time < time_limit:
-        
-        gillespie_result = gillespie_ssa(starting_state = state, transitions = transitions)
-        
-        rates = gillespie_result[4]
-        
-        event = gillespie_result[3]
-        
-        time = gillespie_result[2]
-        
-        observation_state = gillespie_result[0]
-        
-        
-        observation = Observation(observation_state, total_time, time, event, rates)
-        
-        
-        observed_states.append(observation)
-        
-        # Update time
-        total_time += time
-        
-        # Update starting state in gillespie algorithm
-        state = state.copy()
-        
-        state = gillespie_result[1]
-
-    return observed_states
-
-
-
-simulation_results = add_evolution(simulation_results = simulation_results, time_limit = 100, seed_number = 1)  
+simulation_results = evolution(starting_state = state, time_limit = time_limit, seed_number = seed_number)
 
 
 
 #%%
-
-
-
-def steadystate_distribution(observation):
-        return observation.time_of_observation > warmup_time
-
-filtered_results = filter(steadystate_distribution, simulation_results)
-
-removedwarmup_results = list(filtered_results)
 
 
 
@@ -443,7 +390,103 @@ def StatesDistributionPlot(results):
  
 
 
-StatesDistributionPlot(removedwarmup_results)
+StatesDistributionPlot(simulation_results)
+
+
+
+def decide_timelimit(simulation_results):   
+    
+    user_answer = input("Do you want to increase simulation time limit ? [yes/no] : ")
+    
+    user_answer = user_answer.replace(" ","")
+    
+    right_answers = ["yes","YES","no","NO"]
+    
+    if user_answer not in right_answers:
+        
+        print("NameError: valid answers are 'yes' or 'no'")
+        
+        user_answer=input("Do you want to increase simulation time limit ?[yes/no] : ")
+    
+    if user_answer == "yes" or user_answer == "YES":
+        
+        while user_answer != "no" and user_answer != "NO": 
+            
+            timelimit_answer = input("Choose simulation time limit [number] : ")
+
+            def add_evolution(simulation_results, time_limit, seed_number):
+                
+                observed_states = simulation_results
+                
+                last_state = simulation_results[-1]
+                
+                state = last_state.state
+                
+                total_time = last_state.time_of_observation
+                
+                np.random.seed(seed_number)
+                
+                while total_time < time_limit:
+                    
+                    gillespie_result = gillespie_ssa(starting_state = state, transitions = transitions)
+                    
+                    rates = gillespie_result[4]
+                    
+                    event = gillespie_result[3]
+                    
+                    time = gillespie_result[2]
+                    
+                    observation_state = gillespie_result[0]
+                    
+                    
+                    observation = Observation(observation_state, total_time, time, event, rates)
+                    
+                    
+                    observed_states.append(observation)
+                    
+                    # Update time
+                    total_time += time
+                    
+                    # Update starting state in gillespie algorithm
+                    state = state.copy()
+                    
+                    state = gillespie_result[1]
+        
+                return observed_states
+            
+            timelimit_answer = float(timelimit_answer)
+        
+            simulation_results = add_evolution(simulation_results = simulation_results, time_limit = timelimit_answer, seed_number = seed_number)  
+         
+            StatesDistributionPlot(simulation_results)
+            
+            user_answer = input("Do you want to increase again simulation time limit ? [yes/no] : ")
+    
+            user_answer = user_answer.replace(" ","")
+    
+            right_answers = ["yes","YES","no","NO"]
+    
+            if user_answer not in right_answers:
+                
+                print("NameError: valid answers are 'yes' or 'no'")
+                
+                user_answer=input("Do you want to increase again simulation time limit ?[yes/no] : ")
+        
+    else:
+        
+        simulation_results = simulation_results
+        
+        timelimit_answer = time_limit
+    
+    return simulation_results, timelimit_answer
+
+
+
+simulation_results, timelimit_answer = decide_timelimit(simulation_results=simulation_results)
+    
+
+
+#%%
 
 
 
@@ -490,7 +533,118 @@ def save_results(results, file_path):
     
 
 
-save_results(results = removedwarmup_results, file_path = r'C:\Users\asus\Desktop\results.csv')
+save_results(results = simulation_results, file_path = r'C:\Users\asus\Desktop\results.csv')
+
+
+
+def create_multiplesimulations_dataframes(N):
+    """This function makes multiple simulations and creates a list
+    of results dataframes (one results dataframe for each simulation)
+    
+    Parameters
+    ----------
+    N : int
+        number of simulations.
+
+    Returns
+    -------
+    list of results dataframe
+    """
+    
+    results_list = []
+    for n in range(1,N):
+        result = evolution(starting_state = state, time_limit = timelimit_answer, seed_number = n)
+        results_list.append(result)
+
+    dataframes_list = []
+    for result in results_list:
+        dataframe = create_dataframe(result)
+        dataframes_list.append(dataframe)
+    
+    return dataframes_list
+
+
+
+dataframes_list = create_multiplesimulations_dataframes(N)
+
+
+
+def save_multiplesimulations_results(N, file_path=r'C:\\Users\asus\Desktop\{}.csv'):
+    """This function saves dataframes of multiple simulations in tab separated CSV files
+    each one named as "results_seedn" with n that is the number of the random seed.
+    
+    Parameters
+    
+    N : int
+        number of simulations.
+    
+    file_path : str, default is r"C:\\Users\asus\Desktop\{}.csv"
+                path to folder where files are saved. By default, it saves the files following the path \\Users\asus\Desktop.
+    """
+    
+    results_names = []
+    for n in range(1,N):
+        results_names.append("results_seed"+str(n))
+    
+    for dataframe, results in zip(dataframes_list, results_names):
+        dataframe.to_csv(file_path.format(results), sep='\t', index = None, header=True)
+
+
+
+save_multiplesimulations_results(N)
+
+
+
+#%%
+
+
+
+def steadystate_distribution(observation):
+        return observation.time_of_observation > warmup_time
+
+filtered_results = filter(steadystate_distribution, simulation_results)
+
+removedwarmup_results = list(filtered_results)
+
+
+
+def multiple_simulations_remove_warmup(N):
+    """This function makes multiple simulations, removes warmup time points
+    and creates a list of results dataframes (one results dataframe 
+    for each simulation).
+    
+
+    Parameters
+    ----------
+    N : int
+        number of simulations.
+
+    Returns
+    -------
+    list of results dataframe
+    """
+    
+    results_list = []
+    for n in range(1,N):
+        result = evolution(starting_state = state, time_limit = timelimit_answer, seed_number = n)
+        results_list.append(result)
+    
+    removed_warmup_results_list =[]
+    for result in results_list:
+        filtered_results = filter(steadystate_distribution, result)
+        removed_warmup = list(filtered_results)
+        removed_warmup_results_list.append(removed_warmup)
+        
+    dataframes_list = []
+    for result in removed_warmup_results_list:
+        dataframe = create_dataframe(result)
+        dataframes_list.append(dataframe)
+    
+    return dataframes_list
+
+
+
+removed_warmup_dataframes = multiple_simulations_remove_warmup(N)    
 
 
 
@@ -525,110 +679,11 @@ def MoleculesVsTimePlot(results):
 
 
 
+results = [simulation_results, removedwarmup_results]
+
+
+    
 MoleculesVsTimePlot(results = removedwarmup_results)
-
-
-
-#%%
-
-
-
-def multiple_simulations(N):
-    """This function makes multiple simulations and creates a list
-    of results dataframes (one results dataframe for each simulation)
-    
-    Parameters
-    ----------
-    N : int
-        number of simulations.
-
-    Returns
-    -------
-    list of results dataframe
-    """
-    
-    results_list = []
-    for n in range(1,N):
-        result = evolution(starting_state = state, time_limit = time_limit, seed_number = n)
-        results_list.append(result)
-
-    dataframes_list = []
-    for result in results_list:
-        dataframe = create_dataframe(result)
-        dataframes_list.append(dataframe)
-    
-    return dataframes_list
-
-
-
-    
-dataframes_list = multiple_simulations(N)
-
-
-
-def save_multiple_simulations_results(N, file_path=r'C:\\Users\asus\Desktop\{}.csv'):
-    """This function saves dataframes of multiple simulations in tab separated CSV files
-    each one named as "results_seedn" with n that is the number of the random seed.
-    
-    Parameters
-    
-    N : int
-        number of simulations.
-    
-    file_path : str, default is r"C:\\Users\asus\Desktop\{}.csv"
-                path to folder where files are saved. By default, it saves the files following the path \\Users\asus\Desktop.
-    """
-    
-    results_names = []
-    for n in range(1,N):
-        results_names.append("results_seed"+str(n))
-    
-    for dataframe, results in zip(dataframes_list, results_names):
-        dataframe.to_csv(file_path.format(results), sep='\t', index = None, header=True)
-
-
-
-save_multiple_simulations_results(N)
-
-
-
-def multiple_simulations_remove_warmup(N):
-    """This function makes multiple simulations, removes warmup time points
-    and creates a list of results dataframes (one results dataframe 
-    for each simulation).
-    
-
-    Parameters
-    ----------
-    N : int
-        number of simulations.
-
-    Returns
-    -------
-    list of results dataframe
-    """
-    
-    results_list = []
-    for n in range(1,N):
-        result = evolution(starting_state = state, time_limit = time_limit, seed_number = n)
-        results_list.append(result)
-    
-    removed_warmup_results_list =[]
-    for result in results_list:
-        filtered_results = filter(steadystate_distribution, result)
-        removed_warmup = list(filtered_results)
-        removed_warmup_results_list.append(removed_warmup)
-        
-    dataframes_list = []
-    for result in removed_warmup_results_list:
-        dataframe = create_dataframe(result)
-        dataframes_list.append(dataframe)
-    
-    return dataframes_list
-
-
-
-removed_warmup_dataframes = multiple_simulations_remove_warmup(N)    
 
 
 
@@ -654,6 +709,10 @@ def MultipleSimulationsPlot(dataframes):
         ax[1].set_xlabel('Time')
         sns.despine(fig, bottom=False, left=False)
     plt.show()
+
+
+
+results = [dataframes_list, removed_warmup_dataframes]
 
 
 
