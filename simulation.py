@@ -396,7 +396,7 @@ StatesDistributionPlot(simulation_results)
 
 def decide_timelimit(simulation_results):   
     
-    user_answer = input("Do you want to increase simulation time limit ? [yes/no] : ")
+    user_answer = input("The actual time limit is {}. Do you want to increase simulation time limit ? [yes/no] : ".format(time_limit))
     
     user_answer = user_answer.replace(" ","")
     
@@ -460,7 +460,7 @@ def decide_timelimit(simulation_results):
          
             StatesDistributionPlot(simulation_results)
             
-            user_answer = input("Do you want to increase again simulation time limit ? [yes/no] : ")
+            user_answer = input("The actual time limit is {}. Do you want to increase again simulation time limit ? [yes/no] : ".format(timelimit_answer))
     
             user_answer = user_answer.replace(" ","")
     
