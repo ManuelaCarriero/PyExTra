@@ -114,6 +114,11 @@ time_limit, N, warmup_time, seed_number = read_simulation_parameters()
 
 
 
+
+file_path = r'C:\Users\asus\Desktop\results.csv'
+ 
+multiplesimulations_filepath = r'C:\\Users\asus\Desktop\{}.csv' 
+
 #%%
 
 
@@ -533,7 +538,7 @@ def save_results(results, file_path):
     
 
 
-save_results(results = simulation_results, file_path = r'C:\Users\asus\Desktop\results.csv')
+save_results(results = simulation_results, file_path = file_path)
 
 
 
@@ -569,7 +574,7 @@ dataframes_list = create_multiplesimulations_dataframes(N)
 
 
 
-def save_multiplesimulations_results(N, file_path=r'C:\\Users\asus\Desktop\{}.csv'):
+def save_multiplesimulations_results(N, file_path = multiplesimulations_filepath):
     """This function saves dataframes of multiple simulations in tab separated CSV files
     each one named as "results_seedn" with n that is the number of the random seed.
     
