@@ -5,30 +5,47 @@ Created on Tue May 31 10:41:16 2022
 @author: asus
 """
 
-#import argparse
+import argparse
 import configparser
 import ast 
-import sys
+#import sys
 
 import numpy as np
 import pandas as pd
-import seaborn as sns
-import matplotlib.pylab as plt
+
 
 import typing 
-from enum import Enum
+from enum import Enum, IntEnum
 
-from collections import Counter, namedtuple 
+from collections import namedtuple 
 import scipy.stats as st
 
+import json
+import jsonlines
+
+#import os
+#from itertools import cycle
+#import time
 
 
 config = configparser.ConfigParser()
 
-if len(sys.argv) == 1:
-    config.read('gillespie_configuration.txt')
-else:
-    config.read(sys.argv[1])
+parser = argparse.ArgumentParser()
+
+parser.add_argument("filename", help="read configuration file.")
+
+parser.add_argument('-run', help='run Gillespie simulation given a configuration filename', action = "store_true")
+parser.add_argument("-v", "--verbose", help="increase output verbosity", action="store_true")
+parser.add_argument("--time_limit", help="increase time limit", metavar='value', type = float)
+
+args = parser.parse_args()
+
+
+
+config.read(args.filename)
+
+if args.verbose:
+    print("I am reading the configuration file {}".format(args.filename))
 
 
 
@@ -38,11 +55,12 @@ def read_population():
     
     state = config.get('POPULATION', 'state')
     
-    def _convert_to_array(state):
-        List = ast.literal_eval(state)
-        return np.array(List)
+    def apply_pipe(func_list, obj):
+        for function in func_list:
+            obj = function(obj)
+        return obj 
     
-    state = _convert_to_array(state)
+    starting_state = apply_pipe([ast.literal_eval, np.array], state) 
     
     index = dict(config["INDEX"])
     
@@ -54,12 +72,12 @@ def read_population():
     RNAs = index['rnas']
     proteins = index['proteins']
     
-    return state, active_genes, inactive_genes, RNAs, proteins
+    return starting_state, active_genes, inactive_genes, RNAs, proteins
 
 
 
 
-state, active_genes, inactive_genes, RNAs, proteins = read_population()
+starting_state, active_genes, inactive_genes, RNAs, proteins = read_population()
 
 
 
@@ -99,18 +117,22 @@ def read_simulation_parameters():
     simulation = dict(config["SIMULATION"])
     
     for key,value in simulation.items():
-        simulation[key] = int(value)
+        if key == 'dt':
+            simulation[key] = float(value)
+        else:
+            simulation[key] = int(value)
       
     time_limit = simulation['time_limit'] 
-    N = simulation['n']
+    N = simulation['n_simulations']
     warmup_time = simulation['warmup_time']
     seed_number = simulation['seed_number']
+    dt = simulation['dt']
     
-    return time_limit, N, warmup_time, seed_number
+    return time_limit, N, warmup_time, seed_number, dt
 
 
 
-time_limit, N, warmup_time, seed_number = read_simulation_parameters()
+time_limit, N, warmup_time, seed_number, dt = read_simulation_parameters()
 
 
 
@@ -119,9 +141,9 @@ file_path = r'C:\Users\asus\Desktop\results.csv'
  
 multiplesimulations_filepath = r'C:\\Users\asus\Desktop\{}.csv' 
 
+
+
 #%%
-
-
 
 def gene_activate(state):
     return state[inactive_genes]*rate.ka
@@ -173,14 +195,18 @@ transition_names = [Transition.GENE_ACTIVATE, Transition.GENE_INACTIVATE,
 
 
 class Observation(typing.NamedTuple):
-    """ typing.NamedTuple class storing information
-    for each event in the simulation"""
     state: typing.Any
     time_of_observation: float
     time_of_residency: float
     transition: Transition
     transition_rates: typing.Any
 
+class Index(IntEnum):
+    state = 0
+    time_of_observation = 1
+    time_of_residency = 2
+    transition = 3
+    transition_rates = 4
 
 
 #%%
@@ -208,35 +234,27 @@ def update_state(event, state):
     if event == Transition.GENE_ACTIVATE:
          state[active_genes] +=1
          state[inactive_genes] -=1
-         state = state.copy()
-
-         
+                  
     elif event == Transition.GENE_INACTIVATE:
         state[active_genes] -=1
         state[inactive_genes] +=1
-        state = state.copy()
-
+        
     elif event == Transition.RNA_INCREASE:
          state[RNAs] +=1
-         state = state.copy()
-
+         
     elif event == Transition.RNA_DEGRADE:
         state[RNAs] -=1
-        state = state.copy()
-
+        
     elif event == Transition.PROTEIN_INCREASE:
          state[proteins] +=1
-         state = state.copy()
-
+         
     elif event == Transition.PROTEIN_DEGRADE:
         state[proteins] -=1
-        state = state.copy()
-        
+                
     elif event == Transition.GENE_DEGRADE:
         state[active_genes] = 0
         state[inactive_genes] = 0
-        state = state.copy() 
-    
+            
     elif event == Transition.ABSORPTION:
         pass
     
@@ -283,13 +301,13 @@ def gillespie_ssa(starting_state, transitions):
 
 
 
-def evolution(starting_state, time_limit, seed_number):
+def evolution(starting_state, starting_total_time, time_limit, seed_number):
     
     observed_states = []
     
     state = starting_state
     
-    total_time = 0.0
+    total_time = starting_total_time
     
     np.random.seed(seed_number)
 
@@ -323,177 +341,44 @@ def evolution(starting_state, time_limit, seed_number):
 
 
 
-simulation_results = evolution(starting_state = state, time_limit = time_limit, seed_number = seed_number)
+class CustomizedEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        if isinstance(obj, Enum):
+           return obj.name
+        return json.JSONEncoder.default(self, obj)
+
+
+
+if args.run: 
+    
+    simulation_results = evolution(starting_state = starting_state, starting_total_time = 0.0, time_limit = time_limit, seed_number = seed_number)
+    
+    simulation_results_ = json.dumps(simulation_results, cls = CustomizedEncoder)
+
+    with jsonlines.open('simulation_results.jsonl', mode='w') as writer:
+        writer.write(simulation_results_)
+
+
+    
+if args.time_limit:
+    
+    with jsonlines.open('simulation_results.jsonl') as reader:
+        simulation_results = reader.read()
+
+    simulation_results = ast.literal_eval(simulation_results)
+    last_event = simulation_results[-1][Index.transition]
+    last_state = np.array(simulation_results[-1][Index.state])
+
+    state = update_state(event = last_event, state = last_state) 
+
+    added_simulation_results = evolution(starting_state = state, starting_total_time = simulation_results[-1][1] + simulation_results[-1][2], time_limit = args.time_limit, seed_number = seed_number)
+
 
 
 
 #%%
-
-
-
-def generate_RNA_distribution(results):
-    """ This function creates a Counter with RNA state values 
-    as keys and normalized residency time as values
-    """
-    RNA_distribution = Counter()
-    for observation in results[0:-1]:
-        state = observation.state[RNAs]
-        residency_time = observation.time_of_residency
-        RNA_distribution[state] += residency_time
-    
-    total_time_observed = sum(RNA_distribution.values())
-    for state in RNA_distribution:
-        RNA_distribution[state] /= total_time_observed
-
-    return RNA_distribution 
-
-
-
-def generate_protein_distribution(results):
-    """ This function creates a Counter with protein state values 
-    as keys and normalized residency time as values
-    """
-    protein_distribution = Counter()
-    for observation in results[0:-1]:
-        state = observation.state[proteins]
-        residency_time = observation.time_of_residency
-        protein_distribution[state] += residency_time
-    
-    total_time_observed = sum(protein_distribution.values())
-    for state in protein_distribution:
-        protein_distribution[state] /= total_time_observed
-    
-    return protein_distribution 
-
-
-
-def StatesDistributionPlot(results):
-    """ This function plots the probability distribution of 
-    observing each state
-    """
-    RNA_distribution = generate_RNA_distribution(results)
-    
-    protein_distribution = generate_protein_distribution(results)
-    
-    fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(10, 15))
-    values = np.arange(20)
-    pmf = st.poisson(5).pmf(values) 
-    ax[0].bar(RNA_distribution.keys(), RNA_distribution.values())
-    ax[0].set_ylabel('Normalized residency time', fontsize=10)
-    ax[0].set_xlabel('Number of RNA molecules', fontsize=10)
-    ax[0].bar(values, pmf, alpha=0.5)
-    
-    ax[0].legend(["Simulation","Poisson distribution"], fontsize=10)
-    
-    ax[1].bar(protein_distribution.keys(), protein_distribution.values())
-    ax[1].set_ylabel('Normalized residency time', fontsize=10)
-    ax[1].set_xlabel('Number of proteins', fontsize=10)
-    ax[1].bar(values, pmf, alpha=0.5)
-    
-    sns.despine(fig, bottom=False, left=False)
-    plt.show()
- 
-
-
-StatesDistributionPlot(simulation_results)
-
-
-
-def decide_timelimit(simulation_results):   
-    
-    user_answer = input("The actual time limit is {}. Do you want to increase simulation time limit ? [yes/no] : ".format(time_limit))
-    
-    user_answer = user_answer.replace(" ","")
-    
-    right_answers = ["yes","YES","no","NO"]
-    
-    if user_answer not in right_answers:
-        
-        print("NameError: valid answers are 'yes' or 'no'")
-        
-        user_answer=input("Do you want to increase simulation time limit ?[yes/no] : ")
-    
-    if user_answer == "yes" or user_answer == "YES":
-        
-        while user_answer != "no" and user_answer != "NO": 
-            
-            timelimit_answer = input("Choose simulation time limit [number] : ")
-
-            def add_evolution(simulation_results, time_limit, seed_number):
-                
-                observed_states = simulation_results
-                
-                last_state = simulation_results[-1]
-                
-                state = last_state.state
-                
-                total_time = last_state.time_of_observation
-                
-                np.random.seed(seed_number)
-                
-                while total_time < time_limit:
-                    
-                    gillespie_result = gillespie_ssa(starting_state = state, transitions = transitions)
-                    
-                    rates = gillespie_result[4]
-                    
-                    event = gillespie_result[3]
-                    
-                    time = gillespie_result[2]
-                    
-                    observation_state = gillespie_result[0]
-                    
-                    
-                    observation = Observation(observation_state, total_time, time, event, rates)
-                    
-                    
-                    observed_states.append(observation)
-                    
-                    # Update time
-                    total_time += time
-                    
-                    # Update starting state in gillespie algorithm
-                    state = state.copy()
-                    
-                    state = gillespie_result[1]
-        
-                return observed_states
-            
-            timelimit_answer = float(timelimit_answer)
-        
-            simulation_results = add_evolution(simulation_results = simulation_results, time_limit = timelimit_answer, seed_number = seed_number)  
-         
-            StatesDistributionPlot(simulation_results)
-            
-            user_answer = input("The actual time limit is {}. Do you want to increase again simulation time limit ? [yes/no] : ".format(timelimit_answer))
-    
-            user_answer = user_answer.replace(" ","")
-    
-            right_answers = ["yes","YES","no","NO"]
-    
-            if user_answer not in right_answers:
-                
-                print("NameError: valid answers are 'yes' or 'no'")
-                
-                user_answer=input("Do you want to increase again simulation time limit ?[yes/no] : ")
-        
-    else:
-        
-        simulation_results = simulation_results
-        
-        timelimit_answer = time_limit
-    
-    return simulation_results, timelimit_answer
-
-
-
-simulation_results, timelimit_answer = decide_timelimit(simulation_results=simulation_results)
-    
-
-
-#%%
-
-
 
 def create_dataframe(results):
     """ This function creates a dataframe with 4 columns:
@@ -504,11 +389,13 @@ def create_dataframe(results):
     number_of_RNA_molecules = []
     number_of_proteins = []
     gene_activity = []
+    residency_time = []
 
     for observation in results:
         time_of_observation.append(observation.time_of_observation)
         number_of_RNA_molecules.append(observation.state[RNAs])
         number_of_proteins.append(observation.state[proteins])
+        residency_time.append(observation.time_of_residency)
         if observation.state[active_genes] > 0:
             gene_activity.append(1)
         else:
@@ -517,7 +404,8 @@ def create_dataframe(results):
     d = {'Time': time_of_observation, 
          'Gene activity': gene_activity,
          'Number of RNA molecules': number_of_RNA_molecules, 
-         'Number of proteins': number_of_proteins}
+         'Number of proteins': number_of_proteins,
+         'Residency Time': residency_time}
     
     results_dataframe = pd.DataFrame(d)
     
@@ -525,20 +413,82 @@ def create_dataframe(results):
 
 
 
-def save_results(results, file_path):
-    """This function saves dataframe in a tab separated CSV file
+if args.run:
+
+    df = create_dataframe(results = simulation_results)
+
+if args.time_limit:
     
-    Parameters
+    df = create_dataframe(results = added_simulation_results)
     
-    file_path : str
-                r'C: path to folder where the CSV file is saved
-    """
-    df = create_dataframe(results)
-    df.to_csv(file_path, sep ='\t', index = None, header=True) 
     
 
+"""
+def progress(iterator):
+    cycling = cycle("\|/")
+    for element in iterator:
+        print(next(cycling), end="\r")
+        yield element
+    print(" \r", end='')
 
-save_results(results = simulation_results, file_path = file_path)
+
+
+for idx in progress(range(10)):
+    time.sleep(0.5)
+"""
+
+"""
+actual_dir = os.getcwdb()
+if len(sys.argv) != 1 and args.verbose:
+    print(" ")
+    print("I am saving results into your current directory ({}) (simulation random seed = {}). ".format(actual_dir, seed_number))
+"""
+
+
+    
+if args.run:
+
+    df.to_csv(file_path.format("gillespiesimulation_results"), sep =" ", index = None, header=True, mode = "w") 
+
+if args.time_limit:
+    
+    df.to_csv(file_path.format("added_gillespiesimulation_results"), sep =" ", index = None, header=True, mode = "w") 
+
+
+
+"""
+def progress(iterator):
+    cycling = cycle("\|/")
+    for element in iterator:
+        print(next(cycling), end="\r")
+        yield element
+    print(" \r", end='')
+
+
+
+for idx in progress(range(10)):
+    time.sleep(0.5)
+
+
+
+if len(sys.argv) != 1 and args.verbose:
+    print(" ")
+    print("Now I am doing {} different simulations (with random seed respectively from 1 to {}). ".format(N, N))
+
+
+
+def progress(iterator):
+    cycling = cycle("\|/")
+    for element in iterator:
+        print(next(cycling), end="\r")
+        yield element
+    print(" \r", end='')
+
+
+
+for idx in progress(range(10)):
+    time.sleep(0.5)
+"""
 
 
 
@@ -557,8 +507,8 @@ def create_multiplesimulations_dataframes(N):
     """
     
     results_list = []
-    for n in range(1,N):
-        result = evolution(starting_state = state, time_limit = timelimit_answer, seed_number = n)
+    for n in range(1,N+1):
+        result = evolution(starting_state = starting_state, starting_total_time = 0.0, time_limit = time_limit, seed_number = n)
         results_list.append(result)
 
     dataframes_list = []
@@ -571,6 +521,26 @@ def create_multiplesimulations_dataframes(N):
 
 
 dataframes_list = create_multiplesimulations_dataframes(N)
+
+"""
+if len(sys.argv) != 1 and args.verbose:
+    print(" ")
+    print("I am saving results into your current directory ({})".format(actual_dir))
+
+
+
+def progress(iterator):
+    cycling = cycle("\|/")
+    for element in iterator:
+        print(next(cycling), end="\r")
+        yield element
+    print(" \r", end='')
+
+
+
+for idx in progress(range(10)):
+    time.sleep(0.5)
+"""
 
 
 
@@ -585,14 +555,15 @@ def save_multiplesimulations_results(N, file_path = multiplesimulations_filepath
     
     file_path : str, default is r"C:\\Users\asus\Desktop\{}.csv"
                 path to folder where files are saved. By default, it saves the files following the path \\Users\asus\Desktop.
+                You can change it in the configuration file.
     """
     
     results_names = []
-    for n in range(1,N):
-        results_names.append("results_seed"+str(n))
+    for n in range(1,N+1):
+        results_names.append("gillespieresults_seed"+str(n))
     
     for dataframe, results in zip(dataframes_list, results_names):
-        dataframe.to_csv(file_path.format(results), sep='\t', index = None, header=True)
+        dataframe.to_csv(file_path.format(results), sep=" ", index = None, header=True)
 
 
 
@@ -600,128 +571,5 @@ save_multiplesimulations_results(N)
 
 
 
-#%%
-
-
-
-def steadystate_distribution(observation):
-        return observation.time_of_observation > warmup_time
-
-filtered_results = filter(steadystate_distribution, simulation_results)
-
-removedwarmup_results = list(filtered_results)
-
-
-
-def multiple_simulations_remove_warmup(N):
-    """This function makes multiple simulations, removes warmup time points
-    and creates a list of results dataframes (one results dataframe 
-    for each simulation).
-    
-
-    Parameters
-    ----------
-    N : int
-        number of simulations.
-
-    Returns
-    -------
-    list of results dataframe
-    """
-    
-    results_list = []
-    for n in range(1,N):
-        result = evolution(starting_state = state, time_limit = timelimit_answer, seed_number = n)
-        results_list.append(result)
-    
-    removed_warmup_results_list =[]
-    for result in results_list:
-        filtered_results = filter(steadystate_distribution, result)
-        removed_warmup = list(filtered_results)
-        removed_warmup_results_list.append(removed_warmup)
-        
-    dataframes_list = []
-    for result in removed_warmup_results_list:
-        dataframe = create_dataframe(result)
-        dataframes_list.append(dataframe)
-    
-    return dataframes_list
-
-
-
-removed_warmup_dataframes = multiple_simulations_remove_warmup(N)    
-
-
-
-def MoleculesVsTimePlot(results):
-    """This function plots gene activity, the number of RNA molecules
-    produced vs time and the number of proteins produced vs time
-    """
-    df = create_dataframe(results)
-    
-    fig, ax = plt.subplots(nrows=3, ncols=1, figsize=(5, 10))
-    ax[0].plot(df['Time'], df['Gene activity'])
-    ax[0].set_ylabel('Gene Activity')
-    ax[0].set_xlabel('Time')
-    ax[0].text(0.9,0.8,"$k_a$=$n_a$*{}\n $k_i$=$n_i$*{}".format(rate.ka,rate.ki), 
-               ha='center', va='center', fontsize=16, bbox=dict(facecolor='white', alpha=0.5),
-               transform = ax[0].transAxes)
-    ax[1].plot(df['Time'], df['Number of RNA molecules'])
-    ax[1].set_ylabel('# of RNA molecules')
-    ax[1].set_xlabel('Time')
-    ax[1].text(0.9,0.8,"$k_1$=$n_a$*{}\n $k_2$=m*{}".format(rate.k1, rate.k2), 
-               ha ='center', va = 'center', fontsize=16, bbox=dict(facecolor='white', alpha=0.5),
-               transform = ax[1].transAxes)
-    ax[2].plot(df['Time'], df['Number of proteins'])
-    ax[2].set_ylabel('# of proteins')
-    ax[2].set_xlabel('Time')
-    ax[2].text(0.9,0.8,"$k_3$=m*{}\n $k_4$=p*{}".format(rate.k3, rate.k4), 
-               ha='center', va='center', fontsize=16, bbox=dict(facecolor='white', alpha=0.5),
-               transform = ax[2].transAxes)
-    
-    sns.despine(fig, bottom=False, left=False)
-    plt.show()
-
-
-
-results = [simulation_results, removedwarmup_results]
-
-
-    
-MoleculesVsTimePlot(results = removedwarmup_results)
-
-
-
-def MultipleSimulationsPlot(dataframes):
-    """
-    This function makes a multiplot with one column and two rows:
-    top plot for the number of RNA molecules produced vs time 
-    and down plot for the number of proteins produced vs time.
-
-    Parameters
-    ----------
-    N : int > 0
-        number of simulations.
-    """
-        
-    fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(5,10))
-    for dataframe in dataframes:
-        ax[0].plot(dataframe['Time'], dataframe['Number of RNA molecules'])
-        ax[0].set_ylabel('# of RNA molecules')
-        ax[0].set_xlabel('Time')
-        ax[1].plot(dataframe['Time'], dataframe['Number of proteins'])
-        ax[1].set_ylabel('# of proteins')
-        ax[1].set_xlabel('Time')
-        sns.despine(fig, bottom=False, left=False)
-    plt.show()
-
-
-
-results = [dataframes_list, removed_warmup_dataframes]
-
-
-
-MultipleSimulationsPlot(dataframes = removed_warmup_dataframes)
-
-    
-    
+if args.verbose:
+    print("My job is done. Enjoy data analysis !")
