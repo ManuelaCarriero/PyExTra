@@ -1,4 +1,6 @@
-# Stochastic simulation of biological circuits
+# Structure of the project
+
+# First protein synthesis model 
 A simple model for central dogma of biology is represented by the following biological circuit:
 <p align="center">
   <img 
@@ -7,7 +9,11 @@ A simple model for central dogma of biology is represented by the following biol
   >
 </p>
 
-The number of messenger RNAs **m** and proteins **n** produced can be described by a *chemical master equation*. **Gillespie algorithm** (i.e. **stochastic simulation algorithm**) samples the probability distribution described by the master equation. The basic idea is that events are rare, discrete, *separate* events, i.e., each event is an arrivial of a Poisson process and the algorithm is based on the following steps:
+The number of messenger RNAs **m** and proteins **n** produced can be described by a *chemical master equation*. 
+
+#Stochastic Simulation Algorthm (SSA)
+
+**Gillespie algorithm** (i.e. **stochastic simulation algorithm**) samples the probability distribution described by the master equation. The basic idea is that events are rare, discrete, *separate* events, i.e., each event is an arrivial of a Poisson process and the algorithm is based on the following steps:
 1. Choose some **initial states** (in this case, initial state of gene that is active or inactive, initial number of mRNA molecules **m<sub>0</sub>** and initial number of proteins **p<sub>0</sub>**); 
 2. A state change will happen. In this approach, the event that can happen is one of the following: 
     * *gene activation*: the state of the gene switches from inactive to active and, in such case, there is no increase or decrease in the number of RNA or protein molecules;   
@@ -26,27 +32,12 @@ We can also call these events as *transitions* and each one happens with a certa
       | RNA &rarr; Φ  | k<sub>2</sub>  | -1  | 0 |
       | RNA &rarr; RNA + Protein  | k<sub>3</sub>  | 0  | +1 |
       | Protein &rarr; Φ  | k<sub>4</sub>  | 0 | -1 |
-3. Calculate the **time of residency**, that is how much time the system is in that specific state. Since the time it takes for arrival of a Poisson process is Exponentially distributed, the time of residency has an *exponential* distribution with a characteristic time equal to the inverse of the sum of the total rates. 
+3. Calculate the **time of residency**, that is how much time the system is in that specific state. Since the distance between consecutive events in a Poisson process is Exponentially distributed, the time of residency has an *exponential* distribution with a characteristic time equal to the inverse of the sum of the total rates. 
 4. Choose what state change, i.e. transition, will happen. For this purpose we use `random.choices` method that returns a list with the randomly selected element (i.e. a randomly selected transition) from the specified list of transitions with the possibility to choose the probability of each element selection.
 5. Increment time by time step you calculate in step 3.
 6. Update the state according to the state change chosen in step 4.
 7. If the total time spent is less than a pre-determined stopping time, go to step 2. Else stop.
 
+# Tau-leap
+
 # Example of results
-Below there are examples of plots that can be obtained by running [simulation.py](https://github.com/ManuelaCarriero/protein-synthesis-modeling/blob/main/simulation.py) with parameters that are initial state of gene = inactive, initial number of RNA molecules = 0, inital number of proteins = 0, transition rates k<sub>a</sub>=1, k<sub>i</sub>=0.5, k<sub>1</sub>=1, k<sub>2</sub>=m * 0.1, k<sub>3</sub>=m * 1 and k<sub>4</sub>=p * 1 and simulation time limit = 100. First a plot that shows the simulation distribution of states (i.e. number of RNA and protein molecules) and the Poisson distribution is obtained:
-<p align="center">
-  <img 
-    width="450"
-    height="700"   
-    src="https://github.com/ManuelaCarriero/protein-synthesis-modeling/blob/main/Plots/Dist_ka_1_ki_0.5_timelimit_100_initialstate_inactive00.png"
-  >
-</p>
-Then a plot that shows the trend of the number of RNA molecules and proteins produced as function of time with the activity of gene on the top of the multiple plot:
-<p align="center">
-<img 
-    width="300"
-    height="600"   
-    src="https://github.com/ManuelaCarriero/protein-synthesis-modeling/blob/main/Plots/ka_1_ki_0.5_timelimit_100_initialstate_inactive00.png"
-  >
-</p>
-The results can vary also by setting the same values of parameters due to the algorithm stochasticity. 
