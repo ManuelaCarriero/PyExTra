@@ -11,7 +11,7 @@ A simple model for central dogma of biology is represented by the following biol
 
 The number of messenger RNAs **m** and proteins **n** produced can be described by a *chemical master equation*. 
 
-#Stochastic Simulation Algorthm (SSA)
+# Stochastic Simulation Algorthm (SSA)
 
 **Gillespie algorithm** (i.e. **stochastic simulation algorithm**) samples the probability distribution described by the master equation. The basic idea is that events are rare, discrete, *separate* events, i.e., each event is an arrivial of a Poisson process and the algorithm is based on the following steps:
 1. Choose some **initial states** (in this case, initial state of gene that is active or inactive, initial number of mRNA molecules **m<sub>0</sub>** and initial number of proteins **p<sub>0</sub>**); 
