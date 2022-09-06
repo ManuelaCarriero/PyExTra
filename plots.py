@@ -22,10 +22,6 @@ from collections import namedtuple
 
 
 
-#Nella documentation specifica che bisogna mettersi nella
-
-#stessa directory in cui si trovano i file
-
 config = configparser.ConfigParser()
 
 
