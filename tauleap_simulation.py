@@ -5,7 +5,7 @@ Created on Tue Jun  7 11:05:49 2022
 @author: asus
 """
 
-#import argparse
+import argparse
 import configparser
 import ast 
 import sys
@@ -29,10 +29,21 @@ from collections import namedtuple
 
 config = configparser.ConfigParser()
 
-if len(sys.argv) == 1:
-    config.read('configuration.txt')
-else:
-    config.read(sys.argv[1])
+parser = argparse.ArgumentParser()
+
+parser.add_argument("filename", help="read configuration file.")
+
+parser.add_argument('-run', help='run Tau-leap simulation given a configuration filename', action = "store_true")
+parser.add_argument("-v", "--verbose", help="increase output verbosity", action="store_true")
+
+args = parser.parse_args()
+
+
+
+config.read(args.filename)
+
+if args.verbose:
+    print("I am reading the configuration file {}".format(args.filename))
 
 
 
@@ -364,38 +375,5 @@ def save_multiplesimulations_results(N, file_path = multiplesimulations_filepath
 
 save_multiplesimulations_results(N)
 
-
-
-
-"""
-def MoleculesVsTimePlot(df):
-    
-    fig, ax = plt.subplots(nrows=3, ncols=1, figsize=(5, 10))
-    ax[0].plot(df['Time'], df['Gene activity'])
-    ax[0].set_ylabel('Gene Activity')
-    ax[0].set_xlabel('Time')
-    ax[0].text(0.9,0.3,r"$\tau$={}".format(dt), 
-               ha='center', va='center', fontsize=16, bbox=dict(facecolor='white', alpha=0.5),
-               transform = ax[0].transAxes)
-    ax[0].text(0.9,0.8,"$K_a$=$n_a$*{}\n $K_i$=$n_i$*{}".format(rate.ka,rate.ki), 
-               ha='center', va='center', fontsize=16, bbox=dict(facecolor='white', alpha=0.5),
-               transform = ax[0].transAxes)
-    ax[1].plot(df['Time'], df['Number of RNA molecules'])
-    ax[1].set_ylabel('# of RNA molecules')
-    ax[1].set_xlabel('Time')
-    ax[1].text(0.9,0.8,"$K_1$=$n_a$*{}\n $K_2$=m*{}".format(rate.k1, rate.k2), 
-               ha ='center', va = 'center', fontsize=16, bbox=dict(facecolor='white', alpha=0.5),
-               transform = ax[1].transAxes)
-    ax[2].plot(df['Time'], df['Number of proteins'])
-    ax[2].set_ylabel('# of proteins')
-    ax[2].set_xlabel('Time')
-    ax[2].text(0.9,0.8,"$K_3$=m*{}\n $K_4$=p*{}".format(rate.k3, rate.k4), 
-               ha='center', va='center', fontsize=16, bbox=dict(facecolor='white', alpha=0.5),
-               transform = ax[2].transAxes)
-    sns.despine(fig, bottom=False, left=False)
-    plt.show()
-
-
-
-MoleculesVsTimePlot(df = df)
-"""
+if args.verbose:
+    print("My job is done. Enjoy data analysis !")
