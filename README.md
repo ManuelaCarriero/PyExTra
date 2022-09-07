@@ -40,4 +40,8 @@ We can also call these events as *transitions* and each one happens with a certa
 
 # Tau-leap
 
-# Example of results
+## Installation
+
+## Usage
+
+## Example of results
