@@ -1,6 +1,9 @@
-# Structure of the project
+# Introduction
+**aim of this repository** and **target users**.
 
-# First protein synthesis model 
+## Structure of the project
+
+## First protein synthesis model 
 A simple model for central dogma of biology is represented by the following biological circuit:
 <p align="center">
   <img 
@@ -11,7 +14,7 @@ A simple model for central dogma of biology is represented by the following biol
 
 The number of messenger RNAs **m** and proteins **n** produced can be described by a *chemical master equation*. 
 
-# Stochastic Simulation Algorthm (SSA)
+## Stochastic Simulation Algorthm (SSA)
 
 **Gillespie algorithm** (i.e. **stochastic simulation algorithm**) samples the probability distribution described by the master equation. The basic idea is that events are rare, discrete, *separate* events, i.e., each event is an arrivial of a Markov process and the algorithm is based on the following steps:
 1. Choose some **initial states** (in this case, initial state of gene that is active or inactive, initial number of mRNA molecules **m<sub>0</sub>** and initial number of proteins **p<sub>0</sub>**); 
@@ -38,10 +41,12 @@ We can also call these events as *transitions* and each one happens with a certa
 6. Update the state according to the state change chosen in step 4.
 7. If the total time spent is less than a pre-determined stopping time, go to step 2. Else stop.
 
-# Tau-leap
+## Tau-leap
 
 ## Installation
 
 ## Usage
 
 ## Example of results
+
+## References
