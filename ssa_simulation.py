@@ -23,7 +23,7 @@ from collections import namedtuple
 import json
 import jsonlines
 
-#import os
+import os
 #from itertools import cycle
 #import time
 
@@ -137,9 +137,9 @@ time_limit, N, warmup_time, seed_number, dt = read_simulation_parameters()
 
 
 
-file_path = r'C:\Users\asus\Desktop\{}.csv'
- 
-multiplesimulations_filepath = r'C:\\Users\asus\Desktop\{}.csv' 
+p = os.getcwd()
+
+file_path = r'{}\{}.csv'
 
 
 
@@ -448,11 +448,11 @@ if len(sys.argv) != 1 and args.verbose:
     
 if args.run:
 
-    df.to_csv(file_path.format("gillespiesimulation_results"), sep =" ", index = None, header=True, mode = "w") 
+    df.to_csv(file_path.format(p,"gillespiesimulation_results"), sep =" ", index = None, header=True, mode = "w") 
 
 if args.time_limit:
     
-    df.to_csv(file_path.format("added_gillespiesimulation_results"), sep =" ", index = None, header=True, mode = "w") 
+    df.to_csv(file_path.format(p,"added_gillespiesimulation_results"), sep =" ", index = None, header=True, mode = "w") 
 
 
 
@@ -544,7 +544,7 @@ for idx in progress(range(10)):
 
 
 
-def save_multiplesimulations_results(N, file_path = multiplesimulations_filepath ):
+def save_multiplesimulations_results(N, file_path = file_path):
     """This function saves dataframes of multiple simulations in tab separated CSV files
     each one named as "results_seedn" with n that is the number of the random seed.
     
@@ -563,7 +563,7 @@ def save_multiplesimulations_results(N, file_path = multiplesimulations_filepath
         results_names.append("gillespieresults_seed"+str(n))
     
     for dataframe, results in zip(dataframes_list, results_names):
-        dataframe.to_csv(file_path.format(results), sep=" ", index = None, header=True)
+        dataframe.to_csv(file_path.format(p,results), sep=" ", index = None, header=True)
 
 
 
