@@ -18,7 +18,7 @@ import typing
 from enum import Enum, IntEnum
 
 from collections import namedtuple 
-import scipy.stats as st
+
 
 import json
 import jsonlines
@@ -137,7 +137,7 @@ time_limit, N, warmup_time, seed_number, dt = read_simulation_parameters()
 
 
 
-file_path = r'C:\Users\asus\Desktop\results.csv'
+file_path = r'C:\Users\asus\Desktop\{}.csv'
  
 multiplesimulations_filepath = r'C:\\Users\asus\Desktop\{}.csv' 
 
@@ -544,7 +544,7 @@ for idx in progress(range(10)):
 
 
 
-def save_multiplesimulations_results(N, file_path = multiplesimulations_filepath):
+def save_multiplesimulations_results(N, file_path = multiplesimulations_filepath ):
     """This function saves dataframes of multiple simulations in tab separated CSV files
     each one named as "results_seedn" with n that is the number of the random seed.
     
