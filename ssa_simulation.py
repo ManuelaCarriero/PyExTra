@@ -137,7 +137,7 @@ time_limit, N, warmup_time, seed_number, dt = read_simulation_parameters()
 
 
 
-p = os.getcwd()
+actual_dir = os.getcwd()
 
 file_path = r'{}\{}.csv'
 
@@ -448,11 +448,11 @@ if len(sys.argv) != 1 and args.verbose:
     
 if args.run:
 
-    df.to_csv(file_path.format(p,"gillespiesimulation_results"), sep =" ", index = None, header=True, mode = "w") 
+    df.to_csv(file_path.format(actual_dir,"gillespiesimulation_results"), sep =" ", index = None, header=True, mode = "w") 
 
 if args.time_limit:
     
-    df.to_csv(file_path.format(p,"added_gillespiesimulation_results"), sep =" ", index = None, header=True, mode = "w") 
+    df.to_csv(file_path.format(actual_dir,"added_gillespiesimulation_results"), sep =" ", index = None, header=True, mode = "w") 
 
 
 
@@ -563,7 +563,7 @@ def save_multiplesimulations_results(N, file_path = file_path):
         results_names.append("gillespieresults_seed"+str(n))
     
     for dataframe, results in zip(dataframes_list, results_names):
-        dataframe.to_csv(file_path.format(p,results), sep=" ", index = None, header=True)
+        dataframe.to_csv(file_path.format(actual_dir,results), sep=" ", index = None, header=True)
 
 
 
