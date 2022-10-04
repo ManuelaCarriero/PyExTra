@@ -355,6 +355,9 @@ if args.run:
     
     simulation_results = evolution(starting_state = starting_state, starting_total_time = 0.0, time_limit = time_limit, seed_number = seed_number)
     
+    for result in simulation_results:
+        print(result)
+        
     simulation_results_ = json.dumps(simulation_results, cls = CustomizedEncoder)
 
     with jsonlines.open('simulation_results.jsonl', mode='w') as writer:
@@ -373,7 +376,7 @@ if args.time_limit:
 
     state = update_state(event = last_event, state = last_state) 
 
-    added_simulation_results = evolution(starting_state = state, starting_total_time = simulation_results[-1][1] + simulation_results[-1][2], time_limit = args.time_limit, seed_number = seed_number)
+    added_simulation_results = evolution(starting_state = state, starting_total_time = simulation_results[-1][Index.time_of_observation] + simulation_results[-1][Index.time_of_residency], time_limit = args.time_limit, seed_number = seed_number)
 
 
 
