@@ -1,0 +1,40 @@
+[POPULATION]
+state = [1,1,0,0,0,0,0,0]
+
+
+[INDEX]
+active_gene1 = 0
+active_gene2 = 1
+inactive_gene1 = 2
+inactive_gene2 = 3
+RNAs_gene1 = 4
+RNAs_gene2 = 5
+proteins_gene1 = 6 
+proteins_gene2 = 7
+
+[RATES]
+ka_1 = 1
+ki_1 = 0.5
+k1_1 = 1
+k2_1 = 0.1
+k3_1 = 1
+k4_1 = 0.01
+k5_1 = 0.0001
+
+ka_2 = 1
+ki_2 = 0.5
+k1_2 = 1
+k2_2 = 0.1
+k3_2 = 1
+k4_2 = 0.01
+k5_2 = 0.0001
+
+[SIMULATION]
+time_limit = 1000
+n_simulations = 4
+warmup_time = 20
+seed_number = 1
+dt = 0.01
+
+[ACF]
+n_lags = 2000
