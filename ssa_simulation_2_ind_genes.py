@@ -159,51 +159,150 @@ file_path = r'{}\{}.csv'
 #%%
 
 def gene1_activate(state):
-    return (state[inactive_gene1])*rate.ka_1
-def gene1_inactivate(state):
-    return (state[active_gene1])*rate.ki_1
+    
+    state = state.copy()
+    
+    #Transition rate with this starting state
+    trans_rate = (state[inactive_gene1])*rate.ka_1
+    #Update state in case this transition is chosen
+    state[active_gene1] +=1
+    state[inactive_gene1] -=1
+    
+    new_state = state
+    return [trans_rate, new_state]
+
 def gene2_activate(state):
-    return (state[inactive_gene2])*rate.ka_2
+    
+    state = state.copy()
+    
+    trans_rate = (state[inactive_gene2])*rate.ka_2
+    state[active_gene2] +=1
+    state[inactive_gene2] -=1
+
+    new_state = state
+    return [trans_rate, new_state]
+
+def gene1_inactivate(state):
+    
+    state = state.copy()
+    
+    trans_rate = (state[active_gene1])*rate.ki_1
+    state[active_gene1] -=1
+    state[inactive_gene1] +=1
+
+    new_state = state
+    return [trans_rate, new_state]
+
 def gene2_inactivate(state):
-    return (state[active_gene2])*rate.ki_2
+    
+    state = state.copy()
+    
+    trans_rate = (state[active_gene2])*rate.ki_2
+    state[active_gene2] -=1
+    state[inactive_gene2] +=1
+    new_state = state
+    return [trans_rate, new_state]
 
 
 
 
 def RNA_gene1_increase(state):
-    return (state[active_gene1])*rate.k1_1
+    
+    state = state.copy()
+    
+    trans_rate = (state[active_gene1])*rate.k1_1
+    state[RNAs_gene1] +=1
+    new_state = state
+    return [trans_rate, new_state]
 
 def RNA_gene1_degrade(state):
-    return (state[RNAs_gene1])*rate.k2_1
-
-def Protein_gene1_increase(state):
-    return (state[RNAs_gene1])*rate.k3_1
-
-def Protein_gene1_degrade(state):
-    return (state[proteins_gene1])*rate.k4_1
-
-
-
+    
+    state = state.copy()
+    
+    trans_rate = (state[RNAs_gene1])*rate.k2_1
+    state[RNAs_gene1] -=1
+    new_state = state    
+    return [trans_rate, new_state]
 
 def RNA_gene2_increase(state):
-    return (state[active_gene2])*rate.k1_2
+    
+    state = state.copy()
+    
+    trans_rate = (state[active_gene2])*rate.k1_2
+    state[RNAs_gene2] +=1
+    new_state = state
+    return [trans_rate, new_state]
 
 def RNA_gene2_degrade(state):
-    return (state[RNAs_gene2])*rate.k2_2
+    
+    state = state.copy()
+    
+    trans_rate = (state[RNAs_gene2])*rate.k2_2
+    state[RNAs_gene2] -=1
+    new_state = state
+    return [trans_rate, new_state]
+
+
+
+
+def Protein_gene1_increase(state):
+    
+    state = state.copy()
+    
+    trans_rate = (state[RNAs_gene1])*rate.k3_1
+    state[proteins_gene1] +=1
+    new_state = state
+    return [trans_rate, new_state]
+
+def Protein_gene1_degrade(state):
+    
+    state = state.copy()
+    
+    trans_rate = (state[proteins_gene1])*rate.k4_1
+    state[proteins_gene1] -=1
+    new_state = state
+    return [trans_rate, new_state]
 
 def Protein_gene2_increase(state):
-    return (state[RNAs_gene2])*rate.k3_2
+    
+    state = state.copy()
+    
+    trans_rate = (state[RNAs_gene2])*rate.k3_2
+    state[proteins_gene2] +=1
+    new_state = state
+    return [trans_rate, new_state]
 
 def Protein_gene2_degrade(state):
-    return (state[proteins_gene2])*rate.k4_2
+    
+    state = state.copy()
+    
+    trans_rate = (state[proteins_gene2])*rate.k4_2
+    state[proteins_gene2] -=1
+    new_state = state
+    return [trans_rate, new_state]
 
 
 
 
 def gene1_degrade(state):
-    return (state[active_gene1]+state[inactive_gene1])*rate.k5_1
+    
+    state = state.copy()
+    
+    trans_rate = (state[active_gene1]+state[inactive_gene1])*rate.k5_1
+    state[active_gene1] = 0
+    state[inactive_gene1] = 0
+    new_state = state
+    return [trans_rate, new_state]
+
 def gene2_degrade(state):
-    return (state[active_gene2]+state[inactive_gene2])*rate.k5_2
+    
+    state = state.copy()
+    
+    trans_rate = (state[active_gene2]+state[inactive_gene2])*rate.k5_2
+    state[active_gene2] = 0
+    state[inactive_gene2] = 0
+    new_state = state
+    return [trans_rate, new_state]
 
 
 
@@ -257,100 +356,23 @@ class Index(IntEnum):
     time_of_residency = 2
     transition = 3
 
-    
+class index(IntEnum):
+    trans_rate = 0
+    updated_state = 1    
 
 
 #%%
-
-
-
-def update_state(event, state):
-    """This function updates the initial state according to the event occured
-    
-    Parameters
-    ----------
-    event : member of Transition class
-    state : ndarray
-            ndarray with 4 dimensions: number of active genes, number of
-            inactive genes, number of RNAs and number of proteins
-
-    Returns
-    -------
-    updated_state : ndarray
-                    ndarray with 4 dimensions: number of active genes, number of
-                    inactive genes, number of RNAs and number of proteins after
-                    the event has occured.
-    """
-
-    if event == Transition.GENE1_ACTIVATE:
-         state[active_gene1] +=1
-         state[inactive_gene1] -=1
-                  
-    elif event == Transition.GENE1_INACTIVATE:
-        state[active_gene1] -=1
-        state[inactive_gene1] +=1
-        
-        
-    elif event == Transition.RNA_gene1_INCREASE:
-         state[RNAs_gene1] +=1
-         
-    elif event == Transition.RNA_gene1_DEGRADE:
-        state[RNAs_gene1] -=1
-        
-    elif event == Transition.PROTEIN_gene1_INCREASE:
-         state[proteins_gene1] +=1
-         
-    elif event == Transition.PROTEIN_gene1_DEGRADE:
-        state[proteins_gene1] -=1
-                
-    elif event == Transition.GENE1_DEGRADE:
-        state[active_gene1] = 0
-        state[inactive_gene1] = 0
-        
-        
-
-    elif event == Transition.GENE2_ACTIVATE:
-         state[active_gene2] +=1
-         state[inactive_gene2] -=1
-                  
-    elif event == Transition.GENE2_INACTIVATE:
-        state[active_gene2] -=1
-        state[inactive_gene2] +=1
-        
-        
-    elif event == Transition.RNA_gene2_INCREASE:
-         state[RNAs_gene2] +=1
-         
-    elif event == Transition.RNA_gene2_DEGRADE:
-        state[RNAs_gene2] -=1
-        
-    elif event == Transition.PROTEIN_gene2_INCREASE:
-         state[proteins_gene2] +=1
-         
-    elif event == Transition.PROTEIN_gene2_DEGRADE:
-        state[proteins_gene2] -=1
-                
-    elif event == Transition.GENE2_DEGRADE:
-        state[active_gene2] = 0
-        state[inactive_gene2] = 0
-            
-    elif event == Transition.ABSORPTION:
-        pass
-    
-    else:
-        raise ValueError("Transition not recognized")
-
-    updated_state = state
-
-    return updated_state 
-
-
 
 def gillespie_ssa(starting_state):
     
     state = starting_state 
     
-    rates = [f(state) for f in transitions]
+    new_states = [f(state)[index.updated_state] for f in transitions]
+    
+    dict_newstates = {k:v for k, v in zip(transition_names,new_states)}
+        
+            
+    rates = [f(state)[index.trans_rate] for f in transitions]
     
     total_rate = np.sum(rates)
     
@@ -372,16 +394,13 @@ def gillespie_ssa(starting_state):
     
     state = state.copy()
     
-    updated_state = update_state(event = event, state = state)
+    updated_state = dict_newstates[event]
     
     gillespie_result = [starting_state, updated_state, time, event, rates]
     
     return gillespie_result
 
 
-
-
-#starting_state = np.sum([starting_state_gene1, starting_state_gene2], axis = 0)
 
 def evolution(starting_state, starting_total_time, time_limit, seed_number):
     
@@ -435,10 +454,6 @@ class CustomizedEncoder(json.JSONEncoder):
 
 
 
-
-simulation_results = evolution(starting_state = starting_state, starting_total_time = 0.0, time_limit = time_limit, seed_number = seed_number)
-
-
 if args.run: 
     
     simulation_results = evolution(starting_state = starting_state, starting_total_time = 0.0, time_limit = time_limit, seed_number = seed_number)
@@ -462,7 +477,13 @@ if args.time_limit:
     last_event = simulation_results[-1][Index.transition]
     last_state = np.array(simulation_results[-1][Index.state])
 
-    state = update_state(event = last_event, state = last_state)
+    new_states = [f(last_state)[index.updated_state] for f in transitions]
+    
+    dict_newstates = {k:v for k, v in zip(transition_names,new_states)}
+    
+    updated_state = dict_newstates[last_event]
+    
+    state = updated_state
 
     added_simulation_results = evolution(starting_state = state, starting_total_time = simulation_results[-1][Index.time_of_observation] + simulation_results[-1][Index.time_of_residency], time_limit = args.time_limit, seed_number = seed_number)
 
