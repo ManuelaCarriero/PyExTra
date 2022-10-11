@@ -367,12 +367,19 @@ def gillespie_ssa(starting_state):
     
     state = starting_state 
     
-    new_states = [f(state)[index.updated_state] for f in transitions]
+    transition_results = [f(state) for f in transitions]
     
-    dict_newstates = {k:v for k, v in zip(transition_names,new_states)}
+    new_states = []
+
+    for i in np.arange(0, len(transitions)):    
+        new_states.append(transition_results[i][index.updated_state])
         
-            
-    rates = [f(state)[index.trans_rate] for f in transitions]
+    dict_newstates = {k:v for k, v in zip(transition_names, new_states)}
+    
+    rates = []
+
+    for i in np.arange(0, len(transitions)):    
+        rates.append(transition_results[i][index.trans_rate])
     
     total_rate = np.sum(rates)
     
@@ -477,9 +484,16 @@ if args.time_limit:
     last_event = simulation_results[-1][Index.transition]
     last_state = np.array(simulation_results[-1][Index.state])
 
-    new_states = [f(last_state)[index.updated_state] for f in transitions]
+    state = last_state
     
-    dict_newstates = {k:v for k, v in zip(transition_names,new_states)}
+    transition_results = [f(state) for f in transitions]
+    
+    new_states = []
+
+    for i in np.arange(0, len(transitions)):    
+        new_states.append(transition_results[i][index.updated_state])
+    
+    dict_newstates = {k:v for k, v in zip(transition_names, new_states)}
     
     updated_state = dict_newstates[last_event]
     
