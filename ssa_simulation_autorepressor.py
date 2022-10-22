@@ -291,6 +291,8 @@ def gillespie_ssa(starting_state):
         
     dict_newstates = {k:v for k, v in zip(transition_names, new_states)}
     
+    dict_newstates[Transition.ABSORPTION] = np.array([0,0,0,0,0,0,0,0])
+    
     rates = []
 
     for i in np.arange(0, len(transitions)):    
@@ -597,7 +599,7 @@ def save_multiplesimulations_results(N, file_path = file_path):
     
     results_names = []
     for n in range(1,N+1):
-        results_names.append("gillespieresults_autorepressor_seed"+str(n))
+        results_names.append("gillespie_autorepressor_results_seed"+str(n))
     
     for dataframe, results in zip(dataframes_list, results_names):
         dataframe.to_csv(file_path.format(actual_dir,results), sep=" ", index = None, header=True)
