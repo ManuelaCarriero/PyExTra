@@ -377,6 +377,8 @@ def gillespie_ssa(starting_state):
         
     dict_newstates = {k:v for k, v in zip(transition_names, new_states)}
     
+    dict_newstates[Transition.ABSORPTION] = np.array([0,0,0,0,0,0,0,0])
+    
     rates = []
 
     for i in np.arange(0, len(transitions)):    
@@ -579,7 +581,7 @@ if len(sys.argv) != 1 and args.verbose:
 
 if args.run:
 
-    df.to_csv(file_path.format(actual_dir,"gillespiesimulation_toggleswitch_results"), sep =" ", index = None, header=True, mode = "w") 
+    df.to_csv(file_path.format(actual_dir,"toggleswitch_gillespiesimulation_results"), sep =" ", index = None, header=True, mode = "w") 
 
 if args.time_limit:
     
