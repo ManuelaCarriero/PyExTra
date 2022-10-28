@@ -465,8 +465,10 @@ if args.run:
     
     simulation_results = evolution(starting_state = starting_state, starting_total_time = 0.0, time_limit = time_limit, seed_number = seed_number)
     
-    for result in simulation_results:
-        print(result)
+    if args.verbose:
+        
+        for result in simulation_results:
+            print(result)
         
     simulation_results_ = json.dumps(simulation_results, cls = CustomizedEncoder)
 
@@ -696,6 +698,6 @@ save_multiplesimulations_results(N)
 
 
 
-if args.verbose:
-    print(" ")
-    print("My job is done. Enjoy data analysis !")
+
+print(" ")
+print("My job is done. Enjoy data analysis !")
