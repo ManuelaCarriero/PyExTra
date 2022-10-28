@@ -14,6 +14,10 @@ A simple model for central dogma of biology is represented by the following biol
 
 The number of messenger RNAs **m** and proteins **n** produced can be described by a *chemical master equation*. 
 
+## Autorepressor model
+
+## Toggle-switch model
+
 ## Stochastic Simulation Algorthm (SSA)
 
 **Gillespie algorithm** (i.e. **stochastic simulation algorithm**) samples the probability distribution described by the master equation. The basic idea is that events are rare, discrete, *separate* events, i.e., each event is an arrivial of a Markov process and the algorithm is based on the following steps:
