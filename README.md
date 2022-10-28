@@ -3,6 +3,8 @@
 
 ## Structure of the project
 
+# Models
+
 ## First protein synthesis model 
 A simple model for central dogma of biology is represented by the following biological circuit:
 <p align="center">
@@ -17,6 +19,8 @@ The number of messenger RNAs **m** and proteins **n** produced can be described 
 ## Autorepressor model
 
 ## Toggle-switch model
+
+# Algorithms
 
 ## Stochastic Simulation Algorthm (SSA)
 
@@ -45,7 +49,11 @@ We can also call these events as *transitions* and each one happens with a certa
 6. Update the state according to the state change chosen in step 4.
 7. If the total time spent is less than a pre-determined stopping time, go to step 2. Else stop.
 
-## Tau-leap
+## Tau-leap algorithm
+
+## SSA/Tau-leap algorithm
+
+# Running Transcription and Translation simulations
 
 ## Installation
 
