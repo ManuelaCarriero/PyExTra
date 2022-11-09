@@ -134,13 +134,13 @@ quantiles_list_ts = compute_quantiles(autocorrs = autocorrs_RNAs_ts)
 
 
 
-
-
 def Plot_Quantiles(title, quantiles_list):
     
     fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(10, 5))
     
-    for quantile, n in zip(quantiles_list, np.arange(0,len(quantiles_list))):
+    n_series = np.arange(0,len(quantiles_list)).tolist()
+    
+    for quantile, n in zip(quantiles_list, n_series):
     
         lower_quartile = quantile[0]
         median = quantile[1]
@@ -158,6 +158,10 @@ def Plot_Quantiles(title, quantiles_list):
         plt.ylabel('Autocorrelation', size = 14)
         
         plt.xlabel('$t_{tot}/dt$', size = 14)
+        
+        
+        ax.xaxis.set_ticks(n_series)
+        ax.set_xticklabels(n_series)
         
         plt.title(title, size = 15)
         
