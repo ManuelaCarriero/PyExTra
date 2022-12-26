@@ -2,7 +2,6 @@
 **aim of this repository** and **target users**.
 <p align="center">
   <img 
-    width="400"
     src="https://github.com/ManuelaCarriero/protein-synthesis-modeling/blob/main/Images/Genelogo.png"
   >
 </p>
