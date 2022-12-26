@@ -1,7 +1,7 @@
 # Introduction
 **aim of this repository** and **target users**.
 <br />
-<img src="https://github.com/ManuelaCarriero/protein-synthesis-modeling/blob/main/Images/Genelogo.png" width="400" height="500">
+<img src="https://github.com/ManuelaCarriero/protein-synthesis-modeling/blob/main/Images/Genelogo.png">
 <br />
 ## Structure of the project
 
