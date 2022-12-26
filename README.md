@@ -5,9 +5,7 @@
     src="https://github.com/ManuelaCarriero/protein-synthesis-modeling/blob/main/Images/Genelogo.png"
   >
 </p>
-<br />
-<img src="https://github.com/ManuelaCarriero/protein-synthesis-modeling/blob/main/Images/Genelogo.png">
-<br />
+
 ## Structure of the project
 
 ## Testing
