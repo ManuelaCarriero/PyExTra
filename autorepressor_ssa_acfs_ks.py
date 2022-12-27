@@ -23,6 +23,7 @@ import random
 
 from statsmodels.tsa import stattools
 import scipy.interpolate as interp
+import scipy.stats
 
 import os
 #from itertools import cycle
@@ -48,7 +49,8 @@ args = parser.parse_args()
 """
 
 
-config.read('configuration.txt')
+config.read('configuration1.txt')
+
 
 
 """
@@ -396,18 +398,21 @@ actual_dir = os.getcwd()
 file_path = r'{}\{}.csv'
 
 
+#prova a mettere i parametri che cambi nel file di configurazione pari a 1.
+a=3
 
-random.seed(42)
-rands = []
-for i in np.arange(1,201):
-    rand = [random.random() for j in range(4)]
+
+np.random.seed(42)
+rands=[]
+for i in np.arange(1,1001):
+    rand = scipy.stats.gamma.rvs(a, loc=0, scale=0.1, size=4, random_state=None)
+    rand = rand.tolist()
+    #[round(items,1) for items in rand]
     rands.append(rand)
-len(rands) #200
-len(rands[0])#4
-#rands[0] 
-#rands[0][0]
+    
+    
 
-for i in np.arange(0,199):   
+for i in np.arange(0,999):   
     
     n_k1 = rands[i][0]
     n_k2 = rands[i][1]
@@ -463,7 +468,7 @@ for i in np.arange(0,199):
     df = create_dataframe(results = simulation_results)
      
     dt=0.01
-    nlags = 20000
+    nlags = 5000#20000
     
     time = df['Time']
     
@@ -475,34 +480,32 @@ for i in np.arange(0,199):
     autocorr_RNAs = stattools.acf(yinterp_RNAs, nlags = nlags, fft=False) 
     autocorr_RNAs = autocorr_RNAs.tolist()
     
-    if np.isnan(autocorr_RNAs).any():
-        
-        pass
-    
-    else:
+
     
      
     
     
-        """
-        proteins = df['Number of proteins']
-        f_proteins = interp.interp1d(time, proteins, kind='previous')
-        yinterp_proteins = f_proteins(xvals)
-        autocorr_proteins = stattools.acf(yinterp_proteins, nlags = nlags, fft=False) #800, len(yinterp_RNAs) - 1
-        autocorr_proteins = autocorr_proteins.tolist()
-        
-        autocorrs = [autocorr_RNAs,autocorr_proteins] 
-        """
-        rates = list(rate)
-        
-        df_tot.loc[i] = [autocorr_RNAs,rates]
-        print(i)
+    """
+    n_proteins = df['Number of proteins']
+    f_proteins = interp.interp1d(time, n_proteins, kind='previous')
+    yinterp_proteins = f_proteins(xvals)
+    autocorr_proteins = stattools.acf(yinterp_proteins, nlags = nlags, fft=False) #800, len(yinterp_RNAs) - 1
+    autocorr_proteins = autocorr_proteins.tolist()
+    
+    autocorr = autocorr_RNAs + autocorr_proteins
+    
+    #autocorrs = [autocorr_RNAs,autocorr_proteins] 
+    """
+    rates = list(rate)
+    
+    df_tot.loc[i] = [autocorr_RNAs,rates]
+    print(i)
                 
                 
     
     
     
-df_tot.to_csv(file_path.format(actual_dir,"autorepressor_RNAsacfs_k1k2k3k4"), sep =" ", index = None, header=True, mode = "w") 
+df_tot.to_csv(file_path.format(actual_dir,"autorepressor_1000RNASacfs_seed42_scale0.1_nlags5000_k1k2k3k4"), sep =" ", index = None, header=True, mode = "w") 
 
     
 
@@ -526,3 +529,6 @@ elapsed_time_date = end_date - start_date
 
 print(" ")
 print('Execution time:', elapsed_time_date, 'seconds')
+
+#Execution time: 1:57:42.144237 seconds 1000 simulazioni nlags 5000.
+#Execution time: 3:21:08.792660 seconds 1000 simulazioni nlags 5000 autocorrelation RNAS + PROTEINS. 
