@@ -157,24 +157,88 @@ file_path = r'{}\{}.csv'
 #%%
 
 def gene_activate(state):
-    return state[inactive_genes]*rate.ka
+    state = state.copy()
+    
+    trans_rate = state[inactive_genes]*rate.ka
+    
+    state[active_genes] +=1
+    state[inactive_genes] -=1
+    
+    new_state = state
+    
+    return [trans_rate, new_state]
+
 def gene_inactivate(state):
-    return state[active_genes]*rate.ki
+    state = state.copy()
+    
+    trans_rate = state[active_genes]*rate.ki
+    
+    state[active_genes] -=1
+    state[inactive_genes] +=1
+    
+    new_state = state
+    
+    return [trans_rate, new_state]
 
 def RNA_increase(state):
-    return state[active_genes]*rate.k1
+    state = state.copy()
+    
+    trans_rate = state[active_genes]*rate.k1
+    
+    state[RNAs] +=1
+    
+    new_state = state
+    
+    return [trans_rate, new_state]
+    
 
 def RNA_degrade(state):
-    return state[RNAs]*rate.k2
+    state = state.copy()
+    
+    trans_rate = state[RNAs]*rate.k2
+    
+    state[RNAs] -=1
+    
+    new_state = state
+    
+    return [trans_rate, new_state]
+
 
 def Protein_increase(state):
-    return state[RNAs]*rate.k3
+    state = state.copy()
+    
+    trans_rate = state[RNAs]*rate.k3
+    
+    state[proteins] +=1
+    
+    new_state = state
+    
+    return [trans_rate, new_state]
+
 
 def Protein_degrade(state):
-    return state[proteins]*rate.k4
+    state = state.copy()
+    
+    trans_rate = state[proteins]*rate.k4
+    
+    state[proteins] -=1
+    
+    new_state = state
+    
+    return [trans_rate, new_state]
+
 
 def gene_degrade(state):
-    return (state[active_genes]+state[inactive_genes])*rate.k5
+    state = state.copy()
+    
+    trans_rate = (state[active_genes]+state[inactive_genes])*rate.k5
+    
+    state[active_genes] = 0
+    state[inactive_genes] = 0
+    
+    new_state = state
+    
+    return [trans_rate, new_state]
 
 
 
@@ -218,71 +282,32 @@ class Index(IntEnum):
     time_of_residency = 2
     transition = 3
     transition_rates = 4
-
+    
+class index(IntEnum):
+    trans_rate = 0
+    updated_state = 1
 
 #%%
-
-
-
-def update_state(event, state):
-    """This function updates the initial state according to the event occured
-    
-    Parameters
-    ----------
-    event : member of Transition class
-    state : ndarray
-            ndarray with 4 dimensions: number of active genes, number of
-            inactive genes, number of RNAs and number of proteins
-
-    Returns
-    -------
-    updated_state : ndarray
-                    ndarray with 4 dimensions: number of active genes, number of
-                    inactive genes, number of RNAs and number of proteins after
-                    the event has occured.
-    """
-
-    if event == Transition.GENE_ACTIVATE:
-         state[active_genes] +=1
-         state[inactive_genes] -=1
-                  
-    elif event == Transition.GENE_INACTIVATE:
-        state[active_genes] -=1
-        state[inactive_genes] +=1
-        
-    elif event == Transition.RNA_INCREASE:
-         state[RNAs] +=1
-         
-    elif event == Transition.RNA_DEGRADE:
-        state[RNAs] -=1
-        
-    elif event == Transition.PROTEIN_INCREASE:
-         state[proteins] +=1
-         
-    elif event == Transition.PROTEIN_DEGRADE:
-        state[proteins] -=1
-                
-    elif event == Transition.GENE_DEGRADE:
-        state[active_genes] = 0
-        state[inactive_genes] = 0
-            
-    elif event == Transition.ABSORPTION:
-        pass
-    
-    else:
-        raise ValueError("Transition not recognized")
-
-    updated_state = state
-
-    return updated_state 
-
-
 
 def gillespie_ssa(starting_state, transitions):
     
     state = starting_state 
+        
+    transition_results = [f(state) for f in transitions]
     
-    rates = [f(state) for f in transitions]
+    new_states = []
+
+    for i in np.arange(0, len(transitions)):    
+        new_states.append(transition_results[i][index.updated_state])
+        
+    dict_newstates = {k:v for k, v in zip(transition_names, new_states)}
+    
+    dict_newstates[Transition.ABSORPTION] = np.array([0,0,0,0,0,0,0,0])
+    
+    rates = []
+
+    for i in np.arange(0, len(transitions)):    
+        rates.append(transition_results[i][index.trans_rate])
     
     total_rate = np.sum(rates)
     
@@ -302,9 +327,7 @@ def gillespie_ssa(starting_state, transitions):
         
         event = Transition.ABSORPTION
     
-    state = state.copy()
-    
-    updated_state = update_state(event, state)
+    updated_state = dict_newstates[event]
     
     gillespie_result = [starting_state, updated_state, time, event, rates]
     
@@ -386,10 +409,24 @@ if args.time_limit:
     simulation_results = ast.literal_eval(simulation_results)
     last_event = simulation_results[-1][Index.transition]
     last_state = np.array(simulation_results[-1][Index.state])
+    
+    state = last_state
+    
+    transition_results = [f(state) for f in transitions]
+    
+    new_states = []
 
-    state = update_state(event = last_event, state = last_state) 
-
+    for i in np.arange(0, len(transitions)):    
+        new_states.append(transition_results[i][index.updated_state])
+    
+    dict_newstates = {k:v for k, v in zip(transition_names, new_states)}
+    
+    updated_state = dict_newstates[last_event]
+    
+    state = updated_state
+    
     added_simulation_results = evolution(starting_state = state, starting_total_time = simulation_results[-1][Index.time_of_observation] + simulation_results[-1][Index.time_of_residency], time_limit = args.time_limit, seed_number = seed_number)
+
 
 
 
