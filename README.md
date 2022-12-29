@@ -6,6 +6,11 @@
   >
 </p>
 
+## Dependencies
+**Python verion**: 3.9.x
+**Python modules**: numpy, scipy, pandas, stats.models, scikit-learn, keras, tensorflow.
+**OS**: Windows10, Linux (Ubuntu).
+
 ## Structure of the project
 
 ## Testing
