@@ -7,8 +7,9 @@
 </p>
 
 ## Dependencies
-**Python verion**: 3.9.x
-**Python modules**: numpy, scipy, pandas, stats.models, scikit-learn, keras, tensorflow.
+**Python verion**: 3.9.x <br>
+**Python modules**: numpy, scipy, pandas, stats.models,<br> 
+scikit-learn, keras, tensorflow.<br>
 **OS**: Windows10, Linux (Ubuntu).
 
 ## Structure of the project
