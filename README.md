@@ -66,9 +66,15 @@ We can also call these events as *transitions* and each one happens with a certa
 
 ## SSA/Tau-leap algorithm
 
-# Running Transcription and Translation simulations
+# Running PyExTra: Gene Expression and Translation Simulations
 
 ## Installation
+In order to use PyExTra you can just clone this repository in the folder that you desire.
+So first move in the directory you want to put PyExTra and then type:
+<br>
+`git clone <git_repo_url> <directory_name_where_you_clone_PyExTra>`
+<br> 
+
 
 ## Usage
 
