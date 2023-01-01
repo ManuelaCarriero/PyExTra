@@ -35,7 +35,7 @@ The number of messenger RNAs **m** and proteins **n** produced can be described 
 
 # Algorithms
 
-## Stochastic Simulation Algorthm (SSA)
+## Stochastic Simulation Algorithm (SSA)
 
 **Gillespie algorithm** (i.e. **stochastic simulation algorithm**) samples the probability distribution described by the master equation. The basic idea is that events are rare, discrete, *separate* events, i.e., each event is an arrivial of a Markov process and the algorithm is based on the following steps:
 1. Choose some **initial states** (in this case, initial state of gene that is active or inactive, initial number of mRNA molecules **m<sub>0</sub>** and initial number of proteins **p<sub>0</sub>**); 
@@ -70,7 +70,7 @@ We can also call these events as *transitions* and each one happens with a certa
 
 ## Installation
 In order to use PyExTra you can just clone this repository in the folder that you desire.
-So first move in the directory you want to put PyExTra and then type:
+So first open your terminal, move in the directory you want to put PyExTra and then type:
 <br>
 `git clone <git_repo_url> <directory_name_where_you_clone_PyExTra>`
 <br> 
