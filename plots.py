@@ -37,6 +37,8 @@ parser.add_argument("-tauleap_distribution", help="plot simulation states distri
 
 parser.add_argument("-hybrid_distribution", help="plot simulation states distribution given by SSA/Tau-leap algorithm.", action = "store_true")
 
+parser.add_argument("-ssa_hybrid_distribution", help="plot simulation states distribution of first model using SSA.", action = "store_true")
+
 parser.add_argument("-all_distributions", help="plot simulation states distribution and theoretical distribution given by all algorithms.", action = "store_true")
 
 parser.add_argument("-ssa_autorepressor_distribution", help="plot simulation states distribution of autorepressor model using SSA.", action = "store_true")
@@ -374,7 +376,7 @@ def StatesDistributionPlot(df,df_1=None):
         ax[1].set_ylabel('Normalized residency time', fontsize=10)
         ax[1].set_xlabel('Number of proteins', fontsize=10)
         
-    elif args.ssa_hybrid_autorepressor_distribution:
+    elif args.ssa_hybrid_autorepressor_distribution or args.ssa_hybrid_distribution:
         
          RNA_distribution_hybrid = generate_RNA_distribution(df_1)
         
@@ -436,7 +438,47 @@ def AllStatesDistributionPlot():
     
     sns.despine(fig, bottom=False, left=False)
     plt.show()
+    
+    
 
+   
+def ssa_gene_activity_distribution():
+    """
+    This function plots the states of gene.
+    """
+    results = pd.read_csv('gillespiesimulation_results.csv', sep=" ")
+    gene_activity = results['Gene activity']
+    
+    gene_activity = np.ascontiguousarray(gene_activity)
+    
+    plt.hist(gene_activity)
+    
+    gene_activity = gene_activity.tolist()
+    print("Number of times gene is active {}".format(gene_activity.count(1)))
+    print("Number of times gene is inactive {}".format(gene_activity.count(0)))
+    
+    plt.show()
+
+ssa_gene_activity_distribution() 
+
+def hybrid_gene_activity_distribution():
+    """
+    This function plots the states of gene.
+    """
+    results = pd.read_csv('hybridsimulation_results.csv', sep=" ")
+    gene_activity = results['Gene activity']
+    
+    gene_activity = np.ascontiguousarray(gene_activity)
+    
+    plt.hist(gene_activity)
+
+    gene_activity = gene_activity.tolist()
+    print("Number of times gene is active {}".format(gene_activity.count(1)))
+    print("Number of times gene is inactive {}".format(gene_activity.count(0)))
+ 
+    plt.show()   
+    
+hybrid_gene_activity_distribution()
     
 #%%
 
@@ -455,6 +497,17 @@ if args.hybrid_distribution:
     
     StatesDistributionPlot(df = hybrid_results)
     
+    
+    
+if args.ssa_hybrid_distribution:
+    
+    ssa_results = pd.read_csv('gillespiesimulation_results.csv', sep=" ")    
+
+    hybrid_results = pd.read_csv('hybridsimulation_results.csv', sep=" ")
+    
+    StatesDistributionPlot(df = ssa_results, df_1 = hybrid_results)
+    
+
 
 
 if args.tauleap_distribution:
