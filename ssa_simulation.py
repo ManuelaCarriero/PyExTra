@@ -637,9 +637,5 @@ elapsed_time_sec = et_sec - st_sec
 
 elapsed_time_date = et_date - st_date
 
-
-
 print(" ")
-print('Execution time (seconds):', elapsed_time_sec, 's')
-print(" ")
-print('Execution time (hours:minutes:seconds):', elapsed_time_date, 's')
+print('Execution time: {}s ({})'.format(elapsed_time_sec, elapsed_time_date))
