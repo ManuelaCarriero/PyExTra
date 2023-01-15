@@ -179,9 +179,7 @@ time_limit, N, warmup_time, seed_number, dt = read_simulation_parameters()
 
 
 
-actual_dir = os.getcwd()
 
-file_path = r'{}\{}.csv'
 
 
 
@@ -409,17 +407,37 @@ def evolution(starting_state, starting_total_time, time_limit, seed_number):
 
 
 simulation_results = evolution(starting_state = starting_state, starting_total_time = 0.0, time_limit = time_limit, seed_number = seed_number)
-
+simulation_results[-1]
 
 
 #%%Tests
 
 def test_no_increase_RNA_if_gene_is_inactive():
+    """
+    Test that there is no RNA molecules increase if gene is inactive.
+    """
     for simulation in simulation_results:
         if simulation.state[inactive_genes] == 1:
             assert simulation.transition != Transition.RNA_INCREASE
 
+def test_no_increase_Protein_if_nRNAs_are_zero():
+    """
+    Test that the number of proteins do not increase if the
+    number of molecules is zero.
+    """
+    for simulation in simulation_results:
+        if simulation.state[RNAs] == 0:
+            assert simulation.transition != Transition.PROTEIN_INCREASE
 
+def test_there_are_no_negative_number_of_molecules():
+    """
+    Test that there are not negative number of molecules
+    """
+    for simulation in simulation_results:
+        assert simulation.state[active_genes] >= 0
+        assert simulation.state[inactive_genes] >= 0
+        assert simulation.state[RNAs] >= 0
+        assert simulation.state[proteins] >= 0
 
 #For configuration ka=0.01 ki=0.01 (the distribution of states is plotted with 
 #time of residency on that state on the y axis)
