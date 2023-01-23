@@ -31,7 +31,19 @@ The number of messenger RNAs **m** and proteins **n** produced can be described 
 
 ## Autorepressor model
 
+<p align="center">
+  <img 
+    src="https://github.com/ManuelaCarriero/protein-synthesis-modeling/blob/main/Images/autorepressor.jpg"
+  >
+</p>
+
 ## Toggle-switch model
+
+<p align="center">
+  <img 
+    src="https://github.com/ManuelaCarriero/protein-synthesis-modeling/blob/main/Images/toggleswitch.jpg"
+  >
+</p>
 
 # Algorithms
 
