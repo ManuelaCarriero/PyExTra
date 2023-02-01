@@ -9,7 +9,7 @@
 This repository has been built in order to provide python programs that make simulations of the number of molecules produced by a gene. 
 Of course, it is a very wide world because we can have different reactions and different models that describe such process in biology.
 In this repository we explore three main genetic circuits described in section **Models** and provide also programs to analyse simulation data (which can not only be generated!).
-We have wrapped this repository into a unique name called *PyExTra* because of the acronym with gene *ex*pression and *tra*nslation processes that are simulated with python programs.
+We have wrapped this repository into a unique name called *PyExTra* because of the acronym with gene *ex*pression and *tra*nslation processes that are simulated with his python programs.
 Users that can be interested in *PyExTra* are beginners with gene expression simulations and analysis. You can just use it or explore its code to have some help for your research work.
    
 
