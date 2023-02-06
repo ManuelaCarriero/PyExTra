@@ -153,6 +153,7 @@ Academic Year \textcolor{red}{ 201*/201*}
 {\LARGE{\bf Abstract}}\\
 \vspace{9mm}
 I hope it will be an important thesis.
+%I tre principali circuiti analizzati sono semplici da modellizzare però rappresentano importanti sistemi biologici e la loro simulazione e analisi non è affatto banale: serve anche qui molto succo di cervello e fantasia per poter svelare importanti caratteristiche che tali sistemi nascondono. I risultati ottenuti possono essere sfruttati in sistemi più articolati come l'NF-kB che è il nostro target. 
 \end{flushleft}
 \thispagestyle{empty}
 \clearpage
@@ -334,7 +335,7 @@ hence:
 \end{equation}
 This result is known as the \emph{Wiener-Khinchin theorem}. Its meaning is profound: it tells us that one may either directly measure the autocorrelation function of a signal, or the spectrum, and convert back and forth which by means of the \emph{Fast Fourier Transform} is relatively straightforward. We will discuss about the Fast Fourier Transform in Chapter \ref{ChapterPatternRecognition} as an other means to analyze our fluctuating signal $Y(t)$ and we will understand also from simulation results that the autocorrelation function and the fast fourier transform are two different ways to achieve the same information. Hence, they are deeply related.
 
-For the moment we keep discussing merely about the autocorrelation function taking into that, besides such definition of autocorrelation as time average of a signal, we may also consider the \emph{ensemble average}, in which we may repeat the measurement many times, and compute averages, denoted by $\langle \rangle$. It can be shown that for many systems the time average is equal to the ensemble average; such systems are termed \emph{ergotic} \cite{Hand}. If we have such a fluctuating quantity $Y(t)$, then we can consider the average
+For the moment we keep discussing merely about the autocorrelation function taking into account that, besides such definition of autocorrelation as time average of a signal, we may also consider the \emph{ensemble average}, in which we may repeat the measurement many times, and compute averages, denoted by $\langle \rangle$. It can be shown that for many systems the time average is equal to the ensemble average; such systems are termed \emph{ergotic} \cite{Hand}. If we have such a fluctuating quantity $Y(t)$, then we can consider the average
 \begin{equation}
     \langle Y(t)Y(t+\tau) \rangle = G(\tau)
 \end{equation}
@@ -505,9 +506,9 @@ Thus we must use trajectory-based approaches, which differ from the master equat
 
 The trajectory of each stochastic simulation is different, since each is a single realisation sampled randomly from the full distribution given by the master equation. Given many of these random single trajectories, we can build up a picture of the full distribution.
 
-Many approximation methods for the solution of the CME have been developed during the years and which operate by discretizing the time evolution. In this thesis, we will exploit the two simulation algorithms that have become the workhorse stochastic methods for many researchers today: the stochastic simulation algorithm and the tau-leap simulation.
+Many approximation methods for the solution of the CME have been developed during the years and which operate by discretizing the time evolution. In this thesis, we will exploit the two simulation algorithms that have become the workhorse stochastic methods for many researchers today: the stochastic simulation algorithm (SSA) and the tau-leaping procedure. In the end, we will propose an ``alternative'' method that combines the two mentioned algorithms in order to speed up the stochastic simulation of a chemically reacting system. 
 
-\subsection{Stochastic simulation algorithm}
+\subsection{Stochastic simulation algorithm (SSA)}
 Most of the attempts in solving the CME have concentrated on Monte Carlo simulations using the \emph{stochastic simulation algorithm} (SSA) proposed by Gillespie in his seminal paper. This method is statistically exact, namely a full probability distribution built up from an infinite number of simulations will be identical to the distribution of the Markov process, given by the master equation \cite{Article}. This algorithm is arguably the simplest SSA variant and is based on the following steps in order to simulate \emph{one stochastic realisation}: assuming that the system is described by the state vector $\Vec{Y}$ which in general represents the amount of molecules for each chemical species and given that the initial state of the system is $\Vec{Y} = \Vec{Y}_{0}$, one has to choose which reaction happens between the possible ones and how much time the system will spend in such state before the next reaction happens \cite{PHD}. Each reaction \emph{i} is described by its \emph{transition rate} (or even called \emph{propensity}) $k_{i}$ and by the modification of the state vector that generate. Given that we are dealing with Markov process, the difference in time between two successive events $\Delta t$ follows an \emph{exponential distribution}, whose parameter is the propensity $k_{i}$:
 \begin{equation}
     p_{i}(\Delta t) = e^{-k_{i}\Delta t}
@@ -516,17 +517,17 @@ given that any reaction is independent from the others, the distance in time bet
 \begin{equation}\label{exponential}
     p(\Delta t) = e^{-\sum_{i=0}^{R} k_{i} \Delta t}
 \end{equation}
-This process is iterated untill the whole time of interest has been simulated.
+This process is iterated untill the whole time of interest has been simulated or untill an other desired condition is achieved.
 
 
-Unfortunately, the direct method SSA pays the price for its simplicity in computational time, as two random numbers must be generated at each step \cite{Article} (the one for choice of the event and the other for the choice of the time spent in the state). Furthermore, the SSA has an inherent limitation: it must simulate every single reaction. This is, of course, its great strength too, but in cases where there are many reactions or larger molecular populations, it often becomes too slow to generate useful numbers of simulations in a practical time period.
+Unfortunately, the direct method SSA pays the price for its simplicity in computational time, as two random numbers must be generated at each step \cite{Article} (the one for choice of the event and the other for the choice of the time spent in the state given by an exponential random variable). Furthermore, the SSA has an inherent limitation: it must simulate every single reaction. This is, of course, its great strength too, but in cases where there are many reactions or larger molecular populations, it often becomes too slow to generate useful numbers of simulations in a practical time period.
 
-\subsection{Tau-leap}
-The tau-leap method is similar to the SSA in that each simulation is a \emph{single stochastic realisation} from the full distribution at each step. However, the steps are much larger (hence its name) \cite{Article} and in each one of these \emph{it counts the total number of occurrences of each type of reaction over that step}. Thus, also in this case based on the initial state of molecular populations $\Vec{Y}=\Vec{Y_{0}}$, if there are \emph{M} reactions, we take \emph{M} Poisson random number samples. We can call the time interval in which these reactions happen as $\tau$. Hence, the vector of molecules given by the \emph{M} reactions $\Vec{Y}=\Vec{Y}_{M}$ in the time interval $\tau$ is given by
+\subsection{Tau-leap algorithm}
+The tau-leap method, or also referred as explicit tau-leaping procedure, is similar to the SSA in that each simulation is a \emph{single stochastic realisation} from the full distribution at each step. However, the steps are much larger (hence its name) \cite{Article} and in each one of these \emph{it counts the total number of occurrences of each type of reaction over that step approximating the number of firings of each reaction channel during a chosen time increment $\tau$ as a Poisson random variable}. Thus, also in this case based on the initial state of molecular populations $\Vec{Y}=\Vec{Y_{0}}$, if there are \emph{M} reactions, we take \emph{M} Poisson random number samples. We can call the time interval in which these reactions happen as $\tau$. Hence, the vector of molecules given by the \emph{M} reactions $\Vec{Y}=\Vec{Y}_{M}$ in the time interval $\tau$ is given by
 \begin{equation}\label{MPoissonReactions}
     \Vec{Y}_{m}(\tau) = P(\Vec{K_{i}}\tau)
 \end{equation}
-where \emph{P} is the Poisson distribution with mean equal to $\Vec{K_{i}}\tau$ of which $\Vec{K_{i}}$ is the vector of propensities. Then the initial state of molecular populations is updated based on Eq \ref{MPoissonReactions}  and this is iterated untill the whole time of interest has been simulated, similarly to SSA.
+where \emph{P} is the Poisson distribution with mean equal to $\Vec{K_{i}}\tau$ of which $\Vec{K_{i}}$ is the vector of propensities. Then the initial state of molecular populations is updated based on Eq \ref{MPoissonReactions}  and this is iterated untill the whole time of interest has been simulated or a desired condition is met, similarly to SSA.
 
 
 Hence, the basic idea of this procedure is to advance the system by a \emph{pre-selected} time increment $\tau$ (in contrast to the generated time increment that is in the SSA), which is large enough that many reaction events occur in that time, but nevertheless small enough that \emph{no propensity function value is likely to change ``significantly'' as a consequence of those reaction events} \cite{Method}.
@@ -538,74 +539,121 @@ Summing all up, tau-leap algorithm has the key advantage that we now do not need
 The accuracy issue can be mitigated (at the expense of computational time) as the error level, and so time step size, is decreased; indeed, as the time step tends to zero, the tau-leap effectively becomes the SSA, with each step experiencing either zero or one reaction \cite{Article}. 
 
 
-Moreover, as anticipated in some rows above, there is another complementary issue with the tau-leap: as many reactions are simulated at once, molecular species that are depleted in any reaction can go negative if the time step is too large. This is obviously unphysical, and so undesirable and makes it inappropriate to simulate reactions that regards species which are typically lower in number such as genes. Fig. \ref{ODESSATAULEAP} shows the number of RNA molecules produced during time obtained by using the just explained stochastic simulation methods (SSA and Tau-leap) with the one given by the deterministic approach, i.e. ordinary differential equation solution, in the case of a gene that is always expressed. 
+Moreover, as anticipated in some rows above, there is another complementary issue with the tau-leap: as many reactions are simulated at once, molecular species that are depleted in any reaction can go negative if the time step is too large. This is obviously unphysical, and so undesirable and makes it inappropriate to simulate reactions that regards species which are typically lower in number such as genes. Fig. \ref{ODESSATAULEAP} shows the number of RNA molecules produced during time obtained by using the just explained stochastic simulation methods (SSA and Tau-leap) with the one given by the deterministic approach, i.e. ordinary differential equation solution, considering a model with a gene that is always expressed. In this particular case, indeed, we do not run the risk to obtain unphysical negative number of molecules and we can compare the results given by the algorithms.
+
 \begin{figure}[!ht]
-\includegraphics[scale=0.75]{ODESSATAULEAP.png}
-\caption{Comparison of simulation methods. The typical trajectory of the number of molecules as function of time is reported from the SSA (orange line) and tau-leap (green dotted line) and ODE solution (blue thick line).}
+\centering
+\includegraphics[scale=0.30]{ODESSATauleaptimeplot100.png}
+\caption{Comparison of simulation methods. The typical trajectory of the number of molecules as function of time is reported from the SSA (blue line) and tau-leap (orange dotted line) and ODE solution (black thick line).}
 \label{ODESSATAULEAP}
 \end{figure}
-%I parametri del modello erano ka=1, ki=0, k1=1, k2=0.1, k3=0.1, k4=1, k5=0.001, time limit 100.
+
+The trends for the three methods are similar both for the number of RNA molecules and for the number of proteins produced during time. However, in order to compare the two stochastic simulation methods, it is more useful to compare the stationary distributions (i.e. the distribution of states) obtained instead of the time dependent results. 
+
+Hence, we run the same simulation till a longer time limit to allow to obtain the expected Poisson distributions. The results are shown in Fig. \ref{SSATauleapdistribution}:
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.70]{SSA55.25sTauleap10.22stimelimit9000.png}
+\caption{Comparison of simulation methods by using the stationary distributions given by the SSA (orange bar plot) and tau-leap (blue bar plot).}
+\label{SSATauleapdistribution}
+\end{figure}
 \newpage
-\subsection{Alternative methods}
+There is a clear overlap between the two distributions, showing that the SSA simulation is providing the same results to the Tauleaping, validating also that the two algorithms work in representing the stochastic trajectory of the chemical reacting system we are analysing.
+
+The time plot referred to the stationary distribution shown in Fig. \ref{SSATauleapdistribution} is the one reported in Fig. \ref{ODESSATauleaptimeplot9000}: 
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.30]{ODESSATauleaptimeplot9000.png}
+\caption{Comparison of simulation methods using a higher time limit than the one in Fig.\ref{ODESSATAULEAP}. The typical trajectory of the number of molecules as function of time is reported from the SSA (blue line) and tau-leap (orange dotted line) and ODE solution (black thick line).}
+\label{ODESSATauleaptimeplot9000}
+\end{figure}
+\newpage
+%I parametri del modello erano ka=1, ki=0, k1=1, k2=0.1, k3=0.1, k4=1, k5=0.001, time limit 100.
+Also in Fig. \ref{ODESSATauleaptimeplot9000}, the ODE solution is reported. We can notice that the deterministic approach, even though cannot be considered representative of the true behaviour of the system, its result represent a useful statistic of the system that in this case is the means of our unimodal symmetric distributions of the number of RNAs and proteins produced. The black line in Fig. \ref{ODESSATAULEAP} and \ref{ODESSATauleaptimeplot9000} is in fact a rolling mean of the stochastic simulation.
+
+Furthermore, deterministic simulations are generally much faster to run than their statistical counterparts \cite{Article}.
+
+In order to make this simulation for a virtual time equal to 9000 with a computer of 1.10 GHz CPU, the SSA simulation has spent 55 seconds with respect to the 10 seconds spent by the explicit tau-leaping algorithm. 
+
+However the tau-leaping algorithm can work well in this situation of constitutive gene expression. And what if our gene is regulated ? The risk of running in negative number of molecules is much higher hence we need an algorithm that checks that this does not occur if we want to go on using the tau-leap procedure.
+
+In this kind of system, the typical choice is to combine the SSA and the tau-leaping procedure because the first one can simulate the gene behavior while the second one is suitable for simulating the changing of more numerous molecular species such as RNAs and proteins.
+
+In the next section, we propose and describe a combined SSA/tau-leaping algorithm.
+
+\subsection{An alternative method: the ``hybrid''stochastic simulation algorithm}
 
 %METTICI PIù FORMULE PER DESCRIVERE OGNI STEP. Inoltre specifica che questi metodi servono sia per cercare un modo per velocizzare la simulazione (cosa che è molto importante) però anche per attestare che i risultati che otteniamo sono giusti ossia che i metodi funzionano. Dunque bisogna controllare le autocorrelazioni dei diversi metodi con le incertezze e verificare che sono uguali.+ Nota che la configurazione dell'autorepressore è il peggio che possiamo chiedere al Tau-leap e l'efficienza di questi metodi (ossia il tempo impiegato per fare la simulazione) appunto dipende molto dalla configurazione che stiamo considerando.
 
-Many schemes have been developed that allow the choice of larger time steps in the Tau-leap algorithm whilst avoiding negative populations. In this thesis work, we have tried two different approaches and each one combines, basically, the SSA with Tau-leap algorithm in a way that the first one updates the state of genes while the latter updates the state of other more numerous species such as RNA molecules and proteins. The two methods are the following:
-\begin{itemize}
- \item In the first approach, Gillespie algorithm is applied to the starting state $\Vec{\mathbf{Y}}=\Vec{\mathbf{Y_{0}}}$ and transition rates  $\Vec{\mathbf{K}}=\Vec{\mathbf{K_{0}}}$ related to such state; the residency time $\mathbf{t_{residency}}$ in this state $\Vec{\mathbf{Y_{0}}}$ is extracted because it represents our $\mathbf{\tau}$ in the Tau-leap algorithm. 
- 
- At this point the time is checked based on a \emph{threashold time} $\mathbf{t_{threashold}}$ chosen by the user: if $\mathbf{t_{residency} > t_{threashold}}$, the Gillespie time $\mathbf{t_{residency}}$ is divided by the \emph{maximum threshold time} $\mathbf{t_{max\_threshold}}$ (that is, also in this case, chosen by the user and, of course, has to be lower than the initial threshold chosen by the user $\mathbf{t_{threshold} < t_{max\_threshold}}$):
- \begin{equation}\label{ntaus}
-  \mathbf{n = \frac{t\_residency}{t_{max\_threshold}}}
- \end{equation}
- where \emph{n} is the number of times that $\mathbf{t_{max\_threshold}}$ is contained in residency time $\mathbf{t\_residency}$. The ``combined algorithm'' is applied \emph{n} times on each one of these $\mathbf{t_{max\_threshold}}$ plus one time on the remainder of division in Eq. \ref{ntaus}.
- 
- 
- If instead the residency time given by Gillespie algorithm is lower than this threshold $\mathbf{t_{residency} < t_{threashold}}$, we should not be in danger of having a Poissonian mean of Tau-leap algorithm so high to have a number of reactions such that the number of molecules becomes negative and so the ``combined algorithm'' is applied just on the residency time given by Gillespie algorithm $\mathbf{t\_residency}$. 
- 
- 
- We have anticipated at the beginning of this section what we call ``combined algorithm'' but now it is better to clarify how it works: the Tau-leap algorithm is applied to the current state $\Vec{\mathbf{Y}}$ and time \textbf{t}; we extract the updated state $\Vec{\mathbf{Y}}$' and we compute again the transition rates $\Vec{\mathbf{K}}$' based on this updated state (since, at each step of Tau-leap, the state can change significantly and consequently also the transition rates). We apply the Gillespie algorithm to the current state $\Vec{\mathbf{Y}}$' and using these new rates $\Vec{\mathbf{K}}$' we extract the gene state $\Vec{\mathbf{Y}}_{gene}$ that is updated based on the event that is occured, while from the Tau-leap applied before we consider the updated state of the more numerous species $\Vec{\mathbf{Y}}_{abundant\_species}$.
- 
- 
- Before each time control and before each Gillespie algorithm is applied, we check if the total rate is different from zero $\mathbf{\sum_{i=0}^{R} k_{i} \neq 0}$ because problems would arise by applying Eq. \ref{exponential} and, more importantly, if it is zero, it means that all populations are degraded (since in a first order kinetics reaction $\mathbf{k_{i} = k_{j}(n_{molecules})}$, where $k_{j}$ is a constant that we decide apriori in our simulations) and we are fallen in a state called \emph{absorbing state}, whose meaning will be explained in section \ref{absorbingstate}.
- 
- All this is iteratively repeated untill a chosen virtual time limit.
- 
- The first drawback of this approach that we can think about is the fact that we could fall in negative spiecies populations with the \emph{threshold time} and the \emph{maximum threshold time} chosen and so this would lead to a ``try again'' procedure during simulation that are annoyingly inefficient. The second approach overcome this problem by using a trick that is suggested by Gillespie et al. in their article \emph{Avoiding Negative Populations in Explicit Poisson Tau-Leaping} \cite{Method}.
- 
- \item The philosophy behind the second approach is to decide which algorithm has to be applied based on a threashold on the \emph{number of molecules} and on the \emph{mean} of the Poisson distribution in Tau-leap algorithm, instead of the time that represents $\tau$, as it was in the previous method. This strategy recognizes that negative values of a consumed reactant are likely to arise only when the population of that reactant is already small. Furthermore, the probability of having negative values depends not only on the number of molecules but also on the mean of the Poisson distribution in Tau-leap algorithm.
- 
- For example, the single reaction $S_{1} \rightarrow S_{2}$ will rarely be a problem for Poisson tau-leaping if the number of samples $x_{1} \geq 20$ and the probability that a Poisson random variable with mean 8 will give a sample value that is greater than 20 is only about $10^{-4}$ \cite{Method}.
- 
- Now, in practice, in this case the first step is to apply the Tau-leap algorithm to the starting state $\Vec{\mathbf{Y}}=\Vec{\mathbf{Y_{0}}}$ and, as in the first method, we use the updated state to compute again the transition rates that will be used in Gillespie algorithm. 
- 
- Then the number of the more numerous species populations (like RNAs and proteins) and the value of Tau-leaping Poisson mean are checked at the same time. If their values are such that there is low risk to have negative number of molecules, we apply what previously we have called the ``combined algorithm''. Otherwise the pure Gillespie algorithm is applied.
- 
- %Note, firstly, that in this case the control on the total transition rate (that must be different from zero) is applied only in Gillespie algorithm, since only  if we fall in that case of low number of molecules we could end in all populations to be degraded; lastly, in this case the $\tau$ of Tau-leap algorithm is fixed and chosen by the user and from this comes our an advantage: we can safely increase it without having to worry about negative molecules and, at the same time, making the computational time lower. 
-\end{itemize}
 
- Fig. \ref{RNAsODEIANDIIIAPPROACH} and \ref{PROTEINSODEIANDIIIAPPROACH} show the trends solutions of molecules as function of time from the two methods compared to the ODE solutions, both for RNAs and proteins in the case of a gene that is always expressed and when the transition rate of protein increase is higher compared to that of RNAs.
- \newline
-\begin{figure}[H]
-\includegraphics[scale=0.75]{RNAsODEIANDIIIAPPROACH.png}
-\caption{Comparison of simulation methods. The typical trajectory of the number of RNA molecules as function of time is reported from the ordinary differential equation solutions (dark and think blue line), the first method (blue line) and the second method (light blue line).}
-\label{RNAsODEIANDIIIAPPROACH}
-\end{figure}
-\begin{figure}[H]
-\includegraphics[scale=0.75]{PROTEINSODEIANDIIIAPPROACH.png}
-\caption{Comparison of simulation methods. The typical trajectory of the number of RNA molecules as function of time is reported from the ordinary differential equation solutions (dark and think red line), the first method (red line) and the second method (orange line).}
-\label{PROTEINSODEIANDIIIAPPROACH}
-\end{figure}
+
+Many schemes have been developed that allow the choice of larger time steps in the Tau-leap algorithm whilst avoiding negative populations. In this thesis work, we have tried an approach that combines, basically, the SSA with Tau-leap algorithm in a way that the first one updates the state of genes while the latter updates the state of other more numerous species such as RNA molecules and proteins.
+
+The model that we consider to develop this ``hybrid'' algorithm is the first simple protein synthesis model (we will describe in more details the basic genetic models in Chapter \ref{models}). We have 3 molecular species: one \emph{gene} whose transcription leads to \emph{RNAs} production that are translated into \emph{proteins}. In other words, this is what is called as \emph{the central dogma of biology}, that states that genes specify the sequence of mRNA molecules, which in turn specify the sequence of proteins (DNA $\rightarrow$ RNA $\rightarrow$ Protein).
+
+Hence we have 6 possible reactions: gene activation, gene deactivation, RNA production, RNA degradation, protein production and protein degradation.
+
+Let us consider our usual state of molecular populations $\Vec{Y}$ and the initial state $\Vec{Y}=\Vec{Y_{0}}$. The transition rates related to such state is $\Vec{\mathbf{K}}=\Vec{\mathbf{K_{0}}}$.
+
+The proposed hybrid algorithm is based on the following steps:
+\begin{enumerate}
+ \item In state $\Vec{Y}$ at time \emph{t}, evaluate the transitions rates of all species and those related to genes $\Vec{K}_{genes}$.
+ \item Apply the SSA algorithm by considering the sum of genes transition rates in Eq.\ref{exponential} and hence select the reactions that modify the time of residency of the gene state. 
+ \item Eq.\ref{exponential} represents in this case the time of residency of the gene $t_{gene\_state\_residency}$ in the initial state. The aim of this algorithm is to speed up the SSA by considering such $t_{gene\_state\_residency}$ as the tau $\tau$ in the Tauleaping.
+ \item Thus, after the SSA application, consider the $t_{gene\_state\_residency}$ and the updated gene state $\Vec{Y}'$.
+ \item Apply the Tauleaping algorithm to the RNAs and proteins state and by considering $t_{gene\_state\_residency}$ as $\tau$, so $t_{gene\_state\_residency} = \tau$ .
+ 
+ \item Consider the updated state by the tauleaping and SSA $\Vec{Y}'$ and compute also the difference between the transition rates $\Vec{K}_{0}$ refered to the initial state $\Vec{Y}_{0}$ and the final value of transition rate $\Vec{K}'$ obtained considering the updated state $\Vec{Y}'$. In particular compute the following difference:
+ \begin{equation}
+  \Delta \Vec{K} = \left|\frac{\Vec{K}'}{K'_{TOT}}-\frac{\Vec{K}}{K_{TOT}}\right|
+ \end{equation}
+where $K'_{TOT}$ is the sum of all the transition rates calculated with the new updated state $\Vec{Y}'$ and the same for $K_{TOT}$ that is the sum of all the transition rates calculated with the initial state $\Vec{Y}_{0}$.
+
+Let us rember indeed that we are dealing with first order kinetics reactions, whose transition rates are propotional to the amount of molecules of interest by a constant $k$.
+
+$\Vec{Y}'$ and $\Delta \Vec{K}$ are the two quantities that must be monitored, because, as regards the first one, of course, we need to check that there are not negative number of molecules; for the latter, if it is too large, it can lead in very low accuracy in the algorithm results. For instance, if there is a tauleaping step that leads to a final state $\Vec{Y}'$ that has a much higher number of proteins with respect to the initial state $\Vec{Y}_{0}$, the final stationary distribution will result in an ``explosion'' in the number of molecules that does not represent the true distribution. 
+
+Thus, in the following steps we describe how we monitor these two quantities.
+
+\item If $\Vec{Y}'$ has all positive values and $\Delta \Vec{K}$ is lower than a given threashold chosen by the user, update rates and the state by considering the results of the SSA and tauleaping algorithms already applied in points 2 and 5. If the simulation is running untill a precise time limit (as we always do in this thesis work), updated the time of observation using the $t_{gene\_state\_residency}$. 
+
+\item If instead $\Vec{Y}'$ has a negative number of molecules or one of $\Delta \Vec{K}$ is higher than the threashold, it means that we need to make smaller steps than the one proposed by the SSA.
+
+Hence we divide by one half $\tau$, $\tau' \rightarrow \tau/2$, untill the conditions on the number of molecules and on the $\Delta \Vec{K}$ are satisfied.
+
+When we obtain the right $\tau'$, we use it to make a tauleaping, updating the RNAs and proteins states.
+
+Then, we attempt a tauleaping using the remaining time $\tau - \tau'$ that we call as $\tau''$.
+
+If the conditions are satisfied, we update the total time of observation with $\tau$ and attempt a new tau-leaping starting from point 1 by considering a new updated state $\Vec{Y}'$ and the new rates $\Vec{K}'$.
+
+If it is not, we divide again $\tau''$ by one half, $\tau''' \rightarrow \tau''/2$ untill the desired conditions are met.
+
+This process is iterated untill the $\tau^{(n)}$ reaches a value that is higher than 3 times the characteristic time given by the SSA by considering all reactions happening in our system.
+
+\item If the new $\tau^{(n)}$ reaches a lower value, it is worth to make a SSA step without getting trapped in the previous iterating system that is certainly less precise than the SSA. In this case, update the total time with the characteristic time given by the SSA applied considering all the reactions that are possible in our system.
+
+\item Apply steps from 1 to 9 untill the desired total time is reached or the desired condition is met.
+\end{enumerate}
+
+
+
+ 
 %model parameters: ka = 1, ki = 0, k1 = 1, k2 = 0.1, k3 = 1, k4 = 0.1 
-The trends of molecules vs time of these methods in this case are almost overlapping, as seen by eye. However, we can make a more quantitative comparison of these different approaches by computing the means of different simulations and the relative standard deviations.
+%The trends of molecules vs time of these methods in this case are almost overlapping, as seen by eye. However, we can make a more quantitative comparison of these different approaches by computing the means of different simulations and the relative standard deviations.
 %autocorrelation con k4 0.01 e relativi plot nel tempo.
 %quantili
 
-We need to point out, anyway, that the efficiency of these algorithms, i.e. the simulation execution times, depend on the biological model that we are considering. In the next part we will discuss about some important biological models. For the moment, we can say that, for example, the pure SSA algorithm is still efficient for systems where the number of species keeps low as for the case of \emph{autorepressor} where there is only one gene and the proteins produced by their ``father'' gene reduces the probability of activation of the same gene.     
-\newpage
+%DOMANDA AL PROFESSORE: We need to point out, anyway, that the efficiency of these algorithms, i.e. the simulation execution times, depend on the biological model that we are considering. In the next part we will discuss about some important biological models. For the moment, we can say that, for example, the pure SSA algorithm is still efficient for systems where the number of species keeps low as for the case of \emph{autorepressor} where there is only one gene and the proteins produced by their ``father'' gene reduces the probability of activation of the same gene.     
+
 
 
 \section{Statistical analysis techniques for warm-up detection}
+\subsection{The effect of initial conditions}
+%Metti il dogma centrale della biologia. Si tratta di un sistema stiff con le proteine che si producono più velocemente perché ad ogni RNA corrisponde una proteina o più proteine ? Mentre invece da un solo singolo gene partono più molecole di RNA. Infatti il tempo di warm up nel caso delle proteine è maggiore del caso dell'RNA che raggiunge uno stato stazionario che ha una media minore.  
+\subsection{``Replication-deletion'' method}
 
 \section{Absorbing states}\label{absorbingstate}
 %In questo caso dal punto di vista biologico non può accedere perchè i nostri geni non degradano.
@@ -613,7 +661,7 @@ We need to point out, anyway, that the efficiency of these algorithms, i.e. the 
 %Metti dove si trovano in natura questi tipi di circuiti genetici.
 \chapter{Modeling kinetics reactions in a cellular environment}\label{models}
 In this chapter, we describe three simple genetic circuits that are common in nature: the simplest process of gene expression and protein synthesis (already taken into account in the first part), the autorepressor case and the toggle-switch model. We will turn the biological process into a mathematical description by considering, in this chapter, deterministic equations just to understand well the math behind these genetic circuits. Then, the molecular noise in these systems will be taken into account and we will study these systems by means of stochastic methods described in the first part of the thesis.
-
+%Quel che abbiamo definito e descritto come ``rumore'' in biologia all'inizio della tesi a livello computazionale lo si inserisce 
 
 \section{Constitutive gene expression and Poisson expression statistics}
 In the simplest possible model of \emph{constitutive} gene expression, a RNA molecule is produced at a constant rate $k_{1}$ and destroyed in a first-order reaction with rate constant $k_{2}$. Fig. \ref{costitutiveexpression} shows a sketch of this simple biological process.
@@ -794,6 +842,8 @@ cluster forms a bistable switch with Myc and the E2F proteins \cite{microRNAs}.
 
 %Dunque mentre nelle prime due configurazioni descritte abbiamo che troviamo questi sistemi tipicamente in determinate situazioni, nel caso dell'autorepressore e toggle-switch non ci sono proprio situazioni tipiche però nelle situazioni trovate da me sono tipicamente in situazioni in cui sono coinvolti gli oncogenes.
 
+%Useremo come tempo limite 4000 per tutte le analisi perché come abbiamo visto nel Toggle Switch è il minimo tempo per poter osservare l'alternanza tra le espressioni e per avere una distribuzione Poissoniana nel caso di primo modello di sintesi proteica.
+
 \chapter{Pattern recognition methods for stochastics processes}\label{ChapterPatternRecognition}
 We as humans are ``amazing pattern recognizer'' and in fact there are many studies that try to find the link between pattern recognition and human intelligence in order to build artificially intelligent machines \cite{PR}. This is not the theme of this thesis but it is only to say that despite in the time domain signals of Autorepressor model and Toggle Switch model our powerful brain can recognize some patterns, in this context of stochasticity and, perhaps, non-periodic signal, in order to verify that they are really present, and maybe achieve some useful quantitive measurements, we need other tools to investigate such signals than the autocorrelation function that we discussed in section \ref{ACFSubsection}. Let us discuss the ones that we have thought to use in this work of thesis.
 %I nostri occhi sono degli ottimi pattern recognizer infatti nell'autorepressore possiamo percepire che c'Ã¨ qualcosa che si ripete. Abbiamo perÃ² bisogno di altri mezzi perchÃ¨ il segnale nel tempo puÃ² nascondere molte features interessanti under the hood. Queste non sempre possono essere svelate dall'autocorrelazione, che come detto nel paragrafo precedente ha come proprietÃ  di cogliere segnali che si ripetono periodicamente nel tempo. Per altri casi possiamo pensare di utilizzare: Transformata di Fourier + quelli elencati dal professore.
@@ -968,8 +1018,10 @@ From these pictures, we can recognize the power of the CWT for dynamically chang
 \section{ACF, FFT and CWT applied to the first protein synthesis model}
 
 Most of the time, the structure of data is hidden behind the noise so we need these precise mathematical operation with which we can look through the noise and quantify the structure present in the signal. Wavelets are something like could do this blurring of vision and zoom in and out of the signal to pull out the patterns like a kind of mathematical microscope.
-%La trasformata di Fourier media ed analisi di ogni picco per trovare il rate con cui sono prodotte le molecole e le wavelet transform. Usiamo tale modello perchÃ¨ Ã¨ il piÃ¹ semplice quindi come Toy model. + Autocorrelazione delle differenze.
-
+%Metti discorsi fatti dal 2 Novembre in poi e le novità sull'autocorrelazione delle differenze.
+%La trasformata di Fourier media ed analisi di ogni picco per trovare il rate con cui sono prodotte le molecole e le wavelet transform. Usiamo tale modello perchÃ¨ Ã¨ il piÃ¹ semplice quindi come Toy model. 
+%Autocorrelazione delle differenze.
+%Questo lavoro di caratterizzare la forma di una funzione di autocorrelazione per ogni modello può essere utile nel momento in cui ho i dati sperimentali, ne calcolo l'autocorrelazione e se vedo un deep per esempio posso dire che c'è una forma di repressione.
 
 \section{ACF, FFT and CWT applied to Autorepressor signals}
 
@@ -977,7 +1029,7 @@ Most of the time, the structure of data is hidden behind the noise so we need th
 
 \part{Deep Neural Networks for parameters estimation}
 %Noi usiamo l'autocorrelazione però possono essere usate altre funzioni dipendenti dai parametri del sistema. Tipo alcuni usano lo scaleogramma. Trova le fonti che interessava molto il professore. 
-\chapter{Artificial Neural Networks for data-driven modeling}
+\chapter{Artificial Neural Networks as data-driven modeling}
 The regression problem is how to model one or several dependent variables/responses, \emph{Y}, by means of a set of predictor variables, \emph{X} \cite{datadrivenmodeling}. 
 
 This problem can be faced in the data-driven modeling framework that is often more suitable to describe the real-world systems that are associated with complexities. A data-driven model is based on the analysis of the data about a specific system. The main concept of data-driven model is to \emph{find relationships between the system input and output variables without explicit knowledge of the physical behavior of the system} that is, in few words, the opposite of what we did in the previous sections when modeling genetic circuits. Unlike first principles models, data-driven models make no attempt to model the internal features of the system. Instead, they focus on matching the input-output behavior to observational data. 
