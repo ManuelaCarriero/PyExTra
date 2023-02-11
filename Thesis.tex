@@ -190,7 +190,7 @@ Almost all models are phenomenological; that is, they are based on a set of simp
 
 %Importanza dei modelli tipo quello SIR oggigiorno.
 
-
+%Simulation modeling activities encapsulate all three major modeling methods of data analytics: descriptive, predictive, and prescriptive. Descriptive modeling uses historical data to describe what happened in order to understand past behavior of a system. Predictive modeling uses historical data to develop models that help us understand future behavior in order the answer what may happen. Descriptive modeling summarizes past data for understanding. Predictive modeling uses past data to predict future behavior. Prescriptive modeling indicates what should be done and is integral to answering questions involving system design.+finale https://rossetti.github.io/RossettiArenaBook/why-simulate.html
 
 
 
@@ -282,7 +282,7 @@ In a ``rough'' sense, a random process is a phenomenon that varies to some degre
 
 This ``rough'' definition remembers the definition of stochasticity given for isogenic cells in the same environment. 
 
-In the following sections, we will define more rigously what a stochastic process is by using the Van Kampen notations written in its \emph{Stochastic Processes in Physics and Chemistry} book \cite{VanKampenBook} and some possible tools to study random processes.
+In the following sections, we will define more rigously what a stochastic process is by using the Van Kampen notations written in his \emph{Stochastic Processes in Physics and Chemistry} book \cite{VanKampenBook} and some possible tools to study random processes.
 
 
 \subsection{Definition}
@@ -339,7 +339,7 @@ For the moment we keep discussing merely about the autocorrelation function taki
 \begin{equation}
     \langle Y(t)Y(t+\tau) \rangle = G(\tau)
 \end{equation}
-this result being the consequence of our ergodic assumption. If the system is ergodic, we must have a constant $\langle Y(t) \rangle$, since the time average is clearly constant. The process is then \emph{stationary} by which we mean that the averages of functions $Y(t_{1}),Y(t_{2})...Y(t_{n})$ are equal to those of $Y(t_{1}+\tau),Y(t_{2}+\tau)...Y(t_{n}+\tau)$. In particular, $\langle Y \rangle$ is independent of time.  It is often convenient to substract this constant from Y(t) and to deal with the zero-mean process $\bar{Y}(t) = Y(t) - \langle Y \rangle$ and divide by the variance of the stochastic process. The autocorrelation function $G(\tau)$ of a stationary process depends on $|t_{i}-t_{i+\tau}|$ alone and is not affected by this subtraction. $\tau$ is called \emph{lag} and often there exists a constant $t_{c}$ such that $G(\tau)$ is zero or negligible for $|t_{i}-t_{i+\tau}|> t_{c}$; one then calls $t_{c}$ the autocorrelation time.
+this result being the consequence of our ergodic assumption. If the system is ergodic, we must have a constant $\langle Y(t) \rangle$, since the time average is clearly constant. The process is then \emph{stationary} by which we mean that the averages of functions $Y(t_{1}),Y(t_{2})...Y(t_{n})$ are equal to those of $Y(t_{1}+\tau),Y(t_{2}+\tau)...Y(t_{n}+\tau)$. In particular, $\langle Y \rangle$ is independent of time.  It is often convenient to substract this constant from Y(t) and to deal with the zero-mean process $\bar{Y}(t) = Y(t) - \langle Y \rangle$ and divide by the variance of the stochastic process. The autocorrelation function $G(\tau)$ of a stationary process depends on the \emph{lag} time $|t_{i}-t_{i+\tau}|$ alone and is not affected by this subtraction. We can denote the lag time with $\tau$ and often there exists a constant $t_{c}$ such that $G(\tau)$ is zero or negligible for $|t_{i}-t_{i+\tau}|> t_{c}$; one then calls $t_{c}$ the autocorrelation time.
 
 We remind that strictly stationary processes do not exist in nature, let alone in the laboratory, but they may be approximately realized when a process lasts much longer than the phenomena one is interested in. One condition is that it lasts much longer than the autocorrelation time. Processes without a finite $t_{c}$ never forget that they have been switched on in the past and can therefore not be treated as approximately stationary.
 
@@ -351,7 +351,7 @@ Dividing by the variance of the stochastic process, we obtain the autocorrelatio
 \newline
 Hence, the autocorrelation function defines how data points in a time series are related, on average, to the preceding data points \cite{ACF}. In other words, it measures the self-similarity of the signal over different delay times. 
 
-After all this discussion, we can reconize and summerize some autocorrelation function properties:
+After all this discussion, we can recognize and summerize some autocorrelation function properties:
 \begin{enumerate}
  \item $|G(\tau)| \leq G(0)$
  \item $G(-\tau) = G(\tau)$
@@ -370,8 +370,8 @@ P(y_{n},t_{n}|y_{n-1},t_{n-1},...,y_{1},t_{1}) = P(y_{n},t_{n}|y_{n-1},t_{n-1})
 \end{equation}
 that is, the conditional probability density at $t_{n}$, given the value $y_{n-1}$ at $t_{n-1}$, is uniquely determined and is not affected by any knowledge of the values at earlier times. The system loses any kind of information of its state before the present value, and so the markovian systems are usually called memory-less.
 
-\section{The Chemical Master Equation (CME)}
-As we have understood, stochasticity is very important in our biological context. The master equation approach is used to describe the time evolution of the probability of a stochastic system to be in a specific configuration in the framework of Markov processes. Indeed, the mathematical derivation of the Master equation starts from the equation (\ref{Markov}), since we can write such relation in a more formal way \cite{PHD}, that gives the probability of a transition of the system of going from state $y_{3}$ from the state $y_{2}$, that is at the time $t+\tau$, given the observation of the state $y_{1}$ at the time \emph{t}. Given that $T_{\tau}$ is the \emph{transition probability} that does not depend on the moment in time but only on the elapsed time and calling $P(y_{2}, t+\tau|y_{1},t) = T_{\tau}(y_{2}|y_{1})$, we obtain the important Chapman-Kolmogoroff equation for the transition propensity:
+\section{The Chemical Master Equation (CME)}\label{TheCMESection}
+As we have understood, stochasticity is very important in our biological context. The master equation approach is used to describe the time evolution of the probability of a stochastic system to be in a specific configuration in the framework of Markov processes. Indeed, the mathematical derivation of the Master equation starts from the equation (\ref{Markov}), since we can write such relation in a more formal way \cite{PHD}, that gives the probability of a transition of the system of going to the state $y_{3}$ from the state $y_{2}$, that is at the time $t+\tau$, given the observation of the state $y_{1}$ at the time \emph{t}. Given that $T_{\tau}$ is the \emph{transition probability} that does not depend on the moment in time but only on the elapsed time and calling $P(y_{2}, t+\tau|y_{1},t) = T_{\tau}(y_{2}|y_{1})$, we obtain the important Chapman-Kolmogoroff equation for the transition propensity:
 \begin{equation}
     T_{\tau+\tau'}(y_{3}|y_{1}) = \int T_{\tau'}(y_{3}|y_{2})T_{\tau}(y_{2}|y_{1})dy_{2}
 \end{equation}
@@ -439,7 +439,9 @@ On the other hand, one can solve the master equation to obtain \emph{n} solution
 If the system is fully connected (cannot be broken into two non communicating pieces) the stationary distribution is guaranteed to be unique \cite{PHD}. The stationary distribution will be obviously positive, i.e. all its terms are with positive sign and the sum of all its components is 1 (being a probability distribution). All the other eigenvalues will be with negative module, and the corresponding eigenvectors will have total sum of the components equal to zero, as they can be interpreted as the difference between the present distribution and the stationary one, both having total sums of the components equal to 1. A special role is played by the eigenvalue with the smallest absolute value, which it means that its eigenvector is the longest-standing one. This eigenvector is referred as the \emph{metastable} state and its eigenvalue gives a time-scale of the time of convergence to the stationary distribution.
 
 %METTILO NEL CAPITOLO DI REACTION KINETICS
-At this point, we can highlight the impressive similarity between the Chemical Master Equation and the Shr\"{o}dinger's equation: just as the solution of the Shr\"{o}dinger's equation is the probability distribution of finding the particle with a wave function at a given position and so it is the fundamental equation for modeling motions of atomic and subatomic particle systems, the solution of the CME is a probability distribution of the number of molecules in the time for molecular reactions systems.
+We end up this section contemplating the impressive similarity between the Chemical Master Equation and the Shr\"{o}dinger's equation: just as the solution of the Shr\"{o}dinger's equation is the probability distribution of finding the particle with a wave function at a given position and so it is the fundamental equation for modeling motions of atomic and subatomic particle systems, the solution of the CME is a probability distribution of the number of molecules in the time for molecular reactions systems \cite{Brizi}. Indeed, just as the Shr\"{o}dinger's equation reduces to the Newton's second law assuming Planck's constant tends to zero, the Chemical Master Equation becomes the Law of Mass Action if the volume of reaction tends to infinity since we tend to the deterministic context. 
+
+We will apply the Law of Mass Action for describing genetic circuits in Chapter \ref{models}.
      
 
 \section{Expansion in eigenfunctions of the CME solution}
@@ -554,7 +556,7 @@ Hence, we run the same simulation till a longer time limit to allow to obtain th
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[scale=0.70]{SSA55.25sTauleap10.22stimelimit9000.png}
+\includegraphics[scale=0.70]{RemovingwarmupSSA55.25sTauleap10.22stimelimit9000.png}
 \caption{Comparison of simulation methods by using the stationary distributions given by the SSA (orange bar plot) and tau-leap (blue bar plot).}
 \label{SSATauleapdistribution}
 \end{figure}
@@ -595,7 +597,8 @@ The model that we consider to develop this ``hybrid'' algorithm is the first sim
 
 Hence we have 6 possible reactions: gene activation, gene deactivation, RNA production, RNA degradation, protein production and protein degradation.
 
-Let us consider our usual state of molecular populations $\Vec{Y}$ and the initial state $\Vec{Y}=\Vec{Y_{0}}$. The transition rates related to such state is $\Vec{\mathbf{K}}=\Vec{\mathbf{K_{0}}}$.
+Let us consider our usual state of molecular populations $\Vec{Y}$ and the initial state $\Vec{Y}=\Vec{Y_{0}}$. The transition rates related to such state is $\Vec{K}=\Vec{K}_{0}$.
+%\Vec{\mathbf{K}}=\Vec{\mathbf{K_{0}}}
 
 The proposed hybrid algorithm is based on the following steps:
 \begin{enumerate}
@@ -631,17 +634,133 @@ If the conditions are satisfied, we update the total time of observation with $\
 
 If it is not, we divide again $\tau''$ by one half, $\tau''' \rightarrow \tau''/2$ untill the desired conditions are met.
 
-This process is iterated untill the $\tau^{(n)}$ reaches a value that is higher than 3 times the characteristic time given by the SSA by considering all reactions happening in our system.
+This process is iterated untill the $\tau^{(n)}$ is higher than 3 times the characteristic time $t_{c}$ given by the SSA by considering all reactions happening in our system.
 
-\item If the new $\tau^{(n)}$ reaches a lower value, it is worth to make a SSA step without getting trapped in the previous iterating system that is certainly less precise than the SSA. In this case, update the total time with the characteristic time given by the SSA applied considering all the reactions that are possible in our system.
+\item If the new $\tau^{(n)}$ reaches a lower value, i.e. $\tau^{(n)} \leq 3t_{c}$, it is worth to make a SSA step without getting trapped in the previous iterating system that is certainly less precise than the SSA. In this case, update the total time with the characteristic time given by the SSA applied considering all the reactions that are possible in our system.
 
 \item Apply steps from 1 to 9 untill the desired total time is reached or the desired condition is met.
 \end{enumerate}
 
+As in the tauleaping section, we have compared the results of the new algorithm stationary distribution with the SSA. We consider the following model parameters: activation rate $k_{a}=1$, deactivation rate $k_{i}=0.5$, RNA production rate $k_{1}=1$, RNA degradation rate $k_{2}=0.1$, protein production rate $k_{3}=1$, protein degradation rate $k_{4}=0.1$. These are the same parameters and the same model used to compare the SSA simulation with the tauleaping simulation except for the fact that the deactivation rate is now different from 0. Indeed now we can simulate without worrying about the fact that the number of molecules becomes negative and so we can add gene regulation to our model.
+
+We consider a threashold $\Delta K_{t} = 10$ and the result for our basic model is promising.
+\newpage
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.70]{ka1ki0.5SSA1min47sHybrid7.5stimelimit14000.png}
+\caption{Comparison of simulation methods using stationary distributions. The blue bar plot is the result given by the SSA algorithm while the orange bar plot is the result given by the hybrid algorithm.}
+\label{SSAHybridBasicModel}
+\end{figure}
+
+Fig. \ref{SSAHybridBasicModel} shows the distribution of states given by the SSA (blue bar plot) and the hybrid algorithm (orange bar plot). They show a high degree of overlapping with hybrid approach speed that is about 10 times lower than the SSA. More precisely, using a computer with 1.10 GHz, the speed results are summed up in the table \ref{tablebasicmodel}.
+
+\begin{table}[!h]
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+       & \textbf{speed} \\
+ \hline
+ SSA & 107s \\
+ \hline
+ Hybrid & 7.5s \\ 
+ \hline
+\end{tabular}
+\caption{\label{tablebasicmodel}Computational time required for the SSA and Hybrid algorithm in case of our basic model.}
+\end{center}
+\end{table}
+\newpage
+
+We can modify the model changing the parameter value $k_{1}$ (that in the end it is also at the basis of the distribution). By considering $k_{1}=10$, the related stationary distribution is shown in Fig. \ref{SSAHybridk110}.   
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.70]{ka1ki0.5SSA11min58sHybrid7.7stimelimit14000k110.png}
+\caption{Comparison of simulation methods using stationary distributions with $k_{1}=10$. The blue bar plot is the result given by the SSA algorithm while the orange bar plot is the result given by the hybrid algorithm.}
+\label{SSAHybridk110}
+\end{figure}
+\newpage
+There is still a high degree of overlap between the two distributions even though the protein hybrid distribution result is more scattered with respect to the SSA. In this case, the gain in velocity is really high. Once again, the relative speeds are reported in the table \ref{tablek110}.
+
+\begin{table}[!h]
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+       & \textbf{speed} \\
+ \hline
+ SSA & 718s \\
+ \hline
+ Hybrid & 8s \\ 
+ \hline
+\end{tabular}
+\caption{\label{tablek110}Computational time required for the SSA and Hybrid algorithm is case $k_{1}=10$.}
+\end{center}
+\end{table}
 
 
- 
-%model parameters: ka = 1, ki = 0, k1 = 1, k2 = 0.1, k3 = 1, k4 = 0.1 
+However, the situation changes if we decrease 10 times the rate of RNA production and so $k1=0.1$ instead of increasing it by 10 times as in the previous case.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.70]{ka1ki0.5SSA8.31sHybrid7.9stimelimit14000k10.1.png}
+\caption{Comparison of simulation methods using stationary distributions with $k_{1}=0.1$. The blue bar plot is the result given by the SSA algorithm while the orange bar plot is the result given by the hybrid algorithm.}
+\label{SSAHybridk10.1}
+\end{figure}
+\newpage
+The degree of overlap is still high, however we do not achieve a considerable improvement in velocity:
+
+\begin{table}[!h]
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+       & \textbf{speed} \\
+ \hline
+ SSA & 8.3s \\
+ \hline
+ Hybrid & 7.9s \\ 
+ \hline
+\end{tabular}
+\caption{\label{tablek10.1}Computational time required for the SSA and Hybrid algorithm is case $k_{1}=0.1$.}
+\end{center}
+\end{table}
+
+This suggests that decreasing the number of RNAs produced, the performance of our hybrid algorithm decreases. What if we consider the opposite type of regulation ? 
+
+Let us consider $k_{a}=0.1$ and $k_{i}=1$ and let the other parameters equal to the basic model values.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.70]{ka0.1ki1SSA9sHybrid35stimelimit14000.png}
+\caption{Comparison of simulation methods using stationary distributions considering gene activation rate lower than the deactivation rate ($k_{a}=0.1$ and $k_{i}=1$). The blue bar plot is the result given by the SSA algorithm while the orange bar plot is the result given by the hybrid algorithm.}
+\label{SSAHybridka0.1ki1}
+\end{figure}
+
+Fig. \ref{SSAHybridka0.1ki1} shows the effects of this other kind of regulation on the distribution given by the two algorithms. As expected, in both cases the results show that the residency time refered to the state with the number of molecules equal to zero is the highest. However, in this case, the hybrid algorithm shows an increase in the number of molecules state both in the RNAs and even more in the proteins states. One can try to decrease the threashold $\Delta K_{t}$ but at expence of computational time that is already 3 times higher than the SSA (see table \ref{ka0.1ki1}).
+
+\begin{table}
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+       & \textbf{speed} \\
+ \hline
+ SSA & 9s \\
+ \hline
+ Hybrid & 35s \\ 
+ \hline
+\end{tabular}
+\caption{\label{ka0.1ki1}Computational time required for the SSA and Hybrid algorithm is case $k_{a}=0.1$ and $k_{i}=1$.}
+\end{center}
+\end{table}
+
+Hence we can conclude that this proposed hybrid algorithm works very well from the point of view of accuracy and computational time when the model tends to produce a high number of molecules, whereas we still do not find an approach that is better than Gillespie's algorithm when the number of molecules produced is low. Anyway, in such cases of low number of molecules, the SSA is efficient and there is not a huge needing to be optimized.%E' meno efficiente in questi casi perché tendiamo ad andare negli altri if.
+
+Furthemore, we need to notice that our algorithm is a ``paramater-dependent'' algorithm, where the parameter is $\Delta k_{t}$. As regards how tuning this parameter, we can suggest to keep its value as high as possible if one wants to increase the speed but paying attention to the accuracy because with an higher $\Delta k_{t}$ you will run the risk of ``the explosion of molecules''.
+
+In this thesis work we will use the Stochastic Simulation Algorithm because our hybrid approach needs to be further tested and improved.
+
+
+
+%L'algoritmo sembra funzionare meglio quando c'è una maggiore produzione di molecole (controlla proprio cosa succede: quante volte andiamo a finire in un if e quante in un altro).
+
 %The trends of molecules vs time of these methods in this case are almost overlapping, as seen by eye. However, we can make a more quantitative comparison of these different approaches by computing the means of different simulations and the relative standard deviations.
 %autocorrelation con k4 0.01 e relativi plot nel tempo.
 %quantili
@@ -651,17 +770,103 @@ This process is iterated untill the $\tau^{(n)}$ reaches a value that is higher 
 
 
 \section{Statistical analysis techniques for warm-up detection}
-\subsection{The effect of initial conditions}
-%Metti il dogma centrale della biologia. Si tratta di un sistema stiff con le proteine che si producono più velocemente perché ad ogni RNA corrisponde una proteina o più proteine ? Mentre invece da un solo singolo gene partono più molecole di RNA. Infatti il tempo di warm up nel caso delle proteine è maggiore del caso dell'RNA che raggiunge uno stato stazionario che ha una media minore.  
-\subsection{``Replication-deletion'' method}
+Up to now we have shown the results of stationary distributions of the CME for comparing different algorithms. However we have omitted to explain an important analysis step when dealing with simulations: the warm-up detection and its removal. 
 
+We can define our simulations as  ``infinite horizon simulations'': it has no natural beginning point or ending point. The desired starting conditions are sometimes in the far off future. We are interested in the long-run performance of the system and since there is no natural ending point of interest, we consider the horizon infinite \cite{Manuel}.  
+
+As mentioned in section \ref{ACFSubsection}, sometimes we are interested in finding the moments of the probability distributions, such as the mean.
+
+It is true that if the steady state distribution exists and you run the simulation long enough the estimators will tend to converge to the desired quantities. You can observe it in plots reported in Fig. \ref{ODESSATAULEAP} and \ref{SSATauleapdistribution}. At the beginning the number of molecules is low. Then by increasing virtual time, they increase untill they reach a state that we can call as ``steady'' state, that means that the distribution of the desired performance measure has reached a point where it is sufficiently similar to the desired steady state distribution \cite{Manuel}. 
+
+We have also mentioned in section \ref{TheCMESection}, when talking about Chemical Master Equation solutions, that the eigenvector called also as the metastable state is the longest-standing one and its eigenvalue gives a time-scale of the time of convergence to the stationary distribution.
+
+We need to clarify that ``steady state'' is a concept involving the performance measures generated by the system as time goes to infinity. It does not mean that the system itself has reached steady state.
+
+The system never reaches steady state. If the system itself reached steady state, then by implication it would never change with respect to time. The system continues to evolve with respect to time.
+
+The period before the so called steady state can affect the mean calculation and so also the distribution of states. This period is called warmup-period.
+
+At the end of the warm up period, the system can be in any of the possible states of the system. Some states will be more likely than others.
+
+Thus, within the infinite horizon simulation context, you must decide on how long to run the simulations and how to handle the effect of \emph{the initial conditions} on the estimates of performance by estimating when the warmup period ends, i.e. a time point that we can indicate also with $T_{w}$.   
+
+The initial conditions of a simulation represent the state of the system when the simulation is started.
+
+If $T_{w}$ is long enough, then on average across the replications, you are more likely to start collecting data when the system in states that are more representative over long term (rather than just states with low number of molecules).
+
+
+
+\subsection{The effect of initial conditions}
+Consider the output stochastic process $Y_{i}$ of the simulation and let $F_{i}(y|I)$ be the conditional cumulative distribution function of $Y_{i}$ where \emph{I} represents the initial conditions used to start the simulation at time 0.  If $F_{i}(y|I) \rightarrow F(y)$ when $i \rightarrow \infty$ for all conditions \emph{I}, then $F(y)$ is called the steady state distribution of the output process.
+
+The distribution $F_{i}(y|I)$ at the start of the simulation, however, tends to depend more heavily upon the initial conditions. Estimators of steady state performance, such as the sample average, will tend to be biased.
+
+If the expected value of the sampling distribution is equal to the parameter of interest then the estimator is said to be unbiased, i.e. $E[\hat{\theta}] = \theta $, with $\hat{\theta}$ a point estimator.
+
+If instead the estimator is biased then the difference $E[\hat{\theta}] - \theta \neq 0$ and this difference is the bias of the estimator $\hat{\theta}$.
+
+This is the so called initialization bias problem in steady state simulation or warm up problem. The warm-up period $d$ is the period such that given $Y_{i}$ with $i=d+1,...$, $Y_{i}$ \emph{will have substantially similar distributional properties as the steady state distribution}.
+
+
+Unless the initial conditions of the simulation can be generated according to $F(y)$, which is not known, you must focus on methods that detect and/or mitigate the presence of initialization bias.
+
+
+
+
+
+
+
+
+
+
+
+
+%Metti il dogma centrale della biologia. Si tratta di un sistema stiff con le proteine che si producono più velocemente perché ad ogni RNA corrisponde una proteina o più proteine ? Mentre invece da un solo singolo gene partono più molecole di RNA. Infatti il tempo di warm up nel caso delle proteine è maggiore del caso dell'RNA che raggiunge uno stato stazionario che ha una media minore. 
+%Sito.
+%Immagine del periodo di warmup.
+
+\subsection{``Replication-deletion'' method}
+There are many methods that aim to determine the warmup period. In this thesis work we have used the a strategy that we can call ``replication-deletion'' method because it is based on the following steps:
+\begin{enumerate}
+ \item Make \emph{R} replications. Typically $R \geq 5$ is recommended.
+ \item Since the sample points in SSA are obtained at different time intervals for each simulation, we interpolate them at constant intervals (we choose $dt=0.01$).
+ \item Thank to the previous step, we can make the average across the replications. 
+ 
+ Let $Y_{rj}$ be the $j^{th}$ observation on replication \emph{r} $j=1,2,...,m$ where \emph{m} is the minimum of the number of observations in the $r^{th}$ replication, $m=min(m_{r})$.
+ 
+ \begin{equation}
+  \hat{Y}=\sum_{r=1}^{n} Y_{rj}
+ \end{equation}
+ 
+ \item Find $T_{w}$ in $\hat{Y}$ by calculating the difference between $\hat{Y}$ at t and at t+dt, t+dt and t+2dt etc... when the differences start to become constant, then t is $T_{w}$ that we are looking for.
+
+\end{enumerate}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.90]{figWarmUpPeriod.png}
+\caption{Example of a simulation with warmup period detection. Image from \cite{Manuel}.}
+\label{figWarmUpPeriod}
+\end{figure}
+
+Fig. \ref{figWarmUpPeriod} show the concept of a warm up period for a simulation replication.
+\newpage
 \section{Absorbing states}\label{absorbingstate}
-%In questo caso dal punto di vista biologico non può accedere perchè i nostri geni non degradano.
+%In questo caso dal punto di vista biologico non può succedere perchè i nostri geni non degradano.
+From a computational standpoint, we could decide to allow an infinite horizon simulation become finite by considering an ending condition that is the absorbing state, that is a state for which all transition rates are zero. This means that there are no transitions that can lead out of that state and, as a consequence, the residency time is infinite.
+
+In our biological context this situation can not happen because if we consider that RNAs molecules are transcripted from a gene and then, from those, proteins and translated and produced, the gene can be in active or inactive form but a gene can not degrade. Hence we will always have at least one molecule and this condition can not happen. In our simulations, however, when comparing the different algorithms, we have considered it as possibile with a rate much lower with respect to the others, for a computational convenience. It is like an additional test that one can do in order to assess that the algorithm works and do not tend to degrade its molecules. 
+
+
+
+
 \part{Studying genetic circuits and noise}
 %Metti dove si trovano in natura questi tipi di circuiti genetici.
 \chapter{Modeling kinetics reactions in a cellular environment}\label{models}
 In this chapter, we describe three simple genetic circuits that are common in nature: the simplest process of gene expression and protein synthesis (already taken into account in the first part), the autorepressor case and the toggle-switch model. We will turn the biological process into a mathematical description by considering, in this chapter, deterministic equations just to understand well the math behind these genetic circuits. Then, the molecular noise in these systems will be taken into account and we will study these systems by means of stochastic methods described in the first part of the thesis.
-%Quel che abbiamo definito e descritto come ``rumore'' in biologia all'inizio della tesi a livello computazionale lo si inserisce 
+%Quel che abbiamo definito e descritto come ``rumore'' in biologia all'inizio della tesi a livello computazionale lo si inserisce.
+%Sono applicazioni della Law of Mass Action.
+%Inizia riassumendo la lezione del Professore.
 
 \section{Constitutive gene expression and Poisson expression statistics}
 In the simplest possible model of \emph{constitutive} gene expression, a RNA molecule is produced at a constant rate $k_{1}$ and destroyed in a first-order reaction with rate constant $k_{2}$. Fig. \ref{costitutiveexpression} shows a sketch of this simple biological process.
@@ -1323,6 +1528,7 @@ experimental data}
 %Per quanto riguarda l'algoritmo ibrido, occorrerebbe testarlo su tantissimi altri modelli e se ne ricaverebbe sicuramente miglioramento e automatizzare la scelta della differenza dei rate di soglia.
 %Long-tail distributions governs biological systems and the ``queen'' of these is the Poisson Distribution.
 %Metti nella conclusione della tesi che il tutto sta nel trovare i parametri giusti sia nel sistema che rappresenta il soggetto di questa tesi l'NF-kB per poterne modellizzare il comportamento e trovare terapie per tumori o infiammazioni croniche; sia nel percorso fatto per arrivare a studiare questo sistema allo scopo di ottenere i metodi giusti per poterlo esplorare. 
+%Usiamo i metodi per esplorare la biologia però vale anche il viceversa ossia la biologia stessa ci può aiutare a sviluppare i metodi come abbiamo fatto nell'algoritmo ibrido sfruttando le diverse configurazioni del modello ed i diversi tipi di regolazione.
 \begin{appendices}
   \chapter{Software used in this thesis}
   All simulation methods and statistical data analysis have been performed using \emph{Python 3.9} and the programs are available in the following GitHub page \url{https://github.com/ManuelaCarriero/PyExTra} where you can find a detailed explanation of all the Python codes and how to reproduce the results reported in this work.
@@ -1415,6 +1621,7 @@ experimental data}
     \bibitem{AssocProfThamer} Random Process (or Stochastic Process) \href{https://uotechnology.edu.iq/dep/coe/lectures/dr-THAMER/Probability%20&%20Statistics/ch%203.pdf}{https://uotechnology.edu.iq}
     \bibitem{nfkb30years} Zhang Q, Lenardo MJ, Baltimore D., {\em 30 Years of NF-?B: A Blossoming of Relevance to Human Pathobiology}. Cell. 2017 Jan 12;168(1-2):37-57.
     \bibitem{oncogenes} Oncogene \href{https://en.wikipedia.org/wiki/Oncogene}{https://en.wikipedia.org}
+    \bibitem{Manuel} Manuel D. Rossetti, {\em Simulation Modeling and Arena}. \url{https://rossetti.github.io/RossettiArenaBook/}
 
 \end{thebibliography}
 %\addcontentsline{toc}{chapter}{Bibliography}
