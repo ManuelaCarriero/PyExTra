@@ -154,6 +154,7 @@ Academic Year \textcolor{red}{ 201*/201*}
 \vspace{9mm}
 I hope it will be an important thesis.
 %I tre principali circuiti analizzati sono semplici da modellizzare però rappresentano importanti sistemi biologici e la loro simulazione e analisi non è affatto banale: serve anche qui molto succo di cervello e fantasia per poter svelare importanti caratteristiche che tali sistemi nascondono. I risultati ottenuti possono essere sfruttati in sistemi più articolati come l'NF-kB che è il nostro target. 
+%Chronic diseases, cancers and diabetes are associated with dysregulation of many biochemical cues. These biochemical cues are proteins that regulate cellular activity migration and death. The synthesis of these proteins is regulated by nuclear transcription factors. One of the most studied transcription factor is nuclear factor kappa B (NF?B). Many different proteins have been identified that regulate the activity of NF?B. Yet, how these proteins regulate NF?B is still unclear (Dalla tesi di Huanling Liu).
 \end{flushleft}
 \thispagestyle{empty}
 \clearpage
@@ -166,14 +167,23 @@ I hope it will be an important thesis.
 
 \newpage
 
-\pagestyle{fancy}
-\renewcommand{\chaptermark}[1]{\markboth{#1}{#1}}
-\fancyhead[R]{}
-\fancyhead[L]{\chaptername\ \thechapter\ --\ \leftmark}
+
 
 %First part: introduction into heterogeneity and how to deal with it using physical methods.
 \part{Introduction into biological stochasticity and physical methods for its investingation}
+
+\pagestyle{fancy}
+\makeatletter% Needed because of @ in macro name ? https://tex.stackexchange.com/q/8351/277964
+\renewcommand{\chaptermark}[1]{%
+  \markboth{\@chapapp \thechapter\ --\ #1}{\@chapapp \thechapter\ -- \ #1}% chapter/appendix name and number moved from \fancyhead[L]{…}
+}
+\makeatother% because of \makeatletter before
+\fancyhead[R]{}
+\fancyhead[L]{\leftmark}% chapter/appendix name and number moved to \chaptermark
+
 \chapter{Introduction}\epigraph{``Frase''}{Autore}
+
+
 
 Kevin Burrage et al. in their important paper \emph{Stochastic simulation in systems biology} \cite{Article} highlight how mathematical modelling and computational simulation perform essential roles in biology. Models are useful for many different purposes: perhaps the most important of these are crystallising our assumptions and testing them, guiding experiments and looking at experimentally unreachable scenarios, as well as the much-vaunted ability to make new predictions. 
 
@@ -444,7 +454,7 @@ We end up this section contemplating the impressive similarity between the Chemi
 We will apply the Law of Mass Action for describing genetic circuits in Chapter \ref{models}.
      
 
-\section{Expansion in eigenfunctions of the CME solution}
+%\section{Expansion in eigenfunctions of the CME solution}
 
 \section{One-Step processes reveal a Poisson distribution}\label{theonestepdiscussion}
 The one-step or \emph{birth-and-death} (BD) processes are a special class of Markov processes.
@@ -1404,7 +1414,7 @@ In the canonical pathway, after pathogen-derived lipopolysaccharide (LPS) mediat
 
 The subsequent ubiquitination mediated by the ubiquitin ligase $\beta$-TRCP makes I$\kappa$B available for
 proteasomal degradation, so the NF-$\kappa$B dimers are capable to translocate in the nucleus and
-activate gene transcription. This triggers transcription of the inhibitors and numerous other genes. Among the synthesized inhibitors, there are I$\kappa$B$\alpha$ and A20. The newly synthesized I$\kappa$B$\alpha$ again inhibits NF-$\kappa$B, while A20 inhibits IKK by catalysing its transformation into another inactive form (IKKi), in which it is no longer capable of phosphorylating IB$\alpha$.
+activate gene transcription. This triggers transcription of the inhibitors and numerous other genes. Among the synthesized inhibitors, there are I$\kappa$B$\alpha$ and A20. The newly synthesized I$\kappa$B$\alpha$ again inhibits NF-$\kappa$B, while A20 inhibits IKK by catalysing its transformation into another inactive form (IKKi), in which it is no longer capable of phosphorylating I$\kappa$B$\alpha$.
 
 Usually, NF-$\kappa$B activity can be detected within ten minutes after stimulation and some NF-$\kappa$B responsive promoters are induced almost immediately. As already mentioned, the activation of NF-$\kappa$B causes the transcriptional upregulation of I$\kappa$B$\alpha$ which causes \emph{a powerful negative feedback mechanism} that is responsible for the NF-$\kappa$B repression, whose activity can be restored after an other stimulus and may result in an oscillatory pattern of NF-$\kappa$B activity during chronic stimulation.
 
@@ -1491,7 +1501,7 @@ process, it may be possible to govern the NF-$\kappa$B oscillation driving the N
 
 
 \section{NF-\texorpdfstring{$\kappa$}{\265}B and colorectal cancer}
-\newpage
+
 As said at the beginning, NF-$\kappa$B proteins are involved in the control of a large number of normal cellular and organismal processes. However, on the other hand, these transcription factors are persistently active in a number of disease states, including cancer, arthritis, chronic inflammation, asthma, neurodegenerative diseases, and heart disease \cite{NFkB}. NF-$\kappa$B activation supports tumorigenesis by enhancing cell proliferation and angiogenesis, inhibiting apoptosis, and promoting cell invasion and metastasis.
 
 No triggering mutations of NF-$\kappa$B in CRC have been described; however, constitutive activation of NF-$\kappa$B has been reported and is associated with higher tumor stages, treatment resistance and poor survival outcomes.
@@ -1521,8 +1531,10 @@ In particular, constitutive epidermal growth factor receptor and nuclear factor 
 %METTI CAPITOLO TIPO NF-KB AS A PARTICULAR TOGGLE SWITCH.
 \chapter{NF-\texorpdfstring{$\kappa$}{\265}B model formulation}
 
-\part{Results and discussion using 
-experimental data}
+\part{Results and discussion}
+%using experimental data del tuo centro di ricerca e di Hoffman.
+%descrivi l'andamento nel tempo di quel che hai trovato teoricamente e di quello che ci si aspetta.
+%sfrutta i metodi adottati nei circuiti genetici più semplici.
 
 \chapter{Conclusions}\epigraph{``Frase''}{Autore}
 %Per quanto riguarda l'algoritmo ibrido, occorrerebbe testarlo su tantissimi altri modelli e se ne ricaverebbe sicuramente miglioramento e automatizzare la scelta della differenza dei rate di soglia.
@@ -1535,11 +1547,13 @@ experimental data}
   \chapter{Glossary of biology}
   \begin{itemize}
    \item \textbf{Oncogenes} are genes that have the potential to cause cancer. In tumor cells, these genes are often mutated, or expressed at high levels \cite{oncogenes}.
+   
+    \item \textbf{Lymphoid cells} are a family of immune effector cells that have important roles in host defense, metabolic homeostasis and tissue repair but can also contribute to inflammatory diseases such as asthma and colitis \cite{lymphoidcellsnih}.
+     
+   \item \textbf{Lymphocyte} is a type of cell produced by lymphoid tissue that passes into the blood. It is one of the three elements of the white blood series and mediates the immune response by recognizing foreign molecules (antigens) with its membrane receptors; two main groups of lymphocytes are distinguished: the l. B which are responsible for the production of antibodies and the l. T which govern the destruction of cells infected by viruses and bacteria, foreign cells and tumor cells.
    \item \textbf{B lymphocyte} is type of white blood cell that makes antibodies. Also known as B cells, they are part of the immune system and develop from stem cells in the bone marrow \cite{NIHBCells}.
    \item A \textbf{knockout}, as related to genomics, refers to the use of genetic engineering to inactivate or remove one or more specific genes from an organism. Scientists create knockout organisms to study the impact of removing a gene from an organism, which often allows them to then learn something about that gene's function \cite{knockout}.
    \item \textbf{Interleukins} (IL) are a type of \emph{cytokine} (i.e. are a broad and loose category of small proteins $\sim5-20 kDa$ important in cell signaling) first thought to be expressed by leukocytes alone but have later been found to be produced by many other body cells. They play essential roles in the activation and differentiation of immune cells, as well as proliferation, maturation, migration, and adhesion. They also have pro-inflammatory and anti-inflammatory properties. The primary function of interleukins is, therefore, to modulate growth, differentiation, and activation during inflammatory and immune responses. Interleukins consist of a large group of proteins that can elicit many reactions in cells and tissues by binding to high-affinity receptors in cell surfaces. Interleukin 6 (\textbf{IL-6}) is an interleukin that acts as both a pro-inflammatory cytokine and an anti-inflammatory myokine (i.e. one of several hundred cytokines or other small proteins $\sim5-20 kDa$ that are produced and released by muscle fibers in response to muscular contractions). In humans, it is encoded by the IL6 gene.
-   
-   \item \textbf{Lymphoid cells} are a family of immune effector cells that have important roles in host defense, metabolic homeostasis and tissue repair but can also contribute to inflammatory diseases such as asthma and colitis \cite{lymphoidcellsnih}.
    
    \item \textbf{Trans-inhibitor} is the catalytic inactivation of a homodimer, each of which subunits is catalytically active \cite{transinhibitorwikipedia}.
    
@@ -1550,7 +1564,7 @@ experimental data}
    \item \textbf{Phenotypic Switching}
   
   \end{itemize}
-
+\clearpage
 \end{appendices}
 
 %\addcontentsline{toc}{chapter}{Acknowledgments}
