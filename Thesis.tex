@@ -10,6 +10,7 @@
 \usepackage{graphicx} %figures
 \usepackage{amsmath} %math
 \usepackage{amsfonts} %to do the bold W
+\usepackage{mhchem}
 %\usepackage[toc,page]{appendix}
 \usepackage{fancyhdr}%Add chapter name at the beginning of each page
 %\pagestyle{fancy}
@@ -630,7 +631,7 @@ $\Vec{Y}'$ and $\Delta \Vec{K}$ are the two quantities that must be monitored, b
 
 Thus, in the following steps we describe how we monitor these two quantities.
 
-\item If $\Vec{Y}'$ has all positive values and $\Delta \Vec{K}$ is lower than a given threashold chosen by the user, update rates and the state by considering the results of the SSA and tauleaping algorithms already applied in points 2 and 5. If the simulation is running untill a precise time limit (as we always do in this thesis work), updated the time of observation using the $t_{gene\_state\_residency}$. 
+\item If $\Vec{Y}'$ has all positive values and $\Delta \Vec{K}$ is lower than a given threashold chosen by the user, update rates and the state by considering the results of the SSA and tauleaping algorithms already applied in points 2 and 5. If the simulation is running untill a precise time limit (as we always do in this thesis work), update the time of observation using the $t_{gene\_state\_residency}$. 
 
 \item If instead $\Vec{Y}'$ has a negative number of molecules or one of $\Delta \Vec{K}$ is higher than the threashold, it means that we need to make smaller steps than the one proposed by the SSA.
 
@@ -763,9 +764,11 @@ Fig. \ref{SSAHybridka0.1ki1} shows the effects of this other kind of regulation 
 
 Hence we can conclude that this proposed hybrid algorithm works very well from the point of view of accuracy and computational time when the model tends to produce a high number of molecules, whereas we still do not find an approach that is better than Gillespie's algorithm when the number of molecules produced is low. Anyway, in such cases of low number of molecules, the SSA is efficient and there is not a huge needing to be optimized.%E' meno efficiente in questi casi perché tendiamo ad andare negli altri if.
 
-Furthemore, we need to notice that our algorithm is a ``paramater-dependent'' algorithm, where the parameter is $\Delta k_{t}$. As regards how tuning this parameter, we can suggest to keep its value as high as possible if one wants to increase the speed but paying attention to the accuracy because with an higher $\Delta k_{t}$ you will run the risk of ``the explosion of molecules''.
+Furthemore, we need to notice that our algorithm is a ``paramater-dependent'' algorithm, where the parameter is $\Delta k_{t}$. As regards how tuning this parameter, we can suggest to keep its value as high as possible if one wants to increase the speed but paying attention to the accuracy because with an higher $\Delta k_{t}$ you will run the risk of ``the explosion of molecules''. 
 
-In this thesis work we will use the Stochastic Simulation Algorithm because our hybrid approach needs to be further tested and improved.
+One can notice, indeed, that the logic of our hybrid algorithm is similar to the Adaptive Runge-Kutta methods used for the approximate solutions of simultaneous nonlinear equations: during the integration, the step size is adapted such that the estimated error stays below a user-defined threshold. If the error is too high, a step is repeated with a lower step size; if the error is much smaller, the step size is increased to save time \cite{RungeKutta}.
+
+Anyway, in this thesis work we will use the Stochastic Simulation Algorithm because our hybrid approach needs to be further tested and improved.
 
 
 
@@ -871,12 +874,37 @@ In our biological context this situation can not happen because if we consider t
 
 
 \part{Studying genetic circuits and noise}
-%Metti dove si trovano in natura questi tipi di circuiti genetici.
+
 \chapter{Modeling kinetics reactions in a cellular environment}\label{models}
-In this chapter, we describe three simple genetic circuits that are common in nature: the simplest process of gene expression and protein synthesis (already taken into account in the first part), the autorepressor case and the toggle-switch model. We will turn the biological process into a mathematical description by considering, in this chapter, deterministic equations just to understand well the math behind these genetic circuits. Then, the molecular noise in these systems will be taken into account and we will study these systems by means of stochastic methods described in the first part of the thesis.
-%Quel che abbiamo definito e descritto come ``rumore'' in biologia all'inizio della tesi a livello computazionale lo si inserisce.
-%Sono applicazioni della Law of Mass Action.
-%Inizia riassumendo la lezione del Professore.
+In this chapter, we describe three simple genetic circuits that are common in nature: the simplest process of gene expression and protein synthesis that was already taken into account in the first part (it was exploited to build an hybrid algorithm), the autorepressor case and the toggle-switch model. Hence we need to describe different chemical reactions.
+
+Generally, we can have a chemical reaction like this:
+ \begin{equation}
+ \ce{\alpha A + \beta B ...
+<=> \sigma S + rT}
+ \end{equation}
+where A and B are the reagents and S and T are the products of the reaction. This reaction is reversible and, as such, according to the Law of Mass Action, we can define a \emph{forward reaction rate} and a \emph{backward reaction rate}. The reaction rates are related to a constant, for instance the \emph{forward reaction rate} is related to $k_{+}$, and to the concentration of reagents:
+\begin{equation}
+ rate = k_{+} A^{\alpha} B^{\beta}
+\end{equation}
+
+where $\alpha$ and $\beta$ are called the stechiometric coefficients. Analogously, we can write an equation for the backward reaction rate.
+
+However, the specific forms of these equations rates depend on the order of reaction. In the listed genetic circuits that we will describe, we will consider only first order reaction rates.  
+
+When we have a chemical reaction, we are interested in describing it by using differential equations, hence in a deterministic framework. 
+
+Thus we will turn these biological processes into a deterministic mathematical description, but then the molecular noise in these systems will be taken into account and we will study them by means of stochastic methods.
+
+
+
+
+
+
+
+
+
+
 
 \section{Constitutive gene expression and Poisson expression statistics}
 In the simplest possible model of \emph{constitutive} gene expression, a RNA molecule is produced at a constant rate $k_{1}$ and destroyed in a first-order reaction with rate constant $k_{2}$. Fig. \ref{costitutiveexpression} shows a sketch of this simple biological process.
@@ -1541,6 +1569,7 @@ In particular, constitutive epidermal growth factor receptor and nuclear factor 
 %Long-tail distributions governs biological systems and the ``queen'' of these is the Poisson Distribution.
 %Metti nella conclusione della tesi che il tutto sta nel trovare i parametri giusti sia nel sistema che rappresenta il soggetto di questa tesi l'NF-kB per poterne modellizzare il comportamento e trovare terapie per tumori o infiammazioni croniche; sia nel percorso fatto per arrivare a studiare questo sistema allo scopo di ottenere i metodi giusti per poterlo esplorare. 
 %Usiamo i metodi per esplorare la biologia però vale anche il viceversa ossia la biologia stessa ci può aiutare a sviluppare i metodi come abbiamo fatto nell'algoritmo ibrido sfruttando le diverse configurazioni del modello ed i diversi tipi di regolazione.
+%Quel che abbiamo definito e descritto come ``rumore'' in biologia all'inizio della tesi a livello computazionale lo si inserisce.
 \begin{appendices}
   \chapter{Software used in this thesis}
   All simulation methods and statistical data analysis have been performed using \emph{Python 3.9} and the programs are available in the following GitHub page \url{https://github.com/ManuelaCarriero/PyExTra} where you can find a detailed explanation of all the Python codes and how to reproduce the results reported in this work.
@@ -1636,6 +1665,7 @@ In particular, constitutive epidermal growth factor receptor and nuclear factor 
     \bibitem{nfkb30years} Zhang Q, Lenardo MJ, Baltimore D., {\em 30 Years of NF-?B: A Blossoming of Relevance to Human Pathobiology}. Cell. 2017 Jan 12;168(1-2):37-57.
     \bibitem{oncogenes} Oncogene \href{https://en.wikipedia.org/wiki/Oncogene}{https://en.wikipedia.org}
     \bibitem{Manuel} Manuel D. Rossetti, {\em Simulation Modeling and Arena}. \url{https://rossetti.github.io/RossettiArenaBook/}
+    \bibitem{RungeKutta} Runge Kutta methods \url{https://en.wikipedia.org/wiki/Runge-Kutta_methods}
 
 \end{thebibliography}
 %\addcontentsline{toc}{chapter}{Bibliography}
