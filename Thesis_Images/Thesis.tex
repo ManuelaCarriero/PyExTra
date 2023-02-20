@@ -154,8 +154,13 @@ Academic Year \textcolor{red}{ 201*/201*}
 {\LARGE{\bf Abstract}}\\
 \vspace{9mm}
 I hope it will be an important thesis.
-%I tre principali circuiti analizzati sono semplici da modellizzare però rappresentano importanti sistemi biologici e la loro simulazione e analisi non è affatto banale: serve anche qui molto succo di cervello e fantasia per poter svelare importanti caratteristiche che tali sistemi nascondono. I risultati ottenuti possono essere sfruttati in sistemi più articolati come l'NF-kB che è il nostro target. 
+%I tre principali circuiti analizzati sono semplici da modellizzare per� rappresentano importanti sistemi biologici e la loro simulazione e analisi non � affatto banale: serve anche qui molto succo di cervello e fantasia per poter svelare importanti caratteristiche che tali sistemi nascondono. I risultati ottenuti possono essere sfruttati in sistemi pi� articolati come l'NF-kB che � il nostro target. 
 %Chronic diseases, cancers and diabetes are associated with dysregulation of many biochemical cues. These biochemical cues are proteins that regulate cellular activity migration and death. The synthesis of these proteins is regulated by nuclear transcription factors. One of the most studied transcription factor is nuclear factor kappa B (NF?B). Many different proteins have been identified that regulate the activity of NF?B. Yet, how these proteins regulate NF?B is still unclear (Dalla tesi di Huanling Liu).
+%(dalla lezione del 15/10/2018)
+%And of course if you change these constants you will have different behaviors. So an other step will be to learn how to play with the parameters because this is a huge problem in modeling. The usual problem is how to find the parameters numbers. This is not trivial and there are some possibilities that I will show in the next lecture.
+%transcription factors have functional properties because they interfere in some biological process.
+%In order to regulate the RNA production, nature invented the transcription factors.
+%La nostra modellizzazione dell'NF-kB � molto semplificata e ideale tipo ideal gas o Michaleis-Mentein reaction.
 \end{flushleft}
 \thispagestyle{empty}
 \clearpage
@@ -176,7 +181,7 @@ I hope it will be an important thesis.
 \pagestyle{fancy}
 \makeatletter% Needed because of @ in macro name ? https://tex.stackexchange.com/q/8351/277964
 \renewcommand{\chaptermark}[1]{%
-  \markboth{\@chapapp \thechapter\ --\ #1}{\@chapapp \thechapter\ -- \ #1}% chapter/appendix name and number moved from \fancyhead[L]{…}
+  \markboth{\@chapapp \thechapter\ --\ #1}{\@chapapp \thechapter\ -- \ #1}% chapter/appendix name and number moved from \fancyhead[L]{�}
 }
 \makeatother% because of \makeatletter before
 \fancyhead[R]{}
@@ -240,26 +245,26 @@ Intrinsic noise is also an interesting object of study since it represents a ``f
 
 However, as said before, intrinsic noise causes mutations which can also have negative effects. Deleterious mutations that are phenotypically expressed frequently result in loss of important functions or even organismic death, and it has been shown that a substantial proportion of mutations are deleterious. Mutations are also thought to cause cancer, which has become a serious disease in modern times. %in stem and somatic cells
  
- %+la parte che parla degli effetti positivi e negativi della regolazione ed il fatto che tutte le eterogeneità sono interconnesse.
+ %+la parte che parla degli effetti positivi e negativi della regolazione ed il fatto che tutte le eterogeneit� sono interconnesse.
 
 
 
-%Il fatto che cellule diverse possono avere stesso patrimonio genetico porta a pensare che non esiste solo il genetic heterogeneity bensì la causa di questa diversità fenotipica può essere data dall'environment e dal caso.
+%Il fatto che cellule diverse possono avere stesso patrimonio genetico porta a pensare che non esiste solo il genetic heterogeneity bens� la causa di questa diversit� fenotipica pu� essere data dall'environment e dal caso.
 
 
 
-%Partiremo dai circuiti genetici più semplici fino ad arrivare all'NF-kB.
+%Partiremo dai circuiti genetici pi� semplici fino ad arrivare all'NF-kB.
 %Magari prova ad iniziare con la frase ``We and all other animals are machines of our genes''. Originally published in 1976, Richard Dawkins' book argues that genes are the basic unit of evolution, not individual organisms or even species. Due to their naturally selfish behavior, genes merely use organisms as mechanisms to ensure their own survival.
-%PerÃ² ci sono processi come quelli descritti nell'articolo using gene expression noise for understanding gene regulation che dimostrano che i nostri geni non sono tutto.
+%Però ci sono processi come quelli descritti nell'articolo using gene expression noise for understanding gene regulation che dimostrano che i nostri geni non sono tutto.
 %Single-cell experiments.
-%Su cosa tratterÃ  l'intera tesi.
+%Su cosa tratterà l'intera tesi.
 %Il nostro DNA cambia stando a contatto con l'ambiente: gli uomini del passato lo avevano diverso dal nostro e lo si vede dall'aspetto (fenotipo).
 
 %Da stochastics simulations in biological systems.
 %In this thesis, we will refer to reactions occuring inside a cell volume between different types of biochemical molecules with various reaction rates. These will generally be genes , i.e. sections of DNA that are copied into mRNA and initiate a gene expression network, RNA or proteins. 
 
 \section{Colonrectal cancer (CRC)}
-%Il background biologico con i concetti di base come gene regulation.+%Randomness Ã¨ anche nell'iniziazione del tumore al CRC: il 70% dei tumori avvengono in maniera sporadica e secondo il modello genetico di Fearon si ha una prima mutazione che colpisce un tumor-suppressor gene, adenomatous polyposis coli (APC) initiating colorectal tumorigenesis. Il 30% ha base familiare.
+%Il background biologico con i concetti di base come gene regulation.+%Randomness è anche nell'iniziazione del tumore al CRC: il 70% dei tumori avvengono in maniera sporadica e secondo il modello genetico di Fearon si ha una prima mutazione che colpisce un tumor-suppressor gene, adenomatous polyposis coli (APC) initiating colorectal tumorigenesis. Il 30% ha base familiare.
 
 \section{Deterministic versus stochastic models}
 Before the discovery of intrinsic noise, mathematical and computational methods that have traditionally been used were typically \emph{systems of differential equations} which are both \emph{continous} and \emph{deterministic}, i.e. their state variables are real numbers representing the concentrations of molecules and they do not include noise.
@@ -280,11 +285,12 @@ small numbers of reactants are involved, due to the probabilistic nature of indi
 And so, while \emph{the law of mass balance} is used to construct deterministic chemical rate equations which take the form of a system of coupled nonlinear differential equations with the assumption that the concentration of the reactants varies both continuously and differentiably (i.e. in case of molecule numbers of the order $10^{23}$ where a change of one or two molecules in a population of $10^{23}$ is, for all intents and purposes, infinitesimal), \emph{the probability balance} is used as conservation law of this microscopic description. For such purpose we will consider the \emph{Chemical Master Eqaution} which is used to describe the distribution of a population of stochastic systems across states.
 
 
-%Descrizione generale della master equation e dove Ã¨ usata in Fisica ispirandoti anche all'introduzione di Wikipedia + equazione di the SchlÃ¶gl reaction system.
+%Descrizione generale della master equation e dove è usata in Fisica ispirandoti anche all'introduzione di Wikipedia + equazione di the Schlögl reaction system.
 \section{Approximate Bayesian Approach vs Deep Neural Networks for parameters estimation}
+%Il Professore diceva che occorreva molto tempo quindi � un punto contro l'approximate Bayesian approach. Per� in molti lavori (tipo la tesi che hai trovato o di Giosu�) che riguardano l'NF-kB usano l'approccio Bayesiano quindi studiali.
 
 \section{The importance of random numbers generation}
-%I numeri random che ci permettono di simulare quello che in natura abbiamo chiamato la ``stocasticitÃ '' vanno generati in modo preciso.
+%I numeri random che ci permettono di simulare quello che in natura abbiamo chiamato la ``stocasticità'' vanno generati in modo preciso.
 
 \chapter{Stochastic simulation in systems biology}\label{Simulations}
 
@@ -401,7 +407,7 @@ Divide by $\tau'$, go to the limit $\tau' \rightarrow 0$, and use $a_{0}(y_{3})=
 \begin{equation}
     \frac{\partial }{\partial \tau}T_{\tau}(y_{3}|y_{1}) = \int {W(y_{3}|y_{2})T_{\tau}(y_{2}|y_{1}) - W(y_{2}|y_{3})T_{\tau}(y_{3}|y_{1})}dy_{2}
 \end{equation}
-This is the differential form of the Chapmanâ€“Kolmogorov equation that is known as the \emph{Master equation}. It can be written in the simplified and more intuitive form
+This is the differential form of the Chapman–Kolmogorov equation that is known as the \emph{Master equation}. It can be written in the simplified and more intuitive form
 \begin{equation}\label{continuous}
     \frac{\partial P(y,t)}{\partial t} = \int {W(y|y')P(y',t)-W(y'|y)P(y,t)}dy'
 \end{equation}
@@ -409,7 +415,7 @@ This can be recognized as an influx of probability to the state \emph{y} from al
 \begin{equation}\label{discrete}
         \frac{dP_{n}(t)}{dt} = \sum_{n'}[W_{n,n'}P_{n'}(t)-W_{n',n}P_{n}(t)]
 \end{equation}
-as well as $W(y'|y)$ represents the transition probability per unit time from \emph{y} to \emph{y'} in the continuous equation, $W_{n,n'}$ is the transition probability per unit time from the state \emph{n} to the state \emph{n'} in the discrete equation. Hence, also in this form, we can recognize the meaning of Eq \ref{discrete} as we did for Eq \ref{continuous} and state that \emph{the master equation is a gainâ€“loss equation for the probabilities of the separate states n} \cite{Math}.  The first term is the gain due to transitions from $n'$ to $n$ states, and the second term is the loss due to transitions from $n$ to $n'$ states.
+as well as $W(y'|y)$ represents the transition probability per unit time from \emph{y} to \emph{y'} in the continuous equation, $W_{n,n'}$ is the transition probability per unit time from the state \emph{n} to the state \emph{n'} in the discrete equation. Hence, also in this form, we can recognize the meaning of Eq \ref{discrete} as we did for Eq \ref{continuous} and state that \emph{the master equation is a gain–loss equation for the probabilities of the separate states n} \cite{Math}.  The first term is the gain due to transitions from $n'$ to $n$ states, and the second term is the loss due to transitions from $n$ to $n'$ states.
 
 
  The Eq \ref{discrete} shows a linear relationship between transition probabilities, therefore we can write it as a linear dynamical system gaining a more compact form of the CME:
@@ -459,7 +465,7 @@ We will apply the Law of Mass Action for describing genetic circuits in Chapter 
 
 \section{One-Step processes reveal a Poisson distribution}\label{theonestepdiscussion}
 The one-step or \emph{birth-and-death} (BD) processes are a special class of Markov processes.
-Birthâ€“death (BD) processes are characterized by two types of transitions: \emph{births} which increase the state by one, and \emph{deaths} which decrease the state by one. Many stochastic processes are BD processes, indeed they are suitable for modelling the dynamics of the number of individuals in a population, and are widely used in a broad range of areas such as biology, ecology and operations research. In particular, it can be exploited in order to model the evolution of a population of RNA molecules, since the population can increase (production) or decrease (degradation) by one molecule at a time \cite{onesteparticle}. 
+Birth–death (BD) processes are characterized by two types of transitions: \emph{births} which increase the state by one, and \emph{deaths} which decrease the state by one. Many stochastic processes are BD processes, indeed they are suitable for modelling the dynamics of the number of individuals in a population, and are widely used in a broad range of areas such as biology, ecology and operations research. In particular, it can be exploited in order to model the evolution of a population of RNA molecules, since the population can increase (production) or decrease (degradation) by one molecule at a time \cite{onesteparticle}. 
 
 
 More generally and rigorously defined, a BD process is a \emph{continuous time Markov process} whose range consists of integers \emph{n} and whose transition matrix $\mathbb{W}$ permits only jumps between adjacent sites \cite{Math}. In that case, the master equation (Eq \ref{discrete}) is written as
@@ -598,7 +604,7 @@ In the next section, we propose and describe a combined SSA/tau-leaping algorith
 
 \subsection{An alternative method: the ``hybrid''stochastic simulation algorithm}
 
-%METTICI PIù FORMULE PER DESCRIVERE OGNI STEP. Inoltre specifica che questi metodi servono sia per cercare un modo per velocizzare la simulazione (cosa che è molto importante) però anche per attestare che i risultati che otteniamo sono giusti ossia che i metodi funzionano. Dunque bisogna controllare le autocorrelazioni dei diversi metodi con le incertezze e verificare che sono uguali.+ Nota che la configurazione dell'autorepressore è il peggio che possiamo chiedere al Tau-leap e l'efficienza di questi metodi (ossia il tempo impiegato per fare la simulazione) appunto dipende molto dalla configurazione che stiamo considerando.
+%METTICI PI� FORMULE PER DESCRIVERE OGNI STEP. Inoltre specifica che questi metodi servono sia per cercare un modo per velocizzare la simulazione (cosa che � molto importante) per� anche per attestare che i risultati che otteniamo sono giusti ossia che i metodi funzionano. Dunque bisogna controllare le autocorrelazioni dei diversi metodi con le incertezze e verificare che sono uguali.+ Nota che la configurazione dell'autorepressore � il peggio che possiamo chiedere al Tau-leap e l'efficienza di questi metodi (ossia il tempo impiegato per fare la simulazione) appunto dipende molto dalla configurazione che stiamo considerando.
 
 
 
@@ -762,7 +768,7 @@ Fig. \ref{SSAHybridka0.1ki1} shows the effects of this other kind of regulation 
 \end{center}
 \end{table}
 
-Hence we can conclude that this proposed hybrid algorithm works very well from the point of view of accuracy and computational time when the model tends to produce a high number of molecules, whereas we still do not find an approach that is better than Gillespie's algorithm when the number of molecules produced is low. Anyway, in such cases of low number of molecules, the SSA is efficient and there is not a huge needing to be optimized.%E' meno efficiente in questi casi perché tendiamo ad andare negli altri if.
+Hence we can conclude that this proposed hybrid algorithm works very well from the point of view of accuracy and computational time when the model tends to produce a high number of molecules, whereas we still do not find an approach that is better than Gillespie's algorithm when the number of molecules produced is low. Anyway, in such cases of low number of molecules, the SSA is efficient and there is not a huge needing to be optimized.%E' meno efficiente in questi casi perch� tendiamo ad andare negli altri if.
 
 Furthemore, we need to notice that our algorithm is a ``paramater-dependent'' algorithm, where the parameter is $\Delta k_{t}$. As regards how tuning this parameter, we can suggest to keep its value as high as possible if one wants to increase the speed but paying attention to the accuracy because with an higher $\Delta k_{t}$ you will run the risk of ``the explosion of molecules''. 
 
@@ -772,7 +778,7 @@ Anyway, in this thesis work we will use the Stochastic Simulation Algorithm beca
 
 
 
-%L'algoritmo sembra funzionare meglio quando c'è una maggiore produzione di molecole (controlla proprio cosa succede: quante volte andiamo a finire in un if e quante in un altro).
+%L'algoritmo sembra funzionare meglio quando c'� una maggiore produzione di molecole (controlla proprio cosa succede: quante volte andiamo a finire in un if e quante in un altro).
 
 %The trends of molecules vs time of these methods in this case are almost overlapping, as seen by eye. However, we can make a more quantitative comparison of these different approaches by computing the means of different simulations and the relative standard deviations.
 %autocorrelation con k4 0.01 e relativi plot nel tempo.
@@ -834,7 +840,7 @@ Unless the initial conditions of the simulation can be generated according to $F
 
 
 
-%Metti il dogma centrale della biologia. Si tratta di un sistema stiff con le proteine che si producono più velocemente perché ad ogni RNA corrisponde una proteina o più proteine ? Mentre invece da un solo singolo gene partono più molecole di RNA. Infatti il tempo di warm up nel caso delle proteine è maggiore del caso dell'RNA che raggiunge uno stato stazionario che ha una media minore. 
+%Metti il dogma centrale della biologia. Si tratta di un sistema stiff con le proteine che si producono pi� velocemente perch� ad ogni RNA corrisponde una proteina o pi� proteine ? Mentre invece da un solo singolo gene partono pi� molecole di RNA. Infatti il tempo di warm up nel caso delle proteine � maggiore del caso dell'RNA che raggiunge uno stato stazionario che ha una media minore. 
 %Sito.
 %Immagine del periodo di warmup.
 
@@ -865,7 +871,7 @@ There are many methods that aim to determine the warmup period. In this thesis w
 Fig. \ref{figWarmUpPeriod} show the concept of a warm up period for a simulation replication.
 \newpage
 \section{Absorbing states}\label{absorbingstate}
-%In questo caso dal punto di vista biologico non può succedere perchè i nostri geni non degradano.
+%In questo caso dal punto di vista biologico non pu� succedere perch� i nostri geni non degradano.
 From a computational standpoint, we could decide to allow an infinite horizon simulation become finite by considering an ending condition that is the absorbing state, that is a state for which all transition rates are zero. This means that there are no transitions that can lead out of that state and, as a consequence, the residency time is infinite.
 
 In our biological context this situation can not happen because if we consider that RNAs molecules are transcripted from a gene and then, from those, proteins and translated and produced, the gene can be in active or inactive form but a gene can not degrade. Hence we will always have at least one molecule and this condition can not happen. In our simulations, however, when comparing the different algorithms, we have considered it as possibile with a rate much lower with respect to the others, for a computational convenience. It is like an additional test that one can do in order to assess that the algorithm works and do not tend to degrade its molecules. 
@@ -955,7 +961,7 @@ Similarly to Eq. \ref{RNAcostitutiveexpressionequation}, we can write the rate o
  \frac{dp}{dt} = k_{3}m - k_{4}p 
 \end{equation}
 
-The number of proteins produced yields a \emph{scaling law} since they are dependent on both mRNA birth and death as well as translation translation rates \cite{Article}. Therefore proteins have non-Poisson distributions albeit their scaling is also roughly Poissonian.
+The number of proteins produced yields a \emph{scaling law} since they are dependent on both mRNA birth and death as well as translation rates \cite{Article}. Therefore proteins have non-Poisson distributions albeit their scaling is also roughly Poissonian.
 
 \section{Regulated gene expression}\label{regulatedgeneexpressionsection}
 Many genes are constitutively expressed at intermediate levels, which represents a permanent cost but provides an immediate benefit when the protein is needed. On the other hand, \emph{regulated} genes are only expressed under certain necessary conditions in order to save cellular energy. In other words, they are switched on only when needed and they be termed also as ``inducible''. Gene regulation is key to the ability of an organism to respond to environmental changes \cite{generegulationNIH}. Fig. \ref{regulatedgeneexpression} shows a sketch of gene regulated protein synthesis model.
@@ -1025,7 +1031,7 @@ Fig.\ref{autorepressortimeplot} shows the typical pattern of the number of trans
 \label{autorepressortimeplot}
 \end{figure}
 \newpage
-The typical pattern ``sawtooth'' pattern that is repeated over time is revealed by the SSA simulation in RNA molecules trend. As regards proteins time trend, the scaling law mentioned in section \ref{regulatedgeneexpressionsection} causes more ``smooth'' edges. 
+The typical ``sawtooth'' pattern that is repeated over time is revealed by the SSA simulation in RNA molecules trend. As regards proteins time trend, the scaling law mentioned in section \ref{regulatedgeneexpressionsection} causes more ``smooth'' edges. 
 
 One interesting example of autorepressor model in humans is the case of Regulatory Factor $X_{1}$ gene (RFX1).
 
@@ -1083,13 +1089,13 @@ cluster forms a bistable switch with Myc and the E2F proteins \cite{microRNAs}.
 
 %Ci sarebbe anche il caso di due geni indipendenti
 
-%Dunque mentre nelle prime due configurazioni descritte abbiamo che troviamo questi sistemi tipicamente in determinate situazioni, nel caso dell'autorepressore e toggle-switch non ci sono proprio situazioni tipiche però nelle situazioni trovate da me sono tipicamente in situazioni in cui sono coinvolti gli oncogenes.
+%Dunque mentre nelle prime due configurazioni descritte abbiamo che troviamo questi sistemi tipicamente in determinate situazioni, nel caso dell'autorepressore e toggle-switch non ci sono proprio situazioni tipiche per� nelle situazioni trovate da me sono tipicamente in situazioni in cui sono coinvolti gli oncogenes.
 
-%Useremo come tempo limite 4000 per tutte le analisi perché come abbiamo visto nel Toggle Switch è il minimo tempo per poter osservare l'alternanza tra le espressioni e per avere una distribuzione Poissoniana nel caso di primo modello di sintesi proteica.
+%Useremo come tempo limite 4000 per tutte le analisi perch� come abbiamo visto nel Toggle Switch � il minimo tempo per poter osservare l'alternanza tra le espressioni e per avere una distribuzione Poissoniana nel caso di primo modello di sintesi proteica.
 
 \chapter{Pattern recognition methods for stochastics processes}\label{ChapterPatternRecognition}
 We as humans are ``amazing pattern recognizer'' and in fact there are many studies that try to find the link between pattern recognition and human intelligence in order to build artificially intelligent machines \cite{PR}. This is not the theme of this thesis but it is only to say that despite in the time domain signals of Autorepressor model and Toggle Switch model our powerful brain can recognize some patterns, in this context of stochasticity and, perhaps, non-periodic signal, in order to verify that they are really present, and maybe achieve some useful quantitive measurements, we need other tools to investigate such signals than the autocorrelation function that we discussed in section \ref{ACFSubsection}. Let us discuss the ones that we have thought to use in this work of thesis.
-%I nostri occhi sono degli ottimi pattern recognizer infatti nell'autorepressore possiamo percepire che c'Ã¨ qualcosa che si ripete. Abbiamo perÃ² bisogno di altri mezzi perchÃ¨ il segnale nel tempo puÃ² nascondere molte features interessanti under the hood. Queste non sempre possono essere svelate dall'autocorrelazione, che come detto nel paragrafo precedente ha come proprietÃ  di cogliere segnali che si ripetono periodicamente nel tempo. Per altri casi possiamo pensare di utilizzare: Transformata di Fourier + quelli elencati dal professore.
+%I nostri occhi sono degli ottimi pattern recognizer infatti nell'autorepressore possiamo percepire che c'è qualcosa che si ripete. Abbiamo però bisogno di altri mezzi perchè il segnale nel tempo può nascondere molte features interessanti under the hood. Queste non sempre possono essere svelate dall'autocorrelazione, che come detto nel paragrafo precedente ha come proprietà di cogliere segnali che si ripetono periodicamente nel tempo. Per altri casi possiamo pensare di utilizzare: Transformata di Fourier + quelli elencati dal professore.
 \section{Fast Fourier Transform (FFT)}
 Our time domain signal, that we can name as $f(t)$, i.e. a function of time, can hide interesting features under the hood and some of these can be extracted through the Fourier Transform. By considering the continous function $f(t)$, the Fourier transform is based on the following formula:
 \begin{equation}\label{FourierTransformFormula}
@@ -1132,7 +1138,7 @@ Fig. \ref{exampleFFTtimedomainsignal} is the corresponding frequency spectrum.
 The four frequencies, already clearly detectable by eye in the time domain, are all present in the frequency domain. The peaks in the frequency spectrum indicate the most occurring frequencies in the signal. The larger and sharper a peak is, the more prevalent a frequency is in a signal. 
 
 
-%Non so piÃ¹ se Ã¨ giusto...
+%Non so più se è giusto...
 However, as in the case of the autocorrelation function, if the signal is not periodic, the Fourier spectrum would not be really informative. The sine function is the same everywhere, no matter where you look. It stretches to infinity in a regular periodic fashion which meakes it inconvient for time series analysis. Indeed we can say that the autocorrelation function and the Fourier transform are two ways to obtain the same information from the signal: the extraction of periodicity from the signal. Computing the autocorrelation function we obtain a graph with the autocorrelation values as function of time; with the Fourier transform we obtain the FFT amplitude as function of frequencies. Converting the values of the autocorrelation peaks from the time-domain to the frequency domain should result in the same peaks as the ones calculated by the FFT. The frequency of a signal thus can be found with the auto-correlation as well as with the FFT and this was already mentioned in a more ``formal'' way in section \ref{ACFSubsection} as a result of the \emph{Wiener-Khinchin theorem}.
 
 %AGGIUSTA!!!!!!!!!!
@@ -1261,17 +1267,18 @@ From these pictures, we can recognize the power of the CWT for dynamically chang
 \section{ACF, FFT and CWT applied to the first protein synthesis model}
 
 Most of the time, the structure of data is hidden behind the noise so we need these precise mathematical operation with which we can look through the noise and quantify the structure present in the signal. Wavelets are something like could do this blurring of vision and zoom in and out of the signal to pull out the patterns like a kind of mathematical microscope.
-%Metti discorsi fatti dal 2 Novembre in poi e le novità sull'autocorrelazione delle differenze.
-%La trasformata di Fourier media ed analisi di ogni picco per trovare il rate con cui sono prodotte le molecole e le wavelet transform. Usiamo tale modello perchÃ¨ Ã¨ il piÃ¹ semplice quindi come Toy model. 
+%Metti discorsi fatti dal 2 Novembre in poi e le novit� sull'autocorrelazione delle differenze.
+%La trasformata di Fourier media ed analisi di ogni picco per trovare il rate con cui sono prodotte le molecole e le wavelet transform. Usiamo tale modello perchè è il più semplice quindi come Toy model. 
 %Autocorrelazione delle differenze.
-%Questo lavoro di caratterizzare la forma di una funzione di autocorrelazione per ogni modello può essere utile nel momento in cui ho i dati sperimentali, ne calcolo l'autocorrelazione e se vedo un deep per esempio posso dire che c'è una forma di repressione.
+%Questo lavoro di caratterizzare la forma di una funzione di autocorrelazione per ogni modello pu� essere utile nel momento in cui ho i dati sperimentali, ne calcolo l'autocorrelazione e se vedo un deep per esempio posso dire che c'� una forma di repressione.
 
 \section{ACF, FFT and CWT applied to Autorepressor signals}
+%ACF: se hai un delay di 1000 punti corrisponde a 10 secondi virtuali, se invece dt=1 e lag 1000 punti sono 1000 secondi virtuali messaggio.
 
 \section{ACF, FFT and CWT applied to Toggle-Switch signals}
 
 \part{Deep Neural Networks for parameters estimation}
-%Noi usiamo l'autocorrelazione però possono essere usate altre funzioni dipendenti dai parametri del sistema. Tipo alcuni usano lo scaleogramma. Trova le fonti che interessava molto il professore. 
+%Noi usiamo l'autocorrelazione per� possono essere usate altre funzioni dipendenti dai parametri del sistema. Tipo alcuni usano lo scaleogramma. Trova le fonti che interessava molto il professore. 
 \chapter{Artificial Neural Networks as data-driven modeling}
 The regression problem is how to model one or several dependent variables/responses, \emph{Y}, by means of a set of predictor variables, \emph{X} \cite{datadrivenmodeling}. 
 
@@ -1290,11 +1297,11 @@ First we will describe the basics artificial neural networks concepts and then w
 \section{Particular Artificial Neural Networks: Recurrent Neural Networks (RNN) and Long Short Term Memory (LSTM) Networks}
 
 \chapter{Artificial Neural Network regression model at work}
-%The widely used ANN paradigm is a multi-layered feed-forward network (MFFN) with multi-layered perceptron, mostly comprising three sequentially arranged layers of processing units. The MFFN provides a mapping between an input (x) and output (y) through a nonlinear function f as y=f(x). The three layered MFFN has input, hidden, and output layers, and each layer comprises of its own nodes. METTICI PERò CHE NON SAPPIAMO QUAL'è LA FUNZIONE f E LE COSE SCRITTE NEL PROGETTO DI REMONDINI. + USA IN QUALCHE MODO LE LSTM. 
+%The widely used ANN paradigm is a multi-layered feed-forward network (MFFN) with multi-layered perceptron, mostly comprising three sequentially arranged layers of processing units. The MFFN provides a mapping between an input (x) and output (y) through a nonlinear function f as y=f(x). The three layered MFFN has input, hidden, and output layers, and each layer comprises of its own nodes. METTICI PER� CHE NON SAPPIAMO QUAL'� LA FUNZIONE f E LE COSE SCRITTE NEL PROGETTO DI REMONDINI. + USA IN QUALCHE MODO LE LSTM. 
 \section{ANN applied to the first protein synthesis model}
 \section{ANN applied to the Autorepressor model}
 \section{ANN applied to the Toggle-Switch model}
-%Confrontare la mae e la r2score generati da modelli uguali con diverse specie chimiche puÃ² darci informazioni su tali specie.
+%Confrontare la mae e la r2score generati da modelli uguali con diverse specie chimiche può darci informazioni su tali specie.
 
 \part{NF-\texorpdfstring{$\kappa$}{\265}B, a stochastic active player in human cancer}
 \chapter{The NF-\texorpdfstring{$\kappa$}{\265}B family of transcription factors}
@@ -1388,7 +1395,7 @@ loop-helix} (HLH) \emph{domain} and a \emph{leucine zipper domain}.
 
 The IKK complex phosphorylates IkB$\alpha$ on N-terminal serines, and this triggers its degradative polyubiquitination through the proteasome (a simple sketch of this process is shown in figure \ref{NFkBactivation}). 
 
-%In unstimulated cells, NF-$\kappa$B proteins are sequestered in the cytoplasm through binding to inhibitory molecules (i.e. the I$\kappa$Bs family) whose prototype is I$\kappa$B$\alpha$. Stimulation with a variety of stimuli, such as proinflammatory cytokines (e.g., TNFa and IL-1b), Toll-like receptor ligands [e.g., lipopolysaccharide (LPS) and double-stranded RNA (dsRNA)], triggers NF-$\kappa$B activation through the so called â€˜classicalâ€™ or â€˜canonicalâ€™ pathway. This signaling pathway leads to the IKK complex, composed of both kinases IKK$\alpha$ and IKK$\beta$ assembled by the scaffold protein NEMO/IKK$\gamma$. 
+%In unstimulated cells, NF-$\kappa$B proteins are sequestered in the cytoplasm through binding to inhibitory molecules (i.e. the I$\kappa$Bs family) whose prototype is I$\kappa$B$\alpha$. Stimulation with a variety of stimuli, such as proinflammatory cytokines (e.g., TNFa and IL-1b), Toll-like receptor ligands [e.g., lipopolysaccharide (LPS) and double-stranded RNA (dsRNA)], triggers NF-$\kappa$B activation through the so called ‘classical’ or ‘canonical’ pathway. This signaling pathway leads to the IKK complex, composed of both kinases IKK$\alpha$ and IKK$\beta$ assembled by the scaffold protein NEMO/IKK$\gamma$. 
 
 \begin{figure}[!ht]
 \includegraphics[scale=0.70]{NFkBactivation.png}
@@ -1413,12 +1420,12 @@ Although in vitro assembly of the complex indicates that only IKK$\beta$ assembl
 complexes are readily formed.
 
 From here, the NF-$\kappa$B signaling pathways have been classified into two distinct and evolutionary
-conserved types, according to the two multiprotein IKK complexes which regulate the stimulus-responsive phosphorylation and consequent degradation of I$\kappa$B proteins: the classical or so-called â€œcanonicalâ€ NF-$\kappa$B signaling pathway where IKK$\beta$ is sufficient for I$\kappa$B$\alpha$ and
+conserved types, according to the two multiprotein IKK complexes which regulate the stimulus-responsive phosphorylation and consequent degradation of I$\kappa$B proteins: the classical or so-called “canonical” NF-$\kappa$B signaling pathway where IKK$\beta$ is sufficient for I$\kappa$B$\alpha$ and
 I$\kappa$B$\beta$ phosphorylation and degradation, while IKK$\alpha$ may regulate gene expression in the
 nucleus by modifying the phosphorylation status of the histones.
 
 On the contrary, in the
-alternative or â€œnon-canonicalâ€ pathway IKK complex consists exclusively of an IKK$\alpha$ homodimer, which leads to the phosphorylation of p100 and its consequent processing to p52.
+alternative or “non-canonical” pathway IKK complex consists exclusively of an IKK$\alpha$ homodimer, which leads to the phosphorylation of p100 and its consequent processing to p52.
 
 Even though both classic and alternative pathways are principally activated during the functioning of the immune system, the first is mainly involved \emph{in inflammation response} as in the regulation of proliferation and apoptosis of lymphoid cells throughout the
 immune reaction; the latter regulates the lymphoid organogenesis and so its engangement occurs mainly after non-inflammatory stimuli.
@@ -1437,8 +1444,8 @@ immune reaction; the latter regulates the lymphoid organogenesis and so its enga
 \label{NFkBmechanism}
 \end{figure}
 \newpage
-%The â€˜alternativeâ€™ or â€˜non-classicalâ€™ NF-$\kappa$B-activating pathway is triggered by cytokines such as BAFF and lymphotoxin-b, and leads to the activation of an IKK$\alpha$ homodimer, which phosphorylates p100. This inhibitory molecule is subsequently processed to generate p52. NF-$\kappa$B dimers (p52/RelB) move into the nucleus to drive the expression of candidates involved in adaptive immunity, as well as in lymphoid organogenesis.
-In the canonical pathway, after pathogen-derived lipopolysaccharide (LPS) mediates inflammatory stimulus and cytokines such as TNF and interleukin (IL)-1, , the I$\kappa$B proteins I$\kappa$B$\alpha$, I$\kappa$B$\beta$ and I$\kappa$B$\epsilon$ are phosphorylated by the â€œcanonicalâ€ IKK complex on two specific N-terminal serines.
+%The ‘alternative’ or ‘non-classical’ NF-$\kappa$B-activating pathway is triggered by cytokines such as BAFF and lymphotoxin-b, and leads to the activation of an IKK$\alpha$ homodimer, which phosphorylates p100. This inhibitory molecule is subsequently processed to generate p52. NF-$\kappa$B dimers (p52/RelB) move into the nucleus to drive the expression of candidates involved in adaptive immunity, as well as in lymphoid organogenesis.
+In the canonical pathway, after pathogen-derived lipopolysaccharide (LPS) mediates inflammatory stimulus and cytokines such as TNF and interleukin (IL)-1, , the I$\kappa$B proteins I$\kappa$B$\alpha$, I$\kappa$B$\beta$ and I$\kappa$B$\epsilon$ are phosphorylated by the “canonical” IKK complex on two specific N-terminal serines.
 
 The subsequent ubiquitination mediated by the ubiquitin ligase $\beta$-TRCP makes I$\kappa$B available for
 proteasomal degradation, so the NF-$\kappa$B dimers are capable to translocate in the nucleus and
@@ -1446,7 +1453,7 @@ activate gene transcription. This triggers transcription of the inhibitors and n
 
 Usually, NF-$\kappa$B activity can be detected within ten minutes after stimulation and some NF-$\kappa$B responsive promoters are induced almost immediately. As already mentioned, the activation of NF-$\kappa$B causes the transcriptional upregulation of I$\kappa$B$\alpha$ which causes \emph{a powerful negative feedback mechanism} that is responsible for the NF-$\kappa$B repression, whose activity can be restored after an other stimulus and may result in an oscillatory pattern of NF-$\kappa$B activity during chronic stimulation.
 
-Conversely, multiple non-inflammatory stimuli are responsible for the engagement of the â€œnon-canonicalâ€ pathway in a variety of cell types.
+Conversely, multiple non-inflammatory stimuli are responsible for the engagement of the “non-canonical” pathway in a variety of cell types.
 
 In B cells, the survival factor B-cell-activating factor belonging to the TNF family (BAFF) and, in splenic stromal cells, lymphotoxin $\beta$ signaling are able to activate NF-kB for many hours or days.
 
@@ -1509,7 +1516,7 @@ Many mathematical models of such key regulator NF-$\kappa$B activity oscillation
  
  \item Inoue et al. mathematically analysed the NF-$\kappa$B oscillation by using the core model based on three components, IKK$\beta$, I$\kappa$B$\alpha$ and NF-$\kappa$B. According to their stability analysis, the NF-$\kappa$B activity showed two characteristic behaviours, \emph{oscillation and switch-like activation}, regulated by positive and negative feedback, respectively.
  
- Switch-like activation was fundamental to compensate for the upstream IKK transient activity and to induce accumulation of nuclear NF-$\kappa$B, which in turn was responsible for subsequent oscillation in target gene expression. %Lo possiamo modellizzare come un interruttore rappresentato da IKK che libera l'NF-kB dalla molecola inibitrice tramite fosforilazione e come un sistema oscillatorio nell'espressione prodotta dal gene, una volta che l'NF-kB Ã¨ liberato e si attacca alla gene per farne la trascrizione.
+ Switch-like activation was fundamental to compensate for the upstream IKK transient activity and to induce accumulation of nuclear NF-$\kappa$B, which in turn was responsible for subsequent oscillation in target gene expression. %Lo possiamo modellizzare come un interruttore rappresentato da IKK che libera l'NF-kB dalla molecola inibitrice tramite fosforilazione e come un sistema oscillatorio nell'espressione prodotta dal gene, una volta che l'NF-kB è liberato e si attacca alla gene per farne la trascrizione.
  
  Thus, the NF-$\kappa$B oscillation was merely a damped oscillation.
 
@@ -1562,14 +1569,15 @@ In particular, constitutive epidermal growth factor receptor and nuclear factor 
 \part{Results and discussion}
 %using experimental data del tuo centro di ricerca e di Hoffman.
 %descrivi l'andamento nel tempo di quel che hai trovato teoricamente e di quello che ci si aspetta.
-%sfrutta i metodi adottati nei circuiti genetici più semplici.
+%sfrutta i metodi adottati nei circuiti genetici pi� semplici.
 
 \chapter{Conclusions}\epigraph{``Frase''}{Autore}
-%Per quanto riguarda l'algoritmo ibrido, occorrerebbe testarlo su tantissimi altri modelli e se ne ricaverebbe sicuramente miglioramento e automatizzare la scelta della differenza dei rate di soglia.
+%Per quanto riguarda l'algoritmo ibrido, occorrerebbe testarlo su tantissimi altri modelli e se ne ricaverebbe sicuramente miglioramento e automatizzare la scelta della differenza dei rate di soglia. Intanto per� abbiamo sviluppato un algoritmo che � ``adattativo'' nel senso che si applica il Tau-leap ed il Gillespie in base a quel che sono le dinamiche ed in un sistema come l'NF-kB in cui ci sono tanti tipi di reazione che si comportano in un modo o in un altro � quel che serve.
 %Long-tail distributions governs biological systems and the ``queen'' of these is the Poisson Distribution.
 %Metti nella conclusione della tesi che il tutto sta nel trovare i parametri giusti sia nel sistema che rappresenta il soggetto di questa tesi l'NF-kB per poterne modellizzare il comportamento e trovare terapie per tumori o infiammazioni croniche; sia nel percorso fatto per arrivare a studiare questo sistema allo scopo di ottenere i metodi giusti per poterlo esplorare. 
-%Usiamo i metodi per esplorare la biologia però vale anche il viceversa ossia la biologia stessa ci può aiutare a sviluppare i metodi come abbiamo fatto nell'algoritmo ibrido sfruttando le diverse configurazioni del modello ed i diversi tipi di regolazione.
+%Usiamo i metodi per esplorare la biologia per� vale anche il viceversa ossia la biologia stessa ci pu� aiutare a sviluppare i metodi come abbiamo fatto nell'algoritmo ibrido sfruttando le diverse configurazioni del modello ed i diversi tipi di regolazione.
 %Quel che abbiamo definito e descritto come ``rumore'' in biologia all'inizio della tesi a livello computazionale lo si inserisce.
+%Per quanto riguarda i modelli semplici analizzati: mentre nel caso del gene sempre espresso e regolato possiamo trovare situazioni generali in natura, nel caso dell'autorepressore ed il toggle switch non sembra per� nelle ricerche fatte in questo lavoro di tesi sembrano spesso essere coinvolti negli oncogenes e quindi casi di tumore. Anche l'NF-kB � un caso di gene sempre espresso per� non per garantire il buon funzionamento cellulare bens� � il caso in cui si ha un cattivo funzionamento.
 \begin{appendices}
   \chapter{Software used in this thesis}
   All simulation methods and statistical data analysis have been performed using \emph{Python 3.9} and the programs are available in the following GitHub page \url{https://github.com/ManuelaCarriero/PyExTra} where you can find a detailed explanation of all the Python codes and how to reproduce the results reported in this work.
@@ -1599,20 +1607,20 @@ In particular, constitutive epidermal growth factor receptor and nuclear factor 
 %\addcontentsline{toc}{chapter}{Acknowledgments}
 \chapter*{Acknowledgments}
 \addcontentsline{toc}{chapter}{Acknowledgments} 
-
+%we are all sons of the environment in which we live and so of the people with which we interact.
 \begin{thebibliography}{bibliography}
      \bibitem{Brizi} Gastone Castellani, teaching material of {\em Physical Methods of Biology} course, University of Bologna.
     \bibitem{PR} Daniel Remondini, Gastone Castellani, teaching material of {\em Pattern Recognition} course, University of Bologna.
     \bibitem{SDAFAP} Claudia Sala, Maximiliano Sioli, teaching material of {\em Statistical Data Analysis for Applied Physics} course, University of Bologna.
     \bibitem{SACFAP} Enrico Giampieri, teaching material of {\em Software and Computing for Applied Physics} course, University of Bologna.
     \bibitem{PHD} Giampieri Enrico, {\em Stochastic models and dynamic meaures for the characterization of bistable circuits in cellular biophysics}, University of Bologna (2012).
-    \bibitem{Tesi} Davide GiosuÃ© Lippolis, {\em Stochastic modeling of fluctuations in the NF-$\kappa$B activity of neoplastic cells}, University of Bologna (2018/2019).
+    \bibitem{Tesi} Davide Giosué Lippolis, {\em Stochastic modeling of fluctuations in the NF-$\kappa$B activity of neoplastic cells}, University of Bologna (2018/2019).
     \bibitem{VanKampenBook} N. G. van Kampen, {\em Stochastic Processes in Physics and Chemistry}, North Holland, third ed., May 2007.
-    \bibitem{Genetics} Yifeng Xia, Shen Shen, and Inder M. Verma, {\em NF-$\kappa$B, an active player in human cancers}, Cancer Immunol Res (2014) 2 (9): 823â€“830.
+    \bibitem{Genetics} Yifeng Xia, Shen Shen, and Inder M. Verma, {\em NF-$\kappa$B, an active player in human cancers}, Cancer Immunol Res (2014) 2 (9): 823–830.
     \bibitem{NFkB} NF-kB Transcription Factors. URL \url{https://www.bu.edu/nf-kb/}.
     \bibitem{domain} Rel homology domain (RHD), DNA-binding domain. URL \url{https://www.ebi.ac.uk/interpro/entry/InterPro/IPR011539/}.
 	\bibitem{Wiki} NF-kB. URL \url{https://en.wikipedia.org/wiki/NF-%CE%BAB}.
-    \bibitem{Article} TamÃ¡s SzÃ©kely Jr., Kevin Burrage, {\em Stochastic simulation in systems biology}, Computational and Structural Biotechnology Journal, Volume 12, Issues 20â€“21, November 2014, Pages 14-25.
+    \bibitem{Article} Tamás Székely Jr., Kevin Burrage, {\em Stochastic simulation in systems biology}, Computational and Structural Biotechnology Journal, Volume 12, Issues 20–21, November 2014, Pages 14-25.
     \bibitem{Method} Yang Cao, Daniel T. Gillespie and Linda Petzold, {\em Avoiding Negative Populations in Explicit Poisson Tau-Leaping}, Article  in  The Journal of Chemical Physics, September 2005.
     \bibitem{Project} INFLAMMATION'S ROLE IN OBESITY. URL \url{https://sites.tufts.edu/hkerstjaaalislai/?page_id=541}.
     \bibitem{EGFRNFkB} Kateryna Shostak and Alain Chariot, {\em EGFR and NF-kB: partners in cancer}, Trends in Molecular Medicine June 2015, Vol. 21, No. 6.
@@ -1624,7 +1632,7 @@ In particular, constitutive epidermal growth factor receptor and nuclear factor 
     \bibitem{Math} N. G. van Kampen, {\em Stochastic Processes in Physics and Chemistry}, North Holland, third ed., May 2007.
     \bibitem{ACF} Autocorrelation Function. URL \href{https://www.sciencedirect.com/topics/chemistry/autocorrelation-function#:~:text=1%20Autocorrelation-,The%20autocorrelation%20function%20(ACF)%20defines%20how%20data%20points%20in%20a,signal%20over%20different%20delay%20times.}{https://www.sciencedirect.com}
     \bibitem{Stat} G. Cowan, {\em Statistical Data Analysis}, Oxford University Press Inc., New York, 1998.
-    \bibitem{onesteparticle} Mathisca de Gunst, Michel Mandjes and Birgit Sollie, {\em Statistical inference for a quasi birthâ€“death model of RNA transcription}, BMC Bioinformatics 23, 105 (2022).
+    \bibitem{onesteparticle} Mathisca de Gunst, Michel Mandjes and Birgit Sollie, {\em Statistical inference for a quasi birth–death model of RNA transcription}, BMC Bioinformatics 23, 105 (2022).
     \bibitem{Hand} C.W.Gardiner, {\em Handbook of Stochastic Methods for Physics, Chemistry and the Natural Sciences}, Printed in Germany, Springer-Verlag Berlin Heidelberg 1983,1985.
     \bibitem{Ragazza} Luciana Renata De Oliveira, {\em Master Equation: Biological Applications and Thermodynamic Description}, University of Bologna (2013/2014).
      \bibitem{WaveletsTutorial} A guide for using the Wavelet Transform in Machine Learning. URL \href{https://ataspinar.com/2018/12/21/a-guide-for-using-the-wavelet-transform-in-machine-learning/}{https://ataspinar.com}
@@ -1634,7 +1642,7 @@ In particular, constitutive epidermal growth factor receptor and nuclear factor 
     \bibitem{UsefullYoutube} Wavelets: a mathematical microscope. URL \href{https://www.youtube.com/watch?v=jnxqHcObNK4&t=1320s}{https://www.youtube.com}
     \bibitem{Immuno} Yoshiteru Sasaki, Kazuhiro Iwai, {\em Roles of the NF-$\kappa$B Pathway in B-Lymphocyte Biology}, Curr Top Microbiol Immunol. 2016;393:177-209.
     \bibitem{immunoglobulin} Immunoglobulin Light Chain. URL \href{https://www.sciencedirect.com/topics/immunology-and-microbiology/immunoglobulin-light-chain}{https://www.sciencedirect.com}
-    %\bibitem{Exp} Baeuerle, P. A. Baltimore, D. A 65-kappaD subunit of active NF-kappaB is required for inhibition of NF-kappaB by I kappaB. Genes Dev. 3, 1689â€“1698 (1989).
+    %\bibitem{Exp} Baeuerle, P. A. Baltimore, D. A 65-kappaD subunit of active NF-kappaB is required for inhibition of NF-kappaB by I kappaB. Genes Dev. 3, 1689–1698 (1989).
     \bibitem{Ankyrin} Kumar A, Balbach J., {\em Folding and Stability of Ankyrin Repeats Control Biological Protein Function}. Biomolecules. 2021 Jun 5;11(6):840. doi: 10.3390/biom11060840. PMID: 34198779; PMCID: PMC8229355.
     \bibitem{AnkyrinMotif} Li J, Mahajan A, Tsai MD., {\em Ankyrin repeat: a unique motif mediating protein-protein interactions}. Biochemistry. 2006 Dec 26;45(51):15168-78. doi: 10.1021/bi062188q. PMID: 17176038.
     \bibitem{hematopoieticNIH} hematopoietic stem cell. URL \href{https://www.cancer.gov/publications/dictionaries/cancer-terms/def/hematopoietic-stem-cell}{https://www.cancer.gov}
