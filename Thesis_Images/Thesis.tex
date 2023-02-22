@@ -1274,6 +1274,36 @@ Most of the time, the structure of data is hidden behind the noise so we need th
 
 \section{ACF, FFT and CWT applied to Autorepressor signals}
 %ACF: se hai un delay di 1000 punti corrisponde a 10 secondi virtuali, se invece dt=1 e lag 1000 punti sono 1000 secondi virtuali messaggio.
+As we have discussed in Chapter \ref{models}, the autorepressor is a little genetic circuit with negative feedback. The gene\textquotesingle s proteins product decreases the activation rate of the same gene. We have also observed a typical trend as function of time in Fig.\ref{autorepressortimeplot}.
+
+At first sight, there is a sawtooth pattern that is repeated over time in the number of RNA molecules vs time trend, whereas the proteins trend is characterised by more ``smoothed'' edges.
+
+This first impression finds a sort of confirmation by the autocorrelation plots:
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.60]{AutorepressorRNAsACFnlags2000dt1nsimulations64.PNG}
+\caption{Trend of RNAs autocorrelation plot as function of sampling time as a result of 64 simulations. The number of lags used to calculate the autocorrelation is 2000 with a sampling time dt=1. The error bars  and the points are respectively calculated by considering the 25\% or 75\% quantiles and the median.}
+\label{AutorepressorRNAsACFnlags2000dt1nsimulations64}
+\end{figure}
+\newpage
+Fig. \ref{AutorepressorRNAsACFnlags2000dt1nsimulations64} shows an autocorrelation curve that is the result of 64 simulations. It is characterized by a deep at the first virtual time points and then it tends to zero. We can clearly see this from the overlapping between the horizontal line at zero and the autocorrelation points or the relative error bars.
+
+We expected the negative deep because of the repressing behavior. Also in the analogous proteins autocorrelation plot (see Fig. \ref{AutorepressorProteinsACFnlags2000dt1nsimulations64}) we can find a similar trend but in this case we find ``a less profound deep'' that maybe due to the smoothed time course behavior.
+\newpage
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.60]{AutorepressorProteinsACFnlags2000dt1nsimulations64.PNG}
+\caption{Trend of proteins autocorrelation plot as function of sampling time as a result of 64 simulations. The number of lags used to calculate the autocorrelation is 2000 with a sampling time dt=1. The error bars  and the points are respectively calculated by considering the 25\% or 75\% quantiles and the median.}
+\label{AutorepressorProteinsACFnlags2000dt1nsimulations64}
+\end{figure}
+
+This shows how the autocorrelation function is really sensitive to the shape of the molecular time course behavior.  
+
+\newpage
+
+
+
 
 \section{ACF, FFT and CWT applied to Toggle-Switch signals}
 
