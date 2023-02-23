@@ -556,22 +556,27 @@ where \emph{P} is the Poisson distribution with mean equal to $\Vec{K_{i}}\tau$ 
 Hence, the basic idea of this procedure is to advance the system by a \emph{pre-selected} time increment $\tau$ (in contrast to the generated time increment that is in the SSA), which is large enough that many reaction events occur in that time, but nevertheless small enough that \emph{no propensity function value is likely to change ``significantly'' as a consequence of those reaction events} \cite{Method}.
 
 
-Summing all up, tau-leap algorithm has the key advantage that we now do not need to spend time simulating individual reactions and as such it is much faster than the SSA. On the other hand its main drawback is that we have lost accuracy compared to the SSA in some ways such as we do not know exactly how many reactions occurred (we can only estimate this) and we do not know exactly when each reaction occurred within the time step.
+Summing all up, tau-leap algorithm has the key advantage that we now do not need to spend time simulating individual reactions and as such it is much faster than the SSA. On the other hand its main drawback is that we have lost accuracy compared to the SSA in some ways such as we do not know when each reaction occurred within the time step.
+% how many reactions occurred (we can only estimate this)
 
 
 The accuracy issue can be mitigated (at the expense of computational time) as the error level, and so time step size, is decreased; indeed, as the time step tends to zero, the tau-leap effectively becomes the SSA, with each step experiencing either zero or one reaction \cite{Article}. 
 
 
-Moreover, as anticipated in some rows above, there is another complementary issue with the tau-leap: as many reactions are simulated at once, molecular species that are depleted in any reaction can go negative if the time step is too large. This is obviously unphysical, and so undesirable and makes it inappropriate to simulate reactions that regards species which are typically lower in number such as genes. Fig. \ref{ODESSATAULEAP} shows the number of RNA molecules produced during time obtained by using the just explained stochastic simulation methods (SSA and Tau-leap) with the one given by the deterministic approach, i.e. ordinary differential equation solution, considering a model with a gene that is always expressed. In this particular case, indeed, we do not run the risk to obtain unphysical negative number of molecules and we can compare the results given by the algorithms.
+Moreover, as anticipated in some rows above, there is another complementary issue with the tau-leap: as many reactions are simulated at once, molecular species that are depleted in any reaction can go negative if the time step is too large. This is obviously unphysical, and so undesirable and makes it inappropriate to simulate reactions that regards species which are typically lower in number such as genes. 
+
+Fig. \ref{ODESSATAULEAP} shows the number of RNA molecules and proteins produced during time obtained by using the just explained stochastic simulation methods (SSA and Tau-leap) and those given by the deterministic approach, i.e. ordinary differential equation solution, considering a model with a gene that is always expressed (see section \ref{modelconstitutivegeneexpression}). In this particular case in which the RNA production rate is higher than the degradation rate and the same is for proteins, we do not run the risk to obtain unphysical negative number of molecules and we can compare the results given by the algorithms. In particular, we consider the following values of rates: gene activation $k_{a}=1$, gene deactivation $k_{i}=0$, RNA production $k_{1}=1$, RNA degradation $k_{2}=0.1$, protein production $k_{3}=1$, protein degradation $k_{4}=0.1$.
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=0.30]{ODESSATauleaptimeplot100.png}
-\caption{Comparison of simulation methods. The typical trajectory of the number of molecules as function of time is reported from the SSA (blue line) and tau-leap (orange dotted line) and ODE solution (black thick line).}
+\caption{Comparison of simulation methods. The typical trajectory of the number of molecules as function of time is reported from the SSA (blue line) and tau-leap (orange dotted line) and ODE solution (black thick line). The upper plot refers to the number of RNAs molecules produced as a function of time starting from a gene that is always active, while the plot below represents the number of proteins produced starting from the RNAs of the same model.}
 \label{ODESSATAULEAP}
 \end{figure}
 
-The trends for the three methods are similar both for the number of RNA molecules and for the number of proteins produced during time. However, in order to compare the two stochastic simulation methods, it is more useful to compare the stationary distributions (i.e. the distribution of states) obtained instead of the time dependent results. 
+From Fig. \ref{ODESSATAULEAP}, we notice that trends resulting from the three methods are similar both for the number of RNA molecules and for the number of proteins produced during time. 
+
+However, in order to compare the two stochastic simulation methods, it is more useful to compare the stationary distributions (i.e. the distribution of states) obtained instead of the time dependent results. 
 
 Hence, we run the same simulation till a longer time limit to allow to obtain the expected Poisson distributions. The results are shown in Fig. \ref{SSATauleapdistribution}:
 
@@ -916,7 +921,7 @@ Thus we will turn these biological processes into a deterministic mathematical d
 
 
 
-\section{Constitutive gene expression and Poisson expression statistics}
+\section{Constitutive gene expression and Poisson expression statistics}\label{modelconstitutivegeneexpression}
 In the simplest possible model of \emph{constitutive} gene expression, a RNA molecule is produced at a constant rate $k_{1}$ and destroyed in a first-order reaction with rate constant $k_{2}$. Fig. \ref{costitutiveexpression} shows a sketch of this simple biological process.
 
 \begin{figure}[!ht]
