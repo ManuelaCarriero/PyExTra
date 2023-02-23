@@ -519,7 +519,11 @@ that is a Poisson distribution. Let us keep in mind this theoretical result for 
 
 \section{Resolution Methods for the CME}
 
-Solving the master equation would seem to be the ideal way of looking at stochastic systems, as it can tell us the full distribution of possible states the system can be in over time, but for one important disadvantage: its complexity.  What makes it difficult to solve is the mixing of a continuous time evolution with a discrete evolution of the state variables \cite{SanDiegoUniversity}. Furthermore, this becomes apparent when considering how many equations must be solved at each time point, and bearing in mind that the number of possible states can increase exponentially with time \cite{Article}. 
+Solving the master equation would seem to be the ideal way of looking at stochastic systems, as it can tell us the full distribution of possible states the system can be in over time, but for one important disadvantage: its complexity. 
+
+In some special cases it is possible to solve it with analytical and numerical methods, for instance in case of linearity of the process where every reaction term is constant or proportional to the first power of only one chemical specie \cite{PHD}.
+
+However, in general, what makes it difficult to solve is the mixing of a continuous time evolution with a discrete evolution of the state variables \cite{SanDiegoUniversity}. Furthermore, this becomes apparent when considering how many equations must be solved at each time point, and bearing in mind that the number of possible states can increase exponentially with time \cite{Article}. 
  
 Thus we must use trajectory-based approaches, which differ from the master equation in that they do not find the distribution of all possible states over time. Rather, \emph{they simulate single realizations}, meaning that at each step they choose one out of all the possible outcomes.
 
