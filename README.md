@@ -107,6 +107,8 @@ can type this command:
 
 ## Usage
 
+## Command line syntax
+
 ## Example of results
 
 ## References
