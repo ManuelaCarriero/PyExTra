@@ -23,6 +23,9 @@ scikit-learn, keras, tensorflow.<br>
 ## Structure of the project
 
 ## Testing
+As you can notice from the Dependencies section, we have made use of many built-in functions. However, this work is mainly based on the simulations 
+and the autocorrelation function, hence tests are performed on these two main topics, on which this research is based, in order to ensure that
+the basics work properly.
 
 # Models
 
