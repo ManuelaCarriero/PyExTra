@@ -16,7 +16,8 @@
 %\pagestyle{fancy}
 \setlength{\headheight}{15pt}% ...at least 51.60004pt
 
-
+\usepackage[]{lineno} %Professor  
+\runninglinenumbers
 
 
 
@@ -546,7 +547,7 @@ This process is iterated untill the whole time of interest has been simulated or
 Unfortunately, the direct method SSA pays the price for its simplicity in computational time, as two random numbers must be generated at each step \cite{Article} (the one for choice of the event and the other for the choice of the time spent in the state given by an exponential random variable). Furthermore, the SSA has an inherent limitation: it must simulate every single reaction. This is, of course, its great strength too, but in cases where there are many reactions or larger molecular populations, it often becomes too slow to generate useful numbers of simulations in a practical time period.
 
 \subsection{Tau-leap algorithm}
-The tau-leap method, or also referred as explicit tau-leaping procedure, is similar to the SSA in that each simulation is a \emph{single stochastic realisation} from the full distribution at each step. However, the steps are much larger (hence its name) \cite{Article} and in each one of these \emph{it counts the total number of occurrences of each type of reaction over that step approximating the number of firings of each reaction channel during a chosen time increment $\tau$ as a Poisson random variable}. Thus, also in this case based on the initial state of molecular populations $\Vec{Y}=\Vec{Y_{0}}$, if there are \emph{M} reactions, we take \emph{M} Poisson random number samples. We can call the time interval in which these reactions happen as $\tau$. Hence, the vector of molecules given by the \emph{M} reactions $\Vec{Y}=\Vec{Y}_{M}$ in the time interval $\tau$ is given by
+The tau-leap method, or also referred as explicit tau-leaping procedure, is similar to the SSA in that each simulation is a \emph{single stochastic realisation} from the full distribution at each step \cite{Article}. However, the steps are fixed  and in each one of these \emph{it counts the total number of occurrences of each type of reaction over that step approximating the number of firings of each reaction channel during a chosen time increment $\tau$ as a Poisson random variable}. Thus, also in this case based on the initial state of molecular populations $\Vec{Y}=\Vec{Y_{0}}$, if there are \emph{M} reactions, we take \emph{M} Poisson random number samples. We can call the time interval in which these reactions happen as $\tau$. Hence, the vector of molecules given by the \emph{M} reactions $\Vec{Y}=\Vec{Y}_{M}$ in the time interval $\tau$ is given by
 \begin{equation}\label{MPoissonReactions}
     \Vec{Y}_{m}(\tau) = P(\Vec{K_{i}}\tau)
 \end{equation}
@@ -1280,6 +1281,7 @@ Most of the time, the structure of data is hidden behind the noise so we need th
 %La trasformata di Fourier media ed analisi di ogni picco per trovare il rate con cui sono prodotte le molecole e le wavelet transform. Usiamo tale modello perchè è il più semplice quindi come Toy model. 
 %Autocorrelazione delle differenze.
 %Questo lavoro di caratterizzare la forma di una funzione di autocorrelazione per ogni modello pu� essere utile nel momento in cui ho i dati sperimentali, ne calcolo l'autocorrelazione e se vedo un deep per esempio posso dire che c'� una forma di repressione.
+%DEVI METTERE PRIMA LE CURVE DI AUTOCORRELAZIONE DI PIù SIMULAZIONI PER CAPIRE QUALE CRITERIO ADOTTARE PER LA RAPPRESENTAZIONE CON I QUANTILI PIù FORMALE. 
 
 \section{ACF, FFT and CWT applied to Autorepressor signals}
 %ACF: se hai un delay di 1000 punti corrisponde a 10 secondi virtuali, se invece dt=1 e lag 1000 punti sono 1000 secondi virtuali messaggio.
