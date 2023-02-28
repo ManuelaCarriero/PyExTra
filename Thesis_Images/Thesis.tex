@@ -532,7 +532,7 @@ The trajectory of each stochastic simulation is different, since each is a singl
 
 Many approximation methods for the solution of the CME have been developed during the years and which operate by discretizing the time evolution. In this thesis, we will exploit the two simulation algorithms that have become the workhorse stochastic methods for many researchers today: the stochastic simulation algorithm (SSA) and the tau-leaping procedure. In the end, we will propose an ``alternative'' method that combines the two mentioned algorithms in order to speed up the stochastic simulation of a chemically reacting system. 
 
-\subsection{Stochastic simulation algorithm (SSA)}
+\subsection{Stochastic simulation algorithm (SSA)}\label{Gillespie}
 Most of the attempts in solving the CME have concentrated on Monte Carlo simulations using the \emph{stochastic simulation algorithm} (SSA) proposed by Gillespie in his seminal paper. This method is statistically exact, namely a full probability distribution built up from an infinite number of simulations will be identical to the distribution of the Markov process, given by the master equation \cite{Article}. This algorithm is arguably the simplest SSA variant and is based on the following steps in order to simulate \emph{one stochastic realisation}: assuming that the system is described by the state vector $\Vec{Y}$ which in general represents the amount of molecules for each chemical species and given that the initial state of the system is $\Vec{Y} = \Vec{Y}_{0}$, one has to choose which reaction happens between the possible ones and how much time the system will spend in such state before the next reaction happens \cite{PHD}. Each reaction \emph{i} is described by its \emph{transition rate} (or even called \emph{propensity}) $k_{i}$ and by the modification of the state vector that generate. Given that we are dealing with Markov process, the difference in time between two successive events $\Delta t$ follows an \emph{exponential distribution}, whose parameter is the propensity $k_{i}$:
 \begin{equation}
     p_{i}(\Delta t) = e^{-k_{i}\Delta t}
@@ -868,6 +868,8 @@ There are many methods that aim to determine the warmup period. In this thesis w
  \end{equation}
  
  \item Find $T_{w}$ in $\hat{Y}$ by calculating the difference between $\hat{Y}$ at t and at t+dt, t+dt and t+2dt etc... when the differences start to become constant, then t is $T_{w}$ that we are looking for.
+ 
+ %ELENCA IL TUO METODO + UNO SEMPLICE TIPO 10 %
 
 \end{enumerate}
 
@@ -1140,6 +1142,9 @@ cluster forms a bistable switch with Myc and the E2F proteins \cite{microRNAs}.
 \chapter{Pattern recognition methods for stochastics processes}\label{ChapterPatternRecognition}
 We as humans are ``amazing pattern recognizer'' and in fact there are many studies that try to find the link between pattern recognition and human intelligence in order to build artificially intelligent machines \cite{PR}. This is not the theme of this thesis but it is only to say that despite in the time domain signals of Autorepressor model and Toggle Switch model our powerful brain can recognize some patterns, in this context of stochasticity and, perhaps, non-periodic signal, in order to verify that they are really present, and maybe achieve some useful quantitive measurements, we need other tools to investigate such signals than the autocorrelation function that we discussed in section \ref{ACFSubsection}. Let us discuss the ones that we have thought to use in this work of thesis.
 %I nostri occhi sono degli ottimi pattern recognizer infatti nell'autorepressore possiamo percepire che c'è qualcosa che si ripete. Abbiamo però bisogno di altri mezzi perchè il segnale nel tempo può nascondere molte features interessanti under the hood. Queste non sempre possono essere svelate dall'autocorrelazione, che come detto nel paragrafo precedente ha come proprietà di cogliere segnali che si ripetono periodicamente nel tempo. Per altri casi possiamo pensare di utilizzare: Transformata di Fourier + quelli elencati dal professore.
+
+
+%METTI QUI LA SPIEGAZIONE DELL'AUTOCORRELAZIONE FAI VEDERE QUALCHE ESEMPIO DI COME DOVREBBE ESSERE NEL CASO DI UNA FUNZIONE COME HA DETTO IL PROFESSORE E DIRE ANCHE CHE NON è SEMPRE FACILE PREVEDERE LA SUA FORMA ABBIAMO VEDREMO INFATTI NELLE AUTOCORRELAZIONI DEI CIRCUITI GEENTICI CHE ANDREMO AD ANALIZZARE.
 \section{Fast Fourier Transform (FFT)}
 Our time domain signal, that we can name as $f(t)$, i.e. a function of time, can hide interesting features under the hood and some of these can be extracted through the Fourier Transform. By considering the continous function $f(t)$, the Fourier transform is based on the following formula:
 \begin{equation}\label{FourierTransformFormula}
@@ -1320,16 +1325,83 @@ We can start from studying the first simple protein synthesis model by playing w
 
 In the time domain, at first sight, the number of molecules produced and proteins show some  particular patterns: the constitutive expression model case has a steady state period (see Fig.\ref{firstmodelka1ki0timeplot}) whose signal varies with ``smaller amplitudes'' with respect to the regulated gene case when the time of residency of gene in active state is higher than the one in inactive state (see Fig. \ref{firstmodelka1ki0.5timeplot}). Furthermore, as already observed in Chapter \ref{models}, the case in which the gene spends more time to be inactive than active (see Fig. \ref{firstmodelka0.1ki1timeplot}) shows a pattern that remembers the time course analysis for the autorepressor case (see Fig.\ref{autorepressortimeplot}). 
 
-%LE FIGURE SENZA BARRE DI ERRORE 
-%LE FIGURE CHE SONO MEDIA DI PIù SIMULAZIONI
+Fig.\ref{Firstmodelka1ki0ACFnlags10000dt0.1nsimulations4GtauWARMUPREMOVED}, Fig. \ref{Firstmodelka1ki0.5ACFnlags10000dt0.1nsimulations4GtauWARMUPREMOVED} and Fig. \ref{Firstmodelka1ki0ACFnlags10000dt0.1nsimulations4} shows the autocorrelation plots for three cases taken into account.
+
+\newpage
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale=0.80]{Firstmodelka1ki0ACFnlags10000dt0.1nsimulations4GtauWARMUPREMOVED.PNG}
+\caption{Trend of 4 RNAs autocorrelation plot (top) and proteins autocorrelation (bottom) as function of sampling time. The model parameters and time limit are equal to those considered in Fig. \ref{firstmodelka1ki0timeplot}. The number of lags used to calculate the autocorrelation is 10000 with a sampling time dt=0.1.}
+\label{Firstmodelka1ki0ACFnlags10000dt0.1nsimulations4GtauWARMUPREMOVED}
+\end{figure}
+
+\newpage 
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale=0.80]{Firstmodelka1ki0.5ACFnlags10000dt0.1nsimulations4GtauWARMUPREMOVED.PNG}
+\caption{Trend of 4 RNAs autocorrelation plot (top) and proteins autocorrelation (bottom) as function of sampling time. The model parameters and time limit are equal to those considered in Fig. \ref{firstmodelka1ki0.5timeplot}. The number of lags used to calculate the autocorrelation is 10000 with a sampling time dt=0.1.}
+\label{Firstmodelka1ki0.5ACFnlags10000dt0.1nsimulations4GtauWARMUPREMOVED}
+\end{figure}
+
+\newpage
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale=0.80]{Firstmodelka0.1ki1ACFnlags10000dt0.1nsimulations4.PNG}
+\caption{Trend of 4 RNAs autocorrelation plot (top) and proteins autocorrelation (bottom) as function of sampling time. The model parameters and time limit are equal to those considered in Fig. \ref{firstmodelka0.1ki1timeplot}. The number of lags used to calculate the autocorrelation is 10000 with a sampling time dt=0.1.}
+\label{Firstmodelka1ki0ACFnlags10000dt0.1nsimulations4}
+\end{figure}
+
+From Fig.\ref{Firstmodelka1ki0ACFnlags10000dt0.1nsimulations4GtauWARMUPREMOVED}, Fig. \ref{Firstmodelka1ki0.5ACFnlags10000dt0.1nsimulations4GtauWARMUPREMOVED} and Fig. \ref{Firstmodelka1ki0ACFnlags10000dt0.1nsimulations4} we can observe, however, small differences in trends. In all of them we can notice deeper initial negative peaks in RNAs autocorrelation curves with respect to the proteins curves. But only looking at these autocorrelation plots, we would assign to each one the same model, as in fact it is in the reality: we changed the type of regulation but the genetic model is always the same. If instaed we looked at only the temporal series (i.e. Fig.\ref{firstmodelka1ki0timeplot}, Fig.\ref{firstmodelka1ki0.5timeplot} and Fig.\ref{firstmodelka0.1ki1timeplot}) without knowing anything, we would have considered results in Fig.\ref{firstmodelka0.1ki1timeplot} as coming from an other model such as the autorepressor.
+
+This is confirmed by the autocorrelation plots resulting from the quantiles calculation of 64 simulations shown in Fig.\ref{Firstmodelka1ki0ACFnlags10000dt10nsimulations64WARMUPREMOVED}, Fig. \ref{Firstmodelka1ki0.5ACFnlags10000dt10nsimulations64WARMUPREMOVED} and Fig.\ref{Firstmodelka1ki0ACFnlags10000dt10nsimulations64}.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.70]{Firstmodelka1ki0ACFnlags10000dt10nsimulations64WARMUPREMOVED.PNG}
+\caption{Trend of RNAs autocorrelation plot (top) and proteins autocorrelation (bottom) as function of sampling time as a result of 64 simulations. The model parameters and time limit are equal to those considered in Fig. \ref{firstmodelka1ki0timeplot}. The number of lags used to calculate the autocorrelation is 10000 with a sampling time dt=10. The error bars calculated by considering the 25\% or 75\% quantiles of the several simulations and the points are the median that are associated to each sampling time.}
+\label{Firstmodelka1ki0ACFnlags10000dt10nsimulations64WARMUPREMOVED}
+\end{figure}
+
+\newpage
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.70]{Firstmodelka1ki0.5ACFnlags10000dt10nsimulations64WARMUPREMOVED.PNG}
+\caption{Trend of RNAs autocorrelation plot (top) and proteins autocorrelation (bottom) as function of sampling time as a result of 64 simulations. The model parameters and time limit are equal to those considered in Fig. \ref{firstmodelka1ki0.5timeplot}. The number of lags used to calculate the autocorrelation is 10000 with a sampling time dt=10. The error bars calculated by considering the 25\% or 75\% quantiles of the several simulations and the points are the median that are associated to each sampling time.}
+\label{Firstmodelka1ki0.5ACFnlags10000dt10nsimulations64WARMUPREMOVED}
+\end{figure}
+
+\newpage
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.70]{Firstmodelka1ki0ACFnlags10000dt10nsimulations64.PNG}
+\caption{Trend of RNAs autocorrelation plot (top) and proteins autocorrelation (bottom) as function of sampling time as a result of 64 simulations. The model parameters and time limit are equal to those considered in Fig. \ref{firstmodelka1ki0timeplot}. The number of lags used to calculate the autocorrelation is 10000 with a sampling time dt=10. The error bars calculated by considering the 25\% or 75\% quantiles of the several simulations and the points are the median that are associated to each sampling time.}
+\label{Firstmodelka1ki0ACFnlags10000dt10nsimulations64}
+\end{figure}
+
+Fig.\ref{Firstmodelka1ki0ACFnlags10000dt10nsimulations64WARMUPREMOVED}, Fig. \ref{Firstmodelka1ki0.5ACFnlags10000dt10nsimulations64WARMUPREMOVED} and Fig.\ref{Firstmodelka1ki0ACFnlags10000dt10nsimulations64} show in fact almost the same behavior with the autocorrelation value higher for the first sampling time steps and then it tends to be zero.
 
 
+We find a different behavior in the second genetic circuit that we have described, that is the autorepressor model.
 
 As we have discussed in Chapter \ref{models}, the autorepressor is a little genetic circuit with negative feedback. The gene\textquotesingle s proteins product decreases the activation rate of the same gene. We have also observed a typical trend as function of time in Fig.\ref{autorepressortimeplot}.
 
 At first sight, there is a sawtooth pattern that is repeated over time in the number of RNA molecules vs time trend, whereas the proteins trend is characterised by more ``smoothed'' edges.
 
-This first impression finds a sort of confirmation by the autocorrelation plots:
+This first impression finds, this time, a sort of confirmation by the autocorrelation plots.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.80]{AutorepressorACFnlags10000dt0.1nsimulations4Gtau.PNG}
+\caption{Trend of 4 RNAs autocorrelation plot (top) and proteins autocorrelation (bottom) as function of sampling time. The model parameters and time limit are equal to those considered in Fig. \ref{autorepressortimeplot}. The number of lags used to calculate the autocorrelation is 10000 with a sampling time dt=0.1.}
+\label{AutorepressorACFnlags10000dt0.1nsimulations4Gtau}
+\end{figure}
+
+From Fig. \ref{AutorepressorACFnlags10000dt0.1nsimulations4Gtau} we can observe 4 autocorrelation curves calculated for temporal series in Fig. \ref{autorepressortimeplot} changing the random seed. What we can notice is that for the RNAs autocorrelation curves all the curves show a deep at the beginning and then rise and tend to zero values. In case of proteins, not all the 4 autocorrelation curves have this behavior and this is confirmed when calculating autocorrelation quantiles using 64 simulations (see Fig.\ref{AutorepressorModelACFnlags10000dt10nsimulations64xlim01000}). 
 
 \begin{figure}[!ht]
 \centering
@@ -1337,7 +1409,7 @@ This first impression finds a sort of confirmation by the autocorrelation plots:
 \caption{Trend of RNAs autocorrelation plot (top) and proteins autocorrelation (bottom) as function of sampling time as a result of 64 simulations. The model parameters and time limit are equal to those considered in Fig. \ref{autorepressortimeplot}. The number of lags used to calculate the autocorrelation is 10000 with a sampling time dt=10. The error bars calculated by considering the 25\% or 75\% quantiles of the several simulations and the points are the median that are associated to each sampling time.}
 \label{AutorepressorModelACFnlags10000dt10nsimulations64xlim01000}
 \end{figure}
-\newpage
+
 Fig. \ref{AutorepressorModelACFnlags10000dt10nsimulations64xlim01000} shows RNAs and proteins autocorrelation curves with medians and error bars calculated as result of 64 simulations. 
 
 They are both characterized by a deep at the first virtual time points and then it tends to zero. We can clearly see this from the overlapping between the horizontal line at zero and the autocorrelation points or the relative error bars.
@@ -1348,17 +1420,53 @@ However, in case of proteins autocorrelation function, we find ``a less profound
 
 This shows how the autocorrelation function is really sensitive to the shape of the molecular time course behavior.  
 
+The last basic genetic circuit analysed is the Toggle Switch model.
+
+In this case we are dealing with expression of two genes and we remind that the proteins products of one gene reduces the rate of activation of an other one.
+
+Let us consider the time autocorrelation function of the two RNAs and proteins products relative to Fig.\ref{toggleswitchtimeplot} for just one simulation shown in Fig.\ref{ToggleswitchACFnlags10000dt0.1}.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.80]{ToggleswitchACFnlags10000dt0.1.PNG}
+\caption{Trend of RNAs autocorrelation products of the two genes plot (top) and proteins autocorrelations (bottom) as function of sampling time. The model parameters and time limit are equal to those considered in Fig. \ref{toggleswitchtimeplot}. The number of lags used to calculate the autocorrelation is 10000 with a sampling time dt=0.1.}
+\label{ToggleswitchACFnlags10000dt0.1}
+\end{figure}
+
+Notice that the two genes have the same rate constants parameters, hence we expect that the autocorrelation functions of the RNAs molecules for two genes are equal. This is from a mathematical point of view but we can notice that they are not exactly the same due to noise that, in the simulation world, is given by the random number generation of the event and time spent in each state, as explained when presenting the Gillespie\textquotesingle s algorithm in section \ref{Gillespie}. This similar trends validate that our analysis is robust. 
+
+We can point out also that the autocorrelation function shape is much different from the those we have seen in the first simple model and the autorepressor one. It has indeed a much stronger oscillating behavior that is conserved also in proteins autocorrelation functions.
+
+Let us consider now multiple simulations, as we have done for the previous genetic models. We consider the autocorrelation functions of 4 simulations of gene 1 and protein 1.
 \newpage
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.80]{ToggleSwitchACFnlags100000dt0.1nsimulations4Gtaudifferentcollors.PNG}
+\caption{Trend of 4 RNAs autocorrelation plot (top) and proteins autocorrelation (bottom) as function of sampling time. The model parameters and time limit are equal to those considered in Fig. \ref{toggleswitchtimeplot}. The number of lags used to calculate the autocorrelation is 100000 with a sampling time dt=0.1.}
+\label{ToggleSwitchACFnlags100000dt0.1nsimulations4Gtaudifferentcollors}
+\end{figure}
 
+We can notice that for different random seeds the trajectory has an oscillating behavior but it has not ``a common feature'' like in the case of the autorepressor where a clear intial deep is shown at the beginning and then for all SSA simulations, all the autocorrelation functions tend to zero. Hence if we consider the usual classical plot of autocorrelation function resulting from the quantiles calculation of 64 simulations, we do not notice any oscillating behavior (see Fig.\ref{ToggleSwitchACFnlags10000dt100nsimulations64}).
 
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.70]{ToggleSwitchACFnlags10000dt100nsimulations64.PNG}
+\caption{Trend of RNAs autocorrelation plot (top) and proteins autocorrelation (bottom) as function of sampling time as a result of 64 simulations. The model parameters and time limit are equal to those considered in Fig. \ref{toggleswitchtimeplot}. The number of lags used to calculate the autocorrelation is 10000 with a sampling time dt=100. The error bars calculated by considering the 25\% or 75\% quantiles of the several simulations and the points are the median that are associated to each sampling time.}
+\label{ToggleSwitchACFnlags10000dt100nsimulations64}
+\end{figure}
+\newpage
+However Fig.\ref{ToggleSwitchACFnlags10000dt100nsimulations64} reflects what we see in Fig.\ref{ToggleSwitchACFnlags100000dt0.1nsimulations4Gtaudifferentcollors} that is without the error bars. Up to the 3000 sampling points the error bars are large then they start to decrease due to the increasing overlapping between simulations.
 
+The shape of such autocorrelation functions in Fig.\ref{ToggleSwitchACFnlags10000dt100nsimulations64} would resemble to the first model case, however in the that case, the error bars where indeed much smaller indicating a smaller variation into the autocorrelation trends for each random seed.
 
+Hence, from this analysis, we can conclude that the autocorrelation curves are sensitive to the model parameters but also to the type of model. Given these simple genetic circuits that we have analysed, it is possible to understand by looking at the autocorrelation functions which are the genetic models from which they have been generated.  
 
+%Quindi le curve di autocorrelazioni sono sensibili ai parametri però anche al tipo di modello stesso. Dati circuiti genetici semplici potremmo capire dalle curve di autocorrelazione da dove provengono :)
 
-
+\newpage
 \subsection{FFT}
 
-
+\newpage
 \subsection{CWT}
 Most of the time, the structure of data is hidden behind the noise so we need these precise mathematical operation with which we can look through the noise and quantify the structure present in the signal. Wavelets are something like could do this blurring of vision and zoom in and out of the signal to pull out the patterns like a kind of mathematical microscope.
 %Metti discorsi fatti dal 2 Novembre in poi e le novit� sull'autocorrelazione delle differenze.
