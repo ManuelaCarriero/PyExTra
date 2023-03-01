@@ -1325,7 +1325,7 @@ We can start from studying the first simple protein synthesis model by playing w
 
 In the time domain, at first sight, the number of molecules produced and proteins show some  particular patterns: the constitutive expression model case has a steady state period (see Fig.\ref{firstmodelka1ki0timeplot}) whose signal varies with ``smaller amplitudes'' with respect to the regulated gene case when the time of residency of gene in active state is higher than the one in inactive state (see Fig. \ref{firstmodelka1ki0.5timeplot}). Furthermore, as already observed in Chapter \ref{models}, the case in which the gene spends more time to be inactive than active (see Fig. \ref{firstmodelka0.1ki1timeplot}) shows a pattern that remembers the time course analysis for the autorepressor case (see Fig.\ref{autorepressortimeplot}). 
 
-Fig.\ref{Firstmodelka1ki0ACFnlags10000dt0.1nsimulations4GtauWARMUPREMOVED}, Fig. \ref{Firstmodelka1ki0.5ACFnlags10000dt0.1nsimulations4GtauWARMUPREMOVED} and Fig. \ref{Firstmodelka1ki0ACFnlags10000dt0.1nsimulations4} shows the autocorrelation plots for three cases taken into account.
+Fig.\ref{Firstmodelka1ki0ACFnlags10000dt0.1nsimulations4GtauWARMUPREMOVED}, Fig. \ref{Firstmodelka1ki0.5ACFnlags10000dt0.1nsimulations4GtauWARMUPREMOVED} and Fig. \ref{Firstmodelka0.1ki1ACFnlags10000dt0.1nsimulations4} shows the autocorrelation plots for three cases taken into account.
 
 \newpage
 
@@ -1351,12 +1351,15 @@ Fig.\ref{Firstmodelka1ki0ACFnlags10000dt0.1nsimulations4GtauWARMUPREMOVED}, Fig.
 \centering
 \includegraphics[scale=0.80]{Firstmodelka0.1ki1ACFnlags10000dt0.1nsimulations4.PNG}
 \caption{Trend of 4 RNAs autocorrelation plot (top) and proteins autocorrelation (bottom) as function of sampling time. The model parameters and time limit are equal to those considered in Fig. \ref{firstmodelka0.1ki1timeplot}. The number of lags used to calculate the autocorrelation is 10000 with a sampling time dt=0.1.}
-\label{Firstmodelka1ki0ACFnlags10000dt0.1nsimulations4}
+\label{Firstmodelka0.1ki1ACFnlags10000dt0.1nsimulations4}
 \end{figure}
 
-From Fig.\ref{Firstmodelka1ki0ACFnlags10000dt0.1nsimulations4GtauWARMUPREMOVED}, Fig. \ref{Firstmodelka1ki0.5ACFnlags10000dt0.1nsimulations4GtauWARMUPREMOVED} and Fig. \ref{Firstmodelka1ki0ACFnlags10000dt0.1nsimulations4} we can observe, however, small differences in trends. In all of them we can notice deeper initial negative peaks in RNAs autocorrelation curves with respect to the proteins curves. But only looking at these autocorrelation plots, we would assign to each one the same model, as in fact it is in the reality: we changed the type of regulation but the genetic model is always the same. If instaed we looked at only the temporal series (i.e. Fig.\ref{firstmodelka1ki0timeplot}, Fig.\ref{firstmodelka1ki0.5timeplot} and Fig.\ref{firstmodelka0.1ki1timeplot}) without knowing anything, we would have considered results in Fig.\ref{firstmodelka0.1ki1timeplot} as coming from an other model such as the autorepressor.
+From Fig.\ref{Firstmodelka1ki0ACFnlags10000dt0.1nsimulations4GtauWARMUPREMOVED}, Fig. \ref{Firstmodelka1ki0.5ACFnlags10000dt0.1nsimulations4GtauWARMUPREMOVED} and Fig. \ref{Firstmodelka0.1ki1ACFnlags10000dt0.1nsimulations4} we can observe, however, small differences in trends. In all of them we can notice deeper initial negative peaks in RNAs autocorrelation curves with respect to the proteins curves. In case the rate of inactivation of gene is lower than the activation one (Fig.\ref{Firstmodelka0.1ki1ACFnlags10000dt0.1nsimulations4}), we can notice that the initial deep is more evident and that it is conserved also for proteins.
+ 
 
-This is confirmed by the autocorrelation plots resulting from the quantiles calculation of 64 simulations shown in Fig.\ref{Firstmodelka1ki0ACFnlags10000dt10nsimulations64WARMUPREMOVED}, Fig. \ref{Firstmodelka1ki0.5ACFnlags10000dt10nsimulations64WARMUPREMOVED} and Fig.\ref{Firstmodelka1ki0ACFnlags10000dt10nsimulations64}.
+%But only looking at these autocorrelation plots, we would assign to each one the same model, as in fact it is in the reality: we changed the type of regulation but the genetic model is always the same. If instaed we looked at only the temporal series (i.e. Fig.\ref{firstmodelka1ki0timeplot}, Fig.\ref{firstmodelka1ki0.5timeplot} and Fig.\ref{firstmodelka0.1ki1timeplot}) without knowing anything, we would have considered results in Fig.\ref{firstmodelka0.1ki1timeplot} as coming from an other model such as the autorepressor.
+
+However if we consider the autocorrelation plots resulting from the quantiles calculation of 64 simulations shown in Fig.\ref{Firstmodelka1ki0ACFnlags10000dt10nsimulations64WARMUPREMOVED}, Fig. \ref{Firstmodelka1ki0.5ACFnlags10000dt10nsimulations64WARMUPREMOVED} and Fig.\ref{Firstmodelka1ki0ACFnlags10000dt10nsimulations64}, the three curves are always the same validating the fact that they come from the same genetic model. What changes is only the type of regulation.
 
 \begin{figure}[!ht]
 \centering
@@ -1463,10 +1466,81 @@ Hence, from this analysis, we can conclude that the autocorrelation curves are s
 
 %Quindi le curve di autocorrelazioni sono sensibili ai parametri però anche al tipo di modello stesso. Dati circuiti genetici semplici potremmo capire dalle curve di autocorrelazione da dove provengono :)
 
-\newpage
+
 \subsection{FFT}
 
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.60]{Firstmodelka1ki0RNAs.PNG}
+\caption{Fast Fourier Transform of the number of RNA molecules as function of time in Fig.\ref{firstmodelka1ki0timeplot}. The x-axis is in log scale while the y-axis is linear scale.}
+\label{Firstmodelka1ki0RNAs}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.60]{Firstmodelka1ki0Proteins.PNG}
+\caption{Fast Fourier Transform of the number of proteins molecules as function of time in Fig.\ref{firstmodelka1ki0timeplot}. The x-axis is in log scale while the y-axis is linear scale.}
+\label{Firstmodelka1ki0Proteins}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.60]{Firstmodelka1ki0.5RNAs.PNG}
+\caption{Fast Fourier Transform of the number of RNAs molecules as function of time in Fig.\ref{firstmodelka1ki0.5timeplot}. The x-axis is in log scale while the y-axis is linear scale.}
+\label{Firstmodelka1ki0.5RNAs}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.60]{Firstmodelka1ki0.5Proteins.PNG}
+\caption{Fast Fourier Transform of the number of proteins molecules as function of time in Fig.\ref{firstmodelka1ki0.5timeplot}. The x-axis is in log scale while the y-axis is linear scale.}
+\label{Firstmodelka1ki0.5Proteins}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.60]{Firstmodelka0.1ki1RNAs.PNG}
+\caption{Fast Fourier Transform of the number of RNAs molecules as function of time in Fig.\ref{firstmodelka0.1ki1timeplot}. The x-axis is in log scale while the y-axis is linear scale.}
+\label{Firstmodelka0.1ki1RNAs}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.60]{Firstmodelka0.1ki1Proteins.PNG}
+\caption{Fast Fourier Transform of the number of proteins molecules as function of time in Fig.\ref{firstmodelka0.1ki1timeplot}. The x-axis is in log scale while the y-axis is linear scale.}
+\label{Firstmodelka0.1ki1Proteins}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.60]{AutorepressormodelRNAsASSOMIGLIAALLOSPETTROka0.1ki1.PNG}
+\caption{Fast Fourier Transform of the number of RNAs molecules as function of time in Fig.\ref{autorepressortimeplot}. The x-axis is in log scale while the y-axis is linear scale.}
+\label{AutorepressormodelRNAsASSOMIGLIAALLOSPETTROka0.1ki1}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.60]{AutorepressormodelProteinsASSOMIGLIAALLOSPETTROka0.1ki1.PNG}
+\caption{Fast Fourier Transform of the number of proteins molecules as function of time in Fig.\ref{autorepressortimeplot}. The x-axis is in log scale while the y-axis is linear scale.}
+\label{AutorepressormodelProteinsASSOMIGLIAALLOSPETTROka0.1ki1}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.60]{ToggleSwitchModelRNAsGene1.PNG}
+\caption{Fast Fourier Transform of the number of RNAs molecules as function of time in Fig.\ref{toggleswitchtimeplot}. The x-axis is in log scale while the y-axis is linear scale.}
+\label{ToggleSwitchModelRNAsGene1}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.60]{ToggleSwitchModelProteinsGene1.PNG}
+\caption{Fast Fourier Transform of the number of proteins molecules as function of time in Fig.\ref{toggleswitchtimeplot}. The x-axis is in log scale while the y-axis is linear scale.}
+\label{ToggleSwitchModelProteinsGene1}
+\end{figure}
+
 \newpage
+
 \subsection{CWT}
 Most of the time, the structure of data is hidden behind the noise so we need these precise mathematical operation with which we can look through the noise and quantify the structure present in the signal. Wavelets are something like could do this blurring of vision and zoom in and out of the signal to pull out the patterns like a kind of mathematical microscope.
 %Metti discorsi fatti dal 2 Novembre in poi e le novit� sull'autocorrelazione delle differenze.
