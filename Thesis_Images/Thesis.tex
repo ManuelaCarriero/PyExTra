@@ -315,72 +315,6 @@ Such a quantity \emph{Y(t)} is called a ``random function'', or, since in most c
 \end{equation}
 called a \emph{sample function} or \emph{realization} of the process. In physical parlance one regards the stochastic process as an ``ensemble'' of these sample functions.
 
-\subsection{The Autocorrelation Function (ACF)}\label{ACFSubsection}
-Summing up what said in the previous section, by stochastic processes we mean, in a loose sense, systems which evolve \emph{probabilistically} in time \cite{Hand}. For \emph{stochastic systems} it is not possible to exactly determine the state of the system at later times given its state at current time. Hence, to describe a stochastic system we use the probability that the system is in a certain state. Nevertheless, such a calculation is often difficult, and, if we are considering a measurable quantity $Y(t)$ which fluctuates with time, we usually focus on finding the moments of the probability distribution, such as the \emph{mean} and the \emph{variance}. These two quantities are commonly measured experimentally \cite{Brizi}.
-
-
-However, the mean and the variance do not tell a great deal about the underlying dynamics of what is happening. What would be of interest is a measure of the influence of a value of $Y$ at time \emph{t} on the value at time $t + \tau$ \cite{Hand}. Such a quantity is the \emph{autocorrelation function}, which was firstly introduced as
-\begin{equation}
-    G(\tau) = \lim_{T\to\infty}\frac{1}{T}\int_{0}^{T}dt Y(t)Y(t+\tau) 
-\end{equation}
-This is the time average of a two-time product over an arbitrary large time \emph{T}, which is then allowed to become infinite. It is interesting to compute the autocorrelation function starting from the \emph{spectrum} of the quantity $Y(t)$ that is defined in two stages:
-\begin{equation}
- y(\omega) = \int_{0}^{T} dt e^{-i\omega t} Y(t)
-\end{equation}
-then the spectrum is defined by:
-\begin{equation}
- S(\omega) = \lim_{T\to\infty}\frac{1}{2 \pi T}|y(\omega)|^{2}
-\end{equation}
-The autocorrelation function and the spectrum are closely connected. By a little manipulation one finds:
-\begin{equation}
- S(\omega) = \lim_{T\to\infty}\left[\frac{1}{\pi}\int_{0}^{\infty} \cos(\omega\tau)d\tau \frac{1}{T}\int_{0}^{T-\tau} Y(t)Y(t+\tau)dt \right]
-\end{equation}
-and taking $T\to\infty$ one finds:
-\begin{equation}
-S(\omega) = \frac{1}{\pi}\int_{0}^{\infty} \cos(\omega\tau)G(\tau)d\tau
-\end{equation}
-This is a fundamental result that relates the Fourier transform of the autocorrelation function to the spectrum. The result may be put in an other form by considering that:
-\begin{equation}
- G(-\tau)= \lim_{T\to\infty}\frac{1}{T}\int_{-\tau}^{T-\tau} dt Y(t+\tau)Y(t) = G(\tau)
-\end{equation}
-so we obtain:
-\begin{equation}
- S(\omega) = \frac{1}{2\pi}\int_{-\infty}^{\infty}e^{-i\omega\tau}G(\tau)d\tau
-\end{equation}
-hence:
-\begin{equation}
- G(\tau) = \int_{-\infty}^{\infty}e^{i\omega\tau}S(\omega)d\omega
-\end{equation}
-This result is known as the \emph{Wiener-Khinchin theorem}. Its meaning is profound: it tells us that one may either directly measure the autocorrelation function of a signal, or the spectrum, and convert back and forth which by means of the \emph{Fast Fourier Transform} is relatively straightforward. We will discuss about the Fast Fourier Transform in Chapter \ref{ChapterPatternRecognition} as an other means to analyze our fluctuating signal $Y(t)$ and we will understand also from simulation results that the autocorrelation function and the fast fourier transform are two different ways to achieve the same information. Hence, they are deeply related.
-
-For the moment we keep discussing merely about the autocorrelation function taking into account that, besides such definition of autocorrelation as time average of a signal, we may also consider the \emph{ensemble average}, in which we may repeat the measurement many times, and compute averages, denoted by $\langle \rangle$. It can be shown that for many systems the time average is equal to the ensemble average; such systems are termed \emph{ergotic} \cite{Hand}. If we have such a fluctuating quantity $Y(t)$, then we can consider the average
-\begin{equation}
-    \langle Y(t)Y(t+\tau) \rangle = G(\tau)
-\end{equation}
-this result being the consequence of our ergodic assumption. If the system is ergodic, we must have a constant $\langle Y(t) \rangle$, since the time average is clearly constant. The process is then \emph{stationary} by which we mean that the averages of functions $Y(t_{1}),Y(t_{2})...Y(t_{n})$ are equal to those of $Y(t_{1}+\tau),Y(t_{2}+\tau)...Y(t_{n}+\tau)$. In particular, $\langle Y \rangle$ is independent of time.  It is often convenient to substract this constant from Y(t) and to deal with the zero-mean process $\bar{Y}(t) = Y(t) - \langle Y \rangle$ and divide by the variance of the stochastic process. The autocorrelation function $G(\tau)$ of a stationary process depends on the \emph{lag} time $|t_{i}-t_{i+\tau}|$ alone and is not affected by this subtraction. We can denote the lag time with $\tau$ and often there exists a constant $t_{c}$ such that $G(\tau)$ is zero or negligible for $|t_{i}-t_{i+\tau}|> t_{c}$; one then calls $t_{c}$ the autocorrelation time.
-
-We remind that strictly stationary processes do not exist in nature, let alone in the laboratory, but they may be approximately realized when a process lasts much longer than the phenomena one is interested in. One condition is that it lasts much longer than the autocorrelation time. Processes without a finite $t_{c}$ never forget that they have been switched on in the past and can therefore not be treated as approximately stationary.
-
-To summarize, given the time series $Y(t_{1})...Y(t_{n})$ of a stationary stochastic process and its mean $\bar{Y}= \frac{1}{n}\sum_{i=1}^{n} Y(t_{i}) $, we can first calculate what is called the \emph{autocovariance} function at lag $\tau$
-    \begin{equation}
-        G(t_{i},t_{i+\tau}) = \frac{1}{n}\sum_{i=1}^{n-\tau}(Y(t_{i})-\bar{Y})(Y(t_{i+\tau})-\bar{Y})
-    \end{equation}
-Dividing by the variance of the stochastic process, we obtain the autocorrelation function (ACF) at lag $\tau$ and so the correlation between  series values that are $\tau$ intervals apart. A plot of the ACF against $\tau$ is known as a \emph{correlogram}.
-\newline
-Hence, the autocorrelation function defines how data points in a time series are related, on average, to the preceding data points \cite{ACF}. In other words, it measures the self-similarity of the signal over different delay times. 
-
-After all this discussion, we can recognize and summerize some autocorrelation function properties:
-\begin{enumerate}
- \item $|G(\tau)| \leq G(0)$
- \item $G(-\tau) = G(\tau)$
- \item if $Y(t)$ has a periodic component, then $G(\tau)$ will have a periodic component with the same period
- \item if $Y(t)$ is ergotic, zero mean, and has no periodic components, then $\lim_{|\tau|\to\infty}G(\tau) = 0$.
-\end{enumerate}
-
-We will find these properties in our $Y(t)$ signal analysis. 
-
-
-
 \subsection{Markov Processes}
 There is a subclass of stochastic processes that have the Markov property. Such processes are by far the most important in physics and chemistry. A Markov process is defined as a stochastic process with the property that for any set of \emph{n successive} times (i.e., $t_{1} < t_{2} < ... < t_{n}$) one has
 \begin{equation}\label{Markov}
@@ -1140,11 +1074,76 @@ cluster forms a bistable switch with Myc and the E2F proteins \cite{microRNAs}.
 %Useremo come tempo limite 4000 per tutte le analisi perch� come abbiamo visto nel Toggle Switch � il minimo tempo per poter osservare l'alternanza tra le espressioni e per avere una distribuzione Poissoniana nel caso di primo modello di sintesi proteica.
 
 \chapter{Pattern recognition methods for stochastics processes}\label{ChapterPatternRecognition}
-We as humans are ``amazing pattern recognizer'' and in fact there are many studies that try to find the link between pattern recognition and human intelligence in order to build artificially intelligent machines \cite{PR}. This is not the theme of this thesis but it is only to say that despite in the time domain signals of Autorepressor model and Toggle Switch model our powerful brain can recognize some patterns, in this context of stochasticity and, perhaps, non-periodic signal, in order to verify that they are really present, and maybe achieve some useful quantitive measurements, we need other tools to investigate such signals than the autocorrelation function that we discussed in section \ref{ACFSubsection}. Let us discuss the ones that we have thought to use in this work of thesis.
+We as humans are ``amazing pattern recognizer'' and in fact there are many studies that try to find the link between pattern recognition and human intelligence in order to build artificially intelligent machines \cite{PR}. This is not the theme of this thesis but it is only to say that despite in the time domain signals of Autorepressor model and Toggle Switch model our powerful brain can recognize some patterns, in this context of stochasticity and, perhaps, non-periodic signal, in order to verify that they are really present, and maybe achieve some useful quantitive measurements, we need some particular tools to investigate such signals. Let us discuss the ones that we have thought to use in this work of thesis.
 %I nostri occhi sono degli ottimi pattern recognizer infatti nell'autorepressore possiamo percepire che c'è qualcosa che si ripete. Abbiamo però bisogno di altri mezzi perchè il segnale nel tempo può nascondere molte features interessanti under the hood. Queste non sempre possono essere svelate dall'autocorrelazione, che come detto nel paragrafo precedente ha come proprietà di cogliere segnali che si ripetono periodicamente nel tempo. Per altri casi possiamo pensare di utilizzare: Transformata di Fourier + quelli elencati dal professore.
 
 
 %METTI QUI LA SPIEGAZIONE DELL'AUTOCORRELAZIONE FAI VEDERE QUALCHE ESEMPIO DI COME DOVREBBE ESSERE NEL CASO DI UNA FUNZIONE COME HA DETTO IL PROFESSORE E DIRE ANCHE CHE NON è SEMPRE FACILE PREVEDERE LA SUA FORMA ABBIAMO VEDREMO INFATTI NELLE AUTOCORRELAZIONI DEI CIRCUITI GEENTICI CHE ANDREMO AD ANALIZZARE.
+
+\section{The Autocorrelation Function (ACF)}\label{ACFSubsection}
+Summing up what said in the first part, by stochastic processes we mean, in a loose sense, systems which evolve \emph{probabilistically} in time \cite{Hand}. For \emph{stochastic systems} it is not possible to exactly determine the state of the system at later times given its state at current time. Hence, to describe a stochastic system we use the probability that the system is in a certain state. Nevertheless, such a calculation is often difficult, and, if we are considering a measurable quantity $Y(t)$ which fluctuates with time, we usually focus on finding the moments of the probability distribution, such as the \emph{mean} and the \emph{variance}. These two quantities are commonly measured experimentally \cite{Brizi}.
+
+
+However, the mean and the variance do not tell a great deal about the underlying dynamics of what is happening. What would be of interest is a measure of the influence of a value of $Y$ at time \emph{t} on the value at time $t + \tau$ \cite{Hand}. Such a quantity is the \emph{autocorrelation function}, which was firstly introduced as
+\begin{equation}
+    G(\tau) = \lim_{T\to\infty}\frac{1}{T}\int_{0}^{T}dt Y(t)Y(t+\tau) 
+\end{equation}
+This is the time average of a two-time product over an arbitrary large time \emph{T}, which is then allowed to become infinite. It is interesting to compute the autocorrelation function starting from the \emph{spectrum} of the quantity $Y(t)$ that is defined in two stages:
+\begin{equation}
+ y(\omega) = \int_{0}^{T} dt e^{-i\omega t} Y(t)
+\end{equation}
+then the spectrum is defined by:
+\begin{equation}
+ S(\omega) = \lim_{T\to\infty}\frac{1}{2 \pi T}|y(\omega)|^{2}
+\end{equation}
+The autocorrelation function and the spectrum are closely connected. By a little manipulation one finds:
+\begin{equation}
+ S(\omega) = \lim_{T\to\infty}\left[\frac{1}{\pi}\int_{0}^{\infty} \cos(\omega\tau)d\tau \frac{1}{T}\int_{0}^{T-\tau} Y(t)Y(t+\tau)dt \right]
+\end{equation}
+and taking $T\to\infty$ one finds:
+\begin{equation}
+S(\omega) = \frac{1}{\pi}\int_{0}^{\infty} \cos(\omega\tau)G(\tau)d\tau
+\end{equation}
+This is a fundamental result that relates the Fourier transform of the autocorrelation function to the spectrum. The result may be put in an other form by considering that:
+\begin{equation}
+ G(-\tau)= \lim_{T\to\infty}\frac{1}{T}\int_{-\tau}^{T-\tau} dt Y(t+\tau)Y(t) = G(\tau)
+\end{equation}
+so we obtain:
+\begin{equation}
+ S(\omega) = \frac{1}{2\pi}\int_{-\infty}^{\infty}e^{-i\omega\tau}G(\tau)d\tau
+\end{equation}
+hence:
+\begin{equation}
+ G(\tau) = \int_{-\infty}^{\infty}e^{i\omega\tau}S(\omega)d\omega
+\end{equation}
+This result is known as the \emph{Wiener-Khinchin theorem}. Its meaning is profound: it tells us that one may either directly measure the autocorrelation function of a signal, or the spectrum, and convert back and forth which by means of the \emph{Fast Fourier Transform} is relatively straightforward. We will discuss about the Fast Fourier Transform in Chapter \ref{ChapterPatternRecognition} as an other means to analyze our fluctuating signal $Y(t)$ and we will understand also from simulation results that the autocorrelation function and the fast fourier transform are two different ways to achieve the same information. Hence, they are deeply related.
+
+For the moment we keep discussing merely about the autocorrelation function taking into account that, besides such definition of autocorrelation as time average of a signal, we may also consider the \emph{ensemble average}, in which we may repeat the measurement many times, and compute averages, denoted by $\langle \rangle$. It can be shown that for many systems the time average is equal to the ensemble average; such systems are termed \emph{ergotic} \cite{Hand}. If we have such a fluctuating quantity $Y(t)$, then we can consider the average
+\begin{equation}
+    \langle Y(t)Y(t+\tau) \rangle = G(\tau)
+\end{equation}
+this result being the consequence of our ergodic assumption. If the system is ergodic, we must have a constant $\langle Y(t) \rangle$, since the time average is clearly constant. The process is then \emph{stationary} by which we mean that the averages of functions $Y(t_{1}),Y(t_{2})...Y(t_{n})$ are equal to those of $Y(t_{1}+\tau),Y(t_{2}+\tau)...Y(t_{n}+\tau)$. In particular, $\langle Y \rangle$ is independent of time.  It is often convenient to substract this constant from Y(t) and to deal with the zero-mean process $\bar{Y}(t) = Y(t) - \langle Y \rangle$ and divide by the variance of the stochastic process. The autocorrelation function $G(\tau)$ of a stationary process depends on the \emph{lag} time $|t_{i}-t_{i+\tau}|$ alone and is not affected by this subtraction. We can denote the lag time with $\tau$ and often there exists a constant $t_{c}$ such that $G(\tau)$ is zero or negligible for $|t_{i}-t_{i+\tau}|> t_{c}$; one then calls $t_{c}$ the autocorrelation time.
+
+We remind that strictly stationary processes do not exist in nature, let alone in the laboratory, but they may be approximately realized when a process lasts much longer than the phenomena one is interested in. One condition is that it lasts much longer than the autocorrelation time. Processes without a finite $t_{c}$ never forget that they have been switched on in the past and can therefore not be treated as approximately stationary.
+
+To summarize, given the time series $Y(t_{1})...Y(t_{n})$ of a stationary stochastic process and its mean $\bar{Y}= \frac{1}{n}\sum_{i=1}^{n} Y(t_{i}) $, we can first calculate what is called the \emph{autocovariance} function at lag $\tau$
+    \begin{equation}
+        G(t_{i},t_{i+\tau}) = \frac{1}{n}\sum_{i=1}^{n-\tau}(Y(t_{i})-\bar{Y})(Y(t_{i+\tau})-\bar{Y})
+    \end{equation}
+Dividing by the variance of the stochastic process, we obtain the autocorrelation function (ACF) at lag $\tau$ and so the correlation between  series values that are $\tau$ intervals apart. A plot of the ACF against $\tau$ is known as a \emph{correlogram}.
+\newline
+Hence, the autocorrelation function defines how data points in a time series are related, on average, to the preceding data points \cite{ACF}. In other words, it measures the self-similarity of the signal over different delay times. 
+
+After all this discussion, we can recognize and summerize some autocorrelation function properties:
+\begin{enumerate}
+ \item $|G(\tau)| \leq G(0)$
+ \item $G(-\tau) = G(\tau)$
+ \item if $Y(t)$ has a periodic component, then $G(\tau)$ will have a periodic component with the same period
+ \item if $Y(t)$ is ergotic, zero mean, and has no periodic components, then $\lim_{|\tau|\to\infty}G(\tau) = 0$.
+\end{enumerate}
+
+We will find these properties in our $Y(t)$ signal analysis. 
+
 \section{Fast Fourier Transform (FFT)}
 Our time domain signal, that we can name as $f(t)$, i.e. a function of time, can hide interesting features under the hood and some of these can be extracted through the Fourier Transform. By considering the continous function $f(t)$, the Fourier transform is based on the following formula:
 \begin{equation}\label{FourierTransformFormula}
@@ -1567,7 +1566,7 @@ For instance, the amplitudes of the peaks reached in case of the first model whe
 In general the amplitude of the peaks reached by proteins is higher than those of RNAs frequency spectrum suggesting that those low frequency are more dominant with respect to those of noise.
 
 Moreover, in all cases, after the first sharp peaks, we can see lower peaks that are
-spread out evenly over the spectrum. 
+spread out evenly over the spectrum that is random noise. 
 
 The two components are fortunately well separated on the frequency axis, suggesting that low-pass filtering (i.e smoothing) will able to remove the noise without distorting the signal \cite{HarmonicAnalysisEDU}.
 
