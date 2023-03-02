@@ -1468,77 +1468,112 @@ Hence, from this analysis, we can conclude that the autocorrelation curves are s
 
 
 \subsection{FFT}
+The signals that we have seen in Chapter \ref{models}, that we have just analysed with the autocorrelation function, are sometimes signals that contain no visually evident periodic components as in case of first model when the gene tends to be more active than inactive (as in Fig.\ref{firstmodelka1ki0timeplot} and in Fig.\ref{firstmodelka1ki0.5timeplot}) while some patterns seem to rise in the other cases, i.e. Fig.\ref{firstmodelka0.1ki1timeplot}, Fig.\ref{autorepressortimeplot} and Fig.\ref{toggleswitchtimeplot}.
+
+However the frequency spectrum reveals that there is much more to this signal than meets the eye. There is not only random noise for instance in the first two cases that we have mentioned whose frequency spectrum is given by Fig.\ref{FFTFirstmodelka1ki0RNAs} and \ref{FFTFirstmodelka1ki0.5RNAs} for RNAs and Fig.\ref{FFTFirstmodelka1ki0Proteins} and \ref{FFTFirstmodelka1ki0.5Proteins}.
+
+
+
+
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=0.60]{Firstmodelka1ki0RNAs.PNG}
 \caption{Fast Fourier Transform of the number of RNA molecules as function of time in Fig.\ref{firstmodelka1ki0timeplot}. The x-axis is in log scale while the y-axis is linear scale.}
-\label{Firstmodelka1ki0RNAs}
+\label{FFTFirstmodelka1ki0RNAs}
 \end{figure}
+
+\newpage
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=0.60]{Firstmodelka1ki0Proteins.PNG}
 \caption{Fast Fourier Transform of the number of proteins molecules as function of time in Fig.\ref{firstmodelka1ki0timeplot}. The x-axis is in log scale while the y-axis is linear scale.}
-\label{Firstmodelka1ki0Proteins}
+\label{FFTFirstmodelka1ki0Proteins}
 \end{figure}
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=0.60]{Firstmodelka1ki0.5RNAs.PNG}
 \caption{Fast Fourier Transform of the number of RNAs molecules as function of time in Fig.\ref{firstmodelka1ki0.5timeplot}. The x-axis is in log scale while the y-axis is linear scale.}
-\label{Firstmodelka1ki0.5RNAs}
+\label{FFTFirstmodelka1ki0.5RNAs}
 \end{figure}
+
+\newpage
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=0.60]{Firstmodelka1ki0.5Proteins.PNG}
 \caption{Fast Fourier Transform of the number of proteins molecules as function of time in Fig.\ref{firstmodelka1ki0.5timeplot}. The x-axis is in log scale while the y-axis is linear scale.}
-\label{Firstmodelka1ki0.5Proteins}
+\label{FFTFirstmodelka1ki0.5Proteins}
 \end{figure}
+
+At low frequencies, Fig.\ref{FFTFirstmodelka1ki0RNAs},\ref{FFTFirstmodelka1ki0Proteins}, \ref{FFTFirstmodelka1ki0.5RNAs} and \ref{FFTFirstmodelka1ki0.5Proteins} show sharp peaks indicating a precise periodicity.
+
+Neverthless, this kind of frequency spectrum is common to all the other cases, namely sharp peaks al low frequencies. What changes sometimes is the amplitude of these peaks.
+
+For instance, the amplitudes of the peaks reached in case of the first model when the gene tends to be more inactive than active is comparable to those of the autorepressor case both for what regards RNAs and proteins (i.e. Fig. \ref{FFTFirstmodelka0.1ki1RNAs},\ref{FFTFirstmodelka0.1ki1Proteins}, \ref{FFTAutorepressormodelRNAs} and \ref{FFTAutorepressormodelProteins}).
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=0.60]{Firstmodelka0.1ki1RNAs.PNG}
 \caption{Fast Fourier Transform of the number of RNAs molecules as function of time in Fig.\ref{firstmodelka0.1ki1timeplot}. The x-axis is in log scale while the y-axis is linear scale.}
-\label{Firstmodelka0.1ki1RNAs}
+\label{FFTFirstmodelka0.1ki1RNAs}
 \end{figure}
+
+\newpage
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=0.60]{Firstmodelka0.1ki1Proteins.PNG}
 \caption{Fast Fourier Transform of the number of proteins molecules as function of time in Fig.\ref{firstmodelka0.1ki1timeplot}. The x-axis is in log scale while the y-axis is linear scale.}
-\label{Firstmodelka0.1ki1Proteins}
+\label{FFTFirstmodelka0.1ki1Proteins}
 \end{figure}
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=0.60]{AutorepressormodelRNAsASSOMIGLIAALLOSPETTROka0.1ki1.PNG}
 \caption{Fast Fourier Transform of the number of RNAs molecules as function of time in Fig.\ref{autorepressortimeplot}. The x-axis is in log scale while the y-axis is linear scale.}
-\label{AutorepressormodelRNAsASSOMIGLIAALLOSPETTROka0.1ki1}
+\label{FFTAutorepressormodelRNAs}
 \end{figure}
+
+\newpage
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=0.60]{AutorepressormodelProteinsASSOMIGLIAALLOSPETTROka0.1ki1.PNG}
 \caption{Fast Fourier Transform of the number of proteins molecules as function of time in Fig.\ref{autorepressortimeplot}. The x-axis is in log scale while the y-axis is linear scale.}
-\label{AutorepressormodelProteinsASSOMIGLIAALLOSPETTROka0.1ki1}
+\label{FFTAutorepressormodelProteins}
 \end{figure}
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=0.60]{ToggleSwitchModelRNAsGene1.PNG}
 \caption{Fast Fourier Transform of the number of RNAs molecules as function of time in Fig.\ref{toggleswitchtimeplot}. The x-axis is in log scale while the y-axis is linear scale.}
-\label{ToggleSwitchModelRNAsGene1}
+\label{FFTToggleSwitchModelRNAsGene1}
 \end{figure}
+
+\newpage
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=0.60]{ToggleSwitchModelProteinsGene1.PNG}
 \caption{Fast Fourier Transform of the number of proteins molecules as function of time in Fig.\ref{toggleswitchtimeplot}. The x-axis is in log scale while the y-axis is linear scale.}
-\label{ToggleSwitchModelProteinsGene1}
+\label{FFTToggleSwitchModelProteinsGene1}
 \end{figure}
 
+\newpage
+
+In general the amplitude of the peaks reached by proteins is higher than those of RNAs frequency spectrum suggesting that those low frequency are more dominant with respect to those of noise.
+
+Moreover, in all cases, after the first sharp peaks, we can see lower peaks that are
+spread out evenly over the spectrum. 
+
+The two components are fortunately well separated on the frequency axis, suggesting that low-pass filtering (i.e smoothing) will able to remove the noise without distorting the signal \cite{HarmonicAnalysisEDU}.
+
+Note that if the x-axis units of the signal plot had been seconds, the units of the frequency spectrum plot would be Hz; the x-axis of these plots is logarithmic while the y-axis is in linear scale.
+
+Hence, a sort of periodicity arises from these simulated gene expression signals. This is not a surprise since in nature the process of gene expression often shows a precise rythm that maybe caused to environmental factors such as diet, temperature, oxygen levels, humidity, light cycles, and the presence of mutagens can all impact gene expression \cite{NatureGeneExpression} or to the same gene regulatory code, inscribed in the DNA of each gene, specifies how the production of each gene product will be controlled in space, time and magnitude \cite{GeneExpressionTiming}.The gene expression rythm ultimately affects the animal's phenotype. One interesting and much studied synchronization is that between the myocardial contractile response and gene expression of the contractile protein. They show changes with a similar period \cite{GeneExpressionCardiacRythm}.
 \newpage
 
 \subsection{CWT}
@@ -1947,6 +1982,14 @@ In particular, constitutive epidermal growth factor receptor and nuclear factor 
     \bibitem{oncogenes} Oncogene \href{https://en.wikipedia.org/wiki/Oncogene}{https://en.wikipedia.org}
     \bibitem{Manuel} Manuel D. Rossetti, {\em Simulation Modeling and Arena}. \url{https://rossetti.github.io/RossettiArenaBook/}
     \bibitem{RungeKutta} Runge Kutta methods \url{https://en.wikipedia.org/wiki/Runge-Kutta_methods}
+    \bibitem{HarmonicAnalysisEDU} Harmonic analysis and the Fourier Transform \href{https://terpconnect.umd.edu/~toh/spectrum/HarmonicAnalysis.html}{https://terpconnect.umd.edu}
+    \bibitem{NatureGeneExpression} Ralston, A. Shaw, K. (2008) {\em Environment controls gene expression: Sex determination and the onset of genetic disorders}. Nature Education 1(1):203.
+    \bibitem{GeneExpressionTiming} Ali MZ, Brewster RC (2022) {\em Controlling gene expression timing through gene regulatory architecture}. PLOS Computational Biology 18(1): e1009745.
+    \bibitem{GeneExpressionCardiacRythm} Wang ZR, Wang L, Wan CM, Cornelissen G, Anand I, Halberg F. {\em Circadian rhythm of gene expression of myocardial contractile protein, left ventricular pressure and contractility}. Space Med Med Eng (Beijing). 1999 Dec;12(6):391-6. PMID: 12432879.
+    
+    
+
+
 
 \end{thebibliography}
 %\addcontentsline{toc}{chapter}{Bibliography}
