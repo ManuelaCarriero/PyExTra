@@ -1170,7 +1170,7 @@ Fig. \ref{exampletimedomainsignal} is an example of a signal that contains four 
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=0.80]{examplesignalchangesfrequency.png}
-\caption{Example of time domain oscillating signal which contains four frequencies at four different times.}
+\caption{Example of time domain oscillating signal which contains four different frequencies at four different times (in particular the frequencies respectively are 4 Hz, 30 Hz, 60 Hz and 90 Hz).}
 \label{exampletimedomainsignal}
 \end{figure}
 
@@ -1199,7 +1199,7 @@ Furthermore, from these figures and from the FFT theory explained before, we can
 \section{Continous Wavelet Transform (CWT)}
 The Fourier transform uses sine and cosine waves with different frequencies but with the same shape along all the time domain and they repeat periodically back and forth in time. The Wavelet transform instead uses a series of functions called wavelets which have a beginning and an end. The french word wavelet means ``a small wave'', and this is exactly what a wavelet is. Hence while the sine and cosine waves are infinitely long and stretches to infinity in a regular periodic fashion, the Wavelets are \emph{localized} in time and with a different shape. This allows the wavelet transform to obtain time information in addition to frequency information.
 
-Indeed, since they are localized in time, this transform implies that we can multiply our signal with the wavelet at different locations in time. The wavelet is thus translated from the beginning to the end of the signal (i.e. the time series). This operation is named as \emph{convolution}. In this way, you are localizing along the time series the value of this finite domain function. The process is illustrade in the fig. \ref{exampleofconvolution}:
+Indeed, since they are localized in time, this transform implies that we can multiply our signal with the wavelet at different locations in time. The wavelet is thus translated from the beginning to the end of the signal (i.e. the time series). This operation is named as \emph{convolution}. In this way, you are localizing along the time series the value of this finite domain function. The process is illustrated in the fig. \ref{exampleofconvolution}:
 
 \begin{figure}[!ht]
 \centering
@@ -1235,7 +1235,7 @@ Generally speaking, to be considered a proper wavelet, a function $\psi(t)$ has 
         \int_{-\infty}^{+\infty}  |\psi(t)|^{2}dt <  \infty
        \end{equation}
 \end{enumerate}
-The first one is known as the ``admissibility condition'' and it tells that the wavelet function should have zero mean. This means that if you take the integral, i.e. the area under the curve, and we sum the positive and negative parts, we should get zero. We can notice that also a sine wave passes the admissibility condition. Secondly, the wavelet function has to have finite energy: if you square the function and compute the area under the curve everywhere from minus infinity to plus infinity it should be a finite number and this exactly what makes the function localized in time. It means that the wavelet covers a finite area. In fact think about the energy of the sine wave: it is infinite.
+The first one is known as the ``admissibility condition'' and it tells that the wavelet function should have zero mean. This means that if you take the integral, i.e. the area under the curve, and we sum the positive and negative parts, we should get zero. We can notice that also a sine wave passes the admissibility condition. Secondly, the wavelet function has to have finite energy: if you square the function and compute the area under the curve everywhere from minus infinity to plus infinity it should be a finite number and this is exactly what makes the function localized in time. It means that the wavelet covers a finite area. In fact think about the energy of the sine wave: it is infinite.
 
 As said before, one very known wavelet is the Morlet wavelet that is defined taking the cosine wave of a certain frequency and damping it by multiplying on a Gaussian bell curve:
 \begin{equation}\label{MorletEquationFormula}
@@ -1250,7 +1250,7 @@ The Wavelet transform gives, in any case, information about local periodicities 
 
 We can consider an example of the application of the CWT to the signal rappresented in fig. \ref{exampletimedomainsignal} that changes its frequency at four different time steps. A good tool for the CWT representation of our signal is the \emph{scaleogram}. It is a 2D representation of a 1D signal in time domain. The scaleogram, as the name suggests, reports the time on the horizontal axis and the period, i.e. the length of the Wavelet or also called the scale, one the vertical axis. For our convention, the color-level coded scale represents the wavelet coefficients: dark red is associated to high values of wavelet coefficents, while white colored regions represent low values of wavelet coefficients. To clarify, by ``wavelet coefficients'' we mean the result of the convolution between the time series and the chosen wavelet, just as the FFT amplitude values in the Fourier transform. 
 
-On the vertical axis of the scaleogram we put the scale, that the wavelet length: higher the length of the wavalet is, lower the frequency is; on the contrary, lower the length of the wavelet is, higher the frequency is.
+On the vertical axis of the scaleogram we put the scale, that is the wavelet length: higher the length of the wavalet is, lower the frequency is; on the contrary, lower the length of the wavelet is, higher the frequency is.
 
 \begin{figure}[!ht]
 \includegraphics[scale=0.59]{MorletTransformSignalExample.PNG}
@@ -1258,7 +1258,7 @@ On the vertical axis of the scaleogram we put the scale, that the wavelet length
 \label{MorletTransfromSignalExample}
 \end{figure}
 
-Hence, how do we interpret the scaleogram ? Roughly speaking, the convolution measure the similarity between the wavelet function and the data. If the similarity is high, we will have high values of wavelet coefficients (i.e. red colors); if it is low, it will correspond to low wavelet coefficients (i.e. like white colors). But since wavelets vary from one scale to an other, at certain scales it may or may not have the highest similarity. If at low scales (low values on the vertical axis of the scaleogram) there are high values of the coefficients, then the data have high frequencies; on the other hand, if at high scales there are high values of coefficients, then your data have low frequencies. Thus we can locate this low and high frequency portions by analysing these variations in the values of the coefficients. When there is no match with the signal, the dot product, i.e. the result of integral in Eq. \ref{CWT} is zero; but when the signal approaches the wavelet intrinsic frequency, the function begins like to ``resonate'' and you get a significant overall contribution when they are in phase, and a significant negative contribution when they are out of phase. When there is match of frequency there is an alternation between positive and negative values. We can realize that Eq. \ref{CWT} is exactly as the dot product between vectors, indeed when vectors have the same direction, the dot product has high value, contrary to when the angle between them is $90^{\circ}$ in which case it is zero or when they have opposite directions in which case it has negative value.
+Hence, how do we interpret the scaleogram ? Roughly speaking, the convolution measure the similarity between the wavelet function and the data. If the similarity is high, we will have high values of wavelet coefficients (i.e. red colors); if it is low, it will correspond to low wavelet coefficients (i.e. like white colors). But since wavelets vary from one scale to an other, at certain scales it may or may not have the highest similarity. If at low scales (low values on the vertical axis of the scaleogram) there are high values of the coefficients, then the data have high frequencies; on the other hand, if at high scales there are high values of coefficients, then your data have low frequencies. Thus we can locate this low and high frequency portions by analysing these variations in the values of the coefficients. When there is no match with the signal, the dot product, i.e. the result of integral in Eq. \ref{CWT} is zero; but when the signal approaches the wavelet intrinsic frequency, the function begins like to ``resonate'' and you get a significant overall contribution when they are in phase, and a significant negative contribution when they are out of phase. When there is match of frequency there is an alternation between positive and negative values. We can realize that Eq. \ref{CWT} is exactly as the dot product between vectors, indeed when vectors have the same direction, the dot product has high value, contrary to when the angle between them is $90^{\circ}$ in which case it is zero.% or when they have opposite directions in which case it has negative value.
 
 Fig. \ref{MorletTransfromSignalExample} shows the Morlet CWT applied to signal in fig. \ref{exampletimedomainsignal} that changes frequency at four time points. Such scaleogram generally shows bands made of an alternation between red and white stripes. In particular there are four bands of this type that are located at lower and lower scale corresponding to the time domain signal that increases its frequency.
 
@@ -1274,7 +1274,7 @@ In this way the Morlet wavelet is essentially a complex exponent which spins aro
 
 The imaginary part of the Morlet wavelet is like the real part but slightly shifted relative to the cosine. The key idea is to calculate the convolution with both real and imaginary parts.  Then our convolution function, for a fixed wavelet scale, will map one real number to the point in the complex plane where the real component is the value of the convolution at that time point with the real part of the wavelet and the imaginary component is the value of convolution with the imaginary part of the wavelet. The power of the frequency, i.e. the intensity of its contribution, at each point in time is given by the distance from the resulting point in the complex plane to the origin which is the \emph{absolute value of the complex number}. In this way we measure the intensity of a particular frequency component as function of time. The resulting function Eq. \ref{CWT} is the complex function, the absolute value of which represents the contribution of a particular frequency around a certain time point. We can again represent it with colors obtaining the scaleogram.
 
-Fig. \ref{ComplexMorletTransfromSignalExample} shows the scaleograms corresponding to CWT applied to signal in Fig. \ref{exampletimedomainsignal} using the complex Morlet wavelet. At first sight, we can understand that this graph is more intuitive than the one obtained through only the real part of Morlet wavelet that was shown in Fig. \ref{MorletTransfromSignalExample}.
+Fig. \ref{ComplexMorletTransfromSignalExample} show the scaleograms corresponding to CWT applied to signal in Fig. \ref{exampletimedomainsignal} using the complex Morlet wavelet. At first sight, we can understand that this graph is more intuitive than the one obtained through only the real part of Morlet wavelet that was shown in Fig. \ref{MorletTransfromSignalExample}.
 
 \begin{figure}[!ht]
 \includegraphics[scale=0.59]{ComplexMorletTransformSignalExample.PNG}
@@ -1282,7 +1282,7 @@ Fig. \ref{ComplexMorletTransfromSignalExample} shows the scaleograms correspondi
 \label{ComplexMorletTransfromSignalExample}
 \end{figure}
 
-Fig. \ref{ComplexMorletTransfromSignalExample} shows four different bands located at four different time points and at four different scales. This time, the bands are uniformly dark red colored and this agrees with our expectations since the time domain signal changes its frequency four different times by increasing its frequency.
+Fig. \ref{ComplexMorletTransfromSignalExample} shows four different bands located at four different time points and at four different scales. This time, the bands are uniformly dark red colored and this agrees with our expectations since the time domain signal changes its frequency four different times by increasing its frequency and keeping the frequency constant for a time period at each one of the four times.
 
 Before concluding this overview about wavelets, we need to emphisize that the results may change according to the choice of scale and the choice of the wavelet used. The first one is obvious: by considering a lower range of scales in a situation like this, we would not have detected the lowest frequency present at the beginning of the signal. However, this is true if we use a Complex Morlet Wavelet. 
 
@@ -1294,7 +1294,20 @@ Indeed, in a situation like this, if we apply the Complex Gaussian Wavelet trans
 \label{ComplexGaus1TransformSignalExample}
 \end{figure}
 \newpage
-From these pictures, we can recognize the power of the CWT for dynamically changing signals in recognizing frequencies present in the signal together with their temporal localization. Furthemore, as pointed out previously, we can notice also the importance of the parameters chosen which in this case is the choice of the wavelet. 
+From these pictures, we can recognize the power of the CWT for dynamically changing signals in recognizing frequencies present in the signal together with their temporal localization. Furthemore, as pointed out previously, we can notice also the importance of the parameters chosen which in this last example is the importance of the choice of the wavelet. 
+
+In our genetic circuits analysis we will use an other kind of representation of the continous wavelet transform that is analogous to this but it considers the frequencies of the signal on the y axis instead of the scale of the wavelet. Thus, the corresponding continous wavelet transform to Fig.\ref{exampletimedomainsignal} is the one is Fig. \ref{CWTdummysignal}. 
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.70]{CWTsignal.PNG}
+\caption{Example of Continous Wavelet Transform, using ``Generalized Morlet Wavelet'' transform, applied to the signal in figure \ref{exampletimedomainsignal}. Frequencies are reported on the vertical axis while the horizontal axis represents the time.}
+\label{CWTdummysignal}
+\end{figure}
+
+As we can notice, each red band is located to the precise frequency of the signal, that are 4 Hz, 30 Hz, 60 Hz and 90 Hz.
+
+This representation is even more intuitive. The mechanism of conversion from scale to frequency is not studied in this thesis. We can leave some references to the python module that is used and the relative documentation \cite{ssqueezepy},\cite{formuledissqueezepy}.
 
 %We have shown three scaleograms based on three different wavelets and each one has been capable to give different type or a different ``amount'' of information.  
 
@@ -1885,6 +1898,7 @@ In particular, constitutive epidermal growth factor receptor and nuclear factor 
 %Quel che abbiamo definito e descritto come ``rumore'' in biologia all'inizio della tesi a livello computazionale lo si inserisce.
 %Per quanto riguarda i modelli semplici analizzati: mentre nel caso del gene sempre espresso e regolato possiamo trovare situazioni generali in natura, nel caso dell'autorepressore ed il toggle switch non sembra per� nelle ricerche fatte in questo lavoro di tesi sembrano spesso essere coinvolti negli oncogenes e quindi casi di tumore. Anche l'NF-kB � un caso di gene sempre espresso per� non per garantire il buon funzionamento cellulare bens� � il caso in cui si ha un cattivo funzionamento.
 %Per studiare i sistemi stocastici occorre pazienza e fantasia.
+%La periodicità dell'espressione genica può fornire uno spunto per la terapia se si capisce da cosa è data.
 \begin{appendices}
   \chapter{Software used in this thesis}
   All simulation methods and statistical data analysis have been performed using \emph{Python 3.9} and the programs are available in the following GitHub page \url{https://github.com/ManuelaCarriero/PyExTra} where you can find a detailed explanation of all the Python codes and how to reproduce the results reported in this work.
@@ -1985,6 +1999,9 @@ In particular, constitutive epidermal growth factor receptor and nuclear factor 
     \bibitem{NatureGeneExpression} Ralston, A. Shaw, K. (2008) {\em Environment controls gene expression: Sex determination and the onset of genetic disorders}. Nature Education 1(1):203.
     \bibitem{GeneExpressionTiming} Ali MZ, Brewster RC (2022) {\em Controlling gene expression timing through gene regulatory architecture}. PLOS Computational Biology 18(1): e1009745.
     \bibitem{GeneExpressionCardiacRythm} Wang ZR, Wang L, Wan CM, Cornelissen G, Anand I, Halberg F. {\em Circadian rhythm of gene expression of myocardial contractile protein, left ventricular pressure and contractility}. Space Med Med Eng (Beijing). 1999 Dec;12(6):391-6. PMID: 12432879.
+    \bibitem{ssqueezepy} Synchrosqueezing in Python \url{https://github.com/OverLordGoldDragon/ssqueezepy}
+    \bibitem{formuledissqueezepy} Synchrosqueezing Wavelet Transform explanation? (How's it work, exactly?)
+    \href{https://dsp.stackexchange.com/questions/71398/synchrosqueezing-wavelet-transform-explanation/71399#71399}{https://dsp.stackexchange.com}
     
     
 
