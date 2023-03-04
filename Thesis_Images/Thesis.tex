@@ -1589,11 +1589,11 @@ Hence, a sort of periodicity arises from these simulated gene expression signals
 \newpage
 
 \subsection{CWT}
-Thanks to the autocorrelation analysis and the fast fourieri transform we have achieved important information about our gentic models signals. In both cases we have investigated on the periodicity of the signal and in particular the frequencies present in it through the FFT.
+Thanks to the autocorrelation analysis and the fast fourier transform we have achieved important information about our gentic models signals. In both cases we have investigated on the periodicity of the signal and in particular the frequencies present in it through the FFT.
 
 As explained in the theoretical sections about these methods, now we would like to try to get an higher level of information thanks to the Continous Wavelet Transforms. CWT can give information about periodicity and about the frequencies present in the signal as function of time in which the signal is present.
 
-Most of the time, the structure of data is hidden behind the noise so we need these precise mathematical operation with which we can look through the noise and quantify the structure present in the signal. Wavelets are something like could do this blurring of vision and zoom in and out of the signal to pull out the patterns like a kind of mathematical microscope.
+Most of the time, the structure of data is hidden behind the noise so we need this precise mathematical operation with which we can look through the noise and quantify the structure present in the signal. Wavelets are something like could do this blurring of vision and zoom in and out of the signal to pull out the patterns like a kind of mathematical microscope.
 
 As in the ACF and FFT analysis, let us look at the CWT of our genetic models signals starting from the first simple protein synthesis model shown in Fig. \ref{CWTFirstModelka1ki0RNAs} and \ref{CWTFirstModelka1ki0Proteins} for the case of constituive expression and Fig. \ref{CWTFirstModelka1ki0.5RNAs} and \ref{CWTFirstModelka1ki0.5Proteins} in case the gene tends to be more active than inactive.
 
@@ -1633,7 +1633,7 @@ As in the ACF and FFT analysis, let us look at the CWT of our genetic models sig
 
 First, note that the time does not start from zero because of the removed warmup-period.
 
-Then, what we can immediately notice from the CWT is that in the cases in which the gene tends to be active, the CWT shows a more uniform horizontal colored red or yellow bar at low frequencies suggesting the presence of a signal behind noise that has a constant frequency. This is not the case of the gene that tends to be more inactive than active or the autorepressor signal (see Fig. \ref{CWTFirstModelka0.1ki1RNAs}, \ref{CWTFirstModelka0.1ki1Proteins}, \ref{CWTAutorepressormodelRNAs} and \ref{CWTAutorepressormodelProteins}). In this case we can see yellow long spots that are located at precise time point. In particular for the autorepressor case they are red (suggesting a better overlapping between the wavelet and the signal) spots regularly located in time. In case of autorepressor RNAs signal (Fig.\ref{CWTAutorepressormodelRNAs}) we could even estimate this regularity in time since red elongated spots are located at approximately every 300 seconds (if we consider the unit of measure of time in seconds). This is very interesting if one wants to study the gene expression rate and its dependences.
+Then, what we can immediately notice from the CWT is that in the cases in which the gene tends to be active, the CWT shows a more uniform horizontal colored red bar at low frequencies suggesting the presence of a signal behind noise that has a constant frequency. This is not the case of the gene that tends to be more inactive than active or the autorepressor signal (see Fig. \ref{CWTFirstModelka0.1ki1RNAs}, \ref{CWTFirstModelka0.1ki1Proteins}, \ref{CWTAutorepressormodelRNAs} and \ref{CWTAutorepressormodelProteins}). In this case we can see red long spots that are located at precise time points. In particular for the autorepressor case they are more regularly located in time. Ideed, in case of autorepressor RNAs signal (Fig.\ref{CWTAutorepressormodelRNAs}) we could even estimate this regularity in time since red elongated spots are located at approximately every 300 seconds (if we consider the unit of measure of time in seconds). This is very interesting if one wants to study the gene expression rate and its dependences.
 
 \newpage
 
@@ -1665,9 +1665,9 @@ Then, what we can immediately notice from the CWT is that in the cases in which 
 \label{CWTAutorepressormodelProteins}
 \end{figure}
 
-Anyway, any pattern that we find (yellow or red regions) are located at low frequencies, in the order of $10^{-1}$ or $10^{-2}$ and this was expected from the Fast Fourier transform analysis.
+Anyway, any pattern that we find is located at low frequencies, in the order of $10^{-1}$ or $10^{-2}$ and this was expected from the Fast Fourier transform analysis.
 
-We do not have scanned also the toggle switch results by means of CWT because of lack of computational resources. As explained before, the wavelet transform is computed by a repeated convolution of the signal with the chosen wavelet as the wavelet is translated across the time dimeension, in order to probe the time variation, and as the wavelet is stretched or compressed, in order to probe different frequencies. Because two dimensions are being probed, the result is naturally a 3D surface (time-frequency-amplitude) that can be displayed as we have done, i.e. as a time-frequency contour plot with different colors representing the amplitudes at that time and the frequency. Of course this calculation requires greater execution times. In this thesis work a laptop of CPU 1.10 GHz and RAM 4,00 GB is used and this is not enough for CWT toggle switch analysis. However, in general with modern fast processors and great memory capacity this is unlikely to be a problem.
+We do not have scanned also the toggle switch results by means of CWT because of lack of computational resources. As explained before, the wavelet transform is computed by a repeated convolution of the signal with the chosen wavelet as the wavelet is translated across the time dimension, in order to probe the time variation, and as the wavelet is stretched or compressed, in order to probe different frequencies. Because two dimensions are being probed, the result is naturally a 3D surface (time-frequency-amplitude) that can be displayed as we have done, i.e. as a time-frequency contour plot with different colors representing the amplitudes at that time and the frequency. Of course this calculation requires greater execution times. In this thesis work a laptop of CPU 1.10 GHz and RAM 4,00 GB is used and this is not enough for CWT toggle switch analysis. However, in general with modern fast processors and great memory capacity this is unlikely to be a problem.
 
 %Metti discorsi fatti dal 2 Novembre in poi e le novit� sull'autocorrelazione delle differenze.
 %La trasformata di Fourier media ed analisi di ogni picco per trovare il rate con cui sono prodotte le molecole e le wavelet transform. Usiamo tale modello perchè è il più semplice quindi come Toy model. 
@@ -1964,6 +1964,8 @@ In particular, constitutive epidermal growth factor receptor and nuclear factor 
 %METTI CAPITOLO TIPO NF-KB AS A PARTICULAR TOGGLE SWITCH.
 \chapter{NF-\texorpdfstring{$\kappa$}{\265}B model formulation}
 %L'NF-kB assume l'aspetto di un prodotto da un housekeeping gene nel senso che è sempre espresso nelle cellule tumorali però non deve comportarsi in questo modo.
+
+
 \part{Results and discussion}
 %using experimental data del tuo centro di ricerca e di Hoffman.
 %descrivi l'andamento nel tempo di quel che hai trovato teoricamente e di quello che ci si aspetta.
