@@ -1965,7 +1965,70 @@ In particular, constitutive epidermal growth factor receptor and nuclear factor 
 \chapter{NF-\texorpdfstring{$\kappa$}{\265}B model formulation}
 %L'NF-kB assume l'aspetto di un prodotto da un housekeeping gene nel senso che è sempre espresso nelle cellule tumorali però non deve comportarsi in questo modo.
 
+%Mice deficient in A20 develop severe inflammation and cachexia, are hypersensitive to TNF, and die prematurely (Lee et al., 2000). At a biochemical level, A20-deficient fibroblasts show persistent IKK activation after TNF stimulation demonstrating its essential role in mediating IKK inactivation (Lee et al., 2000). Despite these observations the exact mechanism of A20's action is not fully resolved.
 
+Let us consider the very common heterodimer p50-p65 in the canonical pathway. This NF-$\kappa$B dimer as well as the IKK complex will be considered as single proteins and so the dynamics leading to the formation of these complexes will be disregarded. Hence we do not consider second order reactions.
+%The IKK complex, as well as the dimer NF-?B will be considered as single proteins, i.e. the dynamics leading to formation of these complexes will be disregarded (quindi in realt� ci sarebbero le reazioni di dimerizzazione che sono di secondo ordine come ha detto il Professore). Consideriamo ad esempio l'eterodimero molto comune nel canonical pathway p50-p65.
+The regulatory system considered has two activators IKK and NF-$\kappa$B and two \emph{inhibitors} A20 and I$\kappa$B$\alpha$. Indeed, the nuclear activity of NF-$\kappa$B is terminated by the newly synthesized I$\kappa$B$\alpha$, which enters the nucleus, binds to NF-$\kappa$B and takes it out into cytoplasm; A20 instead acts as I$\kappa$B$\alpha$ activator and so an NF-$\kappa$B inhibitor.
+
+In the presence of an extracellular signal such as TNF or IL-1, IKK is transformed into its active (phosphorylated) form.
+
+In this form it is capable of phophorylating I$\kappa$B$\alpha$ which in turn leads to its degradation. As a result, degradation of I$\kappa$B$\alpha$ releases the second activator, NF-$\kappa$B.
+
+The free NF-$\kappa$B enters the nucleus and upregulates transcription of the two inhibitors I$\kappa$B$\alpha$ and A20 and of a large number of other genes, in particular the target gene whose gene expression has to be regulated by NF-$\kappa$B.
+
+The newly synthesized I$\kappa$B$\alpha$ again inhibits NF-$\kappa$B, while A20 inhibits IKK by catalysing its transformation into another inactive form, in which it is no longer capable of phosphorylating I$\kappa$B$\alpha$. We ignore this and we consider that the protein A20 inhibits IKK making it neutral and so we do not consider the step of its transformation into IKKi (that is a catalytic reaction because A20 catalyses its transformation into its inactive form) and the kinetics of its resynthesis to its neutral form IKKn.
+
+And this is the logic of our first model: we consider that the four players IKK, NF-$\kappa$B, I$\kappa$B$\alpha$ and A20 can be either active or inactive. In other words, they can be either ON or OFF.
+
+Whereas, the RNA produced starting from the target gene of the NF-$\kappa$B transcription factor can be modeled using ordinary differential equation in deterministic framework. Using the notation of the Chapter \ref{models}, given \emph{m} the number of RNA molecules produced by the target gene and $k_{4}$ the rate of RNA production, $k_{5}$ the rate of degradation, we can write an analogous equation to Eq.\ref{regulatedgeneequation}:
+\begin{equation}
+ \frac{dm}{dt} = k_{4} \cdot g(\cdot) - k_{5}m
+\end{equation}
+where the promoter activity function $g(\cdot)$ is determined by the NF-$\kappa$B state. 
+
+Then a simple sketch of the model is shown in Fig.\ref{NFkBCompleteScheme}:
+
+
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.50]{nfkbschemaconparametriCORRETTO.png}
+\caption{Sketch of our first model NF-$\kappa$B feedback loop regulatory module with relative parameters.}
+\label{NFkBCompleteScheme}
+\end{figure}
+
+There are two repressing actions caused by the inhibitors and from the schemes we can see this very well: one caused by I$\kappa$B$\alpha$ directly on NF-$\kappa$B and one mediated by A20 on IKK in its active form.
+
+In this simple model there are already 10 rates constant: 
+\begin{itemize}
+ \item ki, the constant of activation rate of IKK.
+ \item ka, the constant of inactivation rate of IKK.
+ \item k1, the constant of activation rate of NF-$\kappa$B.
+ \item k1i, the constant of inactivation rate of NF-$\kappa$B (this process is not shown in Fig.\ref{NFkBCompleteScheme}).
+ \item k2, the constant of activation rate of Ik$\alpha$.
+ \item k2i, the constant of degradation rate of Ik$\alpha$.
+ \item k3, the constant of activation rate of A20.
+ \item k3i, the constant of degradation rate of A20.
+ \item k4, the constant of RNA production of target gene that, in experimental terms, is the firefly luciferase as reporter gene in the experiment made in University of Bologna where Cignal Lenti Reporter System (QUIAGEN) was used.
+ \item k4, the constant rate of RNA degradation.
+\end{itemize}
+
+
+Hence the rates of activation and inactivation of the four ON/OFF mentioned players are:
+
+
+%Equazioni degli altri 
+
+%Misuriamo la luce delle lucciole per esempio.
+
+%Puntiamo a riprodurre almeno il modello di Hoffman che � basato su dati sperimentali e considerando solo l'azione dell'IkBalfa della famiglia di IkB.
+
+%Poi possiamo aggiungere il cambiamento delle quantit� di questi componenti.
+
+%Il comportamento ON OFF non � tanto campato in aria (equazione di Hill). E' una reazione di ordine zero ?
+
+%ignoriamo le reazioni di dimerizzazioni, le catalitiche ed in generale le reazioni in cui un substrato si lega ad una proteina che sarebbero reazioni di ordine superiore al primo.
 \part{Results and discussion}
 %using experimental data del tuo centro di ricerca e di Hoffman.
 %descrivi l'andamento nel tempo di quel che hai trovato teoricamente e di quello che ci si aspetta.
@@ -1979,9 +2042,10 @@ In particular, constitutive epidermal growth factor receptor and nuclear factor 
 %Quel che abbiamo definito e descritto come ``rumore'' in biologia all'inizio della tesi a livello computazionale lo si inserisce.
 %Per quanto riguarda i modelli semplici analizzati: mentre nel caso del gene sempre espresso e regolato possiamo trovare situazioni generali in natura, nel caso dell'autorepressore ed il toggle switch non sembra per� nelle ricerche fatte in questo lavoro di tesi sembrano spesso essere coinvolti negli oncogenes e quindi casi di tumore. Anche l'NF-kB � un caso di gene sempre espresso per� non per garantire il buon funzionamento cellulare bens� � il caso in cui si ha un cattivo funzionamento.
 %Per studiare i sistemi stocastici occorre pazienza e fantasia.
-%La periodicità dell'espressione genica può fornire uno spunto per la terapia se si capisce da cosa è data.
+%La periodicità dell'espressione genica può fornire uno spunto per la terapia se si capisce da cosa è data nel caso dell'NF-kB ossia della sua attivit� (espressione genica del gene target).
 %Questo lavoro di caratterizzare la forma di una funzione di autocorrelazione per ogni modello pu� essere utile nel momento in cui ho i dati sperimentali, ne calcolo l'autocorrelazione e se vedo un deep per esempio posso dire che c'� una forma di repressione.
 %si sceglie la wavelet più simile al segnale però noi abbiamo scelto la più famosa diciamo e ha dato già risultati interessanti.
+%SPERIAMO DI POTER SCRIVERE: The model allows detailed analysis of kinetics of the involved proteins and their complexes and gives the predictions of the possible responses of whole kinetics to the change in the level of a given activator or inhibitor.
 \begin{appendices}
   \chapter{Software used in this thesis}
   All simulation methods and statistical data analysis have been performed using \emph{Python 3.9} and the programs are available in the following GitHub page \url{https://github.com/ManuelaCarriero/PyExTra} where you can find a detailed explanation of all the Python codes and how to reproduce the results reported in this work.
@@ -2089,6 +2153,7 @@ In particular, constitutive epidermal growth factor receptor and nuclear factor 
     \href{https://www.cancer.gov/publications/dictionaries/cancer-terms/def/tumor-necrosis-factor}{https://www.cancer.gov}
     \bibitem{NIHPhosphorylation} A process in which a phosphate group is added to a molecule, such as a sugar or a protein. \href{https://www.cancer.gov/publications/dictionaries/cancer-terms/def/phosphorylation}{https://www.cancer.gov}
     \bibitem{NCBIPhosphorylation} Nestler EJ, Greengard P. {\em Protein Phosphorylation is of Fundamental Importance in Biological Regulation}. In: Siegel GJ, Agranoff BW, Albers RW, et al., editors. Basic Neurochemistry: Molecular, Cellular and Medical Aspects. 6th edition. Philadelphia: Lippincott-Raven; 1999.
+    \bibitem{Example} Tomasz Lipniacki, Pawel Paszek, Allan R. Brasier, Bruce Luxon, Marek Kimmel, {\em Mathematical model of NF-?B regulatory module}, Journal of Theoretical Biology, Volume 228, Issue 2, 2004, Pages 195-215, ISSN 0022-5193.
     
     
 
