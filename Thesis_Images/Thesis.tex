@@ -1677,7 +1677,7 @@ We do not have scanned also the toggle switch results by means of CWT because of
 
 \part{Deep Neural Networks for parameters estimation}
 %Noi usiamo l'autocorrelazione per� possono essere usate altre funzioni dipendenti dai parametri del sistema. Tipo alcuni usano lo scaleogramma. Trova le fonti che interessava molto il professore. 
-\chapter{Artificial Neural Networks as data-driven modeling}
+\chapter{Artificial Neural Networks (ANN) as data-driven modeling}
 The regression problem is how to model one or several dependent variables/responses, \emph{Y}, by means of a set of predictor variables, \emph{X} \cite{datadrivenmodeling}. 
 
 This problem can be faced in the data-driven modeling framework that is often more suitable to describe the real-world systems that are associated with complexities. A data-driven model is based on the analysis of the data about a specific system. The main concept of data-driven model is to \emph{find relationships between the system input and output variables without explicit knowledge of the physical behavior of the system} that is, in few words, the opposite of what we did in the previous sections when modeling genetic circuits. Unlike first principles models, data-driven models make no attempt to model the internal features of the system. Instead, they focus on matching the input-output behavior to observational data. 
@@ -1686,19 +1686,80 @@ The input-output data available from a system can be used to derive different fo
 
 In this thesis we use Artificial Neural Networks (ANN) as a method of data-driven modeling class. We use as input data the autocorrelation function whose shape depends on the system parameters and the output data are, indeed, the constant rates of reactions. Hence, it is a matter of building a multi-output regression model using a supervised deep neural network. Then this can be exploited for the purpose of state estimation.
 
-First we will describe the basics artificial neural networks concepts and then we will apply them to the data just mentioned that regard the three genetic models we studied. The results are both important for the building of a data-driven model that is applicable to experimental data and also the building of such deep learning model reveals biological important features of the simple genetic circuits we analysed. Even this last feature can be considered when dealing with data coming not from simulations. 
+First we will describe the basics artificial neural networks concepts and then we will apply them to the data just mentioned that regard the three genetic models we studied. The results are both important for the building of a data-driven model that is applicable to experimental data and also the building of such deep learning model reveals biological important features of the simple genetic circuits we analysed. Even this last feature can be considered when dealing with data not coming from simulations. 
 
 \section{Artificial Neural Networks: the basic principles}
+Artificial Neural Networks are algorithms that mathematically model the neurophysiological structure of human brain.
 
-\section{Building a Neural Network regression model}
+Human brain is full of neurons and so an artificial neural networks if made of many computational units that play the role of neurons. A biological \emph{neuron} receives inputs, transforms it and relays to the other at every step. In biophysical terms, this signal is the action potential that is an electrical signal transmitted by a neural cell across the \emph{axon}. 
 
-\section{Particular Artificial Neural Networks: Recurrent Neural Networks (RNN) and Long Short Term Memory (LSTM) Networks}
+An artificial neural network is made of a similar system. There are computational units (or even called ``nodes'') and the \emph{strengths} of the interconnections are represented by \emph{weights}, in which the learned information is stored.
 
-\chapter{Artificial Neural Network regression model at work}
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.70]{Neuron.png}
+\caption{Sketch of biological neuron (above) and artificial neuron (below).}
+\label{Neuron}
+\end{figure}
+
+Fig. \ref{Neuron} shows both the biological and artificial neuron. Hence, the model of a neuron is composed of three basic elements:
+\begin{itemize}
+ \item A set of \textbf{synapses}, or connecting links, characterized by \textbf{weights} or strength (i.e. the efficiency of the propagation of signals from one cell to another \cite{SynapticStrength}), and a signal $x_{i}$ at the input of synapse \emph{i} connected to a neuron \emph{k}. It is multiplied by the synaptic weight $w_{ki}$ (\emph{k-th} neuron, \emph{i-th} input component).
+ \item An \textbf{adder} to sum input signals weighted by synaptic strengths (linear integration).
+ \item An \textbf{activation function} for limiting the amplitude of the output of a neuron.
+\end{itemize}
+
+Thus, in few words, we can model, from a mathematical point of view, a
+neuron as a set of inputs which are processed with a set of weights into the computational unit of our neuron. This is the simple Rosenblatt Perceptron model whose output is a linear combination of the inputs $x_{i}$ weighted by the weights $w_{ki}$:
+\begin{equation}
+ \nu_{k}=\sum_{i=1}^{m} w_{ki}x_{i}
+\end{equation}
+
+and then processed by an activation function:
+
+\begin{equation}
+ y_{k} = f(\sum_{i=1}^{m} w_{ki}x_{i})
+\end{equation}
+
+
+The widely used ANN paradigm is a \emph{multi-layered feed-forward network} (MFFN) with multi-layered perceptron, mostly comprising three sequentially arranged layers of processing units. 
+
+The MFFN provides a mapping between an
+input (x) and output (y) through a nonlinear function (the previous mentioned activation function) f as $y=f(x)$.
+
+The three layered MFFN has input, hidden, and output layers, and each layer comprises of its own nodes. All the nodes in the input layer are connected using weighted links to the hidden layer nodes, and similar links exist between the hidden and output layer nodes. \emph{The weights represent the state of the knowledge} and are adjusted during the learning stage to improve the network performance.
+
+Usually, the input and hidden layers also contain a bias node with its output as unity.
+
+The nodes in the input layer do not perform any numerical processing. All numerical processing is done by the hidden and output layer nodes. Fig.\ref{MFFN} shows the structure of a typical multiinput-multioutput neural network.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.70]{MFFN.png}
+\caption{Sketch of a typical neural network structure. Image from \cite{datadrivenmodeling}}
+\label{MFFN}
+\end{figure}
+
+The interconnections between the layers of the network and the transfer functions of the neuron processing functions represent the distributed relationships between input and output data. This unique arrangement can acquire some of the neurological
+processing ability of the biological brain, such as \emph{learning and drawing conclusions from experience}.
+
+
+
+%Neural networks can be supervised and in this class we can consider the classification task and regression.
+
+\section{Regressor ANN and its components}
+
+\section{ANN hyperparameters}
+
+%\section{Particular Artificial Neural Networks: Recurrent Neural Networks (RNN) and Long Short Term Memory (LSTM) Networks}
+
+\chapter{Regressor ANN at work}
+\section{ANN applied to the first model}
+\section{ANN applied to the autorepressor model}
+\section{ANN applied to the toggle-switch model}
+%Metti come abbiamo generato i dati.
 %The widely used ANN paradigm is a multi-layered feed-forward network (MFFN) with multi-layered perceptron, mostly comprising three sequentially arranged layers of processing units. The MFFN provides a mapping between an input (x) and output (y) through a nonlinear function f as y=f(x). The three layered MFFN has input, hidden, and output layers, and each layer comprises of its own nodes. METTICI PER� CHE NON SAPPIAMO QUAL'� LA FUNZIONE f E LE COSE SCRITTE NEL PROGETTO DI REMONDINI. + USA IN QUALCHE MODO LE LSTM. 
-\section{ANN applied to the first protein synthesis model}
-\section{ANN applied to the Autorepressor model}
-\section{ANN applied to the Toggle-Switch model}
+
 %Confrontare la mae e la r2score generati da modelli uguali con diverse specie chimiche può darci informazioni su tali specie.
 
 \part{NF-\texorpdfstring{$\kappa$}{\265}B, a stochastic active player in human cancer}
@@ -2036,7 +2097,7 @@ Whereas for the inhibitors:
  \item $A20_{deactivation} = k3i (A20_{active})(NFkB)$
 \end{itemize}
 
-Where IKKn, IKKa, $A20_active$, $A20_inactive$, NFkB, $I\kappa B\alpha$ can be either 0 or 1. $NFkB:IkB\alpha$ is the NF-$\kappa$B bound to its inhibitor and also this can be either 0 or 1 denoting the fact that in this model NF-$\kappa$B can be in its active or inactive form.
+Where IKKn, IKKa, $A20_{active}$, $A20_{inactive}$, NFkB, $I\kappa B\alpha$ can be either 0 or 1. $NFkB:IkB\alpha$ is the NF-$\kappa$B bound to its inhibitor and also this can be either 0 or 1 denoting the fact that in this model NF-$\kappa$B can be in its active or inactive form.
 
 These are the rates to consider when simulating this model using Gillespie's algorithm.
 
@@ -2070,6 +2131,7 @@ This model is very simple is just a ``first order kinetic reactions model'' of t
 %Questo lavoro di caratterizzare la forma di una funzione di autocorrelazione per ogni modello pu� essere utile nel momento in cui ho i dati sperimentali, ne calcolo l'autocorrelazione e se vedo un deep per esempio posso dire che c'� una forma di repressione.
 %si sceglie la wavelet più simile al segnale però noi abbiamo scelto la più famosa diciamo e ha dato già risultati interessanti.
 %SPERIAMO DI POTER SCRIVERE: The model allows detailed analysis of kinetics of the involved proteins and their complexes and gives the predictions of the possible responses of whole kinetics to the change in the level of a given activator or inhibitor.
+%Si potrebbe migliorare la stima dei parametri usando una LSTM.
 \begin{appendices}
   \chapter{Software used in this thesis}
   All simulation methods and statistical data analysis have been performed using \emph{Python 3.9} and the programs are available in the following GitHub page \url{https://github.com/ManuelaCarriero/PyExTra} where you can find a detailed explanation of all the Python codes and how to reproduce the results reported in this work.
@@ -2179,6 +2241,7 @@ This model is very simple is just a ``first order kinetic reactions model'' of t
     \bibitem{NCBIPhosphorylation} Nestler EJ, Greengard P. {\em Protein Phosphorylation is of Fundamental Importance in Biological Regulation}. In: Siegel GJ, Agranoff BW, Albers RW, et al., editors. Basic Neurochemistry: Molecular, Cellular and Medical Aspects. 6th edition. Philadelphia: Lippincott-Raven; 1999.
     \bibitem{Example} Tomasz Lipniacki, Pawel Paszek, Allan R. Brasier, Bruce Luxon, Marek Kimmel, {\em Mathematical model of NF-?B regulatory module}, Journal of Theoretical Biology, Volume 228, Issue 2, 2004, Pages 195-215, ISSN 0022-5193.
     \bibitem{WikiHill} Hill equation (biochemistry) \url{https://en.wikipedia.org/wiki/Hill_equation_(biochemistry)}
+    \bibitem{SynapticStrength} Synaptic Strength \href{https://www.sciencedirect.com/topics/computer-science/synaptic-strength}{https://www.sciencedirect.com}
     
     
 
