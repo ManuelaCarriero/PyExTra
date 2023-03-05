@@ -1993,7 +1993,7 @@ Then a simple sketch of the model is shown in Fig.\ref{NFkBCompleteScheme}:
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[scale=0.50]{nfkbschemaconparametriCORRETTO.png}
+\includegraphics[scale=0.50]{nfkbschemaconparametriNUOVO.png}
 \caption{Sketch of our first model NF-$\kappa$B feedback loop regulatory module with relative parameters.}
 \label{NFkBCompleteScheme}
 \end{figure}
@@ -2005,7 +2005,7 @@ In this simple model there are already 10 rates constant:
  \item ki, the constant of activation rate of IKK.
  \item ka, the constant of inactivation rate of IKK.
  \item k1, the constant of activation rate of NF-$\kappa$B.
- \item k1i, the constant of inactivation rate of NF-$\kappa$B (this process is not shown in Fig.\ref{NFkBCompleteScheme}).
+ \item k1i, the constant of inactivation rate of NF-$\kappa$B (this process is shown in Fig.\ref{NFkBCompleteScheme} as the NF-$\kappa$B attached to its inhibitor I$\kappa$B$\alpha$).
  \item k2, the constant of activation rate of Ik$\alpha$.
  \item k2i, the constant of degradation rate of Ik$\alpha$.
  \item k3, the constant of activation rate of A20.
@@ -2015,21 +2015,45 @@ In this simple model there are already 10 rates constant:
 \end{itemize}
 
 
-Hence the rates of activation and inactivation of the four ON/OFF mentioned players are:
+Hence the rates of activation and inactivation of the four ON/OFF mentioned players are the following. Starting from the ones that are ``repressed'', i.e. IKK and NF-$\kappa$B:
+\begin{itemize}
+ \item $IKK_{activation} = ka (IKKn) (\frac{1}{1+A20_{active}})$
+ 
+ \item $IKK_{deactivation} = ki (IKKa) (A20_{active})$
+ 
+ \item $NFkB_{activation} = k1 (NFkB:IkB\alpha)(IKKa)(\frac{1}{1+IkB\alpha})$
+ \item $NFkB_{deactivation} = k1i (NFkB) (IkB\alpha)$
+\end{itemize}
+
+Whereas for the inhibitors:
+\begin{itemize}
+ \item $Ik\alpha_{activation} = k2 (NFkB)(Ik\alpha_{inactive})$
+ 
+ \item $Ik\alpha_{deactivation} = k2i (IKKa)(A20_{active})$
+ 
+ \item $A20_{activation} = k3 (A20_{inactive})(NFkB)$
+ 
+ \item $A20_{deactivation} = k3i (A20_{active})(NFkB)$
+\end{itemize}
+
+Where IKKn, IKKa, $A20_active$, $A20_inactive$, NFkB, $I\kappa B\alpha$ can be either 0 or 1. $NFkB:IkB\alpha$ is the NF-$\kappa$B bound to its inhibitor and also this can be either 0 or 1 denoting the fact that in this model NF-$\kappa$B can be in its active or inactive form.
+
+These are the rates to consider when simulating this model using Gillespie's algorithm.
+
+This model is very simple is just a ``first order kinetic reactions model'' of the NF-$\alpha$ feedback loops. However notice that the approximation of the ON/OFF behavior for what regards the NF-$\kappa$B is not so ``abstractive'' if we think at the dynamics of a ligand binding to a macromolecule such as protein that is described by the Hill function \cite{WikiHill}. Protein-ligand binding typically changes the structure of the target protein, thereby changing its function in a cell. In this case the binding of I$\kappa$B$\alpha$ to the NF-$\kappa$B ``changes the NF-$\kappa$B from an ON state to a OFF state''.
 
 
-%Equazioni degli altri 
 
-%Misuriamo la luce delle lucciole per esempio.
-
-%Puntiamo a riprodurre almeno il modello di Hoffman che è basato su dati sperimentali e considerando solo l'azione dell'IkBalfa della famiglia di IkB.
+%PROVA A TROVARE IL RATE CHE NEL CASO DI HOFFMANN è TROPPO VELOCE COME SCRITTO NELL'ARTICOLO.
 
 %Poi possiamo aggiungere il cambiamento delle quantità di questi componenti.
 
 %Il comportamento ON OFF non è tanto campato in aria (equazione di Hill). E' una reazione di ordine zero ?
 
 %ignoriamo le reazioni di dimerizzazioni, le catalitiche ed in generale le reazioni in cui un substrato si lega ad una proteina che sarebbero reazioni di ordine superiore al primo.
+
 \part{Results and discussion}
+%Puntiamo a riprodurre almeno il modello di Hoffman che è basato su dati sperimentali e considerando solo l'azione dell'IkBalfa della famiglia di IkB.
 %using experimental data del tuo centro di ricerca e di Hoffman.
 %descrivi l'andamento nel tempo di quel che hai trovato teoricamente e di quello che ci si aspetta.
 %sfrutta i metodi adottati nei circuiti genetici piï¿½ semplici.
@@ -2154,6 +2178,7 @@ Hence the rates of activation and inactivation of the four ON/OFF mentioned play
     \bibitem{NIHPhosphorylation} A process in which a phosphate group is added to a molecule, such as a sugar or a protein. \href{https://www.cancer.gov/publications/dictionaries/cancer-terms/def/phosphorylation}{https://www.cancer.gov}
     \bibitem{NCBIPhosphorylation} Nestler EJ, Greengard P. {\em Protein Phosphorylation is of Fundamental Importance in Biological Regulation}. In: Siegel GJ, Agranoff BW, Albers RW, et al., editors. Basic Neurochemistry: Molecular, Cellular and Medical Aspects. 6th edition. Philadelphia: Lippincott-Raven; 1999.
     \bibitem{Example} Tomasz Lipniacki, Pawel Paszek, Allan R. Brasier, Bruce Luxon, Marek Kimmel, {\em Mathematical model of NF-?B regulatory module}, Journal of Theoretical Biology, Volume 228, Issue 2, 2004, Pages 195-215, ISSN 0022-5193.
+    \bibitem{WikiHill} Hill equation (biochemistry) \url{https://en.wikipedia.org/wiki/Hill_equation_(biochemistry)}
     
     
 
