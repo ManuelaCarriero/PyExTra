@@ -1307,7 +1307,7 @@ In our genetic circuits analysis we will use an other kind of representation of 
 
 As we can notice, each red band is located to the precise frequency of the signal, that are 4 Hz, 30 Hz, 60 Hz and 90 Hz.
 
-This representation is even more intuitive. The mechanism of conversion from scale to frequency is not studied in this thesis. We can leave some references to the python module that is used and the relative documentation \cite{ssqueezepy},\cite{formuledissqueezepy}.
+This representation is even more intuitive. The mechanism of conversion from scale to frequency is not studied in this thesis. We can leave some references to the python module that is used and the relative documentation \cite{ssqueezepy},\cite{formuledissqueezepy},\cite{ssqueezepyfreqscale},\cite{squeezepywaveletcenterfrequency}.
 
 %We have shown three scaleograms based on three different wavelets and each one has been capable to give different type or a different ``amount'' of information.  
 
@@ -1588,7 +1588,7 @@ Note that if the x-axis units of the signal plot had been seconds, the units of 
 Hence, a sort of periodicity arises from these simulated gene expression signals. This is not a surprise since in nature the process of gene expression often shows a precise rythm that maybe caused to environmental factors such as diet, temperature, oxygen levels, humidity, light cycles, and the presence of mutagens can all impact gene expression \cite{NatureGeneExpression} or to the same gene regulatory code, inscribed in the DNA of each gene, specifies how the production of each gene product will be controlled in space, time and magnitude \cite{GeneExpressionTiming}.The gene expression rythm ultimately affects the animal's phenotype. One interesting and much studied synchronization is that between the myocardial contractile response and gene expression of the contractile protein. They show changes with a similar period \cite{GeneExpressionCardiacRythm}.
 \newpage
 
-\subsection{CWT}
+\subsection{CWT}\label{CWTapplication}
 Thanks to the autocorrelation analysis and the fast fourier transform we have achieved important information about our gentic models signals. In both cases we have investigated on the periodicity of the signal and in particular the frequencies present in it through the FFT.
 
 As explained in the theoretical sections about these methods, now we would like to try to get an higher level of information thanks to the Continous Wavelet Transforms. CWT can give information about periodicity and about the frequencies present in the signal as function of time in which the signal is present.
@@ -1933,7 +1933,7 @@ It is interesting to note that the non-canonical activation of NF-$\kappa$B is s
 
 
 
-\section{Models of NF-\texorpdfstring{$\kappa$}{\265}B activity oscillations}
+\section{Models of NF-\texorpdfstring{$\kappa$}{\265}B activity oscillations}\label{nfkbmodels}
 Many mathematical models of such key regulator NF-$\kappa$B activity oscillation have already been studied during years, highilighting the fact that it is  strongly regulated by the inhibitor protein I$\kappa$B$\alpha$. Here we list some studies results:
 \begin{itemize}
  \item For the first time, a mathematical model was presented by Hoffman et al. Their research showed that the resulting negative feedback produces a propensity for oscillation in NF-$\kappa$B activity. 
@@ -2023,7 +2023,7 @@ In particular, constitutive epidermal growth factor receptor and nuclear factor 
 
 
 %METTI CAPITOLO TIPO NF-KB AS A PARTICULAR TOGGLE SWITCH.
-\chapter{NF-\texorpdfstring{$\kappa$}{\265}B model formulation}
+\chapter{NF-\texorpdfstring{$\kappa$}{\265}B model formulation}\label{themodelformulation}
 %L'NF-kB assume l'aspetto di un prodotto da un housekeeping gene nel senso che Ã¨ sempre espresso nelle cellule tumorali perÃ² non deve comportarsi in questo modo.
 
 %Mice deficient in A20 develop severe inflammation and cachexia, are hypersensitive to TNF, and die prematurely (Lee et al., 2000). At a biochemical level, A20-deficient fibroblasts show persistent IKK activation after TNF stimulation demonstrating its essential role in mediating IKK inactivation (Lee et al., 2000). Despite these observations the exact mechanism of A20's action is not fully resolved.
@@ -2118,12 +2118,109 @@ This model is very simple is just a ``first order kinetic reactions model'' of t
 %using experimental data del tuo centro di ricerca e di Hoffman.
 %descrivi l'andamento nel tempo di quel che hai trovato teoricamente e di quello che ci si aspetta.
 %sfrutta i metodi adottati nei circuiti genetici piï¿½ semplici.
+\chapter{Results and discussion about the NF-kB model simulation}
+The expectation from the simple NF-$\kappa$B model described in the last section \ref{themodelformulation} in the model formulation is to obtain an oscillating RNA molecules temporal series as in the model predicted by Hoffman et al. where they experimentally measured the NF-$\kappa$B activity in the I$\kappa$B$\alpha$ and I$\kappa$B$\epsilon$ knock-out cells, whose trend was reported in section \ref{nfkbmodels} in Fig.\ref{NFkBOscillationProfileIkAlfa}. As said, the model displayed that I$\kappa$B$\alpha$ is responsible for strong negative feedback and a rapid switch-off of the NF-$\kappa$B response.
 
-\chapter{Conclusions}\epigraph{``Frase''}{Autore}
-%Per quanto riguarda l'algoritmo ibrido, occorrerebbe testarlo su tantissimi altri modelli e se ne ricaverebbe sicuramente miglioramento e automatizzare la scelta della differenza dei rate di soglia. Intanto perï¿½ abbiamo sviluppato un algoritmo che ï¿½ ``adattativo'' nel senso che si applica il Tau-leap ed il Gillespie in base a quel che sono le dinamiche ed in un sistema come l'NF-kB in cui ci sono tanti tipi di reazione che si comportano in un modo o in un altro ï¿½ quel che serve.
+%PARAMETRIIIII CHE TENDONO A MANTENERE L'NFKB PIù ATTIVO.
+
+Fig.\ref{NFkBsimulation} shows the trend of the SSA simulation of the number of RNA molecules produced from the target gene considering the simple NF-$\kappa$B model (whose scheme was reported in Fig.\ref{NFkBCompleteScheme}). The parameters used are chosen with the logic to keep the NF-$\kappa$B more active than inactive and are: $ka = 1$, $ki = 0.1$, $k1 = 1$, $k1i = 0.1$, $k4 = 1$, $k5 = 0.1$, $k2 = 0.1$, $k2i = 1$, $k3 = 0.1$, $k3i = 1$.
+
+\newpage
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.50]{nfkbRNAstimeplot.png}
+\caption{Number of RNA molecules produced through the NF-$\kappa$B activation and inhibition simulated by using the Stochastic Simulation Algorithm and considering model in Fig.\ref{NFkBCompleteScheme}}
+\label{NFkBsimulation}
+\end{figure}
+
+At first sight, we find an oscillatory profile that we can first verify calculating the autocorrelation as we did for our first genetic models. 
+
+It has an oscillatory behavior as well as the 4 autocorrelation curves reported in Fig.\ref{nfkbACFnlags100000dt0.01nsimulations4} for 4 SSA simulations of the same model.
+
+\newpage
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.70]{nfkbautocorrelationsinglesimulationdt0.01nlags100000.png}
+\caption{Autocorrelation curve regarding the temporal series in Fig.\ref{NFkBsimulation}. Number of lags equal to 100000 and sampling period dt=0.01. The y-axis reports the autocorrelation values and on the x-axis is the sampling period.}
+\label{nfkbautocorrelationsinglesimulationdt0.01nlags100000}
+\end{figure}
+
+
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.59]{nfkbACFnlags100000dt0.01nsimulations4.png}
+\caption{Autocorrelation curves regarding 4 SSA simulations of the same model \ref{NFkBCompleteScheme} with the same parameters. Number of lags equal to 10000 and sampling period dt=10. The y-axis reports the autocorrelation values and on the x-axis is the sampling period.}
+\label{nfkbACFnlags100000dt0.01nsimulations4}
+\end{figure}
+
+What we can notice is that they remind us to the toggle switch behavior where each simulation has a particular oscillatory behavior. It is not like the autorepressor case where there is a common initial deep characterizing all simulations (refering to the same model with same parameters but using a different random seed). Hence the autocorrelation calculated using quantiles (Fig.\ref{nfkbACFnlags10000dt10nsimulations64timelimit1000}) shows large error bars from the second point (the first one has zero error since the autocorrelation is 1 for all the simulations) and then from a sampling point equal to around 600 it decreases as confirmed from Fig.\ref{nfkbACFnlags100000dt0.01nsimulations4} where we see a common behavior.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.70]{nfkbACFnlags10000dt10nsimulations64timelimit1000.png}
+\caption{Autocorrelation curve plotted calculating quantiles of 64 simulations at each time step. Number of lags equal to 10000 and sampling period dt=10. The y-axis reports the autocorrelation values and on the x-axis is the sampling period.}
+\label{nfkbACFnlags10000dt10nsimulations64timelimit1000}
+\end{figure}
+
+\newpage
+
+As in the case of the ``standard'' genetic models analysed, from the Fourier Transform analysis (Fig.\ref{nfkbFFTsamplingperiod0.01}) we can notice relevant peaks at low frequencies and the noise is evenly sparse towards higher frequencies  suggesting the presence of a periodicity also in this case.
+
+
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.60]{nfkbFFTsamplingperiod0.01.png}
+\caption{Fast Fourier Transform of the temporal signal in Fig.\ref{NFkBsimulation}. y-axis is in linear scale while the the x-axis is in log scale.}
+\label{nfkbFFTsamplingperiod0.01}
+\end{figure}
+
+For concluding the pattern recognition analysis of our simple NF-kB model activity, the continous wavelet transform is shown in Fig.\ref{nfkbCWTssqueezepy}. 
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.70]{nfkbCWTssqueezepy.png}
+\caption{Continous Wavelet Transform of the temporal signal in Fig.\ref{NFkBsimulation} using Generalized Morlet Wavelt. Frequencies are reported on the vertical axis while the horizontal axis represents the time.}
+\label{nfkbCWTssqueezepy}
+\end{figure}
+
+The first impression is that it is similar to the CWT of the constituive expression model (Fig.\ref{CWTFirstModelka1ki0.5RNAs} and Fig.\ref{CWTFirstModelka1ki0RNAs}).
+
+However if observe it, we can notice two dark red spots at about 600 and 1000 arbitrary units of time and other regular patterns for example some ``lighter openings'' between them. All located at low frequencies as exprected from the FFT analysis.
+
+It would be interesting to apply the CWT to a longer time of simulation but as explained in the section \ref{CWTapplication} of CWT application, it goes beyond the computational resources available. 
+
+
+
+\chapter{Conclusions}
+All this thesis work is triggered by the desire to give a mathematical modeling of the NF-$\kappa$B activity, that has a fundamental role the regulation of many genes but also its disfunction leads to a long list of illnesses such as the colonrectal cancer cell. 
+
+In this voyage towards the a first mathematical model, we developed a ``hybrid'' algorithm (SSA combined with tauleaping) that is much faster than the SSA when the number of molecules produced tends to be higher, but on the other side it looses its speed performance when we have for example a simple system made by a gene that tends to be more inactive than active and so producing a low number of RNA molecules. If we think about it, it is the same behavior of a simple tauleaping algorithm except the important difference that the hybrid one controls that the number of molecules do not become negative, which is unphysical. Moreover this is an ``adaptive'' algorithm namely SSA or tauleaping are applied on the basis of what the dynamics of the system under study are (that for instance maybe the case of the NF-$\kappa$B). However, we did not feel to use it in this work of thesis because it needs to be tested on many other models together with other unit testings. Finally about this, one other improvement that should be done is the automatation of the choice about the threashold of differences between the old rates and the updated rates. By experience, fixing a $\Delta K_{t}=10$ we achieve the performance just explained but we admit that in any case the choice of a parameter is not confortable.
+
+Playing with the gene regulation of the first protein synthesis model has helped us in the building of the algorithm. Hence we exploited biology to build the hybrid algorithm.
+
+Then we passed to the inverse procedure: by means of algorithms built for the study of stochastic processes we exploited the behavior of four simple standard genetic circuits models: the constituive expression, the regulated gene, the autorepressor and the toggle switch.
+
+In particular, we exploited the autocorrelation, the fast fourier transform analysis and the continous wavelet transform.
+
+What we are able to conclude about these simple models using these means of investigation is that all models analysed have inner periodicity but the autorepressor model is the ``most periodic'' one. First its autocorrelation curve is the only one that with computing quantiles of 64 simulations preserves the characteristic initial negative deep; then from the CWT analysis, we found patterns located at regular time intervals. 
+
+The periodicity in time of the signal in this context is very important. It could be responsible of phenotypic processes such as the example of synchronization between the myocardial contractile response and gene expression of contractile protein. Or even one can find the cause of this periodicity and discover important relationships that if broken could lead to cellular disfunctions. And one can act in order to repristinate this periodicity. Indeed, for each model we have searched also ``their place in biology'' and we found that one gene that uses this type of regulation is the Regulatoy factor X1. Many studies show that RFX1' gene expression regulation is based on its autorepression in response to DNA replication arrest. Also its oncogenic potential is analysed in some cancers.
+
+However, the subject of this thesis if the NF-$\kappa$B and also this is an other transcriptional factor and these reasonings can be done also in this context.
+
+We have tried to model the NF-$\kappa$B activity based on the only actions of two inhibitors, the I$\kappa$B$\alpha$ and the A20. The results of this very simple model based only on first order reaction rate and ON/OFF behavior show a temporal series that has an oscillating behavior very similar to the one found by Hoffman et al. in their experiments. The autocorrelation function is indeed oscillating whereas the fast fourier tranform shows periodicity at low frequencies such as the first simple models analysed. From the continous wavelet transform some patterns arise but with the computational resources at hand it is difficult to draw conclusions.
+
+%RISULTATI SULLE RETI NEURALI.
+
+%MIGLIORAMENTI.
+
 %Long-tail distributions governs biological systems and the ``queen'' of these is the Poisson Distribution.
 %Metti nella conclusione della tesi che il tutto sta nel trovare i parametri giusti sia nel sistema che rappresenta il soggetto di questa tesi l'NF-kB per poterne modellizzare il comportamento e trovare terapie per tumori o infiammazioni croniche; sia nel percorso fatto per arrivare a studiare questo sistema allo scopo di ottenere i metodi giusti per poterlo esplorare. 
-%Usiamo i metodi per esplorare la biologia perï¿½ vale anche il viceversa ossia la biologia stessa ci puï¿½ aiutare a sviluppare i metodi come abbiamo fatto nell'algoritmo ibrido sfruttando le diverse configurazioni del modello ed i diversi tipi di regolazione.
+
 %Quel che abbiamo definito e descritto come ``rumore'' in biologia all'inizio della tesi a livello computazionale lo si inserisce.
 %Per quanto riguarda i modelli semplici analizzati: mentre nel caso del gene sempre espresso e regolato possiamo trovare situazioni generali in natura, nel caso dell'autorepressore ed il toggle switch non sembra perï¿½ nelle ricerche fatte in questo lavoro di tesi sembrano spesso essere coinvolti negli oncogenes e quindi casi di tumore. Anche l'NF-kB ï¿½ un caso di gene sempre espresso perï¿½ non per garantire il buon funzionamento cellulare bensï¿½ ï¿½ il caso in cui si ha un cattivo funzionamento.
 %Per studiare i sistemi stocastici occorre pazienza e fantasia.
@@ -2132,9 +2229,11 @@ This model is very simple is just a ``first order kinetic reactions model'' of t
 %si sceglie la wavelet piÃ¹ simile al segnale perÃ² noi abbiamo scelto la piÃ¹ famosa diciamo e ha dato giÃ  risultati interessanti.
 %SPERIAMO DI POTER SCRIVERE: The model allows detailed analysis of kinetics of the involved proteins and their complexes and gives the predictions of the possible responses of whole kinetics to the change in the level of a given activator or inhibitor.
 %Si potrebbe migliorare la stima dei parametri usando una LSTM.
+%Facendo più simulazioni e prendendo un sampling period più piccolo forse potremmo avere una curva di autocorrelazione più veritiera quando la si calcola per diverse simulazioni con i quantili.
 \begin{appendices}
   \chapter{Software used in this thesis}
-  All simulation methods and statistical data analysis have been performed using \emph{Python 3.9} and the programs are available in the following GitHub page \url{https://github.com/ManuelaCarriero/PyExTra} where you can find a detailed explanation of all the Python codes and how to reproduce the results reported in this work.
+  All simulation methods and statistical data analysis have been performed using Python 3.9 and the programs are available in the following GitHub page \url{https://github.com/ManuelaCarriero/PyExTra} where you can find a detailed explanation of all the Python codes and how to reproduce the results reported in this work.
+  
   \chapter{Glossary of biology}
   \begin{itemize}
    \item \textbf{Oncogenes} are genes that have the potential to cause cancer. In tumor cells, these genes are often mutated, or expressed at high levels \cite{oncogenes}.
@@ -2235,6 +2334,9 @@ This model is very simple is just a ``first order kinetic reactions model'' of t
     \bibitem{ssqueezepy} Synchrosqueezing in Python \url{https://github.com/OverLordGoldDragon/ssqueezepy}
     \bibitem{formuledissqueezepy} Synchrosqueezing Wavelet Transform explanation? (How's it work, exactly?)
     \href{https://dsp.stackexchange.com/questions/71398/synchrosqueezing-wavelet-transform-explanation/71399#71399}{https://dsp.stackexchange.com}
+    \bibitem{ssqueezepyfreqscale}
+    Wavelet "center frequency" explanation? Relation to CWT scales? \href{https://dsp.stackexchange.com/questions/76329/wavelet-center-frequency-explanation-relation-to-cwt-scales/76371#76371}{https://dsp.stackexchange.com}
+    \bibitem{squeezepywaveletcenterfrequency} How is wavelet center frequency computed? \href{https://dsp.stackexchange.com/questions/70835/how-is-wavelet-center-frequency-computed/70837#70837}{https://dsp.stackexchange.com}
     \bibitem{TNF} tumor necrosis factor
     \href{https://www.cancer.gov/publications/dictionaries/cancer-terms/def/tumor-necrosis-factor}{https://www.cancer.gov}
     \bibitem{NIHPhosphorylation} A process in which a phosphate group is added to a molecule, such as a sugar or a protein. \href{https://www.cancer.gov/publications/dictionaries/cancer-terms/def/phosphorylation}{https://www.cancer.gov}
