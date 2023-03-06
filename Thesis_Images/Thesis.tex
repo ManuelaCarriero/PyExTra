@@ -1691,13 +1691,13 @@ First we will describe the basics artificial neural networks concepts and then w
 \section{Artificial Neural Networks: the basic principles}
 Artificial Neural Networks are algorithms that mathematically model the neurophysiological structure of human brain.
 
-Human brain is full of neurons and so an artificial neural networks if made of many computational units that play the role of neurons. A biological \emph{neuron} receives inputs, transforms it and relays to the other at every step. In biophysical terms, this signal is the action potential that is an electrical signal transmitted by a neural cell across the \emph{axon}. 
+Human brain is full of neurons and so an artificial neural networks if made of many computational units that play the role of neurons. A biological \emph{neuron} receives inputs, transforms it and relays a signal to the other at every step. In biophysical terms, this signal is the action potential that is an electrical signal transmitted by a neural cell across the \emph{axon}. 
 
 An artificial neural network is made of a similar system. There are computational units (or even called ``nodes'') and the \emph{strengths} of the interconnections are represented by \emph{weights}, in which the learned information is stored.
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[scale=0.70]{Neuron.png}
+\includegraphics[scale=0.75]{Neuron.png}
 \caption{Sketch of biological neuron (above) and artificial neuron (below).}
 \label{Neuron}
 \end{figure}
@@ -1731,7 +1731,7 @@ The three layered MFFN has input, hidden, and output layers, and each layer comp
 
 Usually, the input and hidden layers also contain a bias node with its output as unity.
 
-The nodes in the input layer do not perform any numerical processing. All numerical processing is done by the hidden and output layer nodes. Fig.\ref{MFFN} shows the structure of a typical multiinput-multioutput neural network.
+\emph{The nodes in the input layer do not perform any numerical processing}. All numerical processing is done by the hidden and output layer nodes. Fig.\ref{MFFN} shows the structure of a typical multinput-multioutput neural network.
 
 \begin{figure}[!ht]
 \centering
@@ -1748,6 +1748,19 @@ processing ability of the biological brain, such as \emph{learning and drawing c
 %Neural networks can be supervised and in this class we can consider the classification task and regression.
 
 \section{Regressor ANN and its components}
+There are many categories of neural networks models. They map input patterns to their associated output patterns by learning from examples. The learning paradigm that we will exploit is the supervised learning.
+
+This type of learning is acquired by training the network with a sequence of input and output data and comparing the network predictions with the expected responses. 
+
+Network interconnection weights are adjusted according to the learning algorithm and training is continued until the network provides desired responses. NN learning finds a function f that matches the example data.
+
+However, we have to consider that neural network is a ``black box'' in the sense that while it can approximate any function, studying its structure will not give you any insights on the structure of the function being approximated.
+
+This makes the analysis very hard, at least from the point of view of choosing right neural network architecture.
+
+There is no ``a standard and accepted method'' for choosing network configuration. 
+
+Typically, as said previously, all neural networks have an \emph{input} layer that do not perform any numerical processing and whose number of neurons is determined by the context since it is given by the number of features. For example, in this case it is the length of the arrays of autocorrelation values that we give in input.
 
 \section{ANN hyperparameters}
 
@@ -2196,7 +2209,7 @@ It would be interesting to apply the CWT to a longer time of simulation but as e
 
 
 \chapter{Conclusions}
-All this thesis work is triggered by the desire to give a mathematical modeling of the NF-$\kappa$B activity, that has a fundamental role the regulation of many genes but also its disfunction leads to a long list of illnesses such as the colonrectal cancer cell. 
+All this thesis work is triggered by the desire to give a mathematical modeling of the NF-$\kappa$B activity, that has a fundamental role the regulation of many genes but also its disfunction leads to a long list of illnesses such as the colonrectal cancer. 
 
 In this voyage towards the a first mathematical model, we developed a ``hybrid'' algorithm (SSA combined with tauleaping) that is much faster than the SSA when the number of molecules produced tends to be higher, but on the other side it looses its speed performance when we have for example a simple system made by a gene that tends to be more inactive than active and so producing a low number of RNA molecules. If we think about it, it is the same behavior of a simple tauleaping algorithm except the important difference that the hybrid one controls that the number of molecules do not become negative, which is unphysical. Moreover this is an ``adaptive'' algorithm namely SSA or tauleaping are applied on the basis of what the dynamics of the system under study are (that for instance maybe the case of the NF-$\kappa$B). However, we did not feel to use it in this work of thesis because it needs to be tested on many other models together with other unit testings. Finally about this, one other improvement that should be done is the automatation of the choice about the threashold of differences between the old rates and the updated rates. By experience, fixing a $\Delta K_{t}=10$ we achieve the performance just explained but we admit that in any case the choice of a parameter is not confortable.
 
@@ -2206,9 +2219,9 @@ Then we passed to the inverse procedure: by means of algorithms built for the st
 
 In particular, we exploited the autocorrelation, the fast fourier transform analysis and the continous wavelet transform.
 
-What we are able to conclude about these simple models using these means of investigation is that all models analysed have inner periodicity but the autorepressor model is the ``most periodic'' one. First its autocorrelation curve is the only one that with computing quantiles of 64 simulations preserves the characteristic initial negative deep; then from the CWT analysis, we found patterns located at regular time intervals. 
+What we are able to conclude about these simple models using these means of investigation is that all models analysed have inner periodicity (confirmed by the fast fourier transforms results) but the autorepressor model is the ``most periodic'' one. First its autocorrelation curve is the only one that with computing quantiles of 64 simulations preserves the characteristic initial negative deep; then from the CWT analysis, we found patterns located at regular time intervals. 
 
-The periodicity in time of the signal in this context is very important. It could be responsible of phenotypic processes such as the example of synchronization between the myocardial contractile response and gene expression of contractile protein. Or even one can find the cause of this periodicity and discover important relationships that if broken could lead to cellular disfunctions. And one can act in order to repristinate this periodicity. Indeed, for each model we have searched also ``their place in biology'' and we found that one gene that uses this type of regulation is the Regulatoy factor X1. Many studies show that RFX1' gene expression regulation is based on its autorepression in response to DNA replication arrest. Also its oncogenic potential is analysed in some cancers.
+The periodicity in time of the signal in this context is very important. It could be responsible of phenotypic processes such as the example of synchronization between the myocardial contractile response and gene expression of contractile protein. Or even one can find the cause of this periodicity and discover important relationships that if broken could lead to cellular disfunctions. And one can act in order to repristinate this periodicity. Indeed, for each model we have searched also ``their place in biology'' and we found that one gene that uses this type of regulation is the Regulatoy factor X1. Many studies show that RFX1's gene expression regulation is based on its autorepression in response to DNA replication arrest. Also its oncogenic potential is analysed in some cancers.
 
 However, the subject of this thesis if the NF-$\kappa$B and also this is an other transcriptional factor and these reasonings can be done also in this context.
 
