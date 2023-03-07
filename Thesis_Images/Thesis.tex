@@ -291,7 +291,7 @@ And so, while \emph{the law of mass balance} is used to construct deterministic 
 %Il Professore diceva che occorreva molto tempo quindi � un punto contro l'approximate Bayesian approach. Per� in molti lavori (tipo la tesi che hai trovato o di Giosu�) che riguardano l'NF-kB usano l'approccio Bayesiano quindi studiali.
 
 \section{The importance of random numbers generation}
-%I numeri random che ci permettono di simulare quello che in natura abbiamo chiamato la ``stocasticità'' vanno generati in modo preciso.
+%I numeri random che ci permettono di simulare quello che in natura abbiamo chiamato la ``stocasticità'' vanno generati in modo preciso + ci abbiamo anche generato i parametri con una distribuzione Gamma come la volevamo noi (in biologia � una distribuzione molto importante).
 
 \chapter{Stochastic simulation in systems biology}\label{Simulations}
 
@@ -1839,9 +1839,26 @@ We are going to use this to evaluate the true vs predicted data since the better
 
 
 
-%E' usato per valutare i valori predetti e veri.
+
 \chapter{Regressor ANN at work}
-%Teniamo i parametri costanti per fare un confronto tra diversi modelli.
+We generate the \emph{k} parameters values that are distributed according to a Gamma distribution. This choice is due to the fact that we recognize these values as the most probable to be for the constant rates of reactions.
+
+The probability density function for gamma is \cite{scipy}:
+\begin{equation}
+ f(x,a) = \frac{x^{a-1}e^{-x}}{\Gamma(a)}
+\end{equation}
+for $x \geq 0$, $a \ge 0$. Here, $\Gamma(a)$ refers to the Gamma function. \emph{a} is the shape parameter.
+
+Gamma distributions are sometimes parameterized with two variables, with a probability density function of:
+\begin{equation}
+ f(x,\alpha,\beta)=\frac{\beta^{\alpha}x^{\alpha-1}e^{-\beta x}}{\Gamma(\alpha)}
+\end{equation}
+
+Note that this parameterization is equivalent to the above, with $scale = \frac{1}{\beta}$.
+
+We choose to generate gamma distribution parameters with $a=3$ and $scale=0.5$ using scipy.stats function.
+
+%Teniamo i parametri costanti per fare un confronto tra diversi modelli e generiamo i dati con una distribuzione Gamma.
 \section{ANN applied to the first model}
 \section{ANN applied to the autorepressor model}
 \section{ANN applied to the toggle-switch model}
@@ -2437,6 +2454,7 @@ The model lacks of many features such as catalytical reactions and so second ord
     \bibitem{SynapticStrength} Synaptic Strength \href{https://www.sciencedirect.com/topics/computer-science/synaptic-strength}{https://www.sciencedirect.com}
     \bibitem{ANNBrainTumorsNMR} H. H. Sultan, N. M. Salem and W. Al-Atabany, {\em Multi-Classification of Brain Tumor Images Using Deep Neural Network}, in IEEE Access, vol. 7, pp. 69215-69225, 2019.
     \bibitem{MAE} (2011). Mean Absolute Error. In: Sammut, C., Webb, G.I. (eds) Encyclopedia of Machine Learning. Springer, Boston, MA.
+    \bibitem{scipy} scipy.stats.gamma \href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gamma.html}{https://docs.scipy.org}
     
     
 
