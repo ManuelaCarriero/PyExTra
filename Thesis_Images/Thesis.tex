@@ -1472,7 +1472,7 @@ We can notice that for different random seeds the trajectory has an oscillating 
 \newpage
 However Fig.\ref{ToggleSwitchACFnlags10000dt100nsimulations64} reflects what we see in Fig.\ref{ToggleSwitchACFnlags100000dt0.1nsimulations4Gtaudifferentcollors} that is without the error bars. Up to the 3000 sampling points the error bars are large then they start to decrease due to the increasing overlapping between simulations.
 
-The shape of such autocorrelation functions in Fig.\ref{ToggleSwitchACFnlags10000dt100nsimulations64} would resemble to the first model case, however in the that case, the error bars where indeed much smaller indicating a smaller variation into the autocorrelation trends for each random seed.
+The shape of such autocorrelation functions in Fig.\ref{ToggleSwitchACFnlags10000dt100nsimulations64} would resemble to the first model case, however in the that case, the error bars where indeed much smaller indicating a smaller variation into the autocorrelation trends for each random seed and the median values lay exactly on the horizontal line corresponding to the zero value y-axis.
 
 Hence, from this analysis, we can conclude that the autocorrelation curves are sensitive to the model parameters but also to the type of model. Given these simple genetic circuits that we have analysed, it is possible to understand by looking at the autocorrelation functions which are the genetic models from which they have been generated.  
 
@@ -1684,14 +1684,14 @@ This problem can be faced in the data-driven modeling framework that is often mo
 
 The input-output data available from a system can be used to derive different forms of computationally efficient data-driven models for the purpose of prediction, state estimation, monitoring, and other process systems engineering applications. The rapid increase in the availability of data of physical systems has stimulated the development of many data-driven methods for modeling and prediction. 
 
-In this thesis we use Artificial Neural Networks (ANN) as a method of data-driven modeling class. We use as input data the autocorrelation function whose shape depends on the system parameters and the output data are, indeed, the constant rates of reactions. Hence, it is a matter of building a multi-output regression model using a supervised deep neural network. Then this can be exploited for the purpose of state estimation.
+In this thesis we use Artificial Neural Networks (ANN) as a method of data-driven modeling class. We use as input data the autocorrelation function whose shape depends on the system parameters and the output data are, indeed, the constant rates of reactions. Hence, it is a matter of building a \emph{multi-output regression model} using a supervised deep neural network. Then this can be exploited for the purpose of state estimation.
 
 First we will describe the basics artificial neural networks concepts and then we will apply them to the data just mentioned that regard the three genetic models we studied. The results are both important for the building of a data-driven model that is applicable to experimental data and also the building of such deep learning model reveals biological important features of the simple genetic circuits we analysed. Even this last feature can be considered when dealing with data not coming from simulations. 
 
 \section{Artificial Neural Networks: the basic principles}
 Artificial Neural Networks are algorithms that mathematically model the neurophysiological structure of human brain.
 
-Human brain is full of neurons and so an artificial neural networks if made of many computational units that play the role of neurons. A biological \emph{neuron} receives inputs, transforms it and relays a signal to the other at every step. In biophysical terms, this signal is the action potential that is an electrical signal transmitted by a neural cell across the \emph{axon}. 
+Human brain is full of neurons and so an artificial neural network is made of many computational units that play the role of neurons. A biological \emph{neuron} receives inputs, transforms it and relays a signal to the other at every step. In biophysical terms, this signal is the action potential that is an electrical signal transmitted by a neural cell across the \emph{axon}. 
 
 An artificial neural network is made of a similar system. There are computational units (or even called ``nodes'') and the \emph{strengths} of the interconnections are represented by \emph{weights}, in which the learned information is stored.
 
@@ -1745,7 +1745,7 @@ processing ability of the biological brain, such as \emph{learning and drawing c
 
 
 
-%Neural networks can be supervised and in this class we can consider the classification task and regression.
+ 
 
 \section{Regressor ANN and its components}
 There are many categories of neural networks models. They map input patterns to their associated output patterns by learning from examples. The learning paradigm that we will exploit is the supervised learning.
@@ -1762,11 +1762,86 @@ There is no ``a standard and accepted method'' for choosing network configuratio
 
 Typically, as said previously, all neural networks have an \emph{input} layer that do not perform any numerical processing and whose number of neurons is determined by the context since it is given by the number of features. For example, in this case it is the length of the arrays of autocorrelation values that we give in input.
 
+Then the \emph{output} layer has a number of nodes equal to the output variables that the neural network has to predict. In our case, since we aim to obtain the model paramaters starting from the autocorrelation function, if the parameters are 4 (for instance the constants rate of the numeber of RNAs molecules increase and degradation and the same analogously for proteins in the simple first model analysed in chapter \ref{models}), the the output layer will have 4 nodes.
+
+As regards the number of hidden layers and the relative number of nodes, as said before, there is no standard rule. We tried with a classical one that is the number of nodes decreases layer per layer.
+
+Then we need to choose other main ingredients: 
+\begin{itemize}
+    \item one is the \emph{activation function}. As the name suggests, it ``activates'' the
+    output that the weighted sum of the inputs is transformed so that the output is limited into a determined range of values. In this case we use the \emph{ReLU} function for each hidden layer and output layer. The rectified linear activation function (or ReLU) for short is a piecewise linear function that will output the input directly if it is positive, otherwise, it will output zero (see Fig.\ref{ReLU}). 
+
+    \begin{figure}[!ht]
+    \centering
+    \includegraphics[scale=0.50]{ReLUactivationfunction.png}
+    \caption{Sketch of ReLU activation function. Image from \cite{ANNBrainTumorsNMR}}
+    \label{ReLU}
+    \end{figure}
+
+    Indeed we are going to predict values that are posive numbers (i.e. the model parameters) hence this is suitable for our context.
+    
+    \item One other ingredient is \emph{the optimization algorithm}. The learning strategy of our neural network is based on backpropagation algorithm that updates all the weights (i.e. connections between neurons) in order to minimize \emph{an error function} which characterizes the comparison between the network output and the ground truth in supervised models. The variation in time of the weights is given by: 
+    \begin{equation}
+     \dot{w_{i}}=\frac{dE}{dw}
+    \end{equation}
+    
+    where E is the error function that is also refered to as energy function in analogy to a physical system in which forces act to minimize the energy. There are different optimizers to make the network evolve, i.e.
+    algorithms used to change the attributes of a neural network such as weights and learning rate in order to reach the optimal solution and minimize the loss. In this study we use the \emph{Adam} as optimization algorithm that deals with the challenge of choosing the proper learning rate (in a classic gradient descent method, if it is too small leads to painfully slow convergence, if too large can hinder convergence) and of avoiding getting trapped in the suboptimal local minima. Its strategy is to accelarate the learning rate but it dampens oscillations towards local minimum. It combines the heuristics of two methods called Momentum and RMSProp.
+    
+    \item As regards the error function instead, since we are building a regressor model, we use the \emph{Mean Absolute Error}. The mean absolute error of a model with respect to a test set is the mean of the absolute values of the individual prediction errors on over all instances in the test set. Each prediction error is the difference between the true value and the predicted value for the instance \cite{MAE}.
+    \begin{equation}
+     mae = \frac{\sum_{n=1}^{n} abs(y_{i}-\lambda(x_{i})}{n}
+    \end{equation}
+    
+    where $y_{i}$ is the true target value for test instance $x_{i}$, $\lambda(x_{i})$ is the predicted target value for test instance $x_{i}$, and \emph{n} is the number of test instances.
+
+\end{itemize}
+
+
+
+
+
+
+
+
+
 \section{ANN hyperparameters}
+We must manually tune the following hyperparameters:
 
-%\section{Particular Artificial Neural Networks: Recurrent Neural Networks (RNN) and Long Short Term Memory (LSTM) Networks}
+\begin{itemize}
+ \item the \emph{batch size}:  computing the gradient on the whole dataset is computationally very complex so nowadays the choice is to devide the dataset into batches, that is \emph{the number of samples to work through before updating the internal model paramaters} (i.e. weights). If we set a batch size equal to 128, the model weigths will be updated after each batch of 128 samples.
+ \item \emph{number of epochs}: it defines the number of times that the learning algorithm will work through the entire training dataset. One epoch means that each sample in the training dataset has had an opportunity to update the internal model parameters.
+ \item \emph{dropout}: since there can be problems of overfitting so that the network learns the input data without being able to generalize or also the problem to get stuck in local minima of the energy function that implies a not optimal learning of the network, there are some regularization procedures to overcome these problems, one of which is perturbing the architecture of the network (dropout). This method consists in removing a subset of nodes during training, randomly choosing the removed units at each training epoch. The reason is that it was observed that while training a network, after overfitting, the weights for some of neurons increases and cause the network to be dependant on them. By exploiting dropout, we are not dependant on any node anymore due to it is possible to drop it while training.
+ 
+ For example, if you set dropout rate to 0.1, then for each iteration within each epoch, each node in that layer has a 10\% probability of being dropped from the neural network. This makes the network more robust and allows weights to explore a wider parameter space.
+ 
+\end{itemize}
 
+\section{Coefficient of determination}
+Finally, we decide to judge the goodness of our model in predicting the true values using a score called \emph{coefficient of determination} denoted as $R^{2}$ pronounced ``R squared''.
+
+A data set has \emph{n} values marked $y_{1}$,...,$y_{n}$ each associated with a fitted (or modeled, or predicted) value $f_{1}$,...,$f_{n}$. Define residuals as $e_{i} = y_{i} - f_{i}$. If $\bar{y}$ is the mean of the observed data:
+\begin{equation}
+ \bar{y} = \frac{1}{n} \sum_{i=1}^{n}y_{i}
+\end{equation}
+
+then the variability of the data set can be measured with two \emph{sums of squares} formulas: the sum of squares of residuals $SS_{res}=\sum_{i}(y_{i}-f_{i})^{2} = \sum_{i} e_{i}^{2}$ and the total sum of squares (proportional to the variance of the data) $SS_{tot}=\sum_{i}(y_{i}-\bar{y})^{2}$.
+
+The most general definition of the coefficient of determination is:
+\begin{equation}
+ R^{2} = 1 - \frac{SS_{res}}{SS_{tot}}
+\end{equation}
+
+In the best case, the modeled values exactly match the observed values, which results in $SS_{res}=0$ and $R^{2}=1$. A baseline model, which always predicts $\bar{y}$, will have $R^{2}=0$. Models that have worse predictions than this baseline will have a negative $R^{2}$.
+
+We are going to use this to evaluate the true vs predicted data since the better the linear regression fits such data, the closer is the value of $R^{2}$ is to 1.
+
+
+
+
+%E' usato per valutare i valori predetti e veri.
 \chapter{Regressor ANN at work}
+%Teniamo i parametri costanti per fare un confronto tra diversi modelli.
 \section{ANN applied to the first model}
 \section{ANN applied to the autorepressor model}
 \section{ANN applied to the toggle-switch model}
@@ -2225,7 +2300,10 @@ The periodicity in time of the signal in this context is very important. It coul
 
 However, the subject of this thesis if the NF-$\kappa$B and also this is an other transcriptional factor and these reasonings can be done also in this context.
 
-We have tried to model the NF-$\kappa$B activity based on the only actions of two inhibitors, the I$\kappa$B$\alpha$ and the A20. The results of this very simple model based only on first order reaction rate and ON/OFF behavior show a temporal series that has an oscillating behavior very similar to the one found by Hoffman et al. in their experiments. The autocorrelation function is indeed oscillating whereas the fast fourier tranform shows periodicity at low frequencies such as the first simple models analysed. From the continous wavelet transform some patterns arise but with the computational resources at hand it is difficult to draw conclusions.
+We ended this journey leaving a simple model the NF-$\kappa$B activity based on the only actions of two inhibitors, the I$\kappa$B$\alpha$ and the A20. The results of this very simple model based only on first order reaction rate and ON/OFF behavior show a temporal series that has an oscillating behavior very similar to the one found by Hoffman et al. in their experiments. The autocorrelation function is indeed oscillating whereas the fast fourier tranform shows periodicity at low frequencies such as the first simple models analysed. From the continous wavelet transform some patterns arise but with the computational resources at hand it is difficult to draw conclusions. 
+
+The model lacks of many features such as catalytical reactions and so second order reactions. However, just in the introduction of this thesis we mentioned the famous phrase ``all models are wrong but some are usefull''. Our model is wrong but it is usefull as a starting point and also to predict what happens if one of the few players involved lacks. For instance the important role played by the inhibitor I$\kappa$B$\alpha$ whose lacking leads to a higher level of NF-$\kappa$B expression, that is what happens in colon cancer cells.
+%FARLOOOOO
 
 %RISULTATI SULLE RETI NEURALI.
 
@@ -2357,6 +2435,8 @@ We have tried to model the NF-$\kappa$B activity based on the only actions of tw
     \bibitem{Example} Tomasz Lipniacki, Pawel Paszek, Allan R. Brasier, Bruce Luxon, Marek Kimmel, {\em Mathematical model of NF-?B regulatory module}, Journal of Theoretical Biology, Volume 228, Issue 2, 2004, Pages 195-215, ISSN 0022-5193.
     \bibitem{WikiHill} Hill equation (biochemistry) \url{https://en.wikipedia.org/wiki/Hill_equation_(biochemistry)}
     \bibitem{SynapticStrength} Synaptic Strength \href{https://www.sciencedirect.com/topics/computer-science/synaptic-strength}{https://www.sciencedirect.com}
+    \bibitem{ANNBrainTumorsNMR} H. H. Sultan, N. M. Salem and W. Al-Atabany, {\em Multi-Classification of Brain Tumor Images Using Deep Neural Network}, in IEEE Access, vol. 7, pp. 69215-69225, 2019.
+    \bibitem{MAE} (2011). Mean Absolute Error. In: Sammut, C., Webb, G.I. (eds) Encyclopedia of Machine Learning. Springer, Boston, MA.
     
     
 
