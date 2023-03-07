@@ -1860,10 +1860,93 @@ We choose to generate gamma distribution parameters with $a=3$ and $scale=0.5$ u
 
 %Teniamo i parametri costanti per fare un confronto tra diversi modelli e generiamo i dati con una distribuzione Gamma.
 \section{ANN applied to the first model}
+Let us consider the first genetic model described in section \ref{regulatedgeneexpressionsection} with regulation that tends to keep the gene more active than inactive, i.e. $k_{a}=1$ and $k_{i}=0.5$.
+
+In order to judge the performance of our regressor ANN, we plot we true parameters vs the predicted one, before evaluating the values of the $R^{2}$. We start from the autocorrelation of both RNAs and proteins given as input.
+
+What we can notice is that test data (never seen by the neural network) are sparse but most of these are close or lie on the diagonal (Fig.\ref{firstmodeltestdata0.05RNAPROTEINS}).
+
+In this case $R_{test}^{2}=0.5$ and $R_{train}^{2}=0.9$. The score for the train is much higher than the one for the test. This maybe due to overfitting as suggested by the shape of the learning curve in Fig.\ref{firstmodellearningcurveRNAPROTEINS}.
+
+Since the test set is 5\%, one attempt to get better performance was to increase the test set to 10\%. This produces infact learning curves with a smaller gap between the training loss curve and the test loss curve (see Fig.\ref{firstmodeltestdata0.10learningcurvesshowloweroverfittingRNAPROTEINS}). The the scores in this case are $R^{2}=0.4$ and $R^{2}=0.7$.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.50]{firstmodeltestdata0.05RNAPROTEINS.png}
+\caption{True data vs predicted data for the test set. RNAs and proteins autocorrelation are considered.}
+\label{firstmodeltestdata0.05RNAPROTEINS}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.50]{firstmodeltraindata0.05RNAPROTEINS.png}
+\caption{True data vs predicted data for the train set. RNAs and proteins autocorrelation are considered.}
+\label{firstmodeltraindata0.05RNAPROTEINS}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.50]{firstmodellearningcurveRNAPROTEINS.png}
+\caption{Learning curve of the ANN refered to RNA and proteins autocorrelations as input.}
+\label{firstmodellearningcurveRNAPROTEINS}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.50]{firstmodeltestdata0.10learningcurvesshowloweroverfittingRNAPROTEINS.png}
+\caption{Learning curve of the ANN refered to RNA and proteins autocorrelations as input. The test set is 10\%.}
+\label{firstmodeltestdata0.10learningcurvesshowloweroverfittingRNAPROTEINS}
+\end{figure}
+\newpage
+However the very interesting thing about this plots is that the neural network is learning. This gives hopes for its use in the model parameters estimation. Moreover, as regards the situation in which we consider only proteins autocorrelation given as input, the score for the test data is lower than the previous case, i.e. $R_{test}^{2}=0.09$ suggesting that in this first genetic model, the RNAs and proteins autocorrelations contain a greater amount of information about the model parameters under investigation and this is as expected.
+\newpage
+%\begin{figure}[!ht]
+%\centering
+%\includegraphics[scale=0.50]%{firstmodeltestdata0.05PROTEINS.png%}
+%\caption{True data vs predicted data for the test set. Only proteins autocorrelation are considered as input.}
+%\label{firstmodeltestdata0.05PROTEINS}
+%\end{figure}
+
+%\begin{figure}[!ht]
+%\centering
+%\includegraphics[scale=0.50]{firstmodeltraindata0.05PROTEINS.png}
+%\caption{True data vs predicted data for the train set. Only proteins autocorrelation are considered as input.}
+%\label{firstmodeltraindata0.05PROTEINS}
+%\end{figure}
+
+%\begin{figure}[!ht]
+%\centering
+%\includegraphics[scale=0.50]{firstmodellearningcurvePROTEINS.png}
+%\caption{Learning curve of the ANN refered to only proteins autocorrelations as input.}
+%\label{firstmodellearningcurvePROTEINS}
+%\end{figure}
+
 \section{ANN applied to the autorepressor model}
+
+In the autoreprepressor model case, we start considering the values of the scores summerize in table \ref{tableautorepressorr2scores}.
+
+\begin{table}[!h]
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+       & $R_{test}^{2}$ \\
+ \hline
+ RNAs+Proteins & 0.5 \\
+ \hline
+ RNAs & 0.2 \\ 
+ \hline
+ Proteins & -0.06 \\ 
+ \hline
+\end{tabular}
+\caption{\label{tableautorepressorr2scores} Autorepressor $R^{2}$ values for test data.}
+\end{center}
+\end{table}
+
+The surprise of this case is that proteins autocorrelation are less suitable for parameter estimation while RNAs carries more information. Finally as expected, the RNA+Proteins autocorrelation given as input to the regressor neural network helps most for parameter estimation.
+
 \section{ANN applied to the toggle-switch model}
-%Metti come abbiamo generato i dati.
-%The widely used ANN paradigm is a multi-layered feed-forward network (MFFN) with multi-layered perceptron, mostly comprising three sequentially arranged layers of processing units. The MFFN provides a mapping between an input (x) and output (y) through a nonlinear function f as y=f(x). The three layered MFFN has input, hidden, and output layers, and each layer comprises of its own nodes. METTICI PER� CHE NON SAPPIAMO QUAL'� LA FUNZIONE f E LE COSE SCRITTE NEL PROGETTO DI REMONDINI. + USA IN QUALCHE MODO LE LSTM. 
+
+
 
 %Confrontare la mae e la r2score generati da modelli uguali con diverse specie chimiche può darci informazioni su tali specie.
 
