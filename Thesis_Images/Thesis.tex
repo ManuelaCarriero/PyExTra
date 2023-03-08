@@ -16,8 +16,8 @@
 %\pagestyle{fancy}
 \setlength{\headheight}{15pt}% ...at least 51.60004pt
 
-\usepackage[]{lineno} %Professor  
-\runninglinenumbers
+%\usepackage[]{lineno} Professor  
+%\runninglinenumbers
 
 
 
@@ -1834,8 +1834,7 @@ The most general definition of the coefficient of determination is:
 
 In the best case, the modeled values exactly match the observed values, which results in $SS_{res}=0$ and $R^{2}=1$. A baseline model, which always predicts $\bar{y}$, will have $R^{2}=0$. Models that have worse predictions than this baseline will have a negative $R^{2}$.
 
-We are going to use this to evaluate the true vs predicted data since the better the linear regression fits such data, the closer is the value of $R^{2}$ is to 1.
-
+We are going to use this to evaluate the true vs predicted data. The better the linear regression fits such data, the closer is the value of $R^{2}$ is to 1.
 
 
 
@@ -1858,7 +1857,14 @@ Note that this parameterization is equivalent to the above, with $scale = \frac{
 
 We choose to generate gamma distribution parameters with $a=3$ and $scale=0.5$ using scipy.stats function.
 
-%Teniamo i parametri costanti per fare un confronto tra diversi modelli e generiamo i dati con una distribuzione Gamma.
+Finally, before starting, let us keep in mind that we generate 1000 autocorrelation data calculated with 5000 lags (relative to the SSA simulations time series results). Each set is refered to particular molecular species. Hence we consider three cases: the RNAS+Proteins autocorrelation case, the RNAs and proteins autocorrelations considered separately.
+
+We decide to keep the model hyperparameters and the structure of the neural network the same from one genetic model to an other. Even though, the most important reason to choose this approach is to understand if neural networks can be an alternative method to the Bayesian Approximate Computation, keeping all fixed makes easier to compare which are the molecular species that carry more information about the model parameters. 
+
+In particular we decide to use a batch size equal to 128. This is a trade off between a low batch size that would make the simulation much slower and high batch size that would require more memory storage and, finally, because it is the most suggested value to use in websites discussions. This last reason may seem a bit ``superficial'' but in this field experience from others help in the study. And we trained untill 50 epochs.  
+
+
+
 \section{ANN applied to the first model}
 Let us consider the first genetic model described in section \ref{regulatedgeneexpressionsection} with regulation that tends to keep the gene more active than inactive, i.e. $k_{a}=1$ and $k_{i}=0.5$.
 
@@ -1868,7 +1874,7 @@ What we can notice is that test data (never seen by the neural network) are spar
 
 In this case $R_{test}^{2}=0.5$ and $R_{train}^{2}=0.9$. The score for the train is much higher than the one for the test. This maybe due to overfitting as suggested by the shape of the learning curve in Fig.\ref{firstmodellearningcurveRNAPROTEINS}.
 
-Since the test set is 5\%, one attempt to get better performance was to increase the test set to 10\%. This produces infact learning curves with a smaller gap between the training loss curve and the test loss curve (see Fig.\ref{firstmodeltestdata0.10learningcurvesshowloweroverfittingRNAPROTEINS}). The the scores in this case are $R^{2}=0.4$ and $R^{2}=0.7$.
+Since the test set is 5\%, one attempt to get better performance was to increase the test set to 10\%. This produces infact learning curves with a smaller gap between the training loss curve and the test loss curve (see Fig.\ref{firstmodeltestdata0.10learningcurvesshowloweroverfittingRNAPROTEINS}). The the scores in this case are $R_{test}^{2}=0.4$ and $R_{train}^{2}=0.7$.
 
 \begin{figure}[!ht]
 \centering
@@ -1898,44 +1904,25 @@ Since the test set is 5\%, one attempt to get better performance was to increase
 \label{firstmodeltestdata0.10learningcurvesshowloweroverfittingRNAPROTEINS}
 \end{figure}
 \newpage
-However the very interesting thing about this plots is that the neural network is learning. This gives hopes for its use in the model parameters estimation. Moreover, as regards the situation in which we consider only proteins autocorrelation given as input, the score for the test data is lower than the previous case, i.e. $R_{test}^{2}=0.09$ suggesting that in this first genetic model, the RNAs and proteins autocorrelations contain a greater amount of information about the model parameters under investigation and this is as expected.
+However the very interesting thing about this plots is that the neural network is learning. This gives hopes for its use in the model parameters estimation. Moreover, as regards the situation in which we consider only proteins autocorrelation given as input, the score for the test data is lower than the previous case, i.e. $R_{test}^{2}=0.09$ and $R_{test}^{2}=0.7$  suggesting that in this first genetic model, the RNAs and proteins autocorrelations contain a greater amount of information about the model parameters under investigation and this is as expected.
 \newpage
-%\begin{figure}[!ht]
-%\centering
-%\includegraphics[scale=0.50]%{firstmodeltestdata0.05PROTEINS.png%}
-%\caption{True data vs predicted data for the test set. Only proteins autocorrelation are considered as input.}
-%\label{firstmodeltestdata0.05PROTEINS}
-%\end{figure}
 
-%\begin{figure}[!ht]
-%\centering
-%\includegraphics[scale=0.50]{firstmodeltraindata0.05PROTEINS.png}
-%\caption{True data vs predicted data for the train set. Only proteins autocorrelation are considered as input.}
-%\label{firstmodeltraindata0.05PROTEINS}
-%\end{figure}
-
-%\begin{figure}[!ht]
-%\centering
-%\includegraphics[scale=0.50]{firstmodellearningcurvePROTEINS.png}
-%\caption{Learning curve of the ANN refered to only proteins autocorrelations as input.}
-%\label{firstmodellearningcurvePROTEINS}
-%\end{figure}
 
 \section{ANN applied to the autorepressor model}
 
-In the autoreprepressor model case, we start considering the values of the scores summerize in table \ref{tableautorepressorr2scores}.
+In the autoreprepressor model case, we start considering the values of the scores summerized in table \ref{tableautorepressorr2scores} without annoying the reader with all the predicted vs true paramaters plots and learning curves that, anyway, are reported in Appendix.
 
 \begin{table}[!h]
 \begin{center}
 \begin{tabular}{ |c|c|c| } 
  \hline
-       & $R_{test}^{2}$ \\
+       & $R_{test}^{2}$ & $R_{train}^{2}$ \\
  \hline
- RNAs+Proteins & 0.5 \\
+ RNAs+Proteins & 0.5 & 0.9 \\
  \hline
- RNAs & 0.2 \\ 
+ RNAs & 0.2 & 0.6 \\ 
  \hline
- Proteins & -0.06 \\ 
+ Proteins & -0.06 & 0.4 \\ 
  \hline
 \end{tabular}
 \caption{\label{tableautorepressorr2scores} Autorepressor $R^{2}$ values for test data.}
@@ -1945,6 +1932,29 @@ In the autoreprepressor model case, we start considering the values of the score
 The surprise of this case is that proteins autocorrelation are less suitable for parameter estimation while RNAs carries more information. Finally as expected, the RNA+Proteins autocorrelation given as input to the regressor neural network helps most for parameter estimation.
 
 \section{ANN applied to the toggle-switch model}
+
+Even in this case we report the table \ref{tabletoggleswitchr2scores} of the $R^{2}$ values. Since this system is made of two genes, each one producing their number of RNA and protein molecules, we decided to consider the autocorrelation relative to the RNAs molecules of both genes and the same is for proteins. 
+
+\begin{table}[!h]
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+       & $R_{test}^{2}$ & $R_{train}^{2}$ \\
+ \hline
+ RNAs & 0.1 & 0.2 \\ 
+ \hline
+ Proteins & 0.1 & 0.2 \\ 
+ \hline
+\end{tabular}
+\caption{\label{tabletoggleswitchr2scores} Toggle switch $R^{2}$ values for test and  train data.}
+\end{center}
+\end{table}
+
+In this case, RNAs + proteins autocorrelation values given as input is not reported because of lack of computational memory in order to do the simulation. However, as in the first model and autorepressor case, we should expect that they carry more information about the distribution of model parameters.
+
+Here, the interesting aspect that arises is that $R^{2}$ values of RNAs molecules are equal to the proteins molecules hence in a system like this using RNAs autocorrelation or proteins autocorrelation as input to the neural network would give the same amount of information about the model parameters (at least using the neural network with the hyperparameters chosen by us).
+
+Anyway, leaving the biological discoveries apart, in all these genetic models, we can notice that the network is learning from the relative loss curves and $R^{2}$ values and this opens the way to an alternative method for the paramters distribution estimation.
 
 
 
@@ -2352,10 +2362,23 @@ What we can notice is that they remind us to the toggle switch behavior where ea
 \caption{Autocorrelation curve plotted calculating quantiles of 64 simulations at each time step. Number of lags equal to 10000 and sampling period dt=10. The y-axis reports the autocorrelation values and on the x-axis is the sampling period.}
 \label{nfkbACFnlags10000dt10nsimulations64timelimit1000}
 \end{figure}
+\newpage
+
+We can start to ``put our model under test'' by switching off one of the most studied inhibitor, namely I$\kappa$B$\alpha$. Hence we consider the model constant rates previously describe but with $k2=0$, $k2i=0$ when simulating the I$\kappa$B$\alpha$ knock-out. We report the plot of only the autocorrelation calculated with quantiles using 64 simulations in Fig.\ref{nfkbACFk20k2i0nsimulations64}.
+
+We can notice that the medians points lie much more on the zero horizontal line and this is a sign of a lower oscillating signal and thus a more constituive expression behavior.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.70]{nfkbACFk20k2i0nsimulations64.png}
+\caption{Autocorrelation curve plotted calculating quantiles of 64 simulations at each time step. Number of lags equal to 10000 and sampling period dt=10. The y-axis reports the autocorrelation values and on the x-axis is the sampling period. In this case $k2=0$, $k2i=0$.}
+\label{nfkbACFk20k2i0nsimulations64}
+\end{figure}
+
 
 \newpage
 
-As in the case of the ``standard'' genetic models analysed, from the Fourier Transform analysis (Fig.\ref{nfkbFFTsamplingperiod0.01}) we can notice relevant peaks at low frequencies and the noise is evenly sparse towards higher frequencies  suggesting the presence of a periodicity also in this case.
+Now coming back to the original model with all constant rates paramters different from zero, as in the case of the ``standard'' genetic models analysed, from the Fourier Transform analysis (Fig.\ref{nfkbFFTsamplingperiod0.01}) we can notice relevant peaks at low frequencies and the noise is evenly sparse towards higher frequencies  suggesting the presence of a periodicity also in this case.
 
 
 
@@ -2365,7 +2388,7 @@ As in the case of the ``standard'' genetic models analysed, from the Fourier Tra
 \caption{Fast Fourier Transform of the temporal signal in Fig.\ref{NFkBsimulation}. y-axis is in linear scale while the the x-axis is in log scale.}
 \label{nfkbFFTsamplingperiod0.01}
 \end{figure}
-
+\newpage
 For concluding the pattern recognition analysis of our simple NF-kB model activity, the continous wavelet transform is shown in Fig.\ref{nfkbCWTssqueezepy}. 
 
 \begin{figure}[!ht]
@@ -2445,6 +2468,82 @@ The model lacks of many features such as catalytical reactions and so second ord
    %\item \textbf{Phenotypic Switching}
   
   \end{itemize}
+  
+  \chapter{Artificial Neural Networks plots}
+    \begin{figure}[!ht]
+    \centering
+    \includegraphics[scale=0.50]{firstmodeltestdata0.05PROTEINS.png}
+    \caption{First model true data vs predicted data for the test set. Only proteins autocorrelation are considered as input.}
+    \label{firstmodeltestdata0.05PROTEINS}
+    \end{figure}
+
+    \begin{figure}[!ht]
+    \centering
+    \includegraphics[scale=0.50]{firstmodeltraindata0.05PROTEINS.png}
+    \caption{First model true data vs predicted data for the train set. Only proteins autocorrelation are considered as input.}
+    \label{firstmodeltraindata0.05PROTEINS}
+    \end{figure}
+
+    \begin{figure}[!ht]
+    \centering
+    \includegraphics[scale=0.50]{firstmodellearningcurvePROTEINS.png}
+    \caption{First model learning curve of the ANN refered to only proteins autocorrelations as input.}
+    \label{firstmodellearningcurvePROTEINS}
+    \end{figure}
+    
+    
+    
+    
+    \begin{figure}[!ht]
+    \centering
+    \includegraphics[scale=0.50]{autorepressortestdatsRNASPROTEINS.png}
+    \caption{True data vs predicted data for the test set in case of autorepressor model. RNA+PROTEINS autocorrelations are considered as input.}
+    \label{autorepressortestdatsRNASPROTEINS}
+    \end{figure}
+
+    \begin{figure}[!ht]
+    \centering
+    \includegraphics[scale=0.50]{autorepressortraindataRNASPROTEINS.png}
+    \caption{True data vs predicted data for the train set in case of autorepressor model. RNA+PROTEINS autocorrelations are considered as input.}
+    \label{autorepressortraindataRNASPROTEINS}
+    \end{figure}
+
+    \begin{figure}[!ht]
+    \centering
+    \includegraphics[scale=0.50]{autorepressorlearningcurveRNASPROTEINS.png}
+    \caption{Learning curve of the ANN refered to only proteins autocorrelations as input for the autorepressor model.}
+    \label{autorepressorlearningcurveRNASPROTEINS}
+    \end{figure}
+    
+    
+    
+    \begin{figure}[!ht]
+    \centering
+    \includegraphics[scale=0.50]{autorepressortestdataRNASPROTEINSDROPOUT.png}
+    \caption{True data vs predicted data for the test set in case of autorepressor model. RNA+PROTEINS autocorrelations are considered as input. Dropout is added in the Neural Network model.}
+    \label{autorepressortestdataRNASPROTEINSDROPOUT}
+    \end{figure}
+
+    \begin{figure}[!ht]
+    \centering
+    \includegraphics[scale=0.50]{autorepressortraindatRNASPROTEINSDROPOUT.png}
+    \caption{True data vs predicted data for the train set in case of autorepressor model. RNA+PROTEINS autocorrelations are considered as input. Dropout is added in the Neural Network model.}
+    \label{autorepressortraindatRNASPROTEINSDROPOUT}
+    \end{figure}
+
+    \begin{figure}[!ht]
+    \centering
+    \includegraphics[scale=0.50]{autorepressorlearningcurveRNASPROTEINSDROPOUT.png}
+    \caption{Learning curve of the ANN refered to only RNAS+PROTEINS autocorrelations as input for the autorepressor model. Dropout is added in the Neural Network model. }
+    \label{autorepressorlearningcurveRNASPROTEINSDROPOUT}
+    \end{figure}
+    
+    
+    
+    
+
+  
+  
 \clearpage
 \end{appendices}
 
