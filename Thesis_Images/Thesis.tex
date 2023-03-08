@@ -81,16 +81,13 @@ Master Degree in Physics}}
 % INSERT THE NAME OF THE SUPERVISOR WITH ITS TITLE (DR. OR PROF.)
 %
 {\large{\bf Supervisor: \vspace{2mm}\\\textcolor{red}{
-Prof./Dr. Name Surname}\\\\
+Prof. Enrico Giampieri}\\\\
 %
 % INSERT THE NAME OF THE CO-SUPERVISOR WITH ITS TITLE (DR. OR PROF.)
 %
 % IF THERE ARE NO CO-SUPERVISORS REMOVE THE FOLLOWING 5 LINES
 %
-\textcolor{red}{
-\bf Co-supervisor: (optional)
-\vspace{2mm}
-Prof./Dr. Name Surname\\\\}}}
+}}
 \end{minipage}
 %
 \hfill
@@ -102,7 +99,7 @@ Prof./Dr. Name Surname\\\\}}}
 % INSERT THE NAME OF THE GRADUAND
 %
 \textcolor{red}{
-Name Surname}}}
+Manuela Carriero}}}
 }
 \end{minipage}
 
@@ -142,7 +139,7 @@ Academic Year \textcolor{red}{ 201*/201*}
 
 \thispagestyle{empty}
 \begin{flushright}
- Dedica.
+ Dedicato alla mia famiglia
 \end{flushright}
 
 \newpage
@@ -154,7 +151,7 @@ Academic Year \textcolor{red}{ 201*/201*}
 \begin{flushleft}
 {\LARGE{\bf Abstract}}\\
 \vspace{9mm}
-I hope it will be an important thesis.
+%L'Approximate Bayesian Approach ha molti punti a sfavore tra cui il fatto che � computazionalmente expensive.
 %I tre principali circuiti analizzati sono semplici da modellizzare per� rappresentano importanti sistemi biologici e la loro simulazione e analisi non � affatto banale: serve anche qui molto succo di cervello e fantasia per poter svelare importanti caratteristiche che tali sistemi nascondono. I risultati ottenuti possono essere sfruttati in sistemi pi� articolati come l'NF-kB che � il nostro target. 
 %Chronic diseases, cancers and diabetes are associated with dysregulation of many biochemical cues. These biochemical cues are proteins that regulate cellular activity migration and death. The synthesis of these proteins is regulated by nuclear transcription factors. One of the most studied transcription factor is nuclear factor kappa B (NF?B). Many different proteins have been identified that regulate the activity of NF?B. Yet, how these proteins regulate NF?B is still unclear (Dalla tesi di Huanling Liu).
 %(dalla lezione del 15/10/2018)
@@ -162,6 +159,8 @@ I hope it will be an important thesis.
 %transcription factors have functional properties because they interfere in some biological process.
 %In order to regulate the RNA production, nature invented the transcription factors.
 %La nostra modellizzazione dell'NF-kB � molto semplificata e ideale tipo ideal gas o Michaleis-Mentein reaction.
+In all the three domains of life, there are two main stages from DNA sequence of a gene to protein: transcription, that is the process of making a strand of RNA that is complementary to a single strand DNA, and translation, that is the process by which a protein is synthesized from the information contained in a molecule of messenger RNA (mRNA). In the process of transcription, proteins called ``transcription factors'' play a central role because they bind to a DNA sequence and helps form the transcription initiation complex. In eukaryotic cells, other transcription factors bind to regulatory sequences, such as enhancers and silencers that can respectively stimulate and repress transcription of the related gene. In this work of thesis are particularly interested in the simulation and analysis of the nuclear factor-kappa B (NF-$\kappa$B) activity which is ubiquitous within cells and its dysfunction leads to chronic diseases, cancers, neurodegenerative diseases and an other very long list of illnesses. In this thesis, however, we do not started immediately modeling its behavior, whose mathematical models made by researchers are already a high number. In this stochastic context, firstly we aim to review and deepen into stochastic simulation algorithms to solve the Chemical Master Equation (CME) giving an our alternative algorithm called ``hybrid'' because it combines the Gillespie's Stochastic Simulation Algorithm with the tauleaping algorithm with the attempt to improve the algorithm's speed and, at the same time, preserve the performance; secondly we analyse the stochastic simulation results of three basics genetic circuits (the simplest model of gene expression, the autorepressor and the toggle switch) with the help of the Autocorrelation Function, the Fast Fourier Transform and the Continous Wavelet Transform with the attempt to find interesting patterns from the temporal series; third, we faced the problem of parameter estimation of these simple genetic circuit using artificial neural networks rather than the often used Approximate Bayesian Computation (ABC) that has the limit to be computationally expensive; finally, 
+conscientious of what we have learned after all the steps, we provide a very little NF-$\kappa$B model. The results for each step are the following: the hybrid algorithm used in the first protein synthesis model configuration has is faster than the SSA but when the number of molecules produced tends to be high; periodicity arises from the temporal series, in particular from the autorepressor case; the neural networks learn to predict the model parameters given the autocorrelation as input but the choice of the chemical species for autocorrelation calculation makes differences in results; finally, our little NF-$\kappa$B model that considers the contribution of only I$\kappa$B$\alpha$ and A20 as inhibitors in the simplified system, shows an oscillating behavior that is similar to the one predicted by Hoffman et al. in their experiments.   
 \end{flushleft}
 \thispagestyle{empty}
 \clearpage
@@ -188,21 +187,29 @@ I hope it will be an important thesis.
 \fancyhead[R]{}
 \fancyhead[L]{\leftmark}% chapter/appendix name and number moved to \chaptermark
 
-\chapter{Introduction}\epigraph{``Frase''}{Autore}
+\chapter{Introduction}\epigraph{``There's no gene for fate''}{from GATTACA film}
 
 
 
-Kevin Burrage et al. in their important paper \emph{Stochastic simulation in systems biology} \cite{Article} highlight how mathematical modelling and computational simulation perform essential roles in biology. Models are useful for many different purposes: perhaps the most important of these are crystallising our assumptions and testing them, guiding experiments and looking at experimentally unreachable scenarios, as well as the much-vaunted ability to make new predictions. 
+Kevin Burrage et al. in their important paper \emph{Stochastic simulation in systems biology} \cite{Article} highlight how mathematical modelling and computational simulation perform essential roles in biology. Models are useful for many different purposes: perhaps the most important of these are crystallising our assumptions and testing them, guiding experiments and looking at experimentally unreachable scenarios, as well as the great ability to make new predictions. 
 
-Ideally, there should be a virtuous cycle between experiment and theory to understand the natural system in which we are interested. If the model and experiments agree, then parameters for the model can be inferred from the data and the model refined, again leading to further experiments.  If they do not agree, this implies that the hypothesis was inappropriate: the model needs revision, and theoretical tests using different models can provide a starting point for further experiments. For this we need to go back to our natural system and propose revisions (major or minor) to the model and new avenues for experiment.
+Ideally, there should be a virtuous cycle between experiment and theory to understand the natural system in which we are interested. 
 
-As defined by Kevin Burrage et al., model is an abstract representation of the system in which we are interested and this is usually formulated mathematically. This model can, in simple cases, be solved analytically for a particular question, giving us an \emph{exact} analytical solution to the question posed to the model. In general, however, analytical solutions for all but the most simple models do not exist, and we need to use methods to solve the model numerically. These last methods give rise to numerical solutions which are approximations to the analytical solution.% that become more and more accurate as we use smaller and smaller numerical steps (the unit of discretisation of a numerical approach)
+If the model and experiments agree, then parameters for the model can be inferred from the data and the model refined, again leading to further experiments.  If they do not agree, this implies that the hypothesis was inappropriate: the model needs revision, and theoretical tests using different models can provide a starting point for further experiments. 
 
-In many cases, the numerical solution will try to mimic the behaviour of the real system over time: this is a simulation.
+As defined by Kevin Burrage et al., model is an abstract representation of the system in which we are interested and this is usually formulated mathematically. This model can, in simple cases, be solved analytically for a particular question, giving us an \emph{exact} analytical solution to the question posed to the model. This means that the full probability distribution for the state of the biological system over time can be calculated explicitly.
 
-An important point to remember when we talk about mathematical models is that, in a sense, ``all models are wrong''  but this does not mean their conclusions or predictions are false, as the famous quote continues, ``but some are useful''. Rather, we should bear in mind that all models are abstractions of reality, simplified versions of the real systems that they represent. A model is a vehicle for gaining understanding, and we would not gain any new understanding from a model that was as complicated as the real system. 
+In general, however, analytical solutions for all but the most simple models do not exist, and we need to use methods to solve the model numerically. These last methods give rise to numerical solutions which are approximations to the analytical solution.% that become more and more accurate as we use smaller and smaller numerical steps (the unit of discretisation of a numerical approach)
 
-Almost all models are phenomenological; that is, they are based on a set of simplified assumptions that we have distilled from the real system using intuition rather than rigorous proof from basic principles. Incorporating only the important ones allows us to crystallise our understanding of the system (and if the model gives wrong results, we know that our assumptions were wrong or incomplete, hence it is in any case a gain in knowledge of our system under study). Creating phenomenological models is not a trivial task: ``sensing which assumptions might be critical and which irrelevant to the question at hand is the art of modeling''. The choice of what to include in the model lies with the modeller.
+Numerical solution will try to mimic the behaviour of the real system over time. This is also refered to as a simulation.
+
+An important point to remember when we talk about mathematical models is that, in a sense, ``all models are wrong''  but this does not mean their conclusions or predictions are false, as the famous quote continues, ``but some are useful''. 
+
+Rather, we should bear in mind that all models are abstractions of reality, simplified versions of the real systems that they represent. A model is a vehicle for gaining understanding, and we would not gain any new understanding from a model that was as complicated as the real system. 
+
+Almost all models are phenomenological; that is, they are based on a set of simplified assumptions that we have distilled from the real system using intuition rather than rigorous proof from basic principles. Incorporating only the important ones allows us to crystallise our understanding of the system (and if the model gives wrong results, we know that our assumptions were wrong or incomplete, hence it is in any case a gain in knowledge of our system under study). 
+
+Creating phenomenological models is not a trivial task: ``sensing which assumptions might be critical and which irrelevant to the question at hand is the art of modeling''. The choice of what to include in the model lies with the modeller and his/ aims.
 %Dipende da: the choice of modelling/simulation method is determined by the aspects of the natural system in which we are interested, how realistic an estimation of it we want, and our mathematical and computational resources.
 
 %Importanza dei modelli tipo quello SIR oggigiorno.
@@ -264,13 +271,25 @@ However, as said before, intrinsic noise causes mutations which can also have ne
 %Da stochastics simulations in biological systems.
 %In this thesis, we will refer to reactions occuring inside a cell volume between different types of biochemical molecules with various reaction rates. These will generally be genes , i.e. sections of DNA that are copied into mRNA and initiate a gene expression network, RNA or proteins. 
 
-\section{Colonrectal cancer (CRC)}
+\section{Motivation of the work and the consequent workflow}
 %Il background biologico con i concetti di base come gene regulation.+%Randomness è anche nell'iniziazione del tumore al CRC: il 70% dei tumori avvengono in maniera sporadica e secondo il modello genetico di Fearon si ha una prima mutazione che colpisce un tumor-suppressor gene, adenomatous polyposis coli (APC) initiating colorectal tumorigenesis. Il 30% ha base familiare.
+Following the line of reasoning of the previous section, cancers like colonrectal cancers are mainly caused by mutations that target oncogenes leading to novel or increased functions, or alterations that drive to loss of functions of tumor-suppressor genes. This provide neoplastic cells with a survival advantage over the surrounding 
+normal intestinal epithelium.
+
+Approximately 70\% of CRC cases are sporadic and, generally, develop from a point mutation that occurs spontaneously during lifetime.
+
+It is very likely that these mutations lead to a malfunction NF-$\kappa$B transcription factor activity, whose behavior is tamed by its regulators, of the proteins family I$\kappa$B, but that in CRC it is constitutively expressed. 
+
+The biology of NF-$\kappa$B will be explained in Chapter \ref{NFkBBiologyExplained} and then a simple model of the feedback loops which involve him will be furnished. However before arriving to this point, we will examine simple genetic models that will serves as a ``training'' before diving into more complex models, which are indeed stochastic.  
+
+This will let us to explore \emph{methods} firstly for simulations, secondly for analyzing data coming from them and last, but not least, to extrapolate model paramaters if the simulations results agree with the experimental data.   
+%METTI I CAPITOLI E INDICA IL TUO LAVORO ORIGINALE.
+
 
 \section{Deterministic versus stochastic models}
 Before the discovery of intrinsic noise, mathematical and computational methods that have traditionally been used were typically \emph{systems of differential equations} which are both \emph{continous} and \emph{deterministic}, i.e. their state variables are real numbers representing the concentrations of molecules and they do not include noise.
 
-Such models can be considered as accurate only when we are interested in the mean dynamics of a large number of molecules, large enough that we need not worry about individual molecules but can approximate them as concentrations \cite{Article}. Above a molecular population size of the order of many hundreds or above, the fluctuations from intrinsic noise are averaged out and the deterministic approximation becomes increasingly valid.
+Such models can be considered as accurate only when we are interested in the mean dynamics of a large number of molecules, large enough that we need not worry about individual molecules but can approximate them as concentrations \cite{Article}. Above a molecular population size of the order of Avogadro's number, the fluctuations from intrinsic noise are averaged out and the deterministic approximation becomes increasingly valid.
 
 This is because intrinsic noise, as a rule of thumb, behaves as $\frac{1}{\sqrt{X}}$ , where \emph{X} is the number of molecules in the system. This is confirmed by experimental studies that find that total noise does scale roughly as the inverse square of abundance until high abundances. At this point, extrinsic noise is thought to take over as the dominant source of noise \cite{noisewithabundance}.
 
@@ -283,15 +302,169 @@ A very clear example may be to imagine the national birth rate as compared to th
 Thus, for many reactant molecules, the species concentrations evolve both continuously and differentiably. When
 small numbers of reactants are involved, due to the probabilistic nature of individual reaction events and the finite change in molecule numbers incurred, the concentration evolves step-wise.
 
-And so, while \emph{the law of mass balance} is used to construct deterministic chemical rate equations which take the form of a system of coupled nonlinear differential equations with the assumption that the concentration of the reactants varies both continuously and differentiably (i.e. in case of molecule numbers of the order $10^{23}$ where a change of one or two molecules in a population of $10^{23}$ is, for all intents and purposes, infinitesimal), \emph{the probability balance} is used as conservation law of this microscopic description. For such purpose we will consider the \emph{Chemical Master Eqaution} which is used to describe the distribution of a population of stochastic systems across states.
+And so, while \emph{the law of mass balance} is used to construct deterministic chemical rate equations which take the form of a system of coupled nonlinear differential equations with the assumption that the concentration of the reactants varies both continuously and differentiably (i.e. in case of molecule numbers of the order $10^{23}$ where a change of one or two molecules in a population of $10^{23}$ is, for all intents and purposes, infinitesimal), \emph{the probability balance} is used as conservation law of this microscopic description. For such purpose we will consider the \emph{Chemical Master Equation} which is used to describe the distribution of a population of stochastic systems across states.
 
 
 %Descrizione generale della master equation e dove è usata in Fisica ispirandoti anche all'introduzione di Wikipedia + equazione di the Schlögl reaction system.
-\section{Approximate Bayesian Approach vs Deep Neural Networks for parameters estimation}
+%\section{Approximate Bayesian Approach vs Deep Neural Networks for parameters estimation}
 %Il Professore diceva che occorreva molto tempo quindi � un punto contro l'approximate Bayesian approach. Per� in molti lavori (tipo la tesi che hai trovato o di Giosu�) che riguardano l'NF-kB usano l'approccio Bayesiano quindi studiali.
 
 \section{The importance of random numbers generation}
-%I numeri random che ci permettono di simulare quello che in natura abbiamo chiamato la ``stocasticità'' vanno generati in modo preciso + ci abbiamo anche generato i parametri con una distribuzione Gamma come la volevamo noi (in biologia � una distribuzione molto importante).
+Before starting, let us briefly make clear the importance of random numbers generations in this context. Random number let us simulate what we have called ``biological stochasticity''. We will see very well this when talking about stochastic simulations in biological systems in Chapter \ref{Simulations}. But we will exploit them also for the needing of a particular distribution of parameters for the same model (that is made in Chapter \ref{ArtificialNeuralNetwork}). Thus, for simulations, it is a particular important key.
+
+% in a cellular environment
+\chapter{Modeling kinetics reactions}\label{models}
+In this chapter, we describe three simple genetic circuits that are common in nature: the simplest process of gene expression and protein synthesis, the autorepressor case and the toggle-switch model. Hence we need to describe different chemical reactions.
+
+Generally, we can have a chemical reaction like this:
+ \begin{equation}
+ \ce{\alpha A + \beta B ...
+<=> \sigma S + rT}
+ \end{equation}
+where A and B are the reagents and S and T are the products of the reaction. This reaction is reversible and, as such, according to the \emph{Law of Mass Action}, we can define a \emph{forward reaction rate} and a \emph{backward reaction rate}. The reaction rates are related to a constant, for instance the \emph{forward reaction rate} is related to $k_{+}$, and to the concentration of reagents:
+\begin{equation}
+ rate = k_{+} A^{\alpha} B^{\beta}
+\end{equation}
+
+where $\alpha$ and $\beta$ are called the stechiometric coefficients. Analogously, we can write an equation for the backward reaction rate.
+
+However, the specific forms of these equations rates depend on the order of reaction. In the listed genetic circuits that we will describe, we will consider only first order reaction rates.  
+
+When we have a chemical reaction, we are interested in describing it by using differential equations, hence in a deterministic framework. 
+
+Thus we will turn these biological processes into a deterministic mathematical description, but then the molecular noise in these systems will be taken into account and we will study them by means of stochastic methods.
+
+
+
+
+
+
+
+
+
+
+
+\section{Constitutive gene expression}\label{modelconstitutivegeneexpression}
+In the simplest possible model of \emph{constitutive} gene expression, a RNA molecule is produced at a constant rate $k_{1}$ and destroyed in a first-order reaction with rate constant $k_{2}$. Fig. \ref{costitutiveexpression} shows a sketch of this simple biological process.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.64]{costitutiveexpression.jpg}
+\caption{Schematic of a constitutive gene expression model with transcription rate $k_{1}$ and mRNA degradation rate constant $k_{2}$.}
+\label{costitutiveexpression}
+\end{figure}
+
+As already anticipated in the introductory part, if the total number of a particular transcript \emph{m} is large, the kinetics is conveniently represented as a deterministic differential equation for species concentrations. This plays the role of the mass-balance conservation law, i.e. change = flux in - flux out \cite{geneexpressionnoise}.
+\begin{equation}\label{RNAcostitutiveexpressionequation}
+ \frac{dm}{dt} = k_{1} - k_{2}m
+\end{equation}
+This approximation breaks down in cells when the copy numbers of transcripts are small with the need of a probabilistic reformulation in which the conservation law is described by the Chemical Master Equation explained in the next Chapter \ref{Simulations}. 
+
+In the constitutive expression model, transcript births and deaths occur as uncorrelated events, such that in any short time interval, $dt$, the probability of one transcript production is $k_{1}dt$, and the probability of one transcript degradation is $k_{2}mdt$ \cite{geneexpressionnoise}.
+
+The scheme in Fig. \ref{costitutiveexpression} shows only the transcription process in case gene is always active.
+
+ We can look at this model also considering protein production as shown in Fig. \ref{proteincostitutiveexpression}.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.64]{proteincostitutiveexpression.jpg}
+\caption{Schematic of a constitutive gene expression model with transcription rate $k_{1}$ and mRNA degradation rate constant $k_{2}$, translation rate $k_{3}$ and protein degradation rate constant $k_{4}$.}
+\label{proteincostitutiveexpression}
+\end{figure}
+
+Similarly to Eq. \ref{RNAcostitutiveexpressionequation}, we can write the rate of change of protein concentration \emph{p} as:
+\begin{equation}\label{proteincostitutiveexpressionequation}
+ \frac{dp}{dt} = k_{3}m - k_{4}p 
+\end{equation}
+
+ 
+
+\section{Regulated gene expression}\label{regulatedgeneexpressionsection}
+Many genes are constitutively expressed at intermediate levels, which represents a permanent cost but provides an immediate benefit when the protein is needed. On the other hand, \emph{regulated} genes are only expressed under certain necessary conditions in order to save cellular energy. In other words, they are switched on only when needed and they can be termed also as ``inducible''. Gene regulation is the key ability of an organism to respond to environmental changes \cite{generegulationNIH}. Fig. \ref{regulatedgeneexpression} shows a sketch of gene regulated protein synthesis model.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.40]{simplest_protein_synthesis_model.jpg}
+\caption{Schematic of a regulated gene expression model with gene activation rate $k_{a}$ and gene inactivation rate $k_{i}$, transcription rate $k_{1}$ and mRNA degradation rate constant $k_{2}$, translation rate $k_{3}$ and protein degradation rate constant $k_{4}$.}
+\label{regulatedgeneexpression}
+\end{figure}
+
+Although the constitutive gene expression model captures the fluctuations of several housekeeping genes, it does not perform as well when gene expression is regulated. Deviations from Poisson behavior indicate regulation. In particular, a two-state model of gene expression can fit this data much better.
+
+This model considers two promoter states: an OFF state, in which no transcription occurs and an ON state, which has transcription rate $k_{1}$. 
+
+The constants $k_{a}$ and $k_{i}$ define the transition rates between the two states, and $k_{2}$ is a first-order rate constant for transcript degradation.
+
+The OFF state is usually associated with a closed chromatin state in which the binding sites for transcription factors are inaccessible, whereas the ON state is associated with the open active chromatin state \cite{geneexpressionnoise}.
+
+And so, a simple way to include transcription factor control in the kinetic equations above is to modify $k_{1}$ using the promoter activity function $g( \cdot )$. Hence, the deterministic equation Eq.\ref{RNAcostitutiveexpressionequation} written for RNA in case of unregulated gene becomes:
+\begin{equation}\label{regulatedgeneequation}
+ \frac{dm}{dt} = k_{1} \cdot g(\cdot) - k_{2}m
+\end{equation}
+while the Eq.\ref{proteincostitutiveexpressionequation} for protein keeps unchanged.
+
+$g( \cdot )$ can have different behaviors: in the case shown in Fig. \ref{regulatedgeneexpression}, it makes the gene alternating between active and inactive state.
+
+
+
+%ABBIAMO VISTO GLI EFFETTI DELLA REGOLAZIONE SULLA DISTRIBUZIONE NEL CAPITOLO PRECEDENTE ED ANCHE GLI ANDAMENTI NEL TEMPO.
+
+
+
+%Metti tutti i modelli di sintesi proteica:
+%unregulated gene
+%regulated gene
+%autorepressor
+%toggleswitch
+%informati in quali contesti avvengono.
+
+\section{The Autorepressor model}
+
+As shown schematically in fig. \ref{autorepressor}, in this case gene product represses its own transcription. 
+
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.50]{autorepressor.jpg}
+\caption{A schematic of an auto-repressing circuit where a blunt line indicates a repressing action while a connector ending with an arrow indicates an activating action}
+\label{autorepressor}
+\end{figure}
+
+Proteins produced by the gene decreases the rate of activation of the gene. Eq.\ref{regulatedgeneequation} and Eq.\ref{proteincostitutiveexpressionequation} written for the first simple protein synthesis model are then modified in the following way:
+\begin{equation}
+ \frac{dm}{dt} = k_{1} \cdot g_{R}(r) - \beta_{m}m
+\end{equation}
+as regards the rate of change of RNA molecules. Analogously, for proteins we can write the same equation as Eq. \ref{proteincostitutiveexpressionequation} written for constitutive expression and for the regulated gene case but, for the sake of clarity, we denote \emph{p} as \emph{r} in order to highlight that protein product is behaving as autorepressor. Hence:
+\begin{equation}
+ \frac{dr}{dt} = k_{3}m - k_{4}r
+\end{equation}
+
+
+
+\section{The Toggle-Switch model}
+The genetic toggle-switch is a system of two mutually repressing genes. A simplified sketch of this model is shown in Fig.\ref{toggleswitch}.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.75]{toggleswitch.jpg}
+\caption{A schematic of the toggle switch where a blunt line indicates a repressing action while a connector ending with an arrow indicates an activating action.}
+\label{toggleswitch}
+\end{figure}
+
+The repression of gene 2 is mediated by an inducer (related to gene 1) that regulate gene expression. Similarly this happens for gene 1 repression.
+
+We would expect the system to exhibit \emph{two} mutually exclusive behaviors: either $r_{1}$ is high, keeping expression of $r_{2}$ low, or conversely, $r_{2}$ is high, keeping expression of $r_{1}$ low \cite{SanDiegoUniversity}. 
+
+For simplicity, we assume that the switch is composed of symmetric elements so that the rate constants are identical for each half of the network. Then, as seen in the other cases, the mathematical model takes the form:
+\begin{align}
+ \frac{dm_{1}}{dt}=k_{1}\cdot g_{R}(r_{2}) - k_{2}m && \frac{dm_{2}}{dt} = k_{1} \cdot g_{R}(r_{1}) - k_{2}m
+\end{align}
+\begin{align}
+ \frac{dr_{1}}{dt}=k_{3}m_{1} - k_{4}r_{1} && \frac{dr_{2}}{dt} = k_{3}m_{2} - k_{4}r_{2}
+\end{align}
+
+
 
 \chapter{Stochastic simulation in systems biology}\label{Simulations}
 
@@ -827,55 +1000,13 @@ In our biological context this situation can not happen because if we consider t
 
 \part{Studying genetic circuits and noise}
 
-\chapter{Modeling kinetics reactions in a cellular environment}\label{models}
-In this chapter, we describe three simple genetic circuits that are common in nature: the simplest process of gene expression and protein synthesis that was already taken into account in the first part (it was exploited to build an hybrid algorithm), the autorepressor case and the toggle-switch model. Hence we need to describe different chemical reactions.
-
-Generally, we can have a chemical reaction like this:
- \begin{equation}
- \ce{\alpha A + \beta B ...
-<=> \sigma S + rT}
- \end{equation}
-where A and B are the reagents and S and T are the products of the reaction. This reaction is reversible and, as such, according to the \emph{Law of Mass Action}, we can define a \emph{forward reaction rate} and a \emph{backward reaction rate}. The reaction rates are related to a constant, for instance the \emph{forward reaction rate} is related to $k_{+}$, and to the concentration of reagents:
-\begin{equation}
- rate = k_{+} A^{\alpha} B^{\beta}
-\end{equation}
-
-where $\alpha$ and $\beta$ are called the stechiometric coefficients. Analogously, we can write an equation for the backward reaction rate.
-
-However, the specific forms of these equations rates depend on the order of reaction. In the listed genetic circuits that we will describe, we will consider only first order reaction rates.  
-
-When we have a chemical reaction, we are interested in describing it by using differential equations, hence in a deterministic framework. 
-
-Thus we will turn these biological processes into a deterministic mathematical description, but then the molecular noise in these systems will be taken into account and we will study them by means of stochastic methods.
 
 
+\chapter{SSA simulation of genetic circuits}
 
+In chapter \ref{models} we described in a deterministic frameworks the three simple genetic circuits at the basis of living organisms. Now that we have deepened into stachastics simulations, we can look at their time course behavior using the SSA algorithm.
 
-
-
-
-
-
-
-
-\section{Constitutive gene expression and Poisson expression statistics}\label{modelconstitutivegeneexpression}
-In the simplest possible model of \emph{constitutive} gene expression, a RNA molecule is produced at a constant rate $k_{1}$ and destroyed in a first-order reaction with rate constant $k_{2}$. Fig. \ref{costitutiveexpression} shows a sketch of this simple biological process.
-
-\begin{figure}[!ht]
-\centering
-\includegraphics[scale=0.64]{costitutiveexpression.jpg}
-\caption{Schematic of a constitutive gene expression model with transcription rate $k_{1}$ and mRNA degradation rate constant $k_{2}$.}
-\label{costitutiveexpression}
-\end{figure}
-
-As already anticipated in the introductory part, if the total number of a particular transcript \emph{m} is large, the kinetics is conveniently represented as a deterministic differential equation for species concentrations. This plays the role of the mass-balance conservation law, i.e. change = flux in - flux out \cite{geneexpressionnoise}.
-\begin{equation}\label{RNAcostitutiveexpressionequation}
- \frac{dm}{dt} = k_{1} - k_{2}m
-\end{equation}
-This approximation breaks down in cells when the copy numbers of transcripts are small with the need of a probabilistic reformulation in which the conservation law is described by the Chemical Master Equation explained in the previous Chapter \ref{Simulations}. 
-
-In the constitutive expression model, transcript births and deaths occur as uncorrelated events, such that in any short time interval, $dt$, the probability of one transcript production is $k_{1}dt$, and the probability of one transcript degradation is $k_{2}mdt$ \cite{geneexpressionnoise}.
-
+\section{Constitutive expression and Poisson statistics}
 Typically, constitutive genes are the so called ``housekeeping genes'' that are required for the maintenance of basic cellular function \cite{housekeepinggene}, for instance genes coding for ribosomal proteins.
 
 For example, Zenklusen et al. in the experiments \cite{yeastexperiments} found that constitutive gene expression model offers surprisingly good quantitative matches to transcriptional behaviors for the housekeeping genes MDN1, KAP104, and DOA1 in budding yeast. The measured numbers of mRNA transcripts per cell were well described by Poisson distributions for all three genes.
@@ -893,19 +1024,7 @@ likewise move out of the state of interest, indicated by dashed arrows.}
 
 Thus in such case, the distribution of RNA molecules produced has a Poissonian shape.
 
-This is not the case of proteins distribution. The scheme in Fig. \ref{costitutiveexpression} shows only the transcription process in case gene is always active. We can look at this model also considering protein production as shown in Fig. \ref{proteincostitutiveexpression}.
-
-\begin{figure}[!ht]
-\centering
-\includegraphics[scale=0.64]{proteincostitutiveexpression.jpg}
-\caption{Schematic of a constitutive gene expression model with transcription rate $k_{1}$ and mRNA degradation rate constant $k_{2}$, translation rate $k_{3}$ and protein degradation rate constant $k_{4}$.}
-\label{proteincostitutiveexpression}
-\end{figure}
-
-Similarly to Eq. \ref{RNAcostitutiveexpressionequation}, we can write the rate of change of protein concentration \emph{p} as:
-\begin{equation}\label{proteincostitutiveexpressionequation}
- \frac{dp}{dt} = k_{3}m - k_{4}p 
-\end{equation}
+This is not the case of proteins distribution. 
 
 The number of proteins produced yields a \emph{scaling law} since they are dependent on both mRNA birth and death as well as translation rates \cite{Article}. Therefore proteins have non-Poisson distributions albeit their scaling is also roughly Poissonian.
 
@@ -922,34 +1041,9 @@ Fig. \ref{firstmodelka1ki0timeplot} shows the time course trend of RNA molecoles
 
 We can notice the warm-up period at the beginning of the simulation discussed in section \ref{warmupsection}. 
 
-Moreover, we can observe the stiffness of the process: the number of proteins reacheas the steady state in correspondence to a higher number of molecules with respect the RNAs in the same or very similar warmup period (if we look at the time scale). Proteins indeed are produced faster than RNA molecules. This is a reasonable if we think about the fact that we are dealing with first order kinetics systems. 
+Moreover, we can observe the stiffness of the process: the number of proteins reacheas the steady state in correspondence to a higher number of molecules with respect the RNAs in the same or very similar warmup period (if we look at the time scale). Proteins indeed are produced faster than RNA molecules. This is a reasonable if we think about the fact that we are dealing with first order kinetics systems.
 
-\section{Regulated gene expression}\label{regulatedgeneexpressionsection}
-Many genes are constitutively expressed at intermediate levels, which represents a permanent cost but provides an immediate benefit when the protein is needed. On the other hand, \emph{regulated} genes are only expressed under certain necessary conditions in order to save cellular energy. In other words, they are switched on only when needed and they be termed also as ``inducible''. Gene regulation is key to the ability of an organism to respond to environmental changes \cite{generegulationNIH}. Fig. \ref{regulatedgeneexpression} shows a sketch of gene regulated protein synthesis model.
-
-\begin{figure}[!ht]
-\centering
-\includegraphics[scale=0.40]{simplest_protein_synthesis_model.jpg}
-\caption{Schematic of a regulated gene expression model with gene activation rate $k_{a}$ and gene inactivation rate $k_{i}$, transcription rate $k_{1}$ and mRNA degradation rate constant $k_{2}$, translation rate $k_{3}$ and protein degradation rate constant $k_{4}$.}
-\label{regulatedgeneexpression}
-\end{figure}
-
-Although the constitutive gene expression model captures the fluctuations of several housekeeping genes, it does not perform as well when gene expression is regulated. Deviations from Poisson behavior indicate regulation. In particular, a two-state model of gene expression can fit this data much better.
-
-This model considers two promoter states: an OFF state, in which no transcription occurs and an ON state, which has transcription rate $k_{1}$. 
-
-The constants $k_{a}$ and $k_{i}$ define the transition rates between the two states, and $k_{2}$ is a first-order rate constant for transcript degradation.
-
-The OFF state is usually associated with a closed chromatin state in which the binding sites for transcription factors are inaccessible, whereas the ON state is associated with the open active chromatin state \cite{geneexpressionnoise}.
-
-And so, a simple way to include transcription factor control in the kinetic equations above is to modify $k_{1}$ using the promoter activity function $g( \cdot )$. Hence, the deterministic equation Eq.\ref{RNAcostitutiveexpressionequation} written for RNA in case of unregulated gene becomes:
-\begin{equation}\label{regulatedgeneequation}
- \frac{dm}{dt} = k_{1} \cdot g(\cdot) - k_{2}m
-\end{equation}
-while the Eq.\ref{proteincostitutiveexpressionequation} for protein keeps unchanged.
-
-$g( \cdot )$ can have different behaviors: in the case shown in Fig. \ref{regulatedgeneexpression}, it makes the gene alternating between active and inactive state.
-
+\section{Regulated gene expression}
 Fig. \ref{firstmodelka1ki0.5timeplot} and Fig. \ref{firstmodelka0.1ki1timeplot} shows the number of RNA and molecules produced, using the SSA simulation, by considering respectively two types of regulation: one when the gene spents more time to be in active state than inative state whereas the other is the opposite situation.
 
 \begin{figure}[!ht]
@@ -969,40 +1063,9 @@ Fig. \ref{firstmodelka1ki0.5timeplot} and Fig. \ref{firstmodelka0.1ki1timeplot} 
 The other two cases that we will study are the autorepressor case and the toggle-switch that now we are going to describe. We can anticipate how the pattern of molecules produced related to the case of the gene that spents more time to be inactive (see Fig. \ref{firstmodelka0.1ki1timeplot}) is similar to the autorepressor case that we are going to explore.
 \newpage
 
+\section{The autorepressor simulation}
 
-%ABBIAMO VISTO GLI EFFETTI DELLA REGOLAZIONE SULLA DISTRIBUZIONE NEL CAPITOLO PRECEDENTE ED ANCHE GLI ANDAMENTI NEL TEMPO.
-
-
-
-%Metti tutti i modelli di sintesi proteica:
-%unregulated gene
-%regulated gene
-%autorepressor
-%toggleswitch
-%informati in quali contesti avvengono.
-
-\section{The Autorepressor model}
-
-As shown schematically in fig. \ref{autorepressor}, in this case gene product represses its own transcription. 
-
-
-\begin{figure}[!ht]
-\centering
-\includegraphics[scale=0.50]{autorepressor.jpg}
-\caption{A schematic of an auto-repressing circuit where a blunt line indicates a repressing action while a connector ending with an arrow indicates an activating action}
-\label{autorepressor}
-\end{figure}
-
-Proteins produced by the gene decreases the rate of activation of the gene. Eq.\ref{regulatedgeneequation} and Eq.\ref{proteincostitutiveexpressionequation} written for the first simple protein synthesis model are then modified in the following way:
-\begin{equation}
- \frac{dm}{dt} = k_{1} \cdot g_{R}(r) - \beta_{m}m
-\end{equation}
-as regards the rate of change of RNA molecules. Analogously, for proteins we can write the same equation as Eq. \ref{proteincostitutiveexpressionequation} written for constitutive expression and for the regulated gene case but, for the sake of clarity, we denote \emph{p} as \emph{r} in order to highlight that protein product is behaving as autorepressor. Hence:
-\begin{equation}
- \frac{dr}{dt} = k_{3}m - k_{4}r
-\end{equation}
-
-Fig.\ref{autorepressortimeplot} shows the typical pattern of the number of transcript and translated molecoles produced in a genetic autorepressor circuit.
+Fig.\ref{autorepressortimeplot} shows the typical pattern of the number of transcript and translated molecules produced in a genetic autorepressor circuit.
 
 \begin{figure}[!ht]
 \hspace*{-2.5cm} 
@@ -1021,30 +1084,7 @@ Regulatory factor X1 (RFX1) is an evolutionary conserved transcriptional factor 
 
 One of the most understood ways of regulating RFX1's gene expression is by its autorepression. RFX1 auto-represses itself with the assistance of yet unidentified co-repressor, in response to DNA replication arrest, to bring about a controlled expression of RFX1 \cite{RFX1ArsenalAgainstCancer}. Such gene is functionally conserved for instance in yeast where we find a yeast RFX1 homologue, that is Ctr1. There are evidences for a common mechanism for Crt1 and Rfx1 expression and for the conservation of their mode of action in response to a DNA replication block \cite{RFX1genehumansyeast}.
 
-
-
-
-\section{The Toggle-Switch model}
-The genetic toggle-switch is a system of two mutually repressing genes. A simplified sketch of this model is shown in Fig.\ref{toggleswitch}.
-
-\begin{figure}[!ht]
-\centering
-\includegraphics[scale=0.75]{toggleswitch.jpg}
-\caption{A schematic of the toggle switch where a blunt line indicates a repressing action while a connector ending with an arrow indicates an activating action.}
-\label{toggleswitch}
-\end{figure}
-
-The repression of gene 2 is mediated by an inducer (related to gene 1) that regulate gene expression. Similarly this happens for gene 1 repression.
-
-We would expect the system to exhibit \emph{two} mutually exclusive behaviors: either $r_{1}$ is high, keeping expression of $r_{2}$ low, or conversely, $r_{2}$ is high, keeping expression of $r_{1}$ low \cite{SanDiegoUniversity}. 
-
-For simplicity, we assume that the switch is composed of symmetric elements so that the rate constants are identical for each half of the network. Then, as seen in the other cases, the mathematical model takes the form:
-\begin{align}
- \frac{dm_{1}}{dt}=k_{1}\cdot g_{R}(r_{2}) - k_{2}m && \frac{dm_{2}}{dt} = k_{1} \cdot g_{R}(r_{1}) - k_{2}m
-\end{align}
-\begin{align}
- \frac{dr_{1}}{dt}=k_{3}m_{1} - k_{4}r_{1} && \frac{dr_{2}}{dt} = k_{3}m_{2} - k_{4}r_{2}
-\end{align}
+\section{The Toggle-Switch simulation}
 
 Fig.\ref{toggleswitchtimeplot} shows the typical trend of gene expression in a toggle switch system.
 
@@ -1064,7 +1104,6 @@ MiRNAs are small, non-coding RNAs
 that modulate the expression of target mRNAs. MiRNAs are often part of toggle switches, with important examples
 are gene pairs built with oncogenes and tumour suppressor genes. The miR-17-92
 cluster forms a bistable switch with Myc and the E2F proteins \cite{microRNAs}.
-
 
 
 %Ci sarebbe anche il caso di due geni indipendenti
@@ -1677,7 +1716,7 @@ We do not have scanned also the toggle switch results by means of CWT because of
 
 \part{Deep Neural Networks for parameters estimation}
 %Noi usiamo l'autocorrelazione per� possono essere usate altre funzioni dipendenti dai parametri del sistema. Tipo alcuni usano lo scaleogramma. Trova le fonti che interessava molto il professore. 
-\chapter{Artificial Neural Networks (ANN) as data-driven modeling}
+\chapter{Artificial Neural Networks (ANN) as data-driven modeling}\label{ArtificialNeuralNetwork}
 The regression problem is how to model one or several dependent variables/responses, \emph{Y}, by means of a set of predictor variables, \emph{X} \cite{datadrivenmodeling}. 
 
 This problem can be faced in the data-driven modeling framework that is often more suitable to describe the real-world systems that are associated with complexities. A data-driven model is based on the analysis of the data about a specific system. The main concept of data-driven model is to \emph{find relationships between the system input and output variables without explicit knowledge of the physical behavior of the system} that is, in few words, the opposite of what we did in the previous sections when modeling genetic circuits. Unlike first principles models, data-driven models make no attempt to model the internal features of the system. Instead, they focus on matching the input-output behavior to observational data. 
@@ -1961,7 +2000,7 @@ Anyway, leaving the biological discoveries apart, in all these genetic models, w
 %Confrontare la mae e la r2score generati da modelli uguali con diverse specie chimiche può darci informazioni su tali specie.
 
 \part{NF-\texorpdfstring{$\kappa$}{\265}B, a stochastic active player in human cancer}
-\chapter{The NF-\texorpdfstring{$\kappa$}{\265}B family of transcription factors}
+\chapter{The NF-\texorpdfstring{$\kappa$}{\265}B family of transcription factors}\label{NFkBBiologyExplained}
 
 %METTI COSA SONO I FATTORI DI TRASCRIZIONE.
 
@@ -2426,7 +2465,12 @@ However, the subject of this thesis if the NF-$\kappa$B and also this is an othe
 We ended this journey leaving a simple model the NF-$\kappa$B activity based on the only actions of two inhibitors, the I$\kappa$B$\alpha$ and the A20. The results of this very simple model based only on first order reaction rate and ON/OFF behavior show a temporal series that has an oscillating behavior very similar to the one found by Hoffman et al. in their experiments. The autocorrelation function is indeed oscillating whereas the fast fourier tranform shows periodicity at low frequencies such as the first simple models analysed. From the continous wavelet transform some patterns arise but with the computational resources at hand it is difficult to draw conclusions. 
 
 The model lacks of many features such as catalytical reactions and so second order reactions. However, just in the introduction of this thesis we mentioned the famous phrase ``all models are wrong but some are usefull''. Our model is wrong but it is usefull as a starting point and also to predict what happens if one of the few players involved lacks. For instance the important role played by the inhibitor I$\kappa$B$\alpha$ whose lacking leads to a higher level of NF-$\kappa$B expression, that is what happens in colon cancer cells.
-%FARLOOOOO
+
+And, also in this case as mentioned in the introduction, once the model agrees with the experimental data all that remains is finding the paramaters models, an hope for finding the cure for illness.
+
+The neural networks analysis has shown to work in the three simple genetic models considered at the begging and not only this. It reveals also the amount of information stored in each chemical species. For instance in the autorepressor case, the neural network works better when the autocorrelations given as input are those of RNA molecules and less for proteins. 
+
+Now, we hope that these findings coming from simulations will be ``materialized'' through experimental data.
 
 %RISULTATI SULLE RETI NEURALI.
 
@@ -2470,6 +2514,9 @@ The model lacks of many features such as catalytical reactions and so second ord
   \end{itemize}
   
   \chapter{Artificial Neural Networks plots}
+    
+    %FIRST MODEL PROTEINS
+    
     \begin{figure}[!ht]
     \centering
     \includegraphics[scale=0.50]{firstmodeltestdata0.05PROTEINS.png}
@@ -2492,7 +2539,7 @@ The model lacks of many features such as catalytical reactions and so second ord
     \end{figure}
     
     
-    
+    %AUTOREPRESSOR RNAS+PROTEINS
     
     \begin{figure}[!ht]
     \centering
@@ -2538,6 +2585,34 @@ The model lacks of many features such as catalytical reactions and so second ord
     \label{autorepressorlearningcurveRNASPROTEINSDROPOUT}
     \end{figure}
     
+    %AUTOREPRESSOR RNAS
+    
+    \begin{figure}[!ht]
+    \centering
+    \includegraphics[scale=0.50]{autorepressortestdataRNAS.png}
+    \caption{True data vs predicted data for the test set in case of autorepressor model. RNA autocorrelations are considered as input. Dropout is added in the Neural Network model.}
+    \label{autorepressortestdataRNAS}
+    \end{figure}
+
+    \begin{figure}[!ht]
+    \centering
+    \includegraphics[scale=0.50]{autorepressortraindataRNAS.png}
+    \caption{True data vs predicted data for the train set in case of autorepressor model. RNA autocorrelations are considered as input. Dropout is added in the Neural Network model.}
+    \label{autorepressortraindataRNAS}
+    \end{figure}
+
+    \begin{figure}[!ht]
+    \centering
+    \includegraphics[scale=0.50]{autorepressorlearningcurveRNAS.png}
+    \caption{Learning curve of the ANN refered to only proteins autocorrelations as input for the autorepressor model. Dropout is added in the Neural Network model. }
+    \label{autorepressorlearningcurveRNAS}
+    \end{figure}    
+    
+    %AUTOREPRESSOR PROTEINS
+    
+    %TOGGLE SWITCH RNAS
+    
+    %TOGGLE SWITCH PROTEINS
     
     
     
