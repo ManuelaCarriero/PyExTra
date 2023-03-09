@@ -67,7 +67,7 @@ Master Degree in Physics}}
 
 \vspace{23mm}
 
-\begin{center}\textcolor{red}{
+\begin{center}\textcolor{black}{
 %
 % INSERT THE TITLE OF YOUR THESIS
 %
@@ -80,7 +80,7 @@ Master Degree in Physics}}
 %
 % INSERT THE NAME OF THE SUPERVISOR WITH ITS TITLE (DR. OR PROF.)
 %
-{\large{\bf Supervisor: \vspace{2mm}\\\textcolor{red}{
+{\large{\bf Supervisor: \vspace{2mm}\\\textcolor{black}{
 Prof. Enrico Giampieri}\\\\
 %
 % INSERT THE NAME OF THE CO-SUPERVISOR WITH ITS TITLE (DR. OR PROF.)
@@ -98,7 +98,7 @@ Prof. Enrico Giampieri}\\\\
 %
 % INSERT THE NAME OF THE GRADUAND
 %
-\textcolor{red}{
+\textcolor{black}{
 Manuela Carriero}}}
 }
 \end{minipage}
@@ -109,7 +109,7 @@ Manuela Carriero}}}
 %
 % INSERT THE ACADEMIC YEAR
 %
-Academic Year \textcolor{red}{ 201*/201*}
+Academic Year \textcolor{black}{ 2022/2023}
 \end{center}
 
 \end{titlepage}
@@ -159,8 +159,8 @@ Academic Year \textcolor{red}{ 201*/201*}
 %transcription factors have functional properties because they interfere in some biological process.
 %In order to regulate the RNA production, nature invented the transcription factors.
 %La nostra modellizzazione dell'NF-kB � molto semplificata e ideale tipo ideal gas o Michaleis-Mentein reaction.
-In all the three domains of life, there are two main stages from DNA sequence of a gene to protein: transcription, that is the process of making a strand of RNA that is complementary to a single strand DNA, and translation, that is the process by which a protein is synthesized from the information contained in a molecule of messenger RNA (mRNA). In the process of transcription, proteins called ``transcription factors'' play a central role because they bind to a DNA sequence and helps form the transcription initiation complex. In eukaryotic cells, other transcription factors bind to regulatory sequences, such as enhancers and silencers that can respectively stimulate and repress transcription of the related gene. In this work of thesis are particularly interested in the simulation and analysis of the nuclear factor-kappa B (NF-$\kappa$B) activity which is ubiquitous within cells and its dysfunction leads to chronic diseases, cancers, neurodegenerative diseases and an other very long list of illnesses. In this thesis, however, we do not started immediately modeling its behavior, whose mathematical models made by researchers are already a high number. In this stochastic context, firstly we aim to review and deepen into stochastic simulation algorithms to solve the Chemical Master Equation (CME) giving an our alternative algorithm called ``hybrid'' because it combines the Gillespie's Stochastic Simulation Algorithm with the tauleaping algorithm with the attempt to improve the algorithm's speed and, at the same time, preserve the performance; secondly we analyse the stochastic simulation results of three basics genetic circuits (the simplest model of gene expression, the autorepressor and the toggle switch) with the help of the Autocorrelation Function, the Fast Fourier Transform and the Continous Wavelet Transform with the attempt to find interesting patterns from the temporal series; third, we faced the problem of parameter estimation of these simple genetic circuit using artificial neural networks rather than the often used Approximate Bayesian Computation (ABC) that has the limit to be computationally expensive; finally, 
-conscientious of what we have learned after all the steps, we provide a very little NF-$\kappa$B model. The results for each step are the following: the hybrid algorithm used in the first protein synthesis model configuration has is faster than the SSA but when the number of molecules produced tends to be high; periodicity arises from the temporal series, in particular from the autorepressor case; the neural networks learn to predict the model parameters given the autocorrelation as input but the choice of the chemical species for autocorrelation calculation makes differences in results; finally, our little NF-$\kappa$B model that considers the contribution of only I$\kappa$B$\alpha$ and A20 as inhibitors in the simplified system, shows an oscillating behavior that is similar to the one predicted by Hoffman et al. in their experiments.   
+In all the three domains of life, there are two main stages from DNA sequence of a gene to protein: transcription, that is the process of making a strand of RNA that is complementary to a single strand DNA, and translation, that is the process by which a protein is synthesized from the information contained in a molecule of messenger RNA (mRNA). In the process of transcription, proteins called ``transcription factors'' play a central role because they bind to a DNA sequence and help the transcription initiation complex. In eukaryotic cells, other transcription factors bind to regulatory sequences, such as enhancers and silencers that can respectively stimulate and repress transcription of the related gene. In this work of thesis, we are particularly interested in the simulation and analysis of the nuclear factor-kappa B (NF-$\kappa$B) activity which is ubiquitous within cells and its dysfunction leads to chronic diseases, cancers, neurodegenerative diseases and an other very long list of illnesses. In this thesis, however, we do not started immediately modeling its behavior, whose mathematical models made by researchers are already a high number. In this stochastic context, firstly we aim to review and deepen into stochastic simulation algorithms to solve the Chemical Master Equation (CME) giving an our alternative algorithm called ``hybrid'' because it combines the Gillespie's Stochastic Simulation Algorithm (SSA) with the tauleaping algorithm with the attempt to improve the algorithm's speed and, at the same time, preserve the SSA accuracy; secondly we analyse the stochastic simulation results of three basics genetic circuits (the simplest model of gene expression, the autorepressor and the toggle switch) with the help of the Autocorrelation Function, the Fast Fourier Transform and the Continous Wavelet Transform with the attempt to find interesting patterns from the temporal series; third, we faced the problem of parameters estimation of these simple genetic circuits using artificial neural networks rather than the often used Approximate Bayesian Computation (ABC) that has the limit to be computationally expensive; finally, 
+conscientious of what we have learned after all such steps, we provide a very little NF-$\kappa$B model. The results for each step are the following: the hybrid algorithm applied to the first protein synthesis model configuration is faster than the SSA but in configurations where the number of molecules produced tends to be high; periodicity arises from the temporal series, in particular from the autorepressor case; the neural networks learn to predict the model parameters given the autocorrelation as input but the choice of the chemical species for autocorrelation calculation makes differences in results; finally, our little NF-$\kappa$B model that considers the contribution of only I$\kappa$B$\alpha$ and A20 as inhibitors in the simplified system, shows an oscillating behavior that is similar to the one predicted by Hoffman et al. in their experiments.   
 \end{flushleft}
 \thispagestyle{empty}
 \clearpage
@@ -218,7 +218,7 @@ Creating phenomenological models is not a trivial task: ``sensing which assumpti
 
 
 
-\section{Heterogeneity in biology}
+\section{Heterogeneity in biology}\label{Heterogeneityinbiology}
 Stochastic computational methods have become commonplace in science because they are able to appropriately account for one key feature in biology: this is heterogeneity.
 
 There are three different sources of heterogeneity in natural systems: genetic, environmental (i.e. also known as \emph{extrinsic noise}) and stochastics (i.e. also called \emph{intrinsic noise}).
@@ -2625,6 +2625,15 @@ Now, we hope that these findings coming from simulations will be ``materialized'
 %\addcontentsline{toc}{chapter}{Acknowledgments}
 \chapter*{Acknowledgments}
 \addcontentsline{toc}{chapter}{Acknowledgments} 
+I gratefully acknowledge the help and support of Professor Enrico Giampieri. His knowledge, experience and advices gave me the possibility to study on this thesis.
+
+I also would like to acknowledge the support and help from all the students in Applied Physics. The year spent for laboratories and lessons was really nice.
+
+Last, but not least, I acknowledge my family for their continous love and support. I aknowledge also my friends for their encouragements.
+
+After all, if we are what we are and we achieve what we achieve is also due to the environment in which we leave and so to the people with which interact (as explained in Chapter \ref{Heterogeneityinbiology}).
+
+
 %we are all sons of the environment in which we live and so of the people with which we interact.
 \begin{thebibliography}{bibliography}
      \bibitem{Brizi} Gastone Castellani, teaching material of {\em Physical Methods of Biology} course, University of Bologna.
@@ -2706,7 +2715,7 @@ Now, we hope that these findings coming from simulations will be ``materialized'
     \href{https://www.cancer.gov/publications/dictionaries/cancer-terms/def/tumor-necrosis-factor}{https://www.cancer.gov}
     \bibitem{NIHPhosphorylation} A process in which a phosphate group is added to a molecule, such as a sugar or a protein. \href{https://www.cancer.gov/publications/dictionaries/cancer-terms/def/phosphorylation}{https://www.cancer.gov}
     \bibitem{NCBIPhosphorylation} Nestler EJ, Greengard P. {\em Protein Phosphorylation is of Fundamental Importance in Biological Regulation}. In: Siegel GJ, Agranoff BW, Albers RW, et al., editors. Basic Neurochemistry: Molecular, Cellular and Medical Aspects. 6th edition. Philadelphia: Lippincott-Raven; 1999.
-    \bibitem{Example} Tomasz Lipniacki, Pawel Paszek, Allan R. Brasier, Bruce Luxon, Marek Kimmel, {\em Mathematical model of NF-?B regulatory module}, Journal of Theoretical Biology, Volume 228, Issue 2, 2004, Pages 195-215, ISSN 0022-5193.
+    \bibitem{Example} Tomasz Lipniacki, Pawel Paszek, Allan R. Brasier, Bruce Luxon, Marek Kimmel, {\em Mathematical model of NF-kB regulatory module}, Journal of Theoretical Biology, Volume 228, Issue 2, 2004, Pages 195-215, ISSN 0022-5193.
     \bibitem{WikiHill} Hill equation (biochemistry) \url{https://en.wikipedia.org/wiki/Hill_equation_(biochemistry)}
     \bibitem{SynapticStrength} Synaptic Strength \href{https://www.sciencedirect.com/topics/computer-science/synaptic-strength}{https://www.sciencedirect.com}
     \bibitem{ANNBrainTumorsNMR} H. H. Sultan, N. M. Salem and W. Al-Atabany, {\em Multi-Classification of Brain Tumor Images Using Deep Neural Network}, in IEEE Access, vol. 7, pp. 69215-69225, 2019.
