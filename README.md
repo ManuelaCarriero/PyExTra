@@ -108,7 +108,7 @@ can type this command:
 ## Usage
 
 ## Command line syntax
-`python <configuration file> <simulation.py> -run`
+`python <configuration file> <simulation.py> -run` <br>
 `python <configuration file> <simulation.py> -run_multiplesimulations`
 
 ## Example of results
