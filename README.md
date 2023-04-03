@@ -22,7 +22,7 @@ scikit-learn, keras, tensorflow.<br>
 
 ## Structure of the project
 First of all, make the Stochastic Simulation Algorithm (SSA) simulation: <br>
-[ssa_simulation.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/ssa_simulation.py) SSA simulation of the **first protein synthesis model**;
+[ssa_simulation.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/ssa_simulation.py) SSA simulation of the [**first protein synthesis model**](https://github.com/ManuelaCarriero/PyExTra#first-protein-synthesis-model);
 
 ## Testing
 As you can notice from the Dependencies section, we have made use of many built-in functions. However, this work is mainly based on the simulations 
