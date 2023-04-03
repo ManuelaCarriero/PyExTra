@@ -28,8 +28,8 @@ First of all, make the simulation using the [Stochastic Simulation Algorithm (SS
 [ssa_simulation_toggleswitch.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/ssa_simulation_toggleswitch.py) SSA simulation of the [**Toggle-Switch model**](https://github.com/ManuelaCarriero/PyExTra#toggle-switch-model).<br>
 Then using:<br>
 [plots.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/plots.py) you can plot the number of molecules as function of time and the distribution of states;<br>
-[acf.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/acf.py) you can plot the autocorrelation functions refered to the temporal series. [statistics.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/statistics.py) is a python script to calculate and plot the quantiles autocorrelation.<br>
-You can also use [fft.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/fft.py) and [wavelet.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/wavelet.py): they are python scripts for the Fast Fourier Transform and the Continuous Wavelet Transform analysis.<br>
+[acf.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/acf.py) you can plot the autocorrelation functions refered to the temporal series. [statistics.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/statistics.py) is a python *script* to calculate and plot the quantiles autocorrelation.<br>
+You can also use [fft.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/fft.py) and [wavelet.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/wavelet.py): they are python *scripts* for the Fast Fourier Transform and the Continuous Wavelet Transform analysis.<br>
  
 
 
