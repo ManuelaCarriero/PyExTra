@@ -32,7 +32,7 @@ Then using:<br>
 You can also use [fft.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/fft.py) and [wavelet.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/wavelet.py): they are python *scripts* for the Fast Fourier Transform and the Continuous Wavelet Transform analysis.<br>
 Other types of algorithms to simulate biological stochastic processes have been implemented:<br>
 [tauleap_simulation.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/tauleap_simulation.py): it makes simulations using the [Tau-leap algorithm](https://github.com/ManuelaCarriero/PyExTra#tau-leap-algorithm); <br>
-[hybrid_simulation.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/hybrid_simulation.py): it makes the simulation using an algorithm that combines [SSA](https://github.com/ManuelaCarriero/PyExTra#stochastic-simulation-algorithm-ssa) algorithm with the [Tau-leap](https://github.com/ManuelaCarriero/PyExTra/blob/main/hybrid_simulation.py).
+[hybrid_simulation.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/hybrid_simulation.py): it makes the simulation using an algorithm that combines [SSA](https://github.com/ManuelaCarriero/PyExTra#stochastic-simulation-algorithm-ssa) algorithm with the [Tau-leap](https://github.com/ManuelaCarriero/PyExTra/blob/main/hybrid_simulation.py) (**NOTE: it is new !**).
 
 ## Testing
 As you can notice from the Dependencies section, we have made use of many built-in functions. However, this work is mainly based on the simulations 
