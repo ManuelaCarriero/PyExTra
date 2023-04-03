@@ -26,6 +26,7 @@ scikit-learn, keras, tensorflow.<br>
 [ssa_simulation_autorepressor.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/ssa_simulation_autorepressor.py) SSA simulation of the [**Autorepressor model**](https://github.com/ManuelaCarriero/PyExTra#autorepressor-model);<br>
 [ssa_simulation_2_ind_genes.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/ssa_simulation_2_ind_genes.py) SSA simulation of two independent genes;<br>
 [ssa_simulation_toggleswitch.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/ssa_simulation_toggleswitch.py) SSA simulation of the [**Toggle-Switch model**](https://github.com/ManuelaCarriero/PyExTra#toggle-switch-model).<br>
+[ssa_simulation_nfkb.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/ssa_simulation_nfkb.py) SSA simulation of the first NF-kB model.<br>
 * Then using:<br>
 [plots.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/plots.py) you can plot the number of molecules as function of time and the distribution of states;<br>
 [acf.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/acf.py) you can plot the autocorrelation functions refered to the temporal series. [statistics.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/statistics.py) is a python *script* to calculate and plot the quantiles autocorrelation.<br>
