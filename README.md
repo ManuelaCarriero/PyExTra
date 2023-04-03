@@ -27,7 +27,7 @@ First of all, make the simulation using the [Stochastic Simulation Algorithm (SS
 [ssa_simulation_2_ind_genes.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/ssa_simulation_2_ind_genes.py) SSA simulation of two independent genes;<br>
 [ssa_simulation_toggleswitch.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/ssa_simulation_toggleswitch.py) SSA simulation of the [**Toggle-Switch model**](https://github.com/ManuelaCarriero/PyExTra#toggle-switch-model);<br>
 Then using:<br>
-[plots.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/plots.py) you can plot the number of molecules as function of time and the stationary distributions;<br>
+[plots.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/plots.py) you can plot the number of molecules as function of time and the distribution of states;<br>
 [acf.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/acf.py) you can plot the autocorrelation functions refered to the temporal series.
 
 
