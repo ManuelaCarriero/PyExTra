@@ -21,6 +21,7 @@ scikit-learn, keras, tensorflow.<br>
 **OS**: Windows10, Linux (Ubuntu).
 
 ## Structure of the project
+[ssa_simulation.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/ssa_simulation.py)
 
 ## Testing
 As you can notice from the Dependencies section, we have made use of many built-in functions. However, this work is mainly based on the simulations 
