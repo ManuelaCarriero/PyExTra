@@ -21,7 +21,7 @@ scikit-learn, keras, tensorflow.<br>
 **OS**: Windows10, Linux (Ubuntu).
 
 ## Structure of the project
-First of all, make the Stochastic Simulation Algorithm (SSA) simulation:
+First of all, make the Stochastic Simulation Algorithm (SSA) simulation: <br>
 [ssa_simulation.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/ssa_simulation.py) SSA simulation of the **first protein synthesis model**;
 
 ## Testing
