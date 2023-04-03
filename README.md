@@ -67,7 +67,7 @@ The number of messenger RNAs **m** and proteins **n** produced can be described 
 <p align="center">
   <img
     width="590" 
-    src="https://github.com/ManuelaCarriero/protein-synthesis-modeling/blob/main/Images/toggleswitch.jpg"
+    src="https://github.com/ManuelaCarriero/PyExTra/blob/main/Thesis_Images/toggleswitchrightmodel.png"
   >
 </p>
 
