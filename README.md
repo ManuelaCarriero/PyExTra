@@ -24,7 +24,7 @@ scikit-learn, keras, tensorflow.<br>
 First of all, make the simulation using the Stochastic Simulation Algorithm (SSA): <br>
 [ssa_simulation.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/ssa_simulation.py) SSA simulation of the [**first protein synthesis model**](https://github.com/ManuelaCarriero/PyExTra#first-protein-synthesis-model);<br>
 [ssa_simulation_autorepressor.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/ssa_simulation_autorepressor.py) SSA simulation of the [**Autorepressor model**](https://github.com/ManuelaCarriero/PyExTra#autorepressor-model);<br>
-[ssa_simulation_2_ind_genes.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/ssa_simulation_2_ind_genes.py) SSA simulation of two independent;<br>
+[ssa_simulation_2_ind_genes.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/ssa_simulation_2_ind_genes.py) SSA simulation of two independent genes;<br>
 [ssa_simulation_toggleswitch.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/ssa_simulation_toggleswitch.py) SSA simulation of the [**Toggle-Switch model**](https://github.com/ManuelaCarriero/PyExTra#toggle-switch-model);
 
 
