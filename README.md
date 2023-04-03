@@ -52,10 +52,10 @@ A simple model for central dogma of biology is represented by the following biol
   >
 </p>
 
-The number of messenger RNAs **m** and proteins **n** produced can be described by a *chemical master equation*. 
+The number of messenger RNAs **m** and proteins **n** produced is a stochastic process and the *Chemical Master Equation* describes the time evolution of the probability of a stochastic system to be in a particular configuration.
 
 ## Autorepressor model
-
+In this model there is a gene and the gene product **p** represses its own transcription.
 <p align="center">
   <img
     width="500"	 
@@ -64,7 +64,7 @@ The number of messenger RNAs **m** and proteins **n** produced can be described 
 </p>
 
 ## Toggle-switch model
-
+The genetic toggle-switch is a system of two mutually repressing genes.
 <p align="center">
   <img
     width="590" 
