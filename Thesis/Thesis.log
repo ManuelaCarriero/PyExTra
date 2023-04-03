@@ -1,0 +1,1786 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.4.24)  10 MAR 2023 16:53
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**./Thesis.tex
+(Thesis.tex
+LaTeX2e <2021-11-15> patch level 1
+L3 programming layer <2022-02-24>
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/base\report.cls
+Document Class: report 2021/10/04 v1.4n Standard LaTeX document class
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/base\size12.clo
+File: size12.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count185
+\c@chapter=\count186
+\c@section=\count187
+\c@subsection=\count188
+\c@subsubsection=\count189
+\c@paragraph=\count190
+\c@subparagraph=\count191
+\c@figure=\count192
+\c@table=\count193
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen138
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
+Package: babel 2022/02/26 3.73 The Babel package
+\babel@savecnt=\count194
+\U@D=\dimen139
+\l@unhyphenated=\language79
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbabel.def)
+\bbl@readstream=\read2
+\bbl@dirlevel=\count195
+
+*************************************
+* Local config file bblopts.cfg used
+*
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg
+File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
+ babel
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/babel-english\english.ld
+f
+Language: english 2017/06/06 v3.3r English support from the babel system
+Package babel Info: Hyphen rules for 'canadian' set to \l@english
+(babel)             (\language0). Reported on input line 102.
+Package babel Info: Hyphen rules for 'australian' set to \l@ukenglish
+(babel)             (\language73). Reported on input line 105.
+Package babel Info: Hyphen rules for 'newzealand' set to \l@ukenglish
+(babel)             (\language73). Reported on input line 108.
+)) (C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/base\newlfont.sty
+Package: newlfont 1998/08/17 v2.2m Standard LaTeX package
+LaTeX Info: Redefining \em on input line 57.
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/base\latexsym.sty
+Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
+\symlasy=\mathgroup4
+LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
+(Font)                  U/lasy/m/n --> U/lasy/b/n on input line 52.
+))
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/graphics\color.sty
+Package: color 2021/12/07 v1.3c Standard LaTeX Color (DPC)
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 149.
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
+)) (C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/csquotes\csquotes.sty
+Package: csquotes 2021-02-22 v5.2l context-sensitive quotations (JAW)
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count196
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks16
+)
+\csq@reset=\count197
+\csq@gtype=\count198
+\csq@glevel=\count199
+\csq@qlevel=\count266
+\csq@maxlvl=\count267
+\csq@tshold=\count268
+\csq@ltx@everypar=\toks17
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/csquotes\csquotes.def
+File: csquotes.def 2021-02-22 v5.2l csquotes generic definitions (JAW)
+)
+Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
+Package csquotes Info: ... configuration file loaded successfully.
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/csquotes\csquotes.cfg
+File: csquotes.cfg 
+))
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/epigraph\epigraph.sty
+Package: epigraph 2020/01/02 v1.5e typesetting epigraphs
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/nextpage\nextpage.sty
+Package: nextpage 2009/09/03 v1.1a additional page commands
+)
+\beforeepigraphskip=\skip49
+\afterepigraphskip=\skip50
+\epigraphwidth=\skip51
+\epigraphrule=\skip52
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/tools\bm.sty
+Package: bm 2021/04/25 v1.2e Bold Symbol Support (DPC/FMi)
+\symboldoperators=\mathgroup5
+\symboldletters=\mathgroup6
+\symboldsymbols=\mathgroup7
+Package bm Info: No bold for \OMX/cmex/m/n, using \pmb.
+\symboldlasy=\mathgroup8
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 149.
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
+Package: hyperref 2022-02-21 v7.00n Hypertext links for LaTeX
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
+Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.
+sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.st
+y
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/generic/kvsetkeys\kvsetkeys.st
+y
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefinek
+eys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape.st
+y
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+) (C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/letltxmacro\letltxmacro.
+sty
+Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
+) (C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/auxhook\auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+)
+\@linkdim=\dimen140
+\Hy@linkcounter=\count269
+\Hy@pagecounter=\count270
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
+File: pd1enc.def 2022-02-21 v7.00n Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/generic/etexcmds\etexcmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+)
+\Hy@SavedSpaceFactor=\count271
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
+File: puenc.def 2022-02-21 v7.00n Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Hyper figures OFF on input line 4137.
+Package hyperref Info: Link nesting OFF on input line 4142.
+Package hyperref Info: Hyper index ON on input line 4145.
+Package hyperref Info: Plain pages OFF on input line 4152.
+Package hyperref Info: Backreferencing OFF on input line 4157.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4390.
+\c@Hy@tempcnt=\count272
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+\Urlmuskip=\muskip16
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4749.
+\XeTeXLinkMargin=\dimen141
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintcalc.
+sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count273
+\Field@Width=\dimen142
+\Fld@charsize=\dimen143
+Package hyperref Info: Hyper figures OFF on input line 6027.
+Package hyperref Info: Link nesting OFF on input line 6032.
+Package hyperref Info: Hyper index ON on input line 6035.
+Package hyperref Info: backreferencing OFF on input line 6042.
+Package hyperref Info: Link coloring OFF on input line 6047.
+Package hyperref Info: Link coloring with OCG OFF on input line 6052.
+Package hyperref Info: PDF/A mode OFF on input line 6057.
+LaTeX Info: Redefining \ref on input line 6097.
+LaTeX Info: Redefining \pageref on input line 6101.
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/base\atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count274
+\c@Item=\count275
+\c@Hfootnote=\count276
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
+File: hpdftex.def 2022-02-21 v7.00n Hyperref driver for pdfTeX
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/base\atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
+kage
+with kernel methods
+)
+\Fld@listcount=\count277
+\c@bookmark@seq@number=\count278
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfile
+check.sty
+Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniqueco
+unter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+85.
+)
+\Hy@SectionHShift=\skip53
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.cf
+g
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+)
+\Gin@req@height=\dimen144
+\Gin@req@width=\dimen145
+) (C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+Package: amsmath 2021/10/15 v2.17l AMS math features
+\@mathmargin=\skip54
+For additional information on amsmath, use the `?' option.
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks18
+\ex@=\dimen146
+))
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+LaTeX Info: Redefining \boldsymbol on input line 28.
+\pmbraise@=\dimen147
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
+Package: amsopn 2021/08/26 v2.02 operator names
+)
+\inf@bad=\count279
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count280
+\leftroot@=\count281
+LaTeX Info: Redefining \overline on input line 399.
+\classnum@=\count282
+\DOTSCASE@=\count283
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box50
+\strutbox@=\box51
+\big@size=\dimen148
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count284
+\c@MaxMatrixCols=\count285
+\dotsspace@=\muskip17
+\c@parentequation=\count286
+\dspbrk@lvl=\count287
+\tag@help=\toks19
+\row@=\count288
+\column@=\count289
+\maxfields@=\count290
+\andhelp@=\toks20
+\eqnshift@=\dimen149
+\alignsep@=\dimen150
+\tagshift@=\dimen151
+\tagwidth@=\dimen152
+\totwidth@=\dimen153
+\lineht@=\dimen154
+\@envbody=\toks21
+\multlinegap=\skip55
+\multlinetaggap=\skip56
+\mathdisplay@stack=\toks22
+LaTeX Info: Redefining \[ on input line 2938.
+LaTeX Info: Redefining \] on input line 2939.
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup9
+\symAMSb=\mathgroup10
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/mhchem\mhchem.sty
+Package: mhchem 2021/12/31 v4.09 for typesetting chemical formulae
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\expl3.sty
+Package: expl3 2022-02-24 L3 programming layer (loader) 
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdft
+ex.def
+File: l3backend-pdftex.def 2022-02-07 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count291
+\l__pdf_internal_box=\box52
+))
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/l3keys2e\l3ke
+ys2e.sty
+Package: l3keys2e 2022-01-12 LaTeX2e option processing using LaTeX3 keys
+) (C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/tools\calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count292
+\calc@Bcount=\count293
+\calc@Adimen=\dimen155
+\calc@Bdimen=\dimen156
+\calc@Askip=\skip57
+\calc@Bskip=\skip58
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count294
+\calc@Cskip=\skip59
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/chemgreek\chemgreek.sty
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/xparse\xparse
+.sty
+Package: xparse 2022-01-12 L3 Experimental document command parser
+)
+Package: chemgreek 2020/01/16 v1.1a interface for upright Greek letters for use
+ in chemistry (CN)
+\l__chemgreek_tmpa_int=\count295
+\g__chemgreek_tmpa_int=\count296
+)
+\l__mhchem_ce_distanceFromLastComma_int=\count297
+\__mhchem_arrow_extPgfLength_skip=\skip60
+\mhchem@minispace@tmp=\skip61
+\mhchem@minibackspace@tmp=\skip62
+\mhchem@bondwidth=\skip63
+\mhchem@bondheight=\skip64
+\mhchem@smallbondwidth@tmpA=\skip65
+\mhchem@smallbondwidth@tmpB=\skip66
+\mhchem@smallbondwidth=\skip67
+\mhchem@bondtmp@minussidebearingleft=\skip68
+\mhchem@bondtmp@minussidebearingright=\skip69
+\l__mhchem_option_version_int=\count298
+\mhchem@option@minusmathsidebearingleft=\dimen157
+\mhchem@option@minusmathsidebearingright=\dimen158
+\mhchem@option@minustextsidebearingleft=\dimen159
+\mhchem@option@minustextsidebearingright=\dimen160
+
+
+Package mhchem Warning: You did not specify a 'version' option for the mhchem
+(mhchem)                package. Please write \usepackage[version=4]{mhchem}
+(mhchem)                in your preamble (or any lower number for
+(mhchem)                compatibility mode), because you might get slightly
+(mhchem)                different output with the same input in future versions
+.
+
+) (C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty
+Package: fancyhdr 2022/11/09 v4.1 Extensive control of page headers and footers
+
+\f@nch@headwidth=\skip70
+\f@nch@O@elh=\skip71
+\f@nch@O@erh=\skip72
+\f@nch@O@olh=\skip73
+\f@nch@O@orh=\skip74
+\f@nch@O@elf=\skip75
+\f@nch@O@erf=\skip76
+\f@nch@O@olf=\skip77
+\f@nch@O@orf=\skip78
+) (C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/appendix\appendix.sty
+Package: appendix 2020/02/08 v1.2c extra appendix facilities
+\c@@pps=\count299
+\c@@ppsavesec=\count300
+\c@@ppsaveapp=\count301
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count302
+\float@exts=\toks23
+\float@box=\box53
+\@float@everytoks=\toks24
+\@floatcapt=\box54
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/mathtools\mathtools.sty
+Package: mathtools 2022/06/29 v1.29 mathematical typesetting tools
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/mathtools\mhsetup.sty
+Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
+)
+\g_MT_multlinerow_int=\count303
+\l_MT_multwidth_dim=\dimen161
+\origjot=\skip79
+\l_MT_shortvdotswithinadjustabove_dim=\dimen162
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen163
+\l_MT_above_intertext_sep=\dimen164
+\l_MT_below_intertext_sep=\dimen165
+\l_MT_above_shortintertext_sep=\dimen166
+\l_MT_below_shortintertext_sep=\dimen167
+\xmathstrut@box=\box55
+\xmathstrut@dim=\dimen168
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/unicode-math\unicode-mat
+h.sty
+Package: unicode-math 2020/01/31 v0.8q Unicode maths in XeLaTeX and LuaLaTeX
+
+
+! Package unicode-math Error: Cannot be run with pdftex!
+(unicode-math)                Use XeLaTeX or LuaLaTeX instead.
+
+Type <return> to continue.
+ ...                                              
+                                                  
+l.40 ...ror:nn {unicode-math} {unsupported-engine}
+                                                  
+
+LaTeX does not know anything more about this error, sorry.
+
+Try typing <return> to proceed.
+If that doesn't work, type X <return> to quit.
+
+
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/tocbibind\tocbibind.sty
+Package: tocbibind 2010/10/13 v1.5k extra ToC listings
+Package tocbibind Info: The document has chapter divisions on input line 50.
+
+
+Package tocbibind Note: Using chapter style headings, unless overridden.
+
+) (C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/tocloft\tocloft.sty
+Package: tocloft 2017/08/31 v2.3i parameterised ToC, etc., typesetting
+Package tocloft Info: The document has chapter divisions on input line 51.
+\cftparskip=\skip80
+\cftbeforetoctitleskip=\skip81
+\cftaftertoctitleskip=\skip82
+\cftbeforepartskip=\skip83
+\cftpartnumwidth=\skip84
+\cftpartindent=\skip85
+\cftbeforechapskip=\skip86
+\cftchapindent=\skip87
+\cftchapnumwidth=\skip88
+\cftbeforesecskip=\skip89
+\cftsecindent=\skip90
+\cftsecnumwidth=\skip91
+\cftbeforesubsecskip=\skip92
+\cftsubsecindent=\skip93
+\cftsubsecnumwidth=\skip94
+\cftbeforesubsubsecskip=\skip95
+\cftsubsubsecindent=\skip96
+\cftsubsubsecnumwidth=\skip97
+\cftbeforeparaskip=\skip98
+\cftparaindent=\skip99
+\cftparanumwidth=\skip100
+\cftbeforesubparaskip=\skip101
+\cftsubparaindent=\skip102
+\cftsubparanumwidth=\skip103
+\cftbeforeloftitleskip=\skip104
+\cftafterloftitleskip=\skip105
+\cftbeforefigskip=\skip106
+\cftfigindent=\skip107
+\cftfignumwidth=\skip108
+\c@lofdepth=\count304
+\c@lotdepth=\count305
+\cftbeforelottitleskip=\skip109
+\cftafterlottitleskip=\skip110
+\cftbeforetabskip=\skip111
+\cfttabindent=\skip112
+\cfttabnumwidth=\skip113
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+Package: caption 2022/03/01 v3.6b Customizing captions (AR)
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
+Package: caption3 2022/03/17 v2.3b caption3 kernel (AR)
+\caption@tempdima=\dimen169
+\captionmargin=\dimen170
+\caption@leftmargin=\dimen171
+\caption@rightmargin=\dimen172
+\caption@width=\dimen173
+\caption@indent=\dimen174
+\caption@parindent=\dimen175
+\caption@hangindent=\dimen176
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count306
+\c@continuedfloat=\count307
+Package caption Info: float package is loaded.
+Package caption Info: hyperref package is loaded.
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/footmisc\footmisc.sty
+Package: footmisc 2022/03/08 v6.0d a miscellany of footnote facilities
+\FN@temptoken=\toks25
+\footnotemargin=\dimen177
+\@outputbox@depth=\dimen178
+Package footmisc Info: Declaring symbol style bringhurst on input line 695.
+Package footmisc Info: Declaring symbol style chicago on input line 703.
+Package footmisc Info: Declaring symbol style wiley on input line 712.
+Package footmisc Info: Declaring symbol style lamport-robust on input line 723.
+
+Package footmisc Info: Declaring symbol style lamport* on input line 743.
+Package footmisc Info: Declaring symbol style lamport*-robust on input line 764
+.
+)
+Package csquotes Info: Checking for multilingual support...
+Package csquotes Info: ... found 'babel' package.
+Package csquotes Info: Adjusting default style.
+Package csquotes Info: Redefining alias 'default' -> 'english'.
+
+(Thesis.aux)
+\openout1 = `Thesis.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mki
+i
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count308
+\scratchdimen=\dimen179
+\scratchbox=\box56
+\nofMPsegments=\count309
+\nofMParguments=\count310
+\everyMPshowfont=\toks26
+\MPscratchCnt=\count311
+\MPscratchDim=\dimen180
+\MPnumerator=\count312
+\makeMPintoPDFobject=\count313
+\everyMPtoPDFconversion=\toks27
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-ba
+se.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+ (C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/grfext\grfext.sty
+Package: grfext 2019/12/03 v1.3 Manage graphics extensions (HO)
+)
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 504.
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cf
+g
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+))
+Package hyperref Info: Link coloring OFF on input line 51.
+ (C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
+Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gettitl
+estring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count314
+)
+LaTeX Info: Redefining \ref on input line 51.
+LaTeX Info: Redefining \pageref on input line 51.
+LaTeX Info: Redefining \nameref on input line 51.
+ (Thesis.out) (Thesis.out)
+\@outlinefile=\write3
+\openout3 = `Thesis.out'.
+
+
+Package chemgreek Info: Activating mapping `default' on line 51.
+
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 59
+.
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/base\ulasy.fd
+File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
+)
+LaTeX Font Info:    Trying to load font information for U+msa on input line 59.
+
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 59.
+
+
+(C:\Users\asus\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+Underfull \hbox (badness 10000) in paragraph at lines 83--95
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 83--95
+
+ []
+
+[1
+
+{C:/Users/asus/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.125 \newpage
+               [1]
+LaTeX Font Info:    Font shape `U/lasy/b/n' in size <8> not available
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 133.
+LaTeX Font Info:    Font shape `U/lasy/b/n' in size <6> not available
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 133.
+LaTeX Font Info:    Font shape `U/lasy/b/n' in size <7> not available
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 134.
+LaTeX Font Info:    Font shape `U/lasy/b/n' in size <5> not available
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 134.
+ [2] [3] [4] [5] [6] (Thesis.toc
+Overfull \hbox (9.67715pt too wide) in paragraph at lines 22--22
+ [][] [][]\OT1/cmr/m/n/12 An al-ter-na-tive method: the ``hy-brid''stochastic 
+ []
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.29 ...n and Poisson statistics}{42}{section.4.1}
+                                                  % [1
+
+]
+pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.58 ... {1em}Results and discussion}{119}{part.5}
+                                                  % [2])
+\tf@toc=\write4
+\openout4 = `Thesis.toc'.
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.182 \newpage
+               [3]
+pdfTeX warning (ext4): destination with the same identifier (name{page.4}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.187 ... physical methods for its investingation}
+                                                   [4
+
+]
+Chapter 1.
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.5}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.215 
+       [5
+
+]
+pdfTeX warning (ext4): destination with the same identifier (name{page.6}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.239 
+       [6] [7]
+Overfull \hbox (1.68773pt too wide) in paragraph at lines 282--282
+[]\OT1/cmr/bx/n/17.28 Motivation of the work and the con-se-quent work-
+ []
+
+[8] [9] [10] [11]
+Chapter 2.
+[12
+
+]
+<costitutiveexpression.jpg, id=456, 268.75406pt x 117.43875pt>
+File: costitutiveexpression.jpg Graphic file (type jpg)
+<use costitutiveexpression.jpg>
+Package pdftex.def Info: costitutiveexpression.jpg  used on input line 365.
+(pdftex.def)             Requested size: 172.002pt x 75.16052pt.
+<proteincostitutiveexpression.jpg, id=462, 398.99063pt x 122.70844pt>
+File: proteincostitutiveexpression.jpg Graphic file (type jpg)
+<use proteincostitutiveexpression.jpg>
+Package pdftex.def Info: proteincostitutiveexpression.jpg  used on input line 3
+84.
+(pdftex.def)             Requested size: 255.35313pt x 78.53313pt.
+ [13 <./costitutiveexpression.jpg>]
+<simplest_protein_synthesis_model.jpg, id=474, 566.86781pt x 147.55125pt>
+File: simplest_protein_synthesis_model.jpg Graphic file (type jpg)
+<use simplest_protein_synthesis_model.jpg>
+Package pdftex.def Info: simplest_protein_synthesis_model.jpg  used on input li
+ne 401.
+(pdftex.def)             Requested size: 226.7431pt x 59.01944pt.
+<autorepressor.jpg, id=480, 695.59875pt x 342.5297pt>
+File: autorepressor.jpg Graphic file (type jpg)
+<use autorepressor.jpg>
+Package pdftex.def Info: autorepressor.jpg  used on input line 442.
+(pdftex.def)             Requested size: 347.79852pt x 171.26442pt.
+ [14 <./proteincostitutiveexpression.jpg> <./simplest_protein_synthesis_model.j
+pg>]
+<toggleswitch.jpg, id=492, 586.44093pt x 304.88907pt>
+File: toggleswitch.jpg Graphic file (type jpg)
+<use toggleswitch.jpg>
+Package pdftex.def Info: toggleswitch.jpg  used on input line 463.
+(pdftex.def)             Requested size: 439.8296pt x 228.66623pt.
+ [15 <./autorepressor.jpg>] [16 <./toggleswitch.jpg>]
+Chapter 3.
+[17
+
+]
+Overfull \hbox (7.8689pt too wide) in paragraph at lines 519--521
+\OT1/cmr/m/n/12 Here $\OML/cmm/m/it/12 W\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 y[]\O
+MS/cmsy/m/n/12 j\OML/cmm/m/it/12 y[]\OT1/cmr/m/n/12 )$ is the \OT1/cmr/m/it/12 
+tran-si-tion prob-a-bil-ity per unit time \OT1/cmr/m/n/12 from $\OML/cmm/m/it/1
+2 y[]$ \OT1/cmr/m/n/12 to $\OML/cmm/m/it/12 y[]$ \OT1/cmr/m/n/12 and hence $\OM
+L/cmm/m/it/12 W\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 y[]\OMS/cmsy/m/n/12 j\OML/cmm/
+m/it/12 y[]\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 ^^U
+ []
+
+[18] [19] [20]
+<theonestep.jpg, id=562, 420.06938pt x 147.55125pt>
+File: theonestep.jpg Graphic file (type jpg)
+<use theonestep.jpg>
+Package pdftex.def Info: theonestep.jpg  used on input line 605.
+(pdftex.def)             Requested size: 378.05894pt x 132.79488pt.
+ [21] [22 <./theonestep.jpg>] [23] [24]
+<ODESSATauleaptimeplot100au.png, id=615, 1488.56125pt x 1154.3125pt>
+File: ODESSATauleaptimeplot100au.png Graphic file (type png)
+<use ODESSATauleaptimeplot100au.png>
+Package pdftex.def Info: ODESSATauleaptimeplot100au.png  used on input line 693
+.
+(pdftex.def)             Requested size: 446.57182pt x 346.29642pt.
+<RemovingwarmupSSA55.25sTauleap10.22stimelimit9000.png, id=619, 722.7pt x 516.7
+305pt>
+File: RemovingwarmupSSA55.25sTauleap10.22stimelimit9000.png Graphic file (type 
+png)
+<use RemovingwarmupSSA55.25sTauleap10.22stimelimit9000.png>
+Package pdftex.def Info: RemovingwarmupSSA55.25sTauleap10.22stimelimit9000.png 
+ used on input line 706.
+(pdftex.def)             Requested size: 505.88655pt x 361.70888pt.
+
+Overfull \hbox (55.88655pt too wide) in paragraph at lines 706--707
+ [][] 
+ []
+
+[25]
+<ODESSATauleaptimeplot9000au.png, id=629, 1482.53876pt x 1154.3125pt>
+File: ODESSATauleaptimeplot9000au.png Graphic file (type png)
+<use ODESSATauleaptimeplot9000au.png>
+Package pdftex.def Info: ODESSATauleaptimeplot9000au.png  used on input line 71
+7.
+(pdftex.def)             Requested size: 444.76506pt x 346.29642pt.
+ [26 <./ODESSATauleaptimeplot100au.png>] [27 <./RemovingwarmupSSA55.25sTauleap1
+0.22stimelimit9000.png>] [28 <./ODESSATauleaptimeplot9000au.png>] [29]
+[30] [31]
+<ka1ki0.5SSA1min47sHybrid7.5stimelimit14000.png, id=678, 722.7pt x 516.7305pt>
+File: ka1ki0.5SSA1min47sHybrid7.5stimelimit14000.png Graphic file (type png)
+<use ka1ki0.5SSA1min47sHybrid7.5stimelimit14000.png>
+Package pdftex.def Info: ka1ki0.5SSA1min47sHybrid7.5stimelimit14000.png  used o
+n input line 797.
+(pdftex.def)             Requested size: 505.88655pt x 361.70888pt.
+
+Overfull \hbox (55.88655pt too wide) in paragraph at lines 797--798
+ [][] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[32 <./ka1ki0.5SSA1min47sHybrid7.5stimelimit14000.png>]
+<ka1ki0.5SSA11min58sHybrid7.7stimelimit14000k110.png, id=689, 722.7pt x 516.730
+5pt>
+File: ka1ki0.5SSA11min58sHybrid7.7stimelimit14000k110.png Graphic file (type pn
+g)
+<use ka1ki0.5SSA11min58sHybrid7.7stimelimit14000k110.png>
+Package pdftex.def Info: ka1ki0.5SSA11min58sHybrid7.7stimelimit14000k110.png  u
+sed on input line 824.
+(pdftex.def)             Requested size: 505.88655pt x 361.70888pt.
+
+Overfull \hbox (55.88655pt too wide) in paragraph at lines 824--825
+ [][] 
+ []
+
+[33 <./ka1ki0.5SSA11min58sHybrid7.7stimelimit14000k110.png>]
+<ka1ki0.5SSA8.31sHybrid7.9stimelimit14000k10.1.png, id=697, 722.7pt x 516.7305p
+t>
+File: ka1ki0.5SSA8.31sHybrid7.9stimelimit14000k10.1.png Graphic file (type png)
+
+<use ka1ki0.5SSA8.31sHybrid7.9stimelimit14000k10.1.png>
+Package pdftex.def Info: ka1ki0.5SSA8.31sHybrid7.9stimelimit14000k10.1.png  use
+d on input line 851.
+(pdftex.def)             Requested size: 505.88655pt x 361.70888pt.
+
+Overfull \hbox (55.88655pt too wide) in paragraph at lines 851--852
+ [][] 
+ []
+
+[34] [35 <./ka1ki0.5SSA8.31sHybrid7.9stimelimit14000k10.1.png>]
+<ka0.1ki1SSA9sHybrid35stimelimit14000.png, id=710, 722.7pt x 516.7305pt>
+File: ka0.1ki1SSA9sHybrid35stimelimit14000.png Graphic file (type png)
+<use ka0.1ki1SSA9sHybrid35stimelimit14000.png>
+Package pdftex.def Info: ka0.1ki1SSA9sHybrid35stimelimit14000.png  used on inpu
+t line 879.
+(pdftex.def)             Requested size: 505.88655pt x 361.70888pt.
+
+Overfull \hbox (55.88655pt too wide) in paragraph at lines 879--880
+ [][] 
+ []
+
+[36 <./ka0.1ki1SSA9sHybrid35stimelimit14000.png>] [37] [38]
+<figWarmUpPeriod.png, id=738, 219.09856pt x 188.98605pt>
+File: figWarmUpPeriod.png Graphic file (type png)
+<use figWarmUpPeriod.png>
+Package pdftex.def Info: figWarmUpPeriod.png  used on input line 998.
+(pdftex.def)             Requested size: 197.18686pt x 170.08586pt.
+ [39] [40 <./figWarmUpPeriod.png>] [41
+
+]
+Chapter 4.
+<theonestepRNA.jpg, id=766, 255.95625pt x 173.14688pt>
+File: theonestepRNA.jpg Graphic file (type jpg)
+<use theonestepRNA.jpg>
+Package pdftex.def Info: theonestepRNA.jpg  used on input line 1031.
+(pdftex.def)             Requested size: 163.81143pt x 110.81361pt.
+[42
+
+] [43 <./theonestepRNA.jpg>]
+<firstmodelka1ki0timeplot.png, id=782, 987.2082pt x 484.9317pt>
+File: firstmodelka1ki0timeplot.png Graphic file (type png)
+<use firstmodelka1ki0timeplot.png>
+Package pdftex.def Info: firstmodelka1ki0timeplot.png  used on input line 1050.
+
+(pdftex.def)             Requested size: 582.4478pt x 286.10722pt.
+
+Overfull \hbox (63.927pt too wide) in paragraph at lines 1049--1051
+[]|  [] 
+ []
+
+[44 <./firstmodelka1ki0timeplot.png>]
+<firstmodelka1ki0.5timeplot.png, id=792, 987.2082pt x 484.9317pt>
+File: firstmodelka1ki0.5timeplot.png Graphic file (type png)
+<use firstmodelka1ki0.5timeplot.png>
+Package pdftex.def Info: firstmodelka1ki0.5timeplot.png  used on input line 106
+8.
+(pdftex.def)             Requested size: 582.4478pt x 286.10722pt.
+
+Overfull \hbox (63.927pt too wide) in paragraph at lines 1067--1069
+[]|  [] 
+ []
+
+[45 <./firstmodelka1ki0.5timeplot.png>]
+<firstmodelka0.1ki1timeplot.png, id=801, 987.2082pt x 484.9317pt>
+File: firstmodelka0.1ki1timeplot.png Graphic file (type png)
+<use firstmodelka0.1ki1timeplot.png>
+Package pdftex.def Info: firstmodelka0.1ki1timeplot.png  used on input line 107
+5.
+(pdftex.def)             Requested size: 582.4478pt x 286.10722pt.
+
+Overfull \hbox (63.927pt too wide) in paragraph at lines 1074--1076
+[]|  [] 
+ []
+
+[46 <./firstmodelka0.1ki1timeplot.png>]
+<autorepressortimeplotaugeneactivity.png, id=810, 987.2082pt x 484.9317pt>
+File: autorepressortimeplotaugeneactivity.png Graphic file (type png)
+<use autorepressortimeplotaugeneactivity.png>
+Package pdftex.def Info: autorepressortimeplotaugeneactivity.png  used on input
+ line 1089.
+(pdftex.def)             Requested size: 582.4478pt x 286.10722pt.
+
+Overfull \hbox (63.927pt too wide) in paragraph at lines 1088--1090
+[]|  [] 
+ []
+
+[47 <./autorepressortimeplotaugeneactivity.png>]
+<toggleswitchtimeplotaugeneactivity.png, id=823, 987.2082pt x 484.9317pt>
+File: toggleswitchtimeplotaugeneactivity.png Graphic file (type png)
+<use toggleswitchtimeplotaugeneactivity.png>
+Package pdftex.def Info: toggleswitchtimeplotaugeneactivity.png  used on input 
+line 1110.
+(pdftex.def)             Requested size: 582.4478pt x 286.10722pt.
+
+Overfull \hbox (63.927pt too wide) in paragraph at lines 1109--1111
+[]|  [] 
+ []
+
+[48] [49 <./toggleswitchtimeplotaugeneactivity.png>]
+Chapter 5.
+[50
+
+] [51] [52] [53]
+<examplesignalchangesfrequency.png, id=884, 401.5pt x 262.9825pt>
+File: examplesignalchangesfrequency.png Graphic file (type png)
+<use examplesignalchangesfrequency.png>
+Package pdftex.def Info: examplesignalchangesfrequency.png  used on input line 
+1228.
+(pdftex.def)             Requested size: 321.20042pt x 210.38626pt.
+<exampleFFTsignalchangesfrequency.png, id=886, 412.54124pt x 262.9825pt>
+File: exampleFFTsignalchangesfrequency.png Graphic file (type png)
+<use exampleFFTsignalchangesfrequency.png>
+Package pdftex.def Info: exampleFFTsignalchangesfrequency.png  used on input li
+ne 1237.
+(pdftex.def)             Requested size: 330.03345pt x 210.38626pt.
+ [54] [55 <./examplesignalchangesfrequency.png> <./exampleFFTsignalchangesfrequ
+ency.png>]
+<exampleofconvolution.jpg, id=905, 384.6872pt x 80.55093pt>
+File: exampleofconvolution.jpg Graphic file (type jpg)
+<use exampleofconvolution.jpg>
+Package pdftex.def Info: exampleofconvolution.jpg  used on input line 1262.
+(pdftex.def)             Requested size: 307.75017pt x 64.44083pt.
+ [56 <./exampleofconvolution.jpg>]
+<Morlet.jpg, id=915, 420.06938pt x 151.3153pt>
+File: Morlet.jpg Graphic file (type jpg)
+<use Morlet.jpg>
+Package pdftex.def Info: Morlet.jpg  used on input line 1270.
+(pdftex.def)             Requested size: 336.05597pt x 121.0524pt.
+ [57 <./Morlet.jpg>]
+<MorletTransformSignalExample.PNG, id=931, 673.51625pt x 346.29375pt>
+File: MorletTransformSignalExample.PNG Graphic file (type png)
+<use MorletTransformSignalExample.PNG>
+Package pdftex.def Info: MorletTransformSignalExample.PNG  used on input line 1
+312.
+(pdftex.def)             Requested size: 397.37114pt x 204.31152pt.
+ [58] [59 <./MorletTransformSignalExample.PNG>]
+<ComplexMorletTransformSignalExample.PNG, id=954, 664.4825pt x 346.29375pt>
+File: ComplexMorletTransformSignalExample.PNG Graphic file (type png)
+<use ComplexMorletTransformSignalExample.PNG>
+Package pdftex.def Info: ComplexMorletTransformSignalExample.PNG  used on input
+ line 1336.
+(pdftex.def)             Requested size: 392.04128pt x 204.31152pt.
+ [60 <./ComplexMorletTransformSignalExample.PNG>]
+<ComplexGaus1TransformSignalExample.PNG, id=966, 673.51625pt x 346.29375pt>
+File: ComplexGaus1TransformSignalExample.PNG Graphic file (type png)
+<use ComplexGaus1TransformSignalExample.PNG>
+Package pdftex.def Info: ComplexGaus1TransformSignalExample.PNG  used on input 
+line 1348.
+(pdftex.def)             Requested size: 397.37114pt x 204.31152pt.
+ [61 <./ComplexGaus1TransformSignalExample.PNG>]
+<CWTsignalRED.PNG, id=976, 428.60126pt x 272.01625pt>
+File: CWTsignalRED.PNG Graphic file (type png)
+<use CWTsignalRED.PNG>
+Package pdftex.def Info: CWTsignalRED.PNG  used on input line 1359.
+(pdftex.def)             Requested size: 300.01883pt x 190.41006pt.
+ [62 <./CWTsignalRED.PNG>] [63]
+<Firstmodelka1ki0ACFnlags10000dt0.1nsimulations4GtauWARMUPREMOVED.PNG, id=1007,
+ 578.16pt x 505.89pt>
+File: Firstmodelka1ki0ACFnlags10000dt0.1nsimulations4GtauWARMUPREMOVED.PNG Grap
+hic file (type png)
+<use Firstmodelka1ki0ACFnlags10000dt0.1nsimulations4GtauWARMUPREMOVED.PNG>
+Package pdftex.def Info: Firstmodelka1ki0ACFnlags10000dt0.1nsimulations4GtauWAR
+MUPREMOVED.PNG  used on input line 1402.
+(pdftex.def)             Requested size: 462.52863pt x 404.71254pt.
+
+Overfull \hbox (12.52863pt too wide) in paragraph at lines 1402--1403
+ [][] 
+ []
+
+[64 <./Firstmodelka1ki0ACFnlags10000dt0.1nsimulations4GtauWARMUPREMOVED.PNG>]
+<Firstmodelka1ki0.5ACFnlags10000dt0.1nsimulations4GtauWARMUPREMOVED.PNG, id=101
+4, 578.16pt x 505.89pt>
+File: Firstmodelka1ki0.5ACFnlags10000dt0.1nsimulations4GtauWARMUPREMOVED.PNG Gr
+aphic file (type png)
+<use Firstmodelka1ki0.5ACFnlags10000dt0.1nsimulations4GtauWARMUPREMOVED.PNG>
+Package pdftex.def Info: Firstmodelka1ki0.5ACFnlags10000dt0.1nsimulations4GtauW
+ARMUPREMOVED.PNG  used on input line 1411.
+(pdftex.def)             Requested size: 462.52863pt x 404.71254pt.
+
+Overfull \hbox (12.52863pt too wide) in paragraph at lines 1411--1412
+ [][] 
+ []
+
+[65 <./Firstmodelka1ki0.5ACFnlags10000dt0.1nsimulations4GtauWARMUPREMOVED.PNG>]
+<Firstmodelka0.1ki1ACFnlags10000dt0.1nsimulations4.PNG, id=1021, 578.16pt x 505
+.89pt>
+File: Firstmodelka0.1ki1ACFnlags10000dt0.1nsimulations4.PNG Graphic file (type 
+png)
+<use Firstmodelka0.1ki1ACFnlags10000dt0.1nsimulations4.PNG>
+Package pdftex.def Info: Firstmodelka0.1ki1ACFnlags10000dt0.1nsimulations4.PNG 
+ used on input line 1420.
+(pdftex.def)             Requested size: 462.52863pt x 404.71254pt.
+
+Overfull \hbox (12.52863pt too wide) in paragraph at lines 1420--1421
+ [][] 
+ []
+
+[66 <./Firstmodelka0.1ki1ACFnlags10000dt0.1nsimulations4.PNG>]
+<Firstmodelka1ki0ACFnlags10000dt10nsimulations64WARMUPREMOVED.PNG, id=1039, 626
+.5809pt x 478.4274pt>
+File: Firstmodelka1ki0ACFnlags10000dt10nsimulations64WARMUPREMOVED.PNG Graphic 
+file (type png)
+<use Firstmodelka1ki0ACFnlags10000dt10nsimulations64WARMUPREMOVED.PNG>
+Package pdftex.def Info: Firstmodelka1ki0ACFnlags10000dt10nsimulations64WARMUPR
+EMOVED.PNG  used on input line 1434.
+(pdftex.def)             Requested size: 438.60364pt x 334.8969pt.
+ [67 <./Firstmodelka1ki0ACFnlags10000dt10nsimulations64WARMUPREMOVED.PNG>]
+<Firstmodelka1ki0.5ACFnlags10000dt10nsimulations64WARMUPREMOVED.PNG, id=1046, 6
+29.4717pt x 478.4274pt>
+File: Firstmodelka1ki0.5ACFnlags10000dt10nsimulations64WARMUPREMOVED.PNG Graphi
+c file (type png)
+<use Firstmodelka1ki0.5ACFnlags10000dt10nsimulations64WARMUPREMOVED.PNG>
+Package pdftex.def Info: Firstmodelka1ki0.5ACFnlags10000dt10nsimulations64WARMU
+PREMOVED.PNG  used on input line 1443.
+(pdftex.def)             Requested size: 440.62718pt x 334.8969pt.
+ [68 <./Firstmodelka1ki0.5ACFnlags10000dt10nsimulations64WARMUPREMOVED.PNG>]
+<Firstmodelka1ki0ACFnlags10000dt10nsimulations64.PNG, id=1053, 627.3036pt x 464
+.6961pt>
+File: Firstmodelka1ki0ACFnlags10000dt10nsimulations64.PNG Graphic file (type pn
+g)
+<use Firstmodelka1ki0ACFnlags10000dt10nsimulations64.PNG>
+Package pdftex.def Info: Firstmodelka1ki0ACFnlags10000dt10nsimulations64.PNG  u
+sed on input line 1452.
+(pdftex.def)             Requested size: 439.10953pt x 325.28505pt.
+ [69 <./Firstmodelka1ki0ACFnlags10000dt10nsimulations64.PNG>]
+<AutorepressorACFnlags10000dt0.1nsimulations4Gtau.PNG, id=1066, 578.16pt x 505.
+89pt>
+File: AutorepressorACFnlags10000dt0.1nsimulations4Gtau.PNG Graphic file (type p
+ng)
+<use AutorepressorACFnlags10000dt0.1nsimulations4Gtau.PNG>
+Package pdftex.def Info: AutorepressorACFnlags10000dt0.1nsimulations4Gtau.PNG  
+used on input line 1470.
+(pdftex.def)             Requested size: 462.52863pt x 404.71254pt.
+
+Overfull \hbox (12.52863pt too wide) in paragraph at lines 1470--1471
+ [][] 
+ []
+
+<AutorepressorModelACFnlags10000dt10nsimulations64xlim01000.PNG, id=1071, 628.0
+263pt x 478.4274pt>
+File: AutorepressorModelACFnlags10000dt10nsimulations64xlim01000.PNG Graphic fi
+le (type png)
+<use AutorepressorModelACFnlags10000dt10nsimulations64xlim01000.PNG>
+Package pdftex.def Info: AutorepressorModelACFnlags10000dt10nsimulations64xlim0
+1000.PNG  used on input line 1479.
+(pdftex.def)             Requested size: 439.61542pt x 334.8969pt.
+[70 <./AutorepressorACFnlags10000dt0.1nsimulations4Gtau.PNG>] [71 <./Autorepres
+sorModelACFnlags10000dt10nsimulations64xlim01000.PNG>]
+<ToggleswitchACFnlags10000dt0.1.PNG, id=1088, 561.5379pt x 478.4274pt>
+File: ToggleswitchACFnlags10000dt0.1.PNG Graphic file (type png)
+<use ToggleswitchACFnlags10000dt0.1.PNG>
+Package pdftex.def Info: ToggleswitchACFnlags10000dt0.1.PNG  used on input line
+ 1502.
+(pdftex.def)             Requested size: 449.23093pt x 382.74243pt.
+ [72 <./ToggleswitchACFnlags10000dt0.1.PNG>] [73]
+<ToggleSwitchACFnlags100000dt0.1nsimulations4Gtaudifferentcollors.PNG, id=1102,
+ 578.16pt x 505.89pt>
+File: ToggleSwitchACFnlags100000dt0.1nsimulations4Gtaudifferentcollors.PNG Grap
+hic file (type png)
+<use ToggleSwitchACFnlags100000dt0.1nsimulations4Gtaudifferentcollors.PNG>
+Package pdftex.def Info: ToggleSwitchACFnlags100000dt0.1nsimulations4Gtaudiffer
+entcollors.PNG  used on input line 1515.
+(pdftex.def)             Requested size: 462.52863pt x 404.71254pt.
+
+Overfull \hbox (12.52863pt too wide) in paragraph at lines 1515--1516
+ [][] 
+ []
+
+<ToggleSwitchACFnlags10000dt100nsimulations64.PNG, id=1105, 565.8741pt x 478.42
+74pt>
+File: ToggleSwitchACFnlags10000dt100nsimulations64.PNG Graphic file (type png)
+<use ToggleSwitchACFnlags10000dt100nsimulations64.PNG>
+Package pdftex.def Info: ToggleSwitchACFnlags10000dt100nsimulations64.PNG  used
+ on input line 1524.
+(pdftex.def)             Requested size: 396.10916pt x 334.8969pt.
+[74 <./ToggleSwitchACFnlags100000dt0.1nsimulations4Gtaudifferentcollors.PNG>]
+[75 <./ToggleSwitchACFnlags10000dt100nsimulations64.PNG>]
+<Firstmodelka1ki0RNAs.PNG, id=1132, 754.82pt x 283.0575pt>
+File: Firstmodelka1ki0RNAs.PNG Graphic file (type png)
+<use Firstmodelka1ki0RNAs.PNG>
+Package pdftex.def Info: Firstmodelka1ki0RNAs.PNG  used on input line 1549.
+(pdftex.def)             Requested size: 452.89551pt x 169.8358pt.
+
+Overfull \hbox (2.89551pt too wide) in paragraph at lines 1549--1550
+ [][] 
+ []
+
+[76 <./Firstmodelka1ki0RNAs.PNG>]
+<Firstmodelka1ki0Proteins.PNG, id=1143, 732.7375pt x 283.0575pt>
+File: Firstmodelka1ki0Proteins.PNG Graphic file (type png)
+<use Firstmodelka1ki0Proteins.PNG>
+Package pdftex.def Info: Firstmodelka1ki0Proteins.PNG  used on input line 1558.
+
+(pdftex.def)             Requested size: 439.64589pt x 169.8358pt.
+<Firstmodelka1ki0.5RNAs.PNG, id=1145, 754.82pt x 283.0575pt>
+File: Firstmodelka1ki0.5RNAs.PNG Graphic file (type png)
+<use Firstmodelka1ki0.5RNAs.PNG>
+Package pdftex.def Info: Firstmodelka1ki0.5RNAs.PNG  used on input line 1565.
+(pdftex.def)             Requested size: 452.89551pt x 169.8358pt.
+
+Overfull \hbox (2.89551pt too wide) in paragraph at lines 1565--1566
+ [][] 
+ []
+
+[77 <./Firstmodelka1ki0Proteins.PNG> <./Firstmodelka1ki0.5RNAs.PNG>]
+<Firstmodelka1ki0.5Proteins.PNG, id=1153, 722.7pt x 283.0575pt>
+File: Firstmodelka1ki0.5Proteins.PNG Graphic file (type png)
+<use Firstmodelka1ki0.5Proteins.PNG>
+Package pdftex.def Info: Firstmodelka1ki0.5Proteins.PNG  used on input line 157
+4.
+(pdftex.def)             Requested size: 433.62334pt x 169.8358pt.
+<Firstmodelka0.1ki1RNAs.PNG, id=1163, 754.82pt x 283.0575pt>
+File: Firstmodelka0.1ki1RNAs.PNG Graphic file (type png)
+<use Firstmodelka0.1ki1RNAs.PNG>
+Package pdftex.def Info: Firstmodelka0.1ki1RNAs.PNG  used on input line 1587.
+(pdftex.def)             Requested size: 452.89551pt x 169.8358pt.
+
+Overfull \hbox (2.89551pt too wide) in paragraph at lines 1587--1588
+ [][] 
+ []
+
+[78 <./Firstmodelka1ki0.5Proteins.PNG> <./Firstmodelka0.1ki1RNAs.PNG>]
+<Firstmodelka0.1ki1Proteins.PNG, id=1176, 754.82pt x 283.0575pt>
+File: Firstmodelka0.1ki1Proteins.PNG Graphic file (type png)
+<use Firstmodelka0.1ki1Proteins.PNG>
+Package pdftex.def Info: Firstmodelka0.1ki1Proteins.PNG  used on input line 159
+6.
+(pdftex.def)             Requested size: 452.89551pt x 169.8358pt.
+
+Overfull \hbox (2.89551pt too wide) in paragraph at lines 1596--1597
+ [][] 
+ []
+
+<AutorepressormodelRNAsASSOMIGLIAALLOSPETTROka0.1ki1.PNG, id=1178, 754.82pt x 2
+83.0575pt>
+File: AutorepressormodelRNAsASSOMIGLIAALLOSPETTROka0.1ki1.PNG Graphic file (typ
+e png)
+<use AutorepressormodelRNAsASSOMIGLIAALLOSPETTROka0.1ki1.PNG>
+Package pdftex.def Info: AutorepressormodelRNAsASSOMIGLIAALLOSPETTROka0.1ki1.PN
+G  used on input line 1603.
+(pdftex.def)             Requested size: 452.89551pt x 169.8358pt.
+
+Overfull \hbox (2.89551pt too wide) in paragraph at lines 1603--1604
+ [][] 
+ []
+
+[79 <./Firstmodelka0.1ki1Proteins.PNG> <./AutorepressormodelRNAsASSOMIGLIAALLOS
+PETTROka0.1ki1.PNG>]
+<AutorepressormodelProteinsASSOMIGLIAALLOSPETTROka0.1ki1.PNG, id=1186, 754.82pt
+ x 283.0575pt>
+File: AutorepressormodelProteinsASSOMIGLIAALLOSPETTROka0.1ki1.PNG Graphic file 
+(type png)
+<use AutorepressormodelProteinsASSOMIGLIAALLOSPETTROka0.1ki1.PNG>
+Package pdftex.def Info: AutorepressormodelProteinsASSOMIGLIAALLOSPETTROka0.1ki
+1.PNG  used on input line 1612.
+(pdftex.def)             Requested size: 452.89551pt x 169.8358pt.
+
+Overfull \hbox (2.89551pt too wide) in paragraph at lines 1612--1613
+ [][] 
+ []
+
+<ToggleSwitchModelRNAsGene1.PNG, id=1188, 754.82pt x 283.0575pt>
+File: ToggleSwitchModelRNAsGene1.PNG Graphic file (type png)
+<use ToggleSwitchModelRNAsGene1.PNG>
+Package pdftex.def Info: ToggleSwitchModelRNAsGene1.PNG  used on input line 161
+9.
+(pdftex.def)             Requested size: 452.89551pt x 169.8358pt.
+
+Overfull \hbox (2.89551pt too wide) in paragraph at lines 1619--1620
+ [][] 
+ []
+
+[80 <./AutorepressormodelProteinsASSOMIGLIAALLOSPETTROka0.1ki1.PNG> <./ToggleSw
+itchModelRNAsGene1.PNG>]
+<ToggleSwitchModelProteinsGene1.PNG, id=1197, 722.7pt x 283.0575pt>
+File: ToggleSwitchModelProteinsGene1.PNG Graphic file (type png)
+<use ToggleSwitchModelProteinsGene1.PNG>
+Package pdftex.def Info: ToggleSwitchModelProteinsGene1.PNG  used on input line
+ 1628.
+(pdftex.def)             Requested size: 433.62334pt x 169.8358pt.
+ [81 <./ToggleSwitchModelProteinsGene1.PNG>] [82]
+<CWTFirstModelka1ki0RNAsRED.PNG, id=1221, 422.57875pt x 286.06876pt>
+File: CWTFirstModelka1ki0RNAsRED.PNG Graphic file (type png)
+<use CWTFirstModelka1ki0RNAsRED.PNG>
+Package pdftex.def Info: CWTFirstModelka1ki0RNAsRED.PNG  used on input line 165
+8.
+(pdftex.def)             Requested size: 295.8031pt x 200.24675pt.
+
+[83 <./CWTFirstModelka1ki0RNAsRED.PNG>]
+<CWTFirstModelka1ki0ProteinsRED.PNG, id=1232, 422.57875pt x 286.06876pt>
+File: CWTFirstModelka1ki0ProteinsRED.PNG Graphic file (type png)
+<use CWTFirstModelka1ki0ProteinsRED.PNG>
+Package pdftex.def Info: CWTFirstModelka1ki0ProteinsRED.PNG  used on input line
+ 1669.
+(pdftex.def)             Requested size: 295.8031pt x 200.24675pt.
+<CWTFirstModelka1ki0.5RNAsRED.PNG, id=1234, 425.59pt x 286.06876pt>
+File: CWTFirstModelka1ki0.5RNAsRED.PNG Graphic file (type png)
+<use CWTFirstModelka1ki0.5RNAsRED.PNG>
+Package pdftex.def Info: CWTFirstModelka1ki0.5RNAsRED.PNG  used on input line 1
+676.
+(pdftex.def)             Requested size: 297.91095pt x 200.24675pt.
+ [84 <./CWTFirstModelka1ki0ProteinsRED.PNG> <./CWTFirstModelka1ki0.5RNAsRED.PNG
+>]
+<CWTFirstModelka1ki0.5ProteinsRED.PNG, id=1243, 430.60875pt x 286.06876pt>
+File: CWTFirstModelka1ki0.5ProteinsRED.PNG Graphic file (type png)
+<use CWTFirstModelka1ki0.5ProteinsRED.PNG>
+Package pdftex.def Info: CWTFirstModelka1ki0.5ProteinsRED.PNG  used on input li
+ne 1685.
+(pdftex.def)             Requested size: 301.42406pt x 200.24675pt.
+ [85 <./CWTFirstModelka1ki0.5ProteinsRED.PNG>]
+<CWTFirstModelka0.1ki1RNAsRED.PNG, id=1259, 425.59pt x 286.06876pt>
+File: CWTFirstModelka0.1ki1RNAsRED.PNG Graphic file (type png)
+<use CWTFirstModelka0.1ki1RNAsRED.PNG>
+Package pdftex.def Info: CWTFirstModelka0.1ki1RNAsRED.PNG  used on input line 1
+698.
+(pdftex.def)             Requested size: 297.91095pt x 200.24675pt.
+<CWTFirstModelka0.1ki1ProteinsRED.PNG, id=1261, 430.60875pt x 286.06876pt>
+File: CWTFirstModelka0.1ki1ProteinsRED.PNG Graphic file (type png)
+<use CWTFirstModelka0.1ki1ProteinsRED.PNG>
+Package pdftex.def Info: CWTFirstModelka0.1ki1ProteinsRED.PNG  used on input li
+ne 1705.
+(pdftex.def)             Requested size: 301.42406pt x 200.24675pt.
+<CWTAutorepressormodelRNAsRED.PNG, id=1263, 422.57875pt x 286.06876pt>
+File: CWTAutorepressormodelRNAsRED.PNG Graphic file (type png)
+<use CWTAutorepressormodelRNAsRED.PNG>
+Package pdftex.def Info: CWTAutorepressormodelRNAsRED.PNG  used on input line 1
+712.
+(pdftex.def)             Requested size: 295.8031pt x 200.24675pt.
+<CWTAutorepressormodelProteinsRED.PNG, id=1265, 422.57875pt x 286.06876pt>
+File: CWTAutorepressormodelProteinsRED.PNG Graphic file (type png)
+<use CWTAutorepressormodelProteinsRED.PNG>
+Package pdftex.def Info: CWTAutorepressormodelProteinsRED.PNG  used on input li
+ne 1719.
+(pdftex.def)             Requested size: 295.8031pt x 200.24675pt.
+ [86 <./CWTFirstModelka0.1ki1RNAsRED.PNG> <./CWTFirstModelka0.1ki1ProteinsRED.P
+NG>] [87 <./CWTAutorepressormodelRNAsRED.PNG> <./CWTAutorepressormodelProteinsR
+ED.PNG>] [88] [89
+
+]
+Chapter 6.
+[90
+
+]
+<Neuron.png, id=1294, 510.40688pt x 429.85594pt>
+File: Neuron.png Graphic file (type png)
+<use Neuron.png>
+Package pdftex.def Info: Neuron.png  used on input line 1756.
+(pdftex.def)             Requested size: 382.80421pt x 322.39116pt.
+ [91 <./Neuron.png>]
+<MFFN.png, id=1304, 496.10344pt x 298.86656pt>
+File: MFFN.png Graphic file (type png)
+<use MFFN.png>
+Package pdftex.def Info: MFFN.png  used on input line 1794.
+(pdftex.def)             Requested size: 347.27003pt x 209.20515pt.
+ [92] [93 <./MFFN.png>]
+<ReLUactivationfunction.png, id=1321, 602.25pt x 339.2675pt>
+File: ReLUactivationfunction.png Graphic file (type png)
+<use ReLUactivationfunction.png>
+Package pdftex.def Info: ReLUactivationfunction.png  used on input line 1832.
+(pdftex.def)             Requested size: 301.12425pt x 169.63333pt.
+ [94 <./ReLUactivationfunction.png>] [95] [96]
+Chapter 7.
+[97
+
+]
+<firstmodeltestdata0.05RNAPROTEINS.png, id=1357, 498.86375pt x 442.65375pt>
+File: firstmodeltestdata0.05RNAPROTEINS.png Graphic file (type png)
+<use firstmodeltestdata0.05RNAPROTEINS.png>
+Package pdftex.def Info: firstmodeltestdata0.05RNAPROTEINS.png  used on input l
+ine 1937.
+(pdftex.def)             Requested size: 249.43126pt x 221.32632pt.
+<firstmodeltraindata0.05RNAPROTEINS.png, id=1358, 489.83pt x 442.65375pt>
+File: firstmodeltraindata0.05RNAPROTEINS.png Graphic file (type png)
+<use firstmodeltraindata0.05RNAPROTEINS.png>
+Package pdftex.def Info: firstmodeltraindata0.05RNAPROTEINS.png  used on input 
+line 1944.
+(pdftex.def)             Requested size: 244.9144pt x 221.32632pt.
+<firstmodellearningcurveRNAPROTEINS.png, id=1359, 597.23125pt x 304.13625pt>
+File: firstmodellearningcurveRNAPROTEINS.png Graphic file (type png)
+<use firstmodellearningcurveRNAPROTEINS.png>
+Package pdftex.def Info: firstmodellearningcurveRNAPROTEINS.png  used on input 
+line 1951.
+(pdftex.def)             Requested size: 298.61488pt x 152.06775pt.
+<firstmodeltestdata0.10learningcurvesshowloweroverfittingRNAPROTEINS.png, id=13
+60, 597.23125pt x 304.13625pt>
+File: firstmodeltestdata0.10learningcurvesshowloweroverfittingRNAPROTEINS.png G
+raphic file (type png)
+<use firstmodeltestdata0.10learningcurvesshowloweroverfittingRNAPROTEINS.png>
+Package pdftex.def Info: firstmodeltestdata0.10learningcurvesshowloweroverfitti
+ngRNAPROTEINS.png  used on input line 1958.
+(pdftex.def)             Requested size: 298.61488pt x 152.06775pt.
+ [98 <./firstmodeltestdata0.05RNAPROTEINS.png>] [99 <./firstmodeltraindata0.05R
+NAPROTEINS.png> <./firstmodellearningcurveRNAPROTEINS.png>]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[100 <./firstmodeltestdata0.10learningcurvesshowloweroverfittingRNAPROTEINS.png
+>] [101] [102
+
+]
+Chapter 8.
+[103
+
+] [104] [105]
+<NFkBactivation.png, id=1423, 678.535pt x 458.71375pt>
+File: NFkBactivation.png Graphic file (type png)
+<use NFkBactivation.png>
+Package pdftex.def Info: NFkBactivation.png  used on input line 2114.
+(pdftex.def)             Requested size: 474.97125pt x 321.09743pt.
+
+Overfull \hbox (24.97125pt too wide) in paragraph at lines 2114--2115
+[][] 
+ []
+
+[106] [107 <./NFkBactivation.png>]
+<NFkBmechanism.png, id=1437, 1027.84pt x 623.32875pt>
+File: NFkBmechanism.png Graphic file (type png)
+<use NFkBmechanism.png>
+Package pdftex.def Info: NFkBmechanism.png  used on input line 2155.
+(pdftex.def)             Requested size: 462.52373pt x 280.49535pt.
+
+Overfull \hbox (12.52373pt too wide) in paragraph at lines 2155--2156
+[][] 
+ []
+
+[108 <./NFkBmechanism.png>]
+<canonicalvsnoncanonicalpathway.png, id=1446, 693.59125pt x 511.9125pt>
+File: canonicalvsnoncanonicalpathway.png Graphic file (type png)
+<use canonicalvsnoncanonicalpathway.png>
+Package pdftex.def Info: canonicalvsnoncanonicalpathway.png  used on input line
+ 2182.
+(pdftex.def)             Requested size: 485.51056pt x 358.3363pt.
+
+Overfull \hbox (9.6689pt too wide) in paragraph at lines 2181--2183
+[]|  [] 
+ []
+
+[109] [110 <./canonicalvsnoncanonicalpathway.png>]
+<NFkBOscillationProfileIkAlfa.jpg, id=1457, 496.10344pt x 326.72063pt>
+File: NFkBOscillationProfileIkAlfa.jpg Graphic file (type jpg)
+<use NFkBOscillationProfileIkAlfa.jpg>
+Package pdftex.def Info: NFkBOscillationProfileIkAlfa.jpg  used on input line 2
+206.
+(pdftex.def)             Requested size: 347.27003pt x 228.70287pt.
+<NFkBTemporalBimodalProfile.jpg, id=1459, 497.60907pt x 332.74312pt>
+File: NFkBTemporalBimodalProfile.jpg Graphic file (type jpg)
+<use NFkBTemporalBimodalProfile.jpg>
+Package pdftex.def Info: NFkBTemporalBimodalProfile.jpg  used on input line 221
+7.
+(pdftex.def)             Requested size: 348.32397pt x 232.91858pt.
+ [111 <./NFkBOscillationProfileIkAlfa.jpg>] [112 <./NFkBTemporalBimodalProfile.
+jpg>]
+Overfull \hbox (0.17738pt too wide) in paragraph at lines 2238--2239
+[]\OT1/cmr/m/n/12 However, the NF-$\OML/cmm/m/it/12 ^^T$\OT1/cmr/m/n/12 B ac-ti
+v-ity is nei-ther a damped nor sus-tained os-cil-la-tor phe-nomenon
+ []
+
+[113]
+<EGFR.jpg, id=1479, 519.44063pt x 355.3275pt>
+File: EGFR.jpg Graphic file (type jpg)
+<use EGFR.jpg>
+Package pdftex.def Info: EGFR.jpg  used on input line 2265.
+(pdftex.def)             Requested size: 467.49225pt x 319.79178pt.
+
+Overfull \hbox (17.49225pt too wide) in paragraph at lines 2265--2266
+[][] 
+ []
+
+[114 <./EGFR.jpg>] [115]
+Chapter 9.
+
+Overfull \hbox (10.84952pt too wide) in paragraph at lines 2295--2296
+[]\OT1/cmr/m/n/12 The newly syn-the-sized I$\OML/cmm/m/it/12 ^^T$\OT1/cmr/m/n/1
+2 B$\OML/cmm/m/it/12 $ \OT1/cmr/m/n/12 again in-hibits NF-$\OML/cmm/m/it/12 ^^
+T$\OT1/cmr/m/n/12 B, while A20 in-hibits IKK by catalysing
+ []
+
+[116
+
+]
+<nfkbschemaconparametriNUOVO.png, id=1505, 963.6pt x 542.025pt>
+File: nfkbschemaconparametriNUOVO.png Graphic file (type png)
+<use nfkbschemaconparametriNUOVO.png>
+Package pdftex.def Info: nfkbschemaconparametriNUOVO.png  used on input line 23
+11.
+(pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
+
+Overfull \hbox (31.79883pt too wide) in paragraph at lines 2311--2312
+ [][] 
+ []
+
+[117 <./nfkbschemaconparametriNUOVO.png>] [118] [119
+
+]
+Chapter 10.
+[120
+
+]
+<nfkbRNAstimeplot.png, id=1535, 987.2082pt x 484.9317pt>
+File: nfkbRNAstimeplot.png Graphic file (type png)
+<use nfkbRNAstimeplot.png>
+Package pdftex.def Info: nfkbRNAstimeplot.png  used on input line 2386.
+(pdftex.def)             Requested size: 493.60289pt x 242.46526pt.
+
+Overfull \hbox (43.60289pt too wide) in paragraph at lines 2386--2387
+ [][] 
+ []
+
+[121 <./nfkbRNAstimeplot.png>]
+<nfkbautocorrelationsinglesimulationdt0.01nlags100000.png, id=1544, 722.7pt x 3
+61.35pt>
+File: nfkbautocorrelationsinglesimulationdt0.01nlags100000.png Graphic file (ty
+pe png)
+<use nfkbautocorrelationsinglesimulationdt0.01nlags100000.png>
+Package pdftex.def Info: nfkbautocorrelationsinglesimulationdt0.01nlags100000.p
+ng  used on input line 2399.
+(pdftex.def)             Requested size: 505.88655pt x 252.94327pt.
+
+Overfull \hbox (55.88655pt too wide) in paragraph at lines 2399--2400
+ [][] 
+ []
+
+<nfkbACFnlags100000dt0.01nsimulations4.png, id=1546, 578.16pt x 478.4274pt>
+File: nfkbACFnlags100000dt0.01nsimulations4.png Graphic file (type png)
+<use nfkbACFnlags100000dt0.01nsimulations4.png>
+Package pdftex.def Info: nfkbACFnlags100000dt0.01nsimulations4.png  used on inp
+ut line 2408.
+(pdftex.def)             Requested size: 341.11143pt x 282.26971pt.
+<nfkbACFnlags10000dt10nsimulations64timelimit1000.png, id=1550, 617.30624pt x 3
+35.2525pt>
+File: nfkbACFnlags10000dt10nsimulations64timelimit1000.png Graphic file (type p
+ng)
+<use nfkbACFnlags10000dt10nsimulations64timelimit1000.png>
+Package pdftex.def Info: nfkbACFnlags10000dt10nsimulations64timelimit1000.png  
+used on input line 2417.
+(pdftex.def)             Requested size: 432.11142pt x 234.67514pt.
+[122 <./nfkbautocorrelationsinglesimulationdt0.01nlags100000.png>]
+<nfkbACFk20k2i0nsimulations64.png, id=1561, 619.31375pt x 335.2525pt>
+File: nfkbACFk20k2i0nsimulations64.png Graphic file (type png)
+<use nfkbACFk20k2i0nsimulations64.png>
+Package pdftex.def Info: nfkbACFk20k2i0nsimulations64.png  used on input line 2
+429.
+(pdftex.def)             Requested size: 433.51668pt x 234.67514pt.
+ [123 <./nfkbACFnlags100000dt0.01nsimulations4.png>]
+<nfkbFFTsamplingperiod0.01.png, id=1571, 754.82pt x 283.0575pt>
+File: nfkbFFTsamplingperiod0.01.png Graphic file (type png)
+<use nfkbFFTsamplingperiod0.01.png>
+Package pdftex.def Info: nfkbFFTsamplingperiod0.01.png  used on input line 2443
+.
+(pdftex.def)             Requested size: 452.89551pt x 169.8358pt.
+
+Overfull \hbox (2.89551pt too wide) in paragraph at lines 2443--2444
+ [][] 
+ []
+
+[124 <./nfkbACFnlags10000dt10nsimulations64timelimit1000.png>]
+<nfkbCWTssqueezepy.png, id=1580, 422.57875pt x 286.06876pt>
+File: nfkbCWTssqueezepy.png Graphic file (type png)
+<use nfkbCWTssqueezepy.png>
+Package pdftex.def Info: nfkbCWTssqueezepy.png  used on input line 2452.
+(pdftex.def)             Requested size: 295.8031pt x 200.24675pt.
+ [125 <./nfkbACFk20k2i0nsimulations64.png> <./nfkbFFTsamplingperiod0.01.png>] [
+126 <./nfkbCWTssqueezepy.png>]
+Chapter 11.
+[127
+
+] [128]
+Appendix A.
+[129
+
+]
+Appendix B.
+[130
+
+] [131]
+Appendix C.
+<firstmodeltestdata0.05PROTEINS.png, id=1637, 489.83pt x 442.65375pt>
+File: firstmodeltestdata0.05PROTEINS.png Graphic file (type png)
+<use firstmodeltestdata0.05PROTEINS.png>
+Package pdftex.def Info: firstmodeltestdata0.05PROTEINS.png  used on input line
+ 2539.
+(pdftex.def)             Requested size: 244.9144pt x 221.32632pt.
+<firstmodeltraindata0.05PROTEINS.png, id=1638, 489.83pt x 442.65375pt>
+File: firstmodeltraindata0.05PROTEINS.png Graphic file (type png)
+<use firstmodeltraindata0.05PROTEINS.png>
+Package pdftex.def Info: firstmodeltraindata0.05PROTEINS.png  used on input lin
+e 2546.
+(pdftex.def)             Requested size: 244.9144pt x 221.32632pt.
+<firstmodellearningcurvePROTEINS.png, id=1639, 597.23125pt x 304.13625pt>
+File: firstmodellearningcurvePROTEINS.png Graphic file (type png)
+<use firstmodellearningcurvePROTEINS.png>
+Package pdftex.def Info: firstmodellearningcurvePROTEINS.png  used on input lin
+e 2553.
+(pdftex.def)             Requested size: 298.61488pt x 152.06775pt.
+<autorepressortestdatsRNASPROTEINS.png, id=1640, 489.83pt x 442.65375pt>
+File: autorepressortestdatsRNASPROTEINS.png Graphic file (type png)
+<use autorepressortestdatsRNASPROTEINS.png>
+Package pdftex.def Info: autorepressortestdatsRNASPROTEINS.png  used on input l
+ine 2563.
+(pdftex.def)             Requested size: 244.9144pt x 221.32632pt.
+<autorepressortraindataRNASPROTEINS.png, id=1641, 489.83pt x 442.65375pt>
+File: autorepressortraindataRNASPROTEINS.png Graphic file (type png)
+<use autorepressortraindataRNASPROTEINS.png>
+Package pdftex.def Info: autorepressortraindataRNASPROTEINS.png  used on input 
+line 2570.
+(pdftex.def)             Requested size: 244.9144pt x 221.32632pt.
+<autorepressorlearningcurveRNASPROTEINS.png, id=1642, 597.23125pt x 304.13625pt
+>
+File: autorepressorlearningcurveRNASPROTEINS.png Graphic file (type png)
+<use autorepressorlearningcurveRNASPROTEINS.png>
+Package pdftex.def Info: autorepressorlearningcurveRNASPROTEINS.png  used on in
+put line 2577.
+(pdftex.def)             Requested size: 298.61488pt x 152.06775pt.
+<autorepressortestdataRNASPROTEINSDROPOUT.png, id=1643, 498.86375pt x 442.65375
+pt>
+File: autorepressortestdataRNASPROTEINSDROPOUT.png Graphic file (type png)
+<use autorepressortestdataRNASPROTEINSDROPOUT.png>
+Package pdftex.def Info: autorepressortestdataRNASPROTEINSDROPOUT.png  used on 
+input line 2586.
+(pdftex.def)             Requested size: 249.43126pt x 221.32632pt.
+<autorepressortraindatRNASPROTEINSDROPOUT.png, id=1644, 489.83pt x 442.65375pt>
+
+File: autorepressortraindatRNASPROTEINSDROPOUT.png Graphic file (type png)
+<use autorepressortraindatRNASPROTEINSDROPOUT.png>
+Package pdftex.def Info: autorepressortraindatRNASPROTEINSDROPOUT.png  used on 
+input line 2593.
+(pdftex.def)             Requested size: 244.9144pt x 221.32632pt.
+<autorepressorlearningcurveRNASPROTEINSDROPOUT.png, id=1645, 597.23125pt x 304.
+13625pt>
+File: autorepressorlearningcurveRNASPROTEINSDROPOUT.png Graphic file (type png)
+
+<use autorepressorlearningcurveRNASPROTEINSDROPOUT.png>
+Package pdftex.def Info: autorepressorlearningcurveRNASPROTEINSDROPOUT.png  use
+d on input line 2600.
+(pdftex.def)             Requested size: 298.61488pt x 152.06775pt.
+<autorepressortestdataRNAS.png, id=1646, 498.86375pt x 442.65375pt>
+File: autorepressortestdataRNAS.png Graphic file (type png)
+<use autorepressortestdataRNAS.png>
+Package pdftex.def Info: autorepressortestdataRNAS.png  used on input line 2609
+.
+(pdftex.def)             Requested size: 249.43126pt x 221.32632pt.
+<autorepressortraindataRNAS.png, id=1647, 489.83pt x 442.65375pt>
+File: autorepressortraindataRNAS.png Graphic file (type png)
+<use autorepressortraindataRNAS.png>
+Package pdftex.def Info: autorepressortraindataRNAS.png  used on input line 261
+6.
+(pdftex.def)             Requested size: 244.9144pt x 221.32632pt.
+<autorepressorlearningcurveRNAS.png, id=1648, 597.23125pt x 304.13625pt>
+File: autorepressorlearningcurveRNAS.png Graphic file (type png)
+<use autorepressorlearningcurveRNAS.png>
+Package pdftex.def Info: autorepressorlearningcurveRNAS.png  used on input line
+ 2623.
+(pdftex.def)             Requested size: 298.61488pt x 152.06775pt.
+<autorepressortestdatapredictedvstruePROTEINS.png, id=1649, 498.86375pt x 442.6
+5375pt>
+File: autorepressortestdatapredictedvstruePROTEINS.png Graphic file (type png)
+<use autorepressortestdatapredictedvstruePROTEINS.png>
+Package pdftex.def Info: autorepressortestdatapredictedvstruePROTEINS.png  used
+ on input line 2632.
+(pdftex.def)             Requested size: 249.43126pt x 221.32632pt.
+<autorepressortraindatapredictedvstruePROTEINS.png, id=1650, 489.83pt x 442.653
+75pt>
+File: autorepressortraindatapredictedvstruePROTEINS.png Graphic file (type png)
+
+<use autorepressortraindatapredictedvstruePROTEINS.png>
+Package pdftex.def Info: autorepressortraindatapredictedvstruePROTEINS.png  use
+d on input line 2639.
+(pdftex.def)             Requested size: 244.9144pt x 221.32632pt.
+<autorepressorlearningcurvePROTEINS.png, id=1651, 597.23125pt x 304.13625pt>
+File: autorepressorlearningcurvePROTEINS.png Graphic file (type png)
+<use autorepressorlearningcurvePROTEINS.png>
+Package pdftex.def Info: autorepressorlearningcurvePROTEINS.png  used on input 
+line 2646.
+(pdftex.def)             Requested size: 298.61488pt x 152.06775pt.
+<toggleswitchtestdatapredictedvstrueRNAS.png, id=1652, 499.8675pt x 442.65375pt
+>
+File: toggleswitchtestdatapredictedvstrueRNAS.png Graphic file (type png)
+<use toggleswitchtestdatapredictedvstrueRNAS.png>
+Package pdftex.def Info: toggleswitchtestdatapredictedvstrueRNAS.png  used on i
+nput line 2657.
+(pdftex.def)             Requested size: 249.93314pt x 221.32632pt.
+<toggleswitchtraindatapredictedvstrueRNAS.png, id=1653, 489.83pt x 442.65375pt>
+
+File: toggleswitchtraindatapredictedvstrueRNAS.png Graphic file (type png)
+<use toggleswitchtraindatapredictedvstrueRNAS.png>
+Package pdftex.def Info: toggleswitchtraindatapredictedvstrueRNAS.png  used on 
+input line 2664.
+(pdftex.def)             Requested size: 244.9144pt x 221.32632pt.
+<toggleswitchlearningcurveRNAS.png, id=1654, 597.23125pt x 304.13625pt>
+File: toggleswitchlearningcurveRNAS.png Graphic file (type png)
+<use toggleswitchlearningcurveRNAS.png>
+Package pdftex.def Info: toggleswitchlearningcurveRNAS.png  used on input line 
+2671.
+(pdftex.def)             Requested size: 298.61488pt x 152.06775pt.
+<toggleswitchtestdatapredictedvstruePROTEINS.png, id=1655, 499.8675pt x 442.653
+75pt>
+File: toggleswitchtestdatapredictedvstruePROTEINS.png Graphic file (type png)
+<use toggleswitchtestdatapredictedvstruePROTEINS.png>
+Package pdftex.def Info: toggleswitchtestdatapredictedvstruePROTEINS.png  used 
+on input line 2682.
+(pdftex.def)             Requested size: 249.93314pt x 221.32632pt.
+<toggleswitchtraindatapredictedvstruePROTEINS.png, id=1656, 489.83pt x 442.6537
+5pt>
+File: toggleswitchtraindatapredictedvstruePROTEINS.png Graphic file (type png)
+<use toggleswitchtraindatapredictedvstruePROTEINS.png>
+Package pdftex.def Info: toggleswitchtraindatapredictedvstruePROTEINS.png  used
+ on input line 2689.
+(pdftex.def)             Requested size: 244.9144pt x 221.32632pt.
+<toggleswitchlearningcurvePROTEINS.png, id=1657, 597.23125pt x 304.13625pt>
+File: toggleswitchlearningcurvePROTEINS.png Graphic file (type png)
+<use toggleswitchlearningcurvePROTEINS.png>
+Package pdftex.def Info: toggleswitchlearningcurvePROTEINS.png  used on input l
+ine 2696.
+(pdftex.def)             Requested size: 298.61488pt x 152.06775pt.
+[132
+
+ <./firstmodeltestdata0.05PROTEINS.png>] [133 <./firstmodeltraindata0.05PROTEIN
+S.png> <./firstmodellearningcurvePROTEINS.png>] [134 <./autorepressortestdatsRN
+ASPROTEINS.png> <./autorepressortraindataRNASPROTEINS.png>] [135 <./autorepress
+orlearningcurveRNASPROTEINS.png> <./autorepressortestdataRNASPROTEINSDROPOUT.pn
+g>] [136 <./autorepressortraindatRNASPROTEINSDROPOUT.png> <./autorepressorlearn
+ingcurveRNASPROTEINSDROPOUT.png>] [137 <./autorepressortestdataRNAS.png> <./aut
+orepressortraindataRNAS.png>] [138 <./autorepressorlearningcurveRNAS.png> <./au
+torepressortestdatapredictedvstruePROTEINS.png>] [139 <./autorepressortraindata
+predictedvstruePROTEINS.png> <./autorepressorlearningcurvePROTEINS.png>]
+[140 <./toggleswitchtestdatapredictedvstrueRNAS.png> <./toggleswitchtraindatapr
+edictedvstrueRNAS.png>] [141 <./toggleswitchlearningcurveRNAS.png> <./toggleswi
+tchtestdatapredictedvstruePROTEINS.png>] [142 <./toggleswitchtraindatapredicted
+vstruePROTEINS.png> <./toggleswitchlearningcurvePROTEINS.png>]
+Appendix D.
+<nfkbtimeplotk2andk2i0.png, id=1746, 987.2082pt x 484.9317pt>
+File: nfkbtimeplotk2andk2i0.png Graphic file (type png)
+<use nfkbtimeplotk2andk2i0.png>
+Package pdftex.def Info: nfkbtimeplotk2andk2i0.png  used on input line 2705.
+(pdftex.def)             Requested size: 493.60289pt x 242.46526pt.
+
+Overfull \hbox (43.60289pt too wide) in paragraph at lines 2705--2706
+ [][] 
+ []
+
+<nfkbtimeplotk20k2i0k30k3i0.png, id=1748, 987.2082pt x 484.9317pt>
+File: nfkbtimeplotk20k2i0k30k3i0.png Graphic file (type png)
+<use nfkbtimeplotk20k2i0k30k3i0.png>
+Package pdftex.def Info: nfkbtimeplotk20k2i0k30k3i0.png  used on input line 271
+2.
+(pdftex.def)             Requested size: 493.60289pt x 242.46526pt.
+
+Overfull \hbox (43.60289pt too wide) in paragraph at lines 2712--2713
+ [][] 
+ []
+
+[143
+
+ <./nfkbtimeplotk2andk2i0.png>] [144 <./nfkbtimeplotk20k2i0k30k3i0.png>]
+[145
+
+
+] [146
+
+] [147] [148]
+Underfull \hbox (badness 1472) in paragraph at lines 2798--2799
+[]\OT1/cmr/m/n/12 Giampieri E, Re-mon-dini D, de Oliveira L, Castel-lani G, Li^
+^So P.,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2803--2804
+[]\OT1/cmr/m/n/12 Runge Kutta meth-ods []$\OT1/cmtt/m/n/12 https : / / en . wik
+ipedia . org / wiki /
+ []
+
+[149]
+Underfull \hbox (badness 10000) in paragraph at lines 2804--2805
+[]\OT1/cmr/m/n/12 Harmonic anal-y-sis and the Fourier Trans-form
+ []
+
+
+Underfull \hbox (badness 2521) in paragraph at lines 2806--2807
+[]\OT1/cmr/m/n/12 Ali MZ, Brew-ster RC (2022) \OT1/cmr/m/it/12 Con-trol-ling ge
+ne ex-pres-sion tim-ing
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2808--2809
+[]\OT1/cmr/m/n/12 Synchrosqueezing in Python []$\OT1/cmtt/m/n/12 https : / / gi
+thub . com /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2813--2814
+[]\OT1/cmr/m/n/12 How is wavelet cen-ter fre-quency com-puted?
+ []
+
+[150] [151] (Thesis.aux)
+Package rerunfilecheck Info: File `Thesis.out' has not changed.
+(rerunfilecheck)             Checksum: A53FABBDFF4549E7B2B467CCCC5872E9;15012.
+ ) 
+Here is how much of TeX's memory you used:
+ 16454 strings out of 478582
+ 296925 string characters out of 2844816
+ 619731 words of memory out of 3000000
+ 33800 multiletter control sequences out of 15000+600000
+ 496523 words of font info for 139 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 60i,15n,68p,2035b,539s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ <C:\Users\asus\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1
+200.pk><C:/Users/asus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
+/cm/cmbx10.pfb><C:/Users/asus/AppData/Local/Programs/MiKTeX/fonts/type1/public/
+amsfonts/cm/cmbx12.pfb><C:/Users/asus/AppData/Local/Programs/MiKTeX/fonts/type1
+/public/amsfonts/cm/cmcsc10.pfb><C:/Users/asus/AppData/Local/Programs/MiKTeX/fo
+nts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/asus/AppData/Local/Programs/M
+iKTeX/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><C:/Users/asus/AppData/Loca
+l/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/asus/AppD
+ata/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/as
+us/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/U
+sers/asus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.
+pfb><C:/Users/asus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
+/cmr10.pfb><C:/Users/asus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
+onts/cm/cmr12.pfb><C:/Users/asus/AppData/Local/Programs/MiKTeX/fonts/type1/publ
+ic/amsfonts/cm/cmr6.pfb><C:/Users/asus/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/amsfonts/cm/cmr7.pfb><C:/Users/asus/AppData/Local/Programs/MiKTeX/font
+s/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/asus/AppData/Local/Programs/MiKTe
+X/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/asus/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/asus/AppData/Local
+/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/asus/AppDat
+a/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/asu
+s/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/U
+sers/asus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msb
+m10.pfb>
+Output written on Thesis.pdf (158 pages, 5556132 bytes).
+PDF statistics:
+ 2035 PDF objects out of 2073 (max. 8388607)
+ 486 named destinations out of 1000 (max. 500000)
+ 1026 words of extra memory for PDF output out of 10000 (max. 10000000)
+
