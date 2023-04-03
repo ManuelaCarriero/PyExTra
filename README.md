@@ -30,8 +30,9 @@ Then using:<br>
 [plots.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/plots.py) you can plot the number of molecules as function of time and the distribution of states;<br>
 [acf.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/acf.py) you can plot the autocorrelation functions refered to the temporal series. [statistics.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/statistics.py) is a python *script* to calculate and plot the quantiles autocorrelation.<br>
 You can also use [fft.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/fft.py) and [wavelet.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/wavelet.py): they are python *scripts* for the Fast Fourier Transform and the Continuous Wavelet Transform analysis.<br>
- 
-
+Other types of algorithms to study biological stochastic processes have been implemented:<br>
+[tauleap_simulation.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/tauleap_simulation.py): it makes simulations using the [Tau-leap algorithm](https://github.com/ManuelaCarriero/PyExTra#tau-leap-algorithm); <br>
+[hybrid_simulation.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/hybrid_simulation.py): it makes the simulation using an algorithm that combines [SSA](https://github.com/ManuelaCarriero/PyExTra#stochastic-simulation-algorithm-ssa) algorithm with the [Tau-leap](https://github.com/ManuelaCarriero/PyExTra/blob/main/hybrid_simulation.py).
 
 ## Testing
 As you can notice from the Dependencies section, we have made use of many built-in functions. However, this work is mainly based on the simulations 
