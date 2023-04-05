@@ -95,7 +95,7 @@ We can also call these events as *transitions* and each one happens with a certa
       | RNA &rarr; Φ  | k<sub>2</sub>  | -1  | 0 |
       | RNA &rarr; RNA + Protein  | k<sub>3</sub>  | 0  | +1 |
       | Protein &rarr; Φ  | k<sub>4</sub>  | 0 | -1 |
-3. Calculate the **time of residency**, that is how much time the system is in that specific state. Since the distance between consecutive events in a Poisson process is Exponentially distributed, the time of residency has an *exponential* distribution with a characteristic time equal to the inverse of the sum of the total rates. 
+3. Calculate the **time of residency**, that is how much time the system is in that specific state. Since the distance between consecutive events in a Markov process is Exponentially distributed, the time of residency has an *exponential* distribution with a characteristic time equal to the inverse of the sum of the total rates. 
 4. Choose what state change, i.e. transition, will happen. For this purpose we use `random.choices` method that returns a list with the randomly selected element (i.e. a randomly selected transition) from the specified list of transitions with the possibility to choose the probability of each element selection.
 5. Increment time by time step you calculate in step 3.
 6. Update the state according to the state change chosen in step 4.
