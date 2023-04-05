@@ -101,7 +101,13 @@ We can also call these events as *transitions* and each one happens with a certa
 7. If the total time spent is less than a pre-determined stopping time, go to step 2. Else stop.
 
 ## Tau-leap algorithm
-1. 
+1. Choose some **initial states** and **reaction time step** $\tau$;
+2. Identification of all possible reaction events;
+3. Calculation of reaction probabilities;
+4. The number of reactions in the reaction time step is given by a Poisson distribution with mean equal to reactions probabilities times $\tau$;
+5. Increment time by $\tau$;
+6. Update the state according to the state change decided in step 4;
+7. If the total time spent is less than a pre-determined stopping time, go to step 2. Else stop.   
 
 ## SSA/Tau-leap algorithm
 
