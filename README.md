@@ -76,8 +76,8 @@ The genetic toggle-switch is a system of two mutually repressing genes.
 ## Stochastic Simulation Algorithm (SSA)
 
 **Gillespie algorithm** (i.e. **stochastic simulation algorithm**) samples the probability distribution described by the master equation. The basic idea is that events are rare, discrete, *separate* events, i.e., each event is an arrivial of a Markov process and the algorithm is based on the following steps:
-1. Choose some **initial states** (in this case, initial state of gene that is active or inactive, initial number of mRNA molecules **m<sub>0</sub>** and initial number of proteins **p<sub>0</sub>**); 
-2. A state change will happen. In the [first protein synthesis model](https://github.com/ManuelaCarriero/PyExTra#first-protein-synthesis-model), the event that can happen is one of the following: 
+1. Choose some **initial states** (in the [first protein synthesis model](https://github.com/ManuelaCarriero/PyExTra#first-protein-synthesis-model) case, initial state of gene that is active or inactive, initial number of mRNA molecules **m<sub>0</sub>** and initial number of proteins **p<sub>0</sub>**); 
+2. A state change will happen. In this model, the event that can happen is one of the following: 
     * *gene activation*: the state of the gene switches from inactive to active and, in such case, there is no increase or decrease in the number of RNA or protein molecules;   
     * *gene inactivation*: the state of the gene switches from active to inactive and, in such case, there is no increase or decrease in the number of RNA or protein molecules;     
     * *RNA synthesis*: the number of RNA molecules increases by 1;  
@@ -101,6 +101,7 @@ We can also call these events as *transitions* and each one happens with a certa
 7. If the total time spent is less than a pre-determined stopping time, go to step 2. Else stop.
 
 ## Tau-leap algorithm
+1. 
 
 ## SSA/Tau-leap algorithm
 
