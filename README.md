@@ -11,9 +11,8 @@ Of course, it is a very wide world because we can have different reactions and d
 In this repository we explore three main genetic circuits described in section **Models** and provide also programs to analyse simulation data (that can not just be generated and left there!).
 We have wrapped this repository into a unique name called *PyExTra* because of the acronym with gene *ex*pression and *tra*nslation processes that are simulated with his python programs.
 Users which can be interested in *PyExTra* are beginners with gene expression simulations and analysis. You can just use it or explore its code to have some help for your research work.
-*PyExTra*, indeed, was born with the aim to investigate about NF-kB model in colon cancer cells for my master degree thesis in Physics (it is [Thesis.tex](https://github.com/ManuelaCarriero/PyExTra/blob/main/Thesis/Thesis.tex) available in [Thesis](https://github.com/ManuelaCarriero/PyExTra/tree/main/Thesis) folder).
+*PyExTra*, indeed, was born with the aim to investigate about NF-kB model in colon cancer cells for my master degree thesis in Physics (it is [Thesis.tex](https://github.com/ManuelaCarriero/PyExTra/blob/main/Thesis/Thesis.tex) available in [Thesis](https://github.com/ManuelaCarriero/PyExTra/tree/main/Thesis) folder and the thesis presentation [MDThesisPresentation_ManuelaCarriero.pptx](https://github.com/ManuelaCarriero/PyExTra/blob/main/MDThesisPresentation_ManuelaCarriero.pptx)).
    
-
 ## Dependencies
 **Python verion**: 3.9.x <br>
 **Python modules**: numpy, scipy, pandas, stats.models,<br> 
