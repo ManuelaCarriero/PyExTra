@@ -15,12 +15,12 @@ import scipy
 from scipy import fftpack
 
 
-df = pd.read_csv('toggleswitch_gillespiesimulation_results.csv',sep= " ")
+df = pd.read_csv('removed_warmup_nfkb_gillespieresults.csv',sep= " ")
 
 
 #RNAs
 
-RNAs = df['Number of RNAs gene1']
+RNAs = df['Number of RNA molecules']
 
 time = df['Time']
 
@@ -44,12 +44,12 @@ ax.plot(scipy.fftpack.fftshift(xf_RNAs), scipy.fftpack.fftshift(np.abs(yf_RNAs))
 #ax.plot(scipy.fftpack.fftshift(xf_RNAs), scipy.fftpack.fftshift(yf_RNAs_mean[:len(xf_RNAs)]))#scipy.fftpack.fftshift(xf_RNAs[:len(yf_RNAs_mean)]), scipy.fftpack.fftshift(yf_RNAs_mean)
 ax.set_xlabel('Frequency (a.u.)')
 ax.set_ylabel('FFT Amplitude')
-ax.set_title('Toggle Switch model Fourier Transform (RNAs gene 1)')
+ax.set_title('NF-kB products')
 ax.set_xlim(0.001,1)
 #If you put the logarithm you can not consider 0 as starting point.
 ax.set_xscale('log')
 #ax.set_yscale('log')
-ax.set_ylim(0,400000)
+ax.set_ylim(0,150000)
 #ax.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
 sns.despine(bottom=False, left=False)
 plt.show()  

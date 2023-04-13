@@ -456,7 +456,16 @@ def test_there_are_states_with_zero_number_of_RNA_molecules():
     for simulation in simulation_results:
         if simulation.state[RNAs] == 0:
             zeroRNAs_lst.append(simulation)
-    assert len(zeroRNAs_lst) != 0            
+    assert len(zeroRNAs_lst) != 0  
+
+@given(starting_state= st.lists(min_size=4, max_size = 4,elements = st.integers(min_value=0,max_value=10)), starting_total_time=st.just(0.0), time_limit=st.just(14000), seed_number=st.just(1))
+def test_no_increase_RNA_if_gene_is_inactive_given_different_startingstates(starting_state, starting_total_time, time_limit, seed_number):
+    """
+    Test that there is no RNA molecules increase if gene is inactive.
+    """
+    for simulation in simulation_results:
+        if simulation.state[inactive_genes] == 1:
+            assert simulation.transition != Transition.RNA_INCREASE          
 
 
 

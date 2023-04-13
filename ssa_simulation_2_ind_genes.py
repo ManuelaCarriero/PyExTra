@@ -376,6 +376,8 @@ def gillespie_ssa(starting_state):
         
     dict_newstates = {k:v for k, v in zip(transition_names, new_states)}
     
+    dict_newstates[Transition.ABSORPTION] = np.array([0,0,0,0,0,0,0,0])
+    
     rates = []
 
     for i in np.arange(0, len(transitions)):    

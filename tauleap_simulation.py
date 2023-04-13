@@ -18,11 +18,17 @@ import pandas as pd
 import typing 
 from enum import Enum
 
-#import os
+import os
 
 from collections import namedtuple 
 #from itertools import cycle
-#import time
+import time
+import datetime
+
+# get the start time
+st_sec = time.time()
+
+st_date = datetime.datetime.now()
 
 
 
@@ -34,6 +40,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument("filename", help="read configuration file.")
 
 parser.add_argument('-run', help='run Tau-leap simulation given a configuration filename', action = "store_true")
+parser.add_argument('-run_multiplesimulations', help='run a number of N Gillespie simulations given a configuration filename', action = "store_true")
+
 parser.add_argument("-v", "--verbose", help="increase output verbosity", action="store_true")
 
 args = parser.parse_args()
@@ -45,7 +53,7 @@ config.read(args.filename)
 if args.verbose:
     print("I am reading the configuration file {}".format(args.filename))
 
-
+#config.read('configuration.txt')
 
 def read_population():
     """This function reads population parameters from configuration file
@@ -127,13 +135,15 @@ def read_simulation_parameters():
 
 time_limit, N, warmup_time, seed_number, dt = read_simulation_parameters()
 
-file_path = r'C:\Users\asus\Desktop\{}.csv'
- 
-multiplesimulations_filepath = r'C:\\Users\asus\Desktop\{}.csv' 
+
+
+actual_dir = os.getcwd()
+
+file_path = r'{}\{}.csv'
+
+
 
 #%%
-
-
 
 def gene_activate(state):
     return state[inactive_genes]*rate.ka
@@ -269,8 +279,9 @@ def evolution(time_limit, seed_number):
     return observed_states
 
 
-
-simulation_results = evolution(time_limit = time_limit, seed_number = seed_number)
+if args.run:
+    
+    simulation_results = evolution(time_limit = time_limit, seed_number = seed_number)
 
 
 
@@ -311,69 +322,82 @@ def create_dataframe(results):
     return results_dataframe
 
 
-
-df = create_dataframe(results = simulation_results)
-
-df.to_csv(file_path.format("tauleapsimulation_results"), sep =" ", index = None, header=True, mode = "w") 
-
-
-
-def create_multiplesimulations_dataframes(N):
-    """This function makes multiple simulations and creates a list
-    of results dataframes (one results dataframe for each simulation)
+if args.run:
     
-    Parameters
-    ----------
-    N : int
-        number of simulations.
-
-    Returns
-    -------
-    list of results dataframe
-    """
+    df = create_dataframe(results = simulation_results)
     
-    results_list = []
-    for n in range(1,N+1):
-        result = evolution(time_limit = time_limit, seed_number = n)
-        results_list.append(result)
+    df.to_csv(file_path.format(actual_dir,"tauleapsimulation_results"), sep =" ", index = None, header=True, mode = "w") 
 
-    dataframes_list = []
-    for result in results_list:
-        dataframe = create_dataframe(result)
-        dataframes_list.append(dataframe)
+
+if args.run_multiplesimulations:
     
-    return dataframes_list
-
-
-
-dataframes_list = create_multiplesimulations_dataframes(N)
-
-
-
-def save_multiplesimulations_results(N, file_path = multiplesimulations_filepath):
-    """This function saves dataframes of multiple simulations in tab separated CSV files
-    each one named as "results_seedn" with n that is the number of the random seed.
+    def create_multiplesimulations_dataframes(N):
+        """This function makes multiple simulations and creates a list
+        of results dataframes (one results dataframe for each simulation)
+        
+        Parameters
+        ----------
+        N : int
+            number of simulations.
     
-    Parameters
+        Returns
+        -------
+        list of results dataframe
+        """
+        
+        results_list = []
+        for n in range(1,N+1):
+            result = evolution(time_limit = time_limit, seed_number = n)
+            results_list.append(result)
     
-    N : int
-        number of simulations.
+        dataframes_list = []
+        for result in results_list:
+            dataframe = create_dataframe(result)
+            dataframes_list.append(dataframe)
+        
+        return dataframes_list
     
-    file_path : str, default is r"C:\\Users\asus\Desktop\{}.csv"
-                path to folder where files are saved. By default, it saves the files following the path \\Users\asus\Desktop.
-                You can change it in the configuration file.
-    """
     
-    results_names = []
-    for n in range(1,N+1):
-        results_names.append("tauleapresults_seed"+str(n))
     
-    for dataframe, results in zip(dataframes_list, results_names):
-        dataframe.to_csv(file_path.format(results), sep=" ", index = None, header=True)
+    dataframes_list = create_multiplesimulations_dataframes(N)
+    
+    
+    
+    def save_multiplesimulations_results(N, file_path = file_path):
+        """This function saves dataframes of multiple simulations in tab separated CSV files
+        each one named as "results_seedn" with n that is the number of the random seed.
+        
+        Parameters
+        
+        N : int
+            number of simulations.
+        
+        file_path : str, default is r"C:\\Users\asus\Desktop\{}.csv"
+                    path to folder where files are saved. By default, it saves the files following the path \\Users\asus\Desktop.
+                    You can change it in the configuration file.
+        """
+        
+        results_names = []
+        for n in range(1,N+1):
+            results_names.append("tauleapresults_seed"+str(n))
+        
+        for dataframe, results in zip(dataframes_list, results_names):
+            dataframe.to_csv(file_path.format(actual_dir, results), sep=" ", index = None, header=True)
+    
+    
+    
+    save_multiplesimulations_results(N)
 
+print("My job is done. Enjoy data analysis !")
+# get the end time
+et_sec = time.time()
 
+et_date = datetime.datetime.now()
 
-save_multiplesimulations_results(N)
+# get the execution time
+elapsed_time_sec = et_sec - st_sec
 
-if args.verbose:
-    print("My job is done. Enjoy data analysis !")
+elapsed_time_date = et_date - st_date
+
+print(" ")
+print('Execution time: {}s ({})'.format(elapsed_time_sec, elapsed_time_date))

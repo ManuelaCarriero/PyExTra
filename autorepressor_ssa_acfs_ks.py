@@ -512,7 +512,7 @@ df_tot.to_csv(file_path.format(actual_dir,"autorepressor_1000RNASacfs_seed42_sca
 
 
 print(" ")
-print("My job is done. RNAs Autocorrelation values are now ready for MLP!")
+print("My job is done. Autocorrelation values are now ready for MLP!")
 
 # get the end time
 #end = time.time()

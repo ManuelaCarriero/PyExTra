@@ -592,7 +592,7 @@ if len(sys.argv) != 1 and args.verbose:
     
 if args.run:
 
-    df.to_csv(file_path.format(actual_dir,"nfkb_gillespiesimulation_results"), sep =" ", index = None, header=True, mode = "w") 
+    df.to_csv(file_path.format(actual_dir,"nfkb_k20k2i0gillespiesimulation_results"), sep =" ", index = None, header=True, mode = "w") 
 
 if args.time_limit:
     
@@ -704,7 +704,7 @@ if args.run_multiplesimulations:
         
         results_names = []
         for n in range(1,N+1):
-            results_names.append("nfkb_gillespieresults_seed"+str(n))
+            results_names.append("nfkb_k20k2i0gillespiesimulation_results_seed"+str(n))#nfkb_gillespieresults_seed
         
         for dataframe, results in zip(dataframes_list, results_names):
             dataframe.to_csv(file_path.format(actual_dir,results), sep=" ", index = None, header=True)

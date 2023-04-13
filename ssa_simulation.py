@@ -451,8 +451,10 @@ def create_dataframe(results):
         residency_time.append(observation.time_of_residency)
         if observation.state[active_genes] > 0:
             gene_activity.append(1)
+
         else:
             gene_activity.append(0)
+
     
     d = {'Time': time_of_observation, 
          'Gene activity': gene_activity,

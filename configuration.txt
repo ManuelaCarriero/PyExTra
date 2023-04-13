@@ -1,5 +1,5 @@
 [POPULATION]
-state = [1, 0, 0, 0]
+state = [1,0,0,0]
 
 
 [INDEX]
@@ -14,15 +14,14 @@ ki = 0.5
 k1 = 1
 k2 = 0.1
 k3 = 1
-k4 = 1
-k5 = 0.001
+k4 = 0.1
+k5 = 0
 
 [SIMULATION]
-time_limit = 100
+time_limit = 1000
 n_simulations = 4
 warmup_time = 20
 seed_number = 1
 dt = 0.01
-
 [ACF]
-n_lags = 2000
+n_lags = 100000

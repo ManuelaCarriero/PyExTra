@@ -411,7 +411,7 @@ a=3
 np.random.seed(42)
 rands=[]
 for i in np.arange(1,1001):
-    rand = scipy.stats.gamma.rvs(a, loc=0, scale=0.1, size=4, random_state=None)
+    rand = scipy.stats.gamma.rvs(a, loc=0, scale=0.5, size=4, random_state=None)
     rand = rand.tolist()
     #[round(items,1) for items in rand]
     rands.append(rand)

@@ -31,7 +31,9 @@ import os
 
 start_date = datetime.datetime.now()
 
-data = pd.read_csv('autorepressor_1000RNAsacfs_seed42_scale0.5_nlags5000_k1k2k3k4.csv',sep= " ")
+#data = pd.read_csv('autorepressor_1000RNAsacfs_seed42_scale0.5_nlags5000_k1k2k3k4.csv',sep= " ")
+
+data = pd.read_csv('nfkb_1000RNASacfs_seed42_scale0.5_nlags5000_allks.csv', sep=" ")
 data.columns
 
 
@@ -43,9 +45,9 @@ ks = np.ascontiguousarray(data['k'])
 lst_k = []
 for k in ks:
     lst_k.append(ast.literal_eval(k))
-
+len(ks[0])
 #Remove parameters that do not change.
-
+"""
 for i in np.arange(0,len(lst_k)):
     lst_k[i].pop(0)
 for i in np.arange(0,len(lst_k)):
@@ -53,10 +55,44 @@ for i in np.arange(0,len(lst_k)):
 for i in np.arange(0,len(lst_k)):
     lst_k[i].pop(4)
 
-
+"""
 
 ks = np.array(lst_k) #output variables 
+ks[0]
 
+
+IIIks=[ks[i][2] for i in np.arange(0,len(ks))]
+IIIks
+
+IVks=[ks[i][3] for i in np.arange(0,len(ks))]
+
+Vks=[ks[i][4] for i in np.arange(0,len(ks))]
+
+VIks=[ks[i][5] for i in np.arange(0,len(ks))]
+
+
+
+for i in np.arange(0,len(ks)):
+    ks[i][0] = 5
+    
+for i in np.arange(0,len(ks)):
+    ks[i][1] = 10
+    
+for i in np.arange(0,len(ks)):
+    ks[i][6] = 0
+
+ks[0]
+
+Iks = [ks[i][0] for i in np.arange(0,len(ks))]
+
+
+    
+plt.hist(IIIks)    
+plt.hist(IVks)
+plt.hist(Vks) 
+plt.hist(VIks)     
+
+plt.hist(Iks)
 
 
 acfs = np.ascontiguousarray(data['acfs'])
@@ -66,6 +102,7 @@ for acf in acfs:
 
 acfs = np.array(lst_acfs) #input variables
 
+len(acfs[0])
 
 end_date = datetime.datetime.now()
 
@@ -91,18 +128,28 @@ X_train, X_test, y_train, y_test = train_test_split(acfs, ks, test_size=0.05, sh
 
 
 dim1 = len(acfs[0])
-           
-model = Sequential()
-model.add(Dense(4000, input_dim=dim1, activation='relu'))#, kernel_initializer='he_uniform',
-model.add(Dropout(0.25))
-model.add(Dense(units=1000, activation='relu'))
-model.add(Dropout(0.30))
-model.add(Dense(units=250, activation='relu'))
-model.add(Dropout(0.25))
-model.add(Dense(units=50, activation='relu'))
-model.add(Dropout(0.30))
-model.add(Dense(units=4))
 
+"""           
+model = Sequential()
+model.add(Dense(4000, input_dim=dim1, activation='relu'))#, kernel_initializer='he_uniform',  
+model.add(Dropout(0.25))
+model.add(Dense(units=1000, activation='relu')) 
+model.add(Dropout(0.30))
+model.add(Dense(units=250, activation='relu')) 
+model.add(Dropout(0.25))
+model.add(Dense(units=50, activation='relu')) 
+#model.add(Dropout(0.30))
+model.add(Dense(units=7, activation='relu'))#con linear o niente e k7=10^-31 torna al valore di -10^84
+"""
+model = Sequential()
+model.add(Dense(1000, input_dim=dim1, activation='relu'))#, kernel_initializer='he_uniform',  
+model.add(Dropout(0.25))
+model.add(Dense(units=250, activation='relu')) 
+model.add(Dropout(0.30))
+model.add(Dense(units=50, activation='relu')) 
+#model.add(Dropout(0.25))
+model.add(Dropout(0.30))
+model.add(Dense(units=14, activation='relu'))#7
 
 print(model.summary())
 
@@ -111,7 +158,7 @@ model.compile(loss='mae', optimizer='adam')
 
 #Fit the model
 
-history = model.fit(X_train, y_train,  batch_size=128, validation_data=(X_test, y_test),verbose=2, epochs=50)
+history = model.fit(X_train, y_train, batch_size=128, validation_data=(X_test, y_test),verbose=2, epochs=50)
 
 end_date = datetime.datetime.now()
 
@@ -119,6 +166,7 @@ elapsed_time_date = end_date - start_date
 
 print(" ")
 print('Execution time:', elapsed_time_date, 'seconds')
+
 
 
 
@@ -134,7 +182,9 @@ prediction = model.predict(X_test)
 
 print(r2_score(y_test,prediction)) 
 r2score_test = r2_score(y_test,prediction)
+
 #0.11228924302246548
+#l'r2score aumenta mettendo l'activation function in ogni layer
 
 r2score_test = r2_score(y_test,prediction,multioutput='variance_weighted')
 
@@ -151,7 +201,7 @@ plt.plot(ident,ident)
 fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(8,7))
 for i in np.arange(0,len(y_test)):
     ident = [0.0, 4]
-    ax.plot(ident,ident)
+    ax.plot(ident,ident,color='grey')
     ax.plot(y_test[i],prediction[i], ".")
 ax.set_ylabel("True parameters")
 ax.set_xlabel("Predicted parameters")
@@ -166,12 +216,21 @@ y_test[0]
 prediction[0]
 
 
+#Metti la funzione di attivazione ad ogni layer... forse puoi provare al cambiare il tipo.
 
 
 prediction_train = model.predict(X_train)
 
 print(r2_score(y_train, prediction_train))
 #0.7937693970512397
+
+y_train = [np.round(item,2) for item in y_train]
+prediction = [np.round(item,2) for item in prediction_train]
+
+y_train[0]
+prediction[0]
+
+ks[0]
 
 r2score_train = r2_score(y_train, prediction_train,multioutput='variance_weighted')
 r2score_train#0.7928748533596189
@@ -211,7 +270,7 @@ plt.plot(ident,ident)
 fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(8,7))
 for i in np.arange(0,len(y_train)):
     ident = [0.0, 8]
-    ax.plot(ident,ident)
+    ax.plot(ident,ident, color='grey')
     ax.plot(y_train[i],prediction_train[i], ".")
 ax.set_ylabel("True parameters")
 ax.set_xlabel("Predicted parameters")
@@ -244,11 +303,11 @@ plt.show()
 
 # serialize model to JSON
 model_json = model.to_json()
-with open("model_autorepressor_1000RNASacfs_seed42_scale0.5_nlags5000_k1k2k3k4withoutkikak5.json","w") as json_file:
+with open("firstmodel_1000RNASPROTEINSacfs_seed42_scale0.5_nlags5000_k1k2k3k4batchsize128.json","w") as json_file:
     json_file.write(model_json)
     
 # serialize model to HDF5
-model.save_weights("model_autorepressor_1000RNASacfs_seed42_scale0.5_nlags5000_k1k2k3k4withoutkikak5.h5")
+model.save_weights("firstmodel_1000RNASPROTEINSacfs_seed42_scale0.5_nlags5000_k1k2k3k4batchsize128.h5")
 print("Saved model to disk")
 
 
@@ -266,5 +325,6 @@ df_tot.to_csv(file_path.format(actual_dir,"INFOautorepressor_1000RNASacfs_seed42
 
 
 
-
+#r2score test data 0.19340419427451033
+#r2score train data 0.6354416052776966
 

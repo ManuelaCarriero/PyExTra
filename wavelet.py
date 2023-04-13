@@ -383,27 +383,192 @@ t = np.linspace(-1, 1, 200, endpoint=False)
 sig = (np.cos(2 * np.pi * 7 * t) +
        np.real(np.exp(-7*(t-0.4)**2)*np.exp(1j*2*np.pi*2*(t-0.4))))
 
+plt.plot(t,sig)
+
 wavelet = Wavelet(('gmw', {'beta': 4}))
 Wx, scales = cwt(sig, wavelet, padtype='zero')
 
 freqs = scale_to_freq(scales, wavelet, N=len(sig), fs=1/(t[1] - t[0]))
-imshow(Wx, abs=1, yticks=freqs,  xticks=t,
-       xlabel="time [sec]", ylabel="frequency [Hz]")
+imshow(Wx, cmap='Reds', abs=1, yticks=freqs,  xticks=t, xlabel="time [sec]", ylabel="frequency [Hz]")
 
 ssqueezepy.wavs()
 ssqueezepy.Wavelet('cmhat').info()
 
 
 
-#%% Our molecules data
+#%%Squeezepy in our case
 
 autorepressor_results = pd.read_csv('autorepressor_gillespiesimulation_results.csv',sep= " ")
-autorepressor_results.columns
+autorepressor_results
+RNAs = autorepressor_results['Number of RNA molecules']
+
+time = autorepressor_results['Time']
+
+xvals = np.arange(autorepressor_results['Time'].iloc[0], autorepressor_results['Time'].iloc[-1], 0.01)
+f_RNAs = interp.interp1d(time, RNAs, kind='previous')
+yinterp_RNAs = f_RNAs(xvals)
+
+
+
+wavelet = Wavelet(('gmw', {'beta': 4}))
+Wx, scales = cwt(yinterp_RNAs, wavelet, padtype='zero')
+
+freqs = scale_to_freq(scales, wavelet, N=len(yinterp_RNAs), fs=1/0.01)
+imshow(Wx, abs=1, yticks=freqs,  xticks=xvals, xlabel="time [sec]", ylabel="frequency [Hz]")
+
+ssqueezepy.wavs()
+ssqueezepy.Wavelet('cmhat').info()
+
+
+
+
+proteins = autorepressor_results['Number of proteins']
+
+time = autorepressor_results['Time']
+
+xvals = np.arange(autorepressor_results['Time'].iloc[0], autorepressor_results['Time'].iloc[-1], 0.01)
+f_proteins = interp.interp1d(time, proteins, kind='previous')
+yinterp_proteins = f_proteins(xvals)
+
+
+
+wavelet = Wavelet(('gmw', {'beta': 4}))
+Wx, scales = cwt(yinterp_proteins, wavelet, padtype='zero')
+
+freqs = scale_to_freq(scales, wavelet, N=len(yinterp_proteins), fs=1/0.01)
+imshow(Wx, abs=1, yticks=freqs,  xticks=xvals, xlabel="time [sec]", ylabel="frequency [Hz]")
+
+ssqueezepy.wavs()
+ssqueezepy.Wavelet('cmhat').info()
+
+
+#%%
+x = np.linspace(0,1/4,2500)
+y1 = np.sin(2*np.pi*x*4)
+#plt.plot(x,y1)
+y2 = np.sin(2*np.pi*x*30)
+#plt.plot(x,y2)
+y3 = np.sin(2*np.pi*x*60)
+#plt.plot(x,y3)
+y4 = np.sin(2*np.pi*x*90)
+#plt.plot(x,y4)
+
+# Using only the first two waves 
+signal = np.concatenate([y1,y2])
+time = np.linspace(0,1,5000)
+plt.plot(time,signal)
+
+# Using only the first three waves 
+signal = np.concatenate([y1,y2,y3])
+time = np.linspace(0,1,7500)
+plt.plot(time,signal)
+
+# Using all waves
+signal = np.concatenate([y1,y2,y3,y4])
+N = 10000
+time = np.linspace(0,1,N)
+plt.plot(time,signal)
+
+
+
+wavelet = Wavelet(('gmw', {'beta': 4}))
+Wx, scales = cwt(signal, wavelet, padtype='zero')
+
+freqs = scale_to_freq(scales, wavelet, N=len(signal), fs=1/(time[1] - time[0]))
+imshow(Wx, cmap='Reds', abs=1, yticks=freqs,  xticks=time, xlabel="time (a.u.)", ylabel="frequency (a.u.)")
+
+ssqueezepy.wavs()
+ssqueezepy.Wavelet('cmhat').info()
+
+#%%
+results = pd.read_csv('removed_warmup_ka1ki0.5gillespieresults_seed1.csv', sep= " ")
+results = pd.read_csv('ka0.1ki1gillespieresults_seed1.csv', sep= " ")
+results = pd.read_csv('autorepressor_gillespiesimulation_results.csv', sep= " ")
+results = pd.read_csv('removed_warmup_nfkb_gillespieresults.csv', sep= " ")
+
+
+
+results.iloc[2490]
+results
+results = results.iloc[:4291]
+results = results.iloc[:14000]
+results = results.iloc[:2490]
+
+RNAs = results['Number of RNA molecules']
+
+time = results['Time']
+
+xvals = np.arange(results['Time'].iloc[0], results['Time'].iloc[-1], 0.01)
+f_RNAs = interp.interp1d(time, RNAs, kind='previous')
+yinterp_RNAs = f_RNAs(xvals)
+
+
+
+wavelet = Wavelet(('gmw', {'beta': 4}))
+Wx, scales = cwt(yinterp_RNAs, wavelet, padtype='zero')
+
+freqs = scale_to_freq(scales, wavelet, N=len(yinterp_RNAs), fs=1/0.01)# è la frequenza del segnale così come lo era per l'onda sinusoidale.
+imshow(Wx, title="NF-kB products (RNAs)",cmap='Reds', abs=1, yticks=freqs,  xticks=xvals, xlabel="time (a.u.)", ylabel="frequency (a.u.)")
+
+ssqueezepy.wavs()
+ssqueezepy.Wavelet('cmhat').info()
+
+
+
+
+proteins = results['Number of proteins']
+
+time = results['Time']
+
+xvals = np.arange(results['Time'].iloc[0], results['Time'].iloc[-1], 0.01)
+f_proteins = interp.interp1d(time, proteins, kind='previous')
+yinterp_proteins = f_proteins(xvals)
+
+
+
+wavelet = Wavelet(('gmw', {'beta': 4}))
+Wx, scales = cwt(yinterp_proteins, wavelet, padtype='zero')
+
+freqs = scale_to_freq(scales, wavelet, N=len(yinterp_proteins), fs=1/0.01)
+imshow(Wx, title="CWT First model ka=0.1,ki=1 (Proteins)",cmap='Reds', abs=1, yticks=freqs,  xticks=xvals, xlabel="time (a.u.)", ylabel="frequency (a.u.)")
+
+ssqueezepy.wavs()
+ssqueezepy.Wavelet('cmhat').info()
+
+
+
+
+#%% Our molecules data
+
+#PROVA A METTERE IN ATTO IL CONSIGLIO DEL PROFESSORE OSSIA DI CONSIDERARE LA DISTRIBUZIONE DI OGNI RIGA.
+
+autorepressor_results = pd.read_csv('autorepressor_gillespiesimulation_results.csv',sep= " ")
+autorepressor_results
 RNAs = autorepressor_results['Number of RNA molecules']
 proteins = autorepressor_results['Number of proteins']
 time = autorepressor_results['Time']
 
 xvals = np.arange(autorepressor_results['Time'].iloc[0], autorepressor_results['Time'].iloc[-1], 0.01)
+
+
+
+
+firstmodel_results = pd.read_csv('removed_warmup_ka1ki0.5gillespieresults_seed1.csv', sep= " ")
+RNAs = firstmodel_results['Number of RNA molecules']
+proteins = firstmodel_results['Number of proteins']
+time = firstmodel_results['Time']
+
+xvals = np.arange(firstmodel_results['Time'].iloc[0], firstmodel_results['Time'].iloc[-1], 0.01)
+
+
+
+results = pd.read_csv('removed_warmup_nfkb_gillespieresults.csv', sep= " ")
+RNAs = results['Number of RNA molecules']
+time = results['Time']
+
+xvals = np.arange(results['Time'].iloc[0], results['Time'].iloc[-1], 0.01)
+
+
 
 f_RNAs = interp.interp1d(time, RNAs, kind='previous')
 yinterp_RNAs = f_RNAs(xvals)
@@ -440,15 +605,46 @@ signal_RNAs = np.ascontiguousarray(signal_RNAs)
 
 signal_proteins = np.ascontiguousarray(signal_proteins)
 
-scales = np.arange(1,128)
-waveletname = 'cmorl1.5-1.0'
+scales = np.arange(1,400)
+waveletname = 'cmorl1.5-1.0'#cgau1'
 coef_RNAs, freqs_RNAs = pywt.cwt(signal_RNAs, scales, waveletname)
 coef_proteins, freqs_proteins = pywt.cwt(signal_proteins, scales, waveletname)
 
 
+#======================================================================
+
+len(coef_RNAs)
+len(coef_RNAs[250])
+len(xvals)
+
+trend_150 = [np.abs(i) for i in coef_RNAs[100]]
+
+trend_250 = [np.abs(i) for i in coef_RNAs[250]]
+
+trend_350 = [np.abs(i) for i in coef_RNAs[350]]
+trend_250
+type(xvals)
 
 
-#contourf
+plt.hist(trend_150)
+trend_150 = np.ascontiguousarray(trend_150)
+plt.plot(xvals,trend_150)
+
+plt.hist(trend_250)
+trend_250 = np.ascontiguousarray(trend_250)
+plt.plot(xvals,trend_250)
+
+plt.hist(trend_350)
+trend_350 = np.ascontiguousarray(trend_350)
+plt.plot(xvals,trend_350)
+
+
+
+#========================================================================
+#contourf(di cui ci fidiamo di meno perché potrebbe avere artifatti)
+
+#freq =  1/scales
+
 fig, ax = plt.subplots(figsize=(12, 5))
 
 contourf_ = ax.contourf(xvals, scales, np.abs(coef_RNAs), cmap=plt.cm.Reds)#extend='both',
@@ -456,6 +652,7 @@ contourf_ = ax.contourf(xvals, scales, np.abs(coef_RNAs), cmap=plt.cm.Reds)#exte
 ax.set_title('Wavelet Transform of Signal (${}$) RNAs'.format(waveletname), fontsize=20)
 ax.set_ylabel('Scales', fontsize=14)
 ax.set_xlabel('Time (s)', fontsize=14)
+ax.set_ylim(top=0.2)
 fig.colorbar(contourf_)
 ax.invert_yaxis()
 plt.show()
@@ -475,7 +672,6 @@ plt.show()
 
 
 
-
 #imshow
 fig, ax = plt.subplots(figsize=(12, 5))
 imshow_ = ax.imshow(np.abs(coef_RNAs), cmap='Reds', aspect='auto')  #extent=[min(xvals), max(xvals), min(scales), max(scales)], , vmax=abs(coef).max(), vmin=0
@@ -483,7 +679,7 @@ ax.set_title('Wavelet Transform of Signal (${}$) RNAs'.format(waveletname), font
 ax.set_ylabel('Scales', fontsize=14)
 ax.set_xlabel('Time (s)', fontsize=14)
 
-ax.set_xlim(0,100000)
+ax.set_xlim(0,100000)#100000
 def numfmt(x, pos): # your custom formatter function: divide by 1000
     s = '{}'.format(int(x / 100))
     return s
@@ -493,9 +689,11 @@ plt.gca().xaxis.set_major_formatter(yfmt)
 fig.colorbar(imshow_)
 plt.show() 
 
+# Perchè sull'asse x plotta 100000 punti ? Forse è la lunghezza di xvals.
 
+len(xvals)#99990
 
-
+#AUMENTA IL TEMPO LIMITE.
 
 fig, ax = plt.subplots(figsize=(12, 5))
 imshow_ = ax.imshow(np.abs(coef_proteins),cmap='Reds', aspect='auto')  #extent=[min(xvals), max(xvals), min(scales), max(scales)], vmax=np.abs(coef_proteins).max(), vmin=0
@@ -513,6 +711,7 @@ plt.gca().xaxis.set_major_formatter(yfmt)
 fig.colorbar(imshow_)
 plt.show() 
 
+#Trova un modo per quantificare la periodicità delle strisce rosse
 
 
 
