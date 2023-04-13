@@ -72,6 +72,13 @@ The genetic toggle-switch is a system of two mutually repressing genes.
   >
 </p>
 
+## First NF-kB model
+<p align="center">
+  <img
+    width="590" 
+    src="https://github.com/ManuelaCarriero/PyExTra/blob/main/Images/nfkbschemaconparametriNUOVO.png"
+  >
+</p>
 # Algorithms
 In this documentation, the stochastic simulation algorithms are explained by considering the [first protein synthesis model](https://github.com/ManuelaCarriero/PyExTra#first-protein-synthesis-model). If you want to have a look at all the transitions and the reaction probability rates considered for the other models, see the presentation [MDThesisPresentation_ManuelaCarriero.pptx](https://github.com/ManuelaCarriero/PyExTra/blob/main/MDThesisPresentation_ManuelaCarriero.pptx).
 
