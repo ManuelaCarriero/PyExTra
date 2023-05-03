@@ -140,10 +140,10 @@ can type this command:
 ## Command line syntax
 Starting from the basics, if you want to run the SSA simulation of one of the studied models, the command line synthax is the following: <br> 
 `python <simulation_model.py> <configuration.txt> -run` <br>
-If you want to run more than one simulations, beware of specifying the number of simulations that you desire in the `configuration.txt` file and change the command line simply in this way: <br> 
+If you want to run more than one simulation, beware of specifying the number of simulations that you desire in the `configuration.txt` file and change the command line simply in this way: <br> 
 `python <simulation_model.py> <configuration.txt> -run_multiplesimulations` <br>
-After running one of this, you will have a file called `gillespiesimulation_results.csv` in your working directory or, if you choose to run more than one simulation, the program gives a list of files named `gillespieresults_seed_<number_of_the_random_seed>` (i.e. run 4 simulations, you will obtain 4 files named `gillespieresults_seed1`, `gillespieresults_seed2`, `gillespieresults_seed3` and `gillespieresults_seed4`). <br>
-
+After running one of these, you will have a file called `gillespiesimulation_results.csv` in your working directory or, if you choose to run more than one simulation, the program gives a list of files named `gillespieresults_seed<number_of_the_random_seed>` (i.e. run 4 simulations, you will obtain 4 files named `gillespieresults_seed1`, `gillespieresults_seed2`, `gillespieresults_seed3` and `gillespieresults_seed4`). <br>
+You can ask for the help `python <simulation_model.py> -h` in order to know all the possible commands you can ask to the program with the description of what they do.
 ## Example of results
 
 ## References
