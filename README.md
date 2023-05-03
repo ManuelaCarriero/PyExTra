@@ -138,8 +138,10 @@ can type this command:
 ## Usage
 
 ## Command line syntax
-`python <configuration file> <simulation.py> -run` <br>
-`python <configuration file> <simulation.py> -run_multiplesimulations`
+Starting from the basics, if you want to run the SSA simulation of one of the studied models, the command line synthax is the following: <br> 
+`python <simulation_model.py> <configuration.txt> -run` <br>
+If you want to run more than one simulations, beware of specifying the number of simulations that you desire in the `configuration.txt` file and change the command line simply in this way: <br> 
+`python <simulation_model.py> <configuration.txt> -run_multiplesimulations` <br>
 
 ## Example of results
 
