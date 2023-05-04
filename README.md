@@ -149,4 +149,4 @@ After running one of these, you will have a file called `gillespiesimulation_res
 You can ask for the help `python <simulation_model.py> -h` in order to know all the possible commands you can ask to the program with the description of what they do.
 ## Example of results
 
-## References
+# References
