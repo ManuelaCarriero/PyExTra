@@ -138,7 +138,7 @@ can type this command:
 ## Usage
 
 ## Command line syntax
-PyExTra is based on command lines to let you lanch in order to use the available Python programs in a easier and friendly way. <br>
+PyExTra is based on command lines to let you use the available Python programs in a easier and friendly way. <br>
 PyExTra command line are describe following the [Structure of the project](https://github.com/ManuelaCarriero/PyExTra#structure-of-the-project) order. <br>
 
 1. Starting from the basics, if you want to run the SSA simulation of one of the studied models, the command line synthax is the following: <br> 
