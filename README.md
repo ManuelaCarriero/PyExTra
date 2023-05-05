@@ -147,6 +147,14 @@ If you want to run more than one simulation, beware of specifying the number of 
 `python <simulation_model.py> <configuration.txt> -run_multiplesimulations` <br>
 After running one of these, you will have a file called `gillespiesimulation_results.csv` in your working directory or, if you choose to run more than one simulation, the program gives a list of files named `gillespieresults_seed<number_of_the_random_seed>` (i.e. run 4 simulations, you will obtain 4 files named `gillespieresults_seed1`, `gillespieresults_seed2`, `gillespieresults_seed3` and `gillespieresults_seed4`). <br>
 You can ask for the help `python <simulation_model.py> -h` in order to know all the possible commands you can ask to the program with the description of what they do.
+
+2. Stay in the same working directory where the simulation results are. You can run this command line in order to plot the number of molecules over time of observation: <br>
+`python plots.py <configuration.txt> -time_plot` <br>
+This is in case of first model simulation results. For the other models the syntax is similar: <br>
+`python plots.py <configuration.txt> -<model>_time_plot` <br>
+You need to specify the type of model you are considering. For the precise syntax you can ask for the help even in this case: `python plots.py -h`
+
+
 ## Example of results
 
 # References
