@@ -136,10 +136,10 @@ can type this command:
 <br> 
 
 ## Usage
-PyExTra is based on command lines to let you use the available Python programs in a easier and friendly way. <br>
+PyExTra is mainly based on command lines to let you use the available Python programs in a easier and friendly way. <br>
 
 ## Command line syntax
-PyExTra command lines are describe following the [Structure of the project](https://github.com/ManuelaCarriero/PyExTra#structure-of-the-project) order. <br>
+PyExTra command lines are described following the [Structure of the project](https://github.com/ManuelaCarriero/PyExTra#structure-of-the-project) order. <br>
 
 1. Starting from the basics, if you want to run the SSA simulation of one of the studied models, the command line synthax is the following: <br> 
 `python <simulation_model.py> <configuration.txt> -run` <br>
@@ -152,7 +152,19 @@ You can ask for the help `python <simulation_model.py> -h` in order to know all 
 `python plots.py <configuration.txt> -time_plot` <br>
 This is in case of first model simulation results. For the other models the syntax is similar: <br>
 `python plots.py <configuration.txt> -<model>_time_plot` <br>
-You need to specify the type of model you are considering. For the precise syntax you can ask for the help even in this case: `python plots.py -h`
+You need to specify the type of model you are considering. <br>
+For the precise list of commands you can ask for the help even in this case: `python plots.py -h` <br>
+Importantly, you can plot the distribution of states (i.e. the stationary distribution) using: <br>
+`python plots.py <configuration.txt> -distribution`
+
+3. In order to plot the autocorrelation values as function of sampling time: <br>
+`python acf.py <configuration.txt> -plot_acf_RNA` <br>
+This is the case you want to plot the autocorrelation of only the RNA number of molecules in case of SSA simulation results. <br>
+Also in this case, you can ask for the help: `python acf.py -h`<br>
+<br>
+The others are scripts that you can use for your research.
+
+
 
 
 ## Example of results
