@@ -162,7 +162,7 @@ Importantly, you can plot the distribution of states (i.e. the stationary distri
 This is the case you want to plot the autocorrelation of only the RNA number of molecules in case of SSA simulation results. <br>
 Also in this case, you can ask for the help: `python acf.py -h`<br>
 <br>
-The others are scripts that you can use for your research.
+The others are scripts that you can use for the analysis of results.
 
 
 
