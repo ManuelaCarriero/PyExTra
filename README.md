@@ -162,7 +162,14 @@ Importantly, you can plot the distribution of states (i.e. the stationary distri
 This is the case you want to plot the autocorrelation of only the RNA number of molecules in case of SSA simulation results. <br>
 Also in this case, you can ask for the help: `python acf.py -h`<br>
 <br>
+
+4. Follow the command line syntax of already described in 1. and 2. for [hybrid_simulation.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/hybrid_simulation.py): it makes the simulation using an algorithm that combines [SSA](https://github.com/ManuelaCarriero/PyExTra#stochastic-simulation-algorithm-ssa) and 
+[tauleap_simulation.py](https://github.com/ManuelaCarriero/PyExTra/blob/main/tauleap_simulation.py): it makes simulations using the [Tau-leap algorithm](https://github.com/ManuelaCarriero/PyExTra#tau-leap-algorithm). 
+
+
 The others are scripts that you can use for the analysis of results.
+
+
 
 
 
