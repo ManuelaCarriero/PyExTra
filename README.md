@@ -173,7 +173,7 @@ The others are scripts that you can use for the analysis of results.
 
 
 
-## Example of results
+## Example of usage and results
 Let us consider the [first protein synthesis model](https://github.com/ManuelaCarriero/PyExTra#first-protein-synthesis-model) and play with its parameters configuration.
 
 # References
