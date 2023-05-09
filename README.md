@@ -174,6 +174,13 @@ The others are scripts that you can use for the analysis of results.
 
 
 ## Example of usage and results
-Let us consider the [first protein synthesis model](https://github.com/ManuelaCarriero/PyExTra#first-protein-synthesis-model) and play with its parameters configuration.
+Let us consider the [first protein synthesis model](https://github.com/ManuelaCarriero/PyExTra#first-protein-synthesis-model) and play with its parameters configuration. <br>
+Open file `configuration.txt`. You can start from a basic configuration where rate constants: ka = 1, ki = 0.5, k1 = 1, k2 = 0.1, k3 = 1, k4 = 0.1, k5 = 0, that is a gene that tends to be more active than inactive.<br>
+Run the SSA simulation `python ssa_simulation.py configuration.txt -run` <br>
+Then you would like to observe the time course behavior: <br>
+And mostly the stationary distribution: <br>
+If you change the type of regulation by making the gene more inactive than active (for instance, ka = 0.1 and ki = 1), you should see a distribution of states whose states with higher residency time are those with lower number of molecules (in particular, a peak at zero molecules).
+<br>
+Try yourself and, if you want, let me know ! PyExTra let you simulate gene expression in a way that you can manipulate your biological system.  
 
 # References
