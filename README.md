@@ -179,8 +179,9 @@ Open file `configuration.txt`. You can start from a basic configuration where ra
 Run the SSA simulation `python ssa_simulation.py configuration.txt -run` <br>
 Then you would like to observe the time course behavior: <br>
 And mostly the stationary distribution: <br>
-If you change the type of regulation by making the gene more inactive than active (for instance, ka = 0.1 and ki = 1), you should see a distribution of states whose states with higher residency time are those with lower number of molecules (in particular, a peak at zero molecules).
+If you change the type of regulation by making the gene more inactive than active (for instance, ka = 0.1 and ki = 1), you should see a distribution of states whose states with higher residency time are those with lower number of molecules (in particular, a peak at zero molecules). 
+Thereby, the Poisson distribution will change its shape assuming a longer tail. <br>
 <br>
-Try yourself and, if you want, let me know ! PyExTra let you simulate gene expression in a way that you can manipulate your biological system.  
-
+Try yourself and, if you want, let me know ! PyExTra let you simulate gene expression in a way that you can manipulate your biological system.<br>  
+$${\color{red}Have a nice research}$$
 # References
