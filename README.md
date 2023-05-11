@@ -194,7 +194,7 @@ And mostly the stationary distribution: `python plots.py configuration.txt -dist
 </p>
 
 If you change the type of regulation by making the gene more inactive than active (for instance, ka = 0.1 and ki = 1), you should see a distribution of states whose states with higher residency time are those with lower number of molecules (in particular, a peak at zero molecules). 
-Thereby, the Poisson distribution will change its shape assuming a longer tail. <br>
+Thereby, the Poisson distribution will change its shape assuming a longer tail on the right. <br>
 <br>
 Try yourself and, if you want, let me know ! PyExTra let you simulate gene expression in a way that you can manipulate your biological system.<br>  
 $${\color{red}Have}$$ $${\color{red}A}$$ $${\color{red}Nice}$$ $${\color{red}Research}$$ $${\color{red}:)}$$
