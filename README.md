@@ -145,6 +145,15 @@ SSA/Tau-leap algorithm, as such called "hybrid", is presented directly through t
   >
 </p>
 
+1. The SSA updates more numerous molecular species such as genes, the tau-leap less numerous molecular species such as RNAs and proteins;
+2. The tau-leap algorithm uses the gene state residency time as time step in the algorithm;
+3. There are two important checks: the number of updated molecules by the tauleap algorithm has to be greater or equal than 0 and the difference between reaction probabilities has to lower or equal to a threashold (to monitor accuracy of results);
+4. If step 3 is not satisfied, it means that we need to make smaller steps, to we divide it by one half; 
+we check if the new smaller tau is greater of equal than 3 times the characteristic time of the system state given by the SSA considering all the reactions
+because, if it is smaller, it is worth to make the SSA algorithm;
+If yes, we go on applying the tau-leap algorithm to the new residency time untill we reach a time that is close to the initial gene state residency time value (the code is `math.isclose(time_count, gil_time, rel_tol=0.5)`).
+
+
 # Running PyExTra
 
 ## Installation
