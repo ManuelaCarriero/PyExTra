@@ -177,8 +177,22 @@ The others are scripts that you can use for the analysis of results.
 Let us consider the [first protein synthesis model](https://github.com/ManuelaCarriero/PyExTra#first-protein-synthesis-model) and play with its parameters configuration. <br>
 Open file `configuration.txt`. You can start from a basic configuration where rate constants: ka = 1, ki = 0.5, k1 = 1, k2 = 0.1, k3 = 1, k4 = 0.1, k5 = 0, that is a gene that tends to be more active than inactive.<br>
 Run the SSA simulation `python ssa_simulation.py configuration.txt -run` <br>
-Then you would like to observe the time course behavior: <br>
-And mostly the stationary distribution: <br>
+Then you would like to observe the time course behavior: `python plots.py configuration.txt -time_plot` <br>
+
+<p align="center">
+  <img 
+    src="https://github.com/ManuelaCarriero/PyExTra/blob/main/Images/ka1ki0.5timeplot.png"
+  >
+</p>
+
+And mostly the stationary distribution: `python plots.py configuration.txt -distribution` after modifying the time limit value from 1000 to 10000 in `configuration.txt` in order to obtain the Poisson distribution:<br> 
+
+<p align="center">
+  <img 
+    src="https://github.com/ManuelaCarriero/PyExTra/blob/main/Images/ka1ki0.5distributionplot.png"
+  >
+</p>
+
 If you change the type of regulation by making the gene more inactive than active (for instance, ka = 0.1 and ki = 1), you should see a distribution of states whose states with higher residency time are those with lower number of molecules (in particular, a peak at zero molecules). 
 Thereby, the Poisson distribution will change its shape assuming a longer tail. <br>
 <br>
