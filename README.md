@@ -127,7 +127,23 @@ You can look at the flowchart that explains in a more "intuitive" way the SSA al
 6. Update the state according to the state change decided in step 4;
 7. If the total time spent is less than a pre-determined stopping time, go to step 2. Else stop.   
 
+You can look at the flowchart that explains in a more "intuitive" way the Tauleap algorithm:<br>
+
+<p align="center">
+  <img 
+    src="https://github.com/ManuelaCarriero/PyExTra/blob/main/Images/TauleapPresentation.png"
+  >
+</p>
+
 ## SSA/Tau-leap algorithm
+
+SSA/Tau-leap algorithm, as such called "hybrid", is presented directly through the flowchart:<br>
+
+<p align="center">
+  <img 
+    src="https://github.com/ManuelaCarriero/PyExTra/blob/main/Images/HybridPresentation.png"
+  >
+</p>
 
 # Running PyExTra
 
