@@ -15,8 +15,11 @@ Users which can be interested in *PyExTra* are beginners with gene expression si
    
 ## Dependencies
 **Python verion**: 3.9.x <br>
-**Python modules**: numpy, scipy, pandas, stats.models,<br> 
-scikit-learn, keras, tensorflow.<br>
+**Python modules**: 
+* numpy, scipy, pandas, stats.models, matplotlib, seaborn;<br> 
+* scikit-learn, keras, tensorflow;<br>
+* ssqueezepy, pywt, scaleogram.
+
 **OS**: Windows10, Linux (Ubuntu).
 
 ## Structure of the project
