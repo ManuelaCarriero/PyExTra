@@ -1028,7 +1028,7 @@ if args.distribution:
     
     ssa_results = pd.read_csv('gillespiesimulation_results.csv', sep=" ")
     
-    StatesDistributionPlot(df = ssa_results)
+    StatesDistributionPlot(df_1 = ssa_results, df_2 = ssa_results)
    
     
 
