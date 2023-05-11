@@ -110,6 +110,14 @@ We can also call these events as *transitions* and each one happens with a certa
 6. Update the state according to the state change chosen in step 4.
 7. If the total time spent is less than a pre-determined stopping time, go to step 2. Else stop.
 
+You can look at the flowchart that explains in a more "intuitive" way the SSA algorithm:<br>
+
+<p align="center">
+  <img 
+    src="https://github.com/ManuelaCarriero/PyExTra/blob/main/Images/SSAPresentation.png"
+  >
+</p>
+ 
 ## Tau-leap algorithm
 1. Choose some **initial states** and **reaction time step** $\tau$ (tau);
 2. Identification of all possible reaction events;
