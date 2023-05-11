@@ -236,3 +236,9 @@ Try yourself and, if you want, let me know ! PyExTra let you simulate gene expre
 $${\color{red}Have}$$ $${\color{red}A}$$ $${\color{red}Nice}$$ $${\color{red}Research}$$ $${\color{red}:)}$$
 
 # References
+
+https://github.com/UniboDIFABiophysics/programmingCourseDIFA <br>
+
+In particular: <br>
+
+https://unibodifabiophysics.github.io/programmingCourseDIFA/Lesson_AF_03_continuous_time_random_walks.html
