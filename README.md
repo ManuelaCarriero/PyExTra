@@ -233,7 +233,12 @@ If you change the type of regulation by making the gene more inactive than activ
 Thereby, the Poisson distribution will change its shape assuming a longer tail on the right. <br>
 <br>
 Try yourself and, if you want, let me know ! PyExTra let you simulate gene expression in a way that you can manipulate your biological system.<br>  
-$${\color{red}Have}$$ $${\color{red}A}$$ $${\color{red}Nice}$$ $${\color{red}Research}$$ $${\color{red}:)}$$
+<br>
+<p align="center">
+  <img 
+    src="https://github.com/ManuelaCarriero/PyExTra/blob/main/Images/Genethatisgreeting.png"
+  >
+</p>
 
 # References
 
