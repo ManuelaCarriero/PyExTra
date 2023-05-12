@@ -236,7 +236,7 @@ Try yourself and, if you want, let me know ! PyExTra let you simulate gene expre
 <br>
 <p align="center">
   <img 
-    src="https://github.com/ManuelaCarriero/PyExTra/blob/main/Images/Genethatisgreeting.png"
+    src="https://github.com/ManuelaCarriero/PyExTra/blob/main/Images/Genethatisreallygreeting.gif"
   >
 </p>
 
