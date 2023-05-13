@@ -244,6 +244,6 @@ https://unibodifabiophysics.github.io/programmingCourseDIFA/Lesson_AF_03_continu
 
 <p align="center">
   <img 
-    src="https://github.com/ManuelaCarriero/PyExTra/blob/main/Images/GenethatisreallygreetingNEW.gif"
+    src="https://github.com/ManuelaCarriero/PyExTra/blob/main/Images/GenethatisreallygreetingSMILE.gif"
   >
 </p>
