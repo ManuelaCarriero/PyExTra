@@ -240,7 +240,7 @@ https://github.com/UniboDIFABiophysics/programmingCourseDIFA <br>
 
 In particular: <br>
 
-https://unibodifabiophysics.github.io/programmingCourseDIFA/Lesson_AF_03_continuous_time_random_walks.html <br>
+[Lesson_AF_03_continuous_time_random_walks.html](https://unibodifabiophysics.github.io/programmingCourseDIFA/Lesson_AF_03_continuous_time_random_walks.html) <br>
 
 <p align="center">
   <img 
