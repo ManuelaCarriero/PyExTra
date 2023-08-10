@@ -79,7 +79,7 @@ The genetic toggle-switch is a system of two mutually repressing genes.
 <p align="center">
   <img
     width="590" 
-    src="https://github.com/ManuelaCarriero/PyExTra/blob/main/Images/nfkbschemaconparametriNUOVO.png"
+    src="https://github.com/ManuelaCarriero/PyExTra/blob/main/Images/20230810nfkbschemaconparametri.png"
   >
 </p>
 
